@@ -1,0 +1,28 @@
+﻿<div class="modal-header bg-color-darken" style="color: white;">
+    <h4>{{ viewSettings.DisplayTitle }}</h4>
+</div>
+
+<div class="modal-body">
+    <form class="smart-form" novalidate>
+        <section>
+            <div>
+                <label class="control-label">{{ viewSettings.LabelTitle }}</label>
+                <label class="input" style="width: 30%">
+                    <input type="text"
+                           uib-datepicker-popup
+                           ng-model="dateObj.Value"
+                           placeholder="yyyy-mm-dd"
+                           class="form-control disabled-input-color"
+                           is-open="datePickers.datePickerOpened_date"
+                           readonly="readonly" />
+                </label>
+                <button type="button" class="btn btn-sm btn-default form-control" style="background-color: lightskyblue; margin-bottom: 3px; width: 30%;" ng-click="openDatePicker('date', $event)"><i class="fa fa-calendar"></i></button>
+            </div>
+        </section>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button ng-click="save()" class="btn btn-success">Sačuvaj</button>
+    <button ng-click="close()" class="btn btn-primary">Odustani</button>
+</div>

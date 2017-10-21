@@ -1,0 +1,26 @@
+﻿
+<div class="modal-header bg-color-darken" style="color: white;">
+    <h4>{{ viewSettings.dialogTitle }}</h4>
+</div>
+
+<div class="modal-body">
+    <div>
+        Brzo pretraživanje:
+        <input type="text" style="width: 100%" ng-model="treeSearch" />
+    </div>
+
+    <br />
+
+    <div style="max-height: 500px !important; overflow: auto;">
+        <div ivh-treeview="treeData"
+             ivh-treeview-filter="treeSearch"
+             ivh-treeview-default-selected-state="false"
+             ivh-treeview-on-cb-change="checkboxChangeCallback(ivhNode, ivhIsSelected, ivhTree)">
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button ng-click="save()" class="btn btn-success">Sačuvaj</button>
+    <button ng-click="close();" class="btn btn-primary">Zatvori</button>
+</div>

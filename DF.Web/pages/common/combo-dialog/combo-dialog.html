@@ -1,0 +1,24 @@
+﻿<div class="modal-header bg-color-darken" style="color: white;">
+    <h4>{{ viewSettings.DisplayTitle }}</h4>
+</div>
+
+<div class="modal-body">
+    <form class="smart-form" novalidate="novalidate">
+        <section>
+            <label class="control-label">{{ viewSettings.ComboLabel }}</label>
+            <select class="form-control" ng-model="combo.Value" ng-options="value.Id as value.DisplayText for (key, value) in comboValues"></select>
+        </section>
+
+        <section ng-hide="viewSettings.HideNote">
+            <div>
+                <label class="control-label">Napomena</label>
+                <label class="input"><textarea class="form-control" rows="3" style="width: 100%;" ng-model="combo.Note"></textarea></label>
+            </div>
+        </section>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button ng-click="save()" class="btn btn-success">Sačuvaj</button>
+    <button ng-click="close()" class="btn btn-primary">Odustani</button>
+</div>

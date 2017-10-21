@@ -132,9 +132,58 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="core\app.js" />
+    <Content Include="core\config.js" />
+    <Content Include="core\constants.js" />
+    <Content Include="core\routes.js" />
+    <Content Include="core\run.js" />
+    <Content Include="core\smart-admin-app.js" />
+    <Content Include="directives\abn-tree\abntree.js" />
+    <Content Include="directives\checklist-model\checklist-model.js" />
+    <Content Include="directives\filestyle\filestyle.js" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="img\jqueryui\ui-bg_flat_0_999999_40x100.png" />
+    <Content Include="img\jqueryui\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="img\jqueryui\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="img\jqueryui\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="img\jqueryui\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="img\jqueryui\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="img\jqueryui\ui-bg_glass_75_ffffff_1x400.png" />
+    <Content Include="img\jqueryui\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="img\jqueryui\ui-bg_inset-soft_95_fef1ec_1x100.png" />
+    <Content Include="img\jqueryui\ui-icons_222222_256x240.png" />
+    <Content Include="img\jqueryui\ui-icons_2e83ff_256x240.png" />
+    <Content Include="img\jqueryui\ui-icons_428bca_256x240.png" />
+    <Content Include="img\jqueryui\ui-icons_454545_256x240.png" />
+    <Content Include="img\jqueryui\ui-icons_555555_256x240.png" />
+    <Content Include="img\jqueryui\ui-icons_888888_256x240.png" />
+    <Content Include="img\jqueryui\ui-icons_999999_256x240.png" />
+    <Content Include="img\jqueryui\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="img\jqueryui\ui-icons_f0ad4e_256x240.png" />
+    <Content Include="img\jqueryui\ui-icons_f6cf3b_256x240.png" />
+    <Content Include="img\jqueryui\ui-icons_ffffff_256x240.png" />
+    <Content Include="modules\user-auth\user-auth.module.js" />
     <Content Include="packages.config" />
+    <Content Include="pages\common\checkbox-tree-dialog\checkbox-tree-dialog.html" />
+    <Content Include="pages\common\checkbox-tree-dialog\CheckboxTreeDialogController.js" />
+    <Content Include="pages\common\combo-dialog\combo-dialog.html" />
+    <Content Include="pages\common\combo-dialog\ComboDialogController.js" />
+    <Content Include="pages\common\date-dialog\date-dialog.html" />
+    <Content Include="pages\common\date-dialog\DateDialogController.js" />
+    <Content Include="pages\common\table-select-dialog\table-select-dialog.html" />
+    <Content Include="pages\common\table-select-dialog\TableSelectDialogController.js" />
+    <Content Include="pages\common\tags-dialog\tags-dialog.html" />
+    <Content Include="pages\common\tags-dialog\TagsDialogController.js" />
+    <Content Include="pages\common\text-field-dialog\text-field-dialog.html" />
+    <Content Include="pages\common\text-field-dialog\TextFieldDialogController.js" />
+    <Content Include="pages\home\home.html" />
+    <Content Include="pages\home\HomeController.js" />
+    <Content Include="pages\login\login.html" />
+    <Content Include="pages\login\LoginController.js" />
+    <Content Include="pages\NavigationController.js" />
+    <Content Include="pages\not-authorised\not-authorised.html" />
+    <Content Include="pages\not-authorised\NotAuthorisedController.js" />
     <Content Include="Scripts\angular-base64\angular-base64.min.js" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.js" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.min.js" />
@@ -145,6 +194,10 @@
     <Content Include="Scripts\angular-file-saver\angular-file-saver.min.js" />
     <Content Include="Scripts\angular-moment\angular-moment.js" />
     <Content Include="Scripts\angular-moment\angular-moment.min.js" />
+    <Content Include="Scripts\angular-toastr\angular-toastr.js" />
+    <Content Include="Scripts\angular-toastr\angular-toastr.min.js" />
+    <Content Include="Scripts\angular-toastr\angular-toastr.tpls.js" />
+    <Content Include="Scripts\angular-toastr\angular-toastr.tpls.min.js" />
     <Content Include="Scripts\angular-ui\angular-ui-ieshiv.js" />
     <Content Include="Scripts\angular-ui\angular-ui-ieshiv.min.js" />
     <Content Include="Scripts\angular-ui\angular-ui.js" />
@@ -220,6 +273,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="img\jqueryui\Thumbs.db" />
     <None Include="Scripts\jquery\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\blob\Blob.js" />
     <Content Include="Scripts\bootbox\bootbox.js" />
@@ -280,7 +334,10 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DocumentStore\" />
+    <Folder Include="services\data\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

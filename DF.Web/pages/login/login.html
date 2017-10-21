@@ -1,0 +1,52 @@
+﻿<style>
+    #main {
+        margin-left: 0;
+    }
+</style>
+
+<table style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="text-align: center; padding-top: 50px;">
+                <img src="img/nis-logo.gif" />
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                <div style="width: 500px; margin: auto;">
+                    <form id="login-form" class="smart-form client-form" style="border: 1px solid lightgray; margin-top: 50px;">
+                        <header style="text-align: left;"><strong>Dance Factory</strong></header>
+
+                        <fieldset>
+                            <section>
+                                <label class="label">{{ 'LOGIN.USERNAME' | translate }}</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-user"></i>
+                                    <input type="text" name="username" ng-model="userLoginModel.Username">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> {{ 'LOGIN.TOOLTIP_USERNAME' | translate }}</b>
+                                </label>
+                            </section>
+
+                            <section>
+                                <label class="label">{{ 'LOGIN.PASSWORD' | translate }}</label>
+                                <label class="input">
+                                    <i class="icon-append fa fa-lock"></i>
+                                    <input type="password" name="password" ng-model="userLoginModel.Password">
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> {{ 'LOGIN.TOOLTIP_PASSWORD' | translate }}</b>
+                                </label>
+                            </section>
+
+                            <section>
+                                <div ng-show="error.errorMsg" class="note note-error" style="color: red;">{{ error.errorMsg }}</div>
+                            </section>
+                        </fieldset>
+
+                        <footer>
+                            <button class="btn btn-primary" ng-click="login()">{{ 'LOGIN.BTNTEXT' | translate }}</button>
+                        </footer>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

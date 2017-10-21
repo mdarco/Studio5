@@ -1,0 +1,15 @@
+﻿<div class="modal-header bg-color-darken" style="color: white;">
+    <h4>{{ settings.DisplayTitle }}</h4>
+</div>
+
+<div class="modal-body" style="min-height: 300px;">
+    <label class="control-label">{{ settings.LabelTitle }}</label>
+    <tags-input ng-model="tags" display-property="TagName" palceholder="" spellcheck="false">
+        <auto-complete source="loadTags($query)" select-first-match="false"></auto-complete>
+    </tags-input>
+</div>
+
+<div class="modal-footer">
+    <button ng-click="save()" class="btn btn-success">Sačuvaj</button>
+    <button ng-click="close()" class="btn btn-primary">Odustani</button>
+</div>

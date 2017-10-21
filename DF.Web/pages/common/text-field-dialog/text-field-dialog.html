@@ -1,0 +1,20 @@
+﻿
+<div class="modal-header bg-color-darken" style="color: white;">
+    <h4>{{ viewSettings.DisplayTitle }}</h4>
+</div>
+
+<div class="modal-body">
+    <form class="smart-form" novalidate="novalidate">
+        <section>
+            <div>
+                <label class="control-label">{{ viewSettings.FieldLabel }}</label>
+                <label class="input"><input type="text" class="form-control" ng-model="field.Value"></label>
+            </div>
+        </section>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button ng-click="save()" class="btn btn-success">Sačuvaj</button>
+    <button ng-click="close()" class="btn btn-primary">Odustani</button>
+</div>
