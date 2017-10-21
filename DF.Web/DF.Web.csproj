@@ -143,6 +143,7 @@
     <Content Include="directives\filestyle\filestyle.js" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="img\df-logo.jpg" />
     <Content Include="img\jqueryui\ui-bg_flat_0_999999_40x100.png" />
     <Content Include="img\jqueryui\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="img\jqueryui\ui-bg_glass_55_fbf9ee_1x400.png" />
