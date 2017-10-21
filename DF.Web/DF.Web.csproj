@@ -118,6 +118,8 @@
     <Content Include="packages.config" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.js" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.min.js" />
+    <Content Include="Scripts\angular-moment\angular-moment.js" />
+    <Content Include="Scripts\angular-moment\angular-moment.min.js" />
     <Content Include="Scripts\angular-ui\angular-ui-ieshiv.js" />
     <Content Include="Scripts\angular-ui\angular-ui-ieshiv.min.js" />
     <Content Include="Scripts\angular-ui\angular-ui.js" />
@@ -166,6 +168,7 @@
     <Content Include="Scripts\angular-block-ui\angular-block-ui.min.js.map" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.js.map" />
     <Content Include="Content\angular-block-ui\angular-block-ui.css.map" />
+    <Content Include="Scripts\angular-moment\angular-moment.min.js.map" />
     <None Include="Scripts\jquery\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-ui\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui\jquery-ui-1.12.1.min.js" />
@@ -185,6 +188,10 @@
   <ItemGroup>
     <Content Include="Scripts\angular-ui\select2.js" />
     <Content Include="Scripts\angular-ui\select2.min.js" />
+    <Content Include="Scripts\angular-moment\moment-with-locales.js" />
+    <Content Include="Scripts\angular-moment\moment-with-locales.min.js" />
+    <Content Include="Scripts\angular-moment\moment.js" />
+    <Content Include="Scripts\angular-moment\moment.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
