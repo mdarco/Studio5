@@ -82,6 +82,11 @@
     <Content Include="Content\css\select2.min.css" />
     <Content Include="Content\font-awesome\font-awesome.css" />
     <Content Include="Content\font-awesome\font-awesome.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\ivh-treeview\ivh-treeview-theme-basic.css" />
+    <Content Include="Content\ivh-treeview\ivh-treeview.css" />
+    <Content Include="Content\ivh-treeview\ivh-treeview.min.css" />
     <Content Include="Content\ngTagsInput\ng-tags-input.bootstrap.css" />
     <Content Include="Content\ngTagsInput\ng-tags-input.css" />
     <Content Include="Content\ngTable\ng-table.css" />
@@ -130,8 +135,14 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\angular-base64\angular-base64.min.js" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.js" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.min.js" />
+    <Content Include="Scripts\angular-checkboxes\angular-checkboxes.js" />
+    <Content Include="Scripts\angular-file-saver\angular-file-saver.bundle.js" />
+    <Content Include="Scripts\angular-file-saver\angular-file-saver.bundle.min.js" />
+    <Content Include="Scripts\angular-file-saver\angular-file-saver.js" />
+    <Content Include="Scripts\angular-file-saver\angular-file-saver.min.js" />
     <Content Include="Scripts\angular-moment\angular-moment.js" />
     <Content Include="Scripts\angular-moment\angular-moment.min.js" />
     <Content Include="Scripts\angular-ui\angular-ui-ieshiv.js" />
@@ -200,13 +211,28 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Content\ngTable\ng-table.min.css.map" />
     <Content Include="Content\ngTable\ng-table.css.map" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\blob\Blob.js" />
     <Content Include="Scripts\bootbox\bootbox.js" />
     <Content Include="Scripts\bootbox\bootbox.min.js" />
+    <Content Include="Scripts\bootstrap-filestyle\bootstrap-filestyle.js" />
+    <Content Include="Scripts\bootstrap-filestyle\bootstrap-filestyle.min.js" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\checklist-model\checklist-model.js" />
     <Content Include="Scripts\file-saver\FileSaver.js" />
     <Content Include="Scripts\file-saver\FileSaver.min.js" />
+    <Content Include="Scripts\ivh-treeview\ivh-treeview.js" />
+    <Content Include="Scripts\ivh-treeview\ivh-treeview.min.js" />
     <Content Include="Scripts\jquery-ui\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery\jquery-3.2.1.js" />
@@ -219,11 +245,17 @@
     <Content Include="Scripts\angular-moment\moment-with-locales.min.js" />
     <Content Include="Scripts\angular-moment\moment.js" />
     <Content Include="Scripts\angular-moment\moment.min.js" />
+    <Content Include="Scripts\JSTools\dataConvert.min.js" />
+    <Content Include="Scripts\JSTools\dataValidator.min.js" />
     <Content Include="Scripts\ngTagsInput\ng-tags-input.js" />
     <Content Include="Scripts\ngTable\ng-table.js" />
     <Content Include="Scripts\ngTable\ng-table.min.js" />
     <Content Include="Scripts\ngTable\ng-table.min.js.map" />
     <Content Include="Scripts\ngTable\ng-table.js.map" />
+    <Content Include="Scripts\JSTools\dataConvert.min.js.map" />
+    <Content Include="Scripts\JSTools\dataValidator.min.js.map" />
+    <Content Include="Scripts\sprintf\angular-sprintf.min.js.map" />
+    <Content Include="Scripts\sprintf\sprintf.min.js.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -238,6 +270,11 @@
     <Content Include="Scripts\lodash\lodash.min.js" />
     <Content Include="Scripts\angular-ui\select2.js" />
     <Content Include="Scripts\angular-ui\select2.min.js" />
+    <Content Include="Scripts\sprintf\angular-sprintf.min.js" />
+    <Content Include="Scripts\sprintf\sprintf.min.js" />
+    <Content Include="Scripts\sweet-alert\sweet-alert.css" />
+    <Content Include="Scripts\sweet-alert\sweet-alert.js" />
+    <Content Include="Scripts\sweet-alert\sweet-alert.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
