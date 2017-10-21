@@ -80,6 +80,8 @@
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\font-awesome\font-awesome.css" />
     <Content Include="Content\font-awesome\font-awesome.min.css" />
+    <Content Include="Content\ngTagsInput\ng-tags-input.bootstrap.css" />
+    <Content Include="Content\ngTagsInput\ng-tags-input.css" />
     <Content Include="Content\ngTable\ng-table.css" />
     <Content Include="Content\ngTable\ng-table.min.css" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -209,6 +211,7 @@
     <Content Include="Scripts\jquery\jquery-3.2.1.slim.min.js" />
     <Content Include="Scripts\jquery\jquery-3.2.1.slim.min.map" />
     <Content Include="Scripts\jquery\jquery-3.2.1.min.map" />
+    <Content Include="Scripts\ngTagsInput\ng-tags-input.js" />
     <Content Include="Scripts\ngTable\ng-table.js" />
     <Content Include="Scripts\ngTable\ng-table.min.js" />
     <Content Include="Scripts\ngTable\ng-table.min.js.map" />
