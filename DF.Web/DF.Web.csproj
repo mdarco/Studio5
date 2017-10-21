@@ -74,6 +74,10 @@
     <Content Include="Content\angular-ui\select2.png" />
     <Content Include="Content\angular-ui\select2x2.png" />
     <Content Include="Content\angular-ui\spinner.gif" />
+    <Content Include="Content\bootstrap\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap\bootstrap.css" />
+    <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -115,6 +119,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="packages.config" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.js" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.min.js" />
@@ -169,7 +174,17 @@
     <Content Include="Scripts\angular-block-ui\angular-block-ui.js.map" />
     <Content Include="Content\angular-block-ui\angular-block-ui.css.map" />
     <Content Include="Scripts\angular-moment\angular-moment.min.js.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap\bootstrap.css.map" />
+    <Content Include="Content\bootstrap\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\jquery-ui\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery\jquery-3.2.1.js" />
