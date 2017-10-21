@@ -1,0 +1,148 @@
+﻿
+body {
+    font-family: "Open Sans", Arial, Helvetica, Sans-Serif;
+    font-size: 13px;
+    line-height: 1.428571429;
+    color: #333333;
+    background-color: #ffffff;
+}
+
+/* Table styles */
+caption {
+    font-weight: bold;
+    font-size: medium;
+}
+
+/* Bootstrap bs-callout-... styles (not included in Bootstrap distribution) */
+
+.bs-callout {
+    margin: 20px 0;
+    padding: 15px 30px 15px 15px;
+    border-left: 5px solid #eee;
+}
+
+.bs-callout h4 {
+    margin-top: 0;
+}
+
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.bs-callout code,
+.bs-callout .highlight {
+    background-color: #fff;
+}
+ 
+.bs-callout-danger {
+    background-color: #fcf2f2;
+    border-color: #dFb5b4;
+}
+
+.bs-callout-danger h4 {
+    color: #B94A48;
+}
+
+.bs-callout-warning {
+    background-color: #fefbed;
+    border-color: #f1e7bc;
+}
+
+.bs-callout-warning h4 {
+    color: #C09853;
+}
+
+.bs-callout-info {
+    background-color: #f0f7fd;
+    border-color: #d0e3f0;
+}
+
+.bs-callout-info h4 {
+    color: #3A87AD;
+}
+
+.bs-callout-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+/* Bootstrap bs-callout-... styles (not included in Bootstrap distribution) - end */
+
+.error-input {
+    text-align: right;
+    color: #B94A48;
+    font-size: 12px;
+}
+
+.block-ui-message {
+    background-color: gray;
+    /* color: red; */
+}
+
+.disabled-input-color {
+    background-color: #e3e3e3 !important;
+}
+
+.selectedDialogTableRow {
+    color: white;
+    background-color: #3a3633;
+}
+
+.commentOwner {
+    background-color: #fffedf;
+}
+
+/* Wizard */
+.wizard-main-body {
+    height: 50px;
+    max-height: 50px;
+    /* overflow-y: auto; */
+    padding-right: 20px;
+}
+
+.wizard-main-body-empty {
+    /* text-align: center; */
+    /* line-height: 300px; */
+    font-variant: small-caps;
+    font-weight: bold;
+    font-size: x-large;
+    font-style: italic;
+    color: lightgrey;
+}
+
+/* Label additional styles */
+.label-magenta {
+    background-color: magenta;
+}
+
+.label-dotted-red {
+    background-color: white;
+    border: 2px dotted red;
+    color: black;
+}
+
+.label-dotted-blue {
+    background-color: white;
+    border: 2px dotted blue;
+    color: black;
+}
+
+.label-white {
+    background-color: white;
+    border: 1px solid gray;
+    color: black;
+}
+
+/* Misc */
+.text-bold {
+    font-weight: bold;
+}
+
+/* Reports */
+.report-result-file-redirection {
+    border: 1px solid lightgray;
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
