@@ -205,6 +205,8 @@
     <Content Include="Scripts\bootbox\bootbox.min.js" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\file-saver\FileSaver.js" />
+    <Content Include="Scripts\file-saver\FileSaver.min.js" />
     <Content Include="Scripts\jquery-ui\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\jquery\jquery-3.2.1.js" />
