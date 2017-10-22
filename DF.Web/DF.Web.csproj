@@ -338,6 +338,7 @@
     <Content Include="pages\NavigationController.js" />
     <Content Include="pages\not-authorised\not-authorised.html" />
     <Content Include="pages\not-authorised\NotAuthorisedController.js" />
+    <Content Include="pages\settings\users\UserInfoController.js" />
     <Content Include="Scripts\angular-base64\angular-base64.min.js" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.js" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.min.js" />
