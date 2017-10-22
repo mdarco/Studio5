@@ -1,9 +1,9 @@
 ﻿
-angular.module('UserAuth', ['base64', 'WebApiBaseUrl']);
+angular.module('UserAuth', ['base64']);
 
 /*** CONSTANTS ***/
 
-angular.module('UserAuth').constant('WebApiBaseUrl', WebApiBaseUrl);
+angular.module('UserAuth').constant('WebApiBaseUrl', '/DFApi');
 
 /*** CONSTANTS ***/
 
