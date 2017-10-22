@@ -127,6 +127,7 @@
     <Content Include="Content\img\demo\site-1.jpg" />
     <Content Include="Content\img\demo\site-2.jpg" />
     <Content Include="Content\img\demo\widget-colorpicker.png" />
+    <Content Include="Content\img\df-logo-transparent.png" />
     <Content Include="Content\img\doc-1.png" />
     <Content Include="Content\img\doc-2.png" />
     <Content Include="Content\img\dropzone\spritemap%402x.png" />
