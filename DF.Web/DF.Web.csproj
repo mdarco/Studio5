@@ -506,6 +506,10 @@
     <Content Include="Scripts\sweet-alert\sweet-alert.css" />
     <Content Include="Scripts\sweet-alert\sweet-alert.js" />
     <Content Include="Scripts\sweet-alert\sweet-alert.min.js" />
+    <Content Include="services\data\DocumentsService.js" />
+    <Content Include="services\data\TagsService.js" />
+    <Content Include="services\data\UsersService.js" />
+    <Content Include="services\UtilityService.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -513,7 +517,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DocumentStore\" />
-    <Folder Include="services\data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
