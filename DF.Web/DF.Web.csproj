@@ -66,8 +66,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app.css" />
+    <Content Include="Content\abn-tree\abn_tree.css" />
     <Content Include="Content\angular-block-ui\angular-block-ui.css" />
     <Content Include="Content\angular-block-ui\angular-block-ui.min.css" />
+    <Content Include="Content\angular-toastr\angular-toastr.css" />
+    <Content Include="Content\angular-toastr\angular-toastr.min.css" />
     <Content Include="Content\angular-ui\angular-ui.css" />
     <Content Include="Content\angular-ui\angular-ui.min.css" />
     <Content Include="Content\angular-ui\select2.css" />
@@ -91,6 +95,8 @@
     <Content Include="Content\ngTagsInput\ng-tags-input.css" />
     <Content Include="Content\ngTable\ng-table.css" />
     <Content Include="Content\ngTable\ng-table.min.css" />
+    <Content Include="Content\SmartAdmin\smartadmin-production.css" />
+    <Content Include="Content\SmartAdmin\smartadmin-skins.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -164,6 +170,7 @@
     <Content Include="img\jqueryui\ui-icons_f0ad4e_256x240.png" />
     <Content Include="img\jqueryui\ui-icons_f6cf3b_256x240.png" />
     <Content Include="img\jqueryui\ui-icons_ffffff_256x240.png" />
+    <Content Include="Index.html" />
     <Content Include="modules\user-auth\user-auth.module.js" />
     <Content Include="packages.config" />
     <Content Include="pages\common\checkbox-tree-dialog\checkbox-tree-dialog.html" />
@@ -309,6 +316,12 @@
     <Content Include="Scripts\ngTable\ng-table.js.map" />
     <Content Include="Scripts\JSTools\dataConvert.min.js.map" />
     <Content Include="Scripts\JSTools\dataValidator.min.js.map" />
+    <Content Include="Scripts\SmartAdmin\jarvis-widgets\jarvis.widget.js" />
+    <Content Include="Scripts\SmartAdmin\jarvis-widgets\jarvis.widget.min.js" />
+    <Content Include="Scripts\SmartAdmin\plugins\msie-fix\jquery.mb.browser.js" />
+    <Content Include="Scripts\SmartAdmin\plugins\msie-fix\jquery.mb.browser.min.js" />
+    <Content Include="Scripts\SmartAdmin\SmartNotification.js" />
+    <Content Include="Scripts\SmartAdmin\SmartNotification.min.js" />
     <Content Include="Scripts\sprintf\angular-sprintf.min.js.map" />
     <Content Include="Scripts\sprintf\sprintf.min.js.map" />
     <None Include="Web.Debug.config">
