@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DFDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DFDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Choreographies">
           <Key>
             <PropertyRef Name="ChoreographyID" />
@@ -1241,6 +1241,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserGroupPermissions_Permissions">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
+          <End Role="UserGroupPermissions" Type="Self.UserGroupPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="PermissionID" />
+            </Principal>
+            <Dependent Role="UserGroupPermissions">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserGroupPermissions_UserGroups">
           <End Role="UserGroups" Type="Self.UserGroups" Multiplicity="1" />
           <End Role="UserGroupPermissions" Type="Self.UserGroupPermissions" Multiplicity="*" />
@@ -1274,6 +1286,18 @@
             </Principal>
             <Dependent Role="UserImages">
               <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPermissions_Permissions">
+          <End Role="Permissions" Type="Self.Permissions" Multiplicity="1" />
+          <End Role="UserPermissions" Type="Self.UserPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="PermissionID" />
+            </Principal>
+            <Dependent Role="UserPermissions">
+              <PropertyRef Name="PermissionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1595,6 +1619,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserGroupMembers" EntitySet="UserGroupMembers" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserGroupPermissions_Permissions" Association="Self.FK_UserGroupPermissions_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="UserGroupPermissions" EntitySet="UserGroupPermissions" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserGroupPermissions_UserGroups" Association="Self.FK_UserGroupPermissions_UserGroups">
             <End Role="UserGroups" EntitySet="UserGroups" />
             <End Role="UserGroupPermissions" EntitySet="UserGroupPermissions" />
@@ -1607,6 +1635,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserImages" EntitySet="UserImages" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserPermissions_Permissions" Association="Self.FK_UserPermissions_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="UserPermissions" EntitySet="UserPermissions" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserPermissions_Users" Association="Self.FK_UserPermissions_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserPermissions" EntitySet="UserPermissions" />
@@ -1616,8 +1648,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DFDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2144,6 +2175,8 @@
           </Key>
           <Property Name="PermissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PermissionName" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="UserGroupPermissions" Relationship="DFDataModel.FK_UserGroupPermissions_Permissions" FromRole="Permissions" ToRole="UserGroupPermissions" />
+          <NavigationProperty Name="UserPermissions" Relationship="DFDataModel.FK_UserPermissions_Permissions" FromRole="Permissions" ToRole="UserPermissions" />
         </EntityType>
         <EntityType Name="TrainingMemberPresenceRegistrations">
           <Key>
@@ -2213,6 +2246,7 @@
           <Property Name="PermissionID" Type="Int32" Nullable="false" />
           <Property Name="Note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="UserGroups" Relationship="Self.FK_UserGroupPermissions_UserGroups" FromRole="UserGroupPermissions" ToRole="UserGroups" />
+          <NavigationProperty Name="Permissions" Relationship="DFDataModel.FK_UserGroupPermissions_Permissions" FromRole="UserGroupPermissions" ToRole="Permissions" />
         </EntityType>
         <EntityType Name="UserGroups">
           <Key>
@@ -2243,6 +2277,7 @@
           <Property Name="PermissionID" Type="Int32" Nullable="false" />
           <Property Name="Note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="Self.FK_UserPermissions_Users" FromRole="UserPermissions" ToRole="Users" />
+          <NavigationProperty Name="Permissions" Relationship="DFDataModel.FK_UserPermissions_Permissions" FromRole="UserPermissions" ToRole="Permissions" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -3361,7 +3396,39 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="UserPermissions" EntitySet="UserPermissions" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserGroupPermissions_Permissions" Association="DFDataModel.FK_UserGroupPermissions_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="UserGroupPermissions" EntitySet="UserGroupPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserPermissions_Permissions" Association="DFDataModel.FK_UserPermissions_Permissions">
+            <End Role="Permissions" EntitySet="Permissions" />
+            <End Role="UserPermissions" EntitySet="UserPermissions" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_UserGroupPermissions_Permissions">
+          <End Type="DFDataModel.Permissions" Role="Permissions" Multiplicity="1" />
+          <End Type="DFDataModel.UserGroupPermissions" Role="UserGroupPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="PermissionID" />
+            </Principal>
+            <Dependent Role="UserGroupPermissions">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserPermissions_Permissions">
+          <End Type="DFDataModel.Permissions" Role="Permissions" Multiplicity="1" />
+          <End Type="DFDataModel.UserPermissions" Role="UserPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Permissions">
+              <PropertyRef Name="PermissionID" />
+            </Principal>
+            <Dependent Role="UserPermissions">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

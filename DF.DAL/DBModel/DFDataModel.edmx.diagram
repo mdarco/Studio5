@@ -123,6 +123,8 @@
         <AssociationConnector Association="DFDataModel.FK_UserGroupPermissions_UserGroups" ManuallyRouted="false" />
         <AssociationConnector Association="DFDataModel.FK_UserImages_Users" ManuallyRouted="false" />
         <AssociationConnector Association="DFDataModel.FK_UserPermissions_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_UserGroupPermissions_Permissions" />
+        <AssociationConnector Association="DFDataModel.FK_UserPermissions_Permissions" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

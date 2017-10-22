@@ -19,5 +19,6 @@ namespace DF.DB.DBModel
         public string Note { get; set; }
     
         public virtual UserGroups UserGroups { get; set; }
+        public virtual Permissions Permissions { get; set; }
     }
 }

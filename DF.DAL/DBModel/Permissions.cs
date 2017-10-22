@@ -14,7 +14,19 @@ namespace DF.DB.DBModel
     
     public partial class Permissions
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Permissions()
+        {
+            this.UserGroupPermissions = new HashSet<UserGroupPermissions>();
+            this.UserPermissions = new HashSet<UserPermissions>();
+        }
+    
         public int PermissionID { get; set; }
         public string PermissionName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserGroupPermissions> UserGroupPermissions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserPermissions> UserPermissions { get; set; }
     }
 }
