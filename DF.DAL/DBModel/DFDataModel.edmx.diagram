@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4a4c631abe654169b4065e2f9d6ed17f" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="DFDataModel.Choreographies" Width="1.5" PointX="9" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.ChoreographyChoreographers" Width="1.5" PointX="5.25" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.ChoreographyMembers" Width="1.5" PointX="5.25" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.ContactData" Width="1.5" PointX="0.75" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Costumes" Width="1.5" PointX="0.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DanceGroupChoreographies" Width="1.5" PointX="14.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DanceGroupLocations" Width="1.5" PointX="11.25" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DanceGroupMembers" Width="1.5" PointX="5.25" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DanceGroupPeriods" Width="1.5" PointX="11.25" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DanceGroups" Width="1.5" PointX="3" PointY="36.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DanceGroupStaff" Width="1.5" PointX="5.25" PointY="34.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DanceSelectionChoreographies" Width="1.5" PointX="14.25" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DanceSelectionDanceGroups" Width="1.5" PointX="11.25" PointY="44.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DanceSelectionLocations" Width="1.5" PointX="14.25" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DanceSelectionMembers" Width="1.5" PointX="8.25" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DanceSelectionPeriods" Width="1.5" PointX="14.25" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DanceSelections" Width="1.5" PointX="6" PointY="42.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DanceSelectionStaff" Width="1.5" PointX="8.25" PointY="36.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DocumentMetadata" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Documents" Width="1.5" PointX="5.25" PointY="37.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DocumentTags" Width="1.5" PointX="7.5" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.DocumentTypes" Width="1.5" PointX="3" PointY="40.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.EventChoreographies" Width="1.5" PointX="14.25" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Events" Width="1.5" PointX="0.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Images" Width="1.5" PointX="6" PointY="46.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Locations" Width="1.5" PointX="2.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Log" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Lookup_AgeCategories" Width="1.5" PointX="6.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Lookup_DanceStyles" Width="1.5" PointX="6.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Lookup_Disciplines" Width="1.5" PointX="6.75" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Lookup_DocumentTags" Width="1.5" PointX="5.25" PointY="59.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Lookup_EventTypes" Width="1.5" PointX="1.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.MemberDocuments" Width="1.5" PointX="8.25" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.MemberImages" Width="1.5" PointX="8.25" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.MemberPaymentItems" Width="1.5" PointX="11.25" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.MemberPayments" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.MemberPaymentsForCompanions" Width="1.5" PointX="8.25" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Members" Width="1.5" PointX="3" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Outfits" Width="1.5" PointX="0.75" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Payments" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Performances" Width="1.5" PointX="11.25" PointY="22.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Periods" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Permissions" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.TrainingMemberPresenceRegistrations" Width="1.5" PointX="8.25" PointY="32.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Trainings" Width="1.5" PointX="6" PointY="55.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.TrainingStaff" Width="1.5" PointX="11.25" PointY="32.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.UserDocuments" Width="1.5" PointX="10.5" PointY="41" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.UserGroupMembers" Width="1.5" PointX="11.25" PointY="35.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.UserGroupPermissions" Width="1.5" PointX="11.25" PointY="48.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.UserGroups" Width="1.5" PointX="9" PointY="44.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.UserImages" Width="1.5" PointX="11.25" PointY="38.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.UserPermissions" Width="1.5" PointX="5.25" PointY="52" IsExpanded="true" />
+        <EntityTypeShape EntityType="DFDataModel.Users" Width="1.5" PointX="3" PointY="30.875" IsExpanded="true" />
+        <AssociationConnector Association="DFDataModel.FK_Choreographies_Lookup_AgeCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_Choreographies_Lookup_DanceStyles" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_Choreographies_Lookup_Disciplines" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_ChoreographyMembers_Choreographies" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceGroupChoreographies_Choreographies" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceSelectionChoreographies_Choreographies" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_EventChoreographies_Choreographies" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_Performances_Choreographies" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_ChoreographyChoreographers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_ChoreographyMembers_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_Members_ContactData" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_Users_ContactData" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_Payments_Costumes" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceGroupChoreographies_DanceGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceGroupLocations_DanceGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceGroupLocations_Locations" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceGroupMembers_DanceGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceGroupMembers_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceGroupPeriods_DanceGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceGroupPeriods_Periods" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceGroupStaff_DanceGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceSelectionDanceGroups_DanceGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceGroupStaff_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceSelectionChoreographies_DanceSelections" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceSelectionDanceGroups_DanceSelections" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceSelectionLocations_DanceSelections" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceSelectionLocations_Locations" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceGroupSelections_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceSelectionMembers_DanceSelections" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceSelectionPeriods_DanceSelections" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceSelectionPeriods_Periods" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceSelectionStaff_DanceSelections" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DanceSelectionStaff_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_Documents_CreatedByUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_Documents_DocumentTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DocumentTags_Documents" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_MemberDocuments_Documents" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_UserDocuments_Documents" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_DocumentTags_Lookup" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_EventChoreographies_Events" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_Events_Lookup_EventTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_Payments_Events" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_Performances_Events" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_MemberImages_Images" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_UserImages_Images" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_MemberDocuments_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_MemberImages_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_MemberPaymentItems_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_MemberPaymentItems_Payments" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_MemberPayments_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_MemberPayments_Payments" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_MemberPayments_PaymentsForCompanions" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_MemberPaymentsForCompanions_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_Performances_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_TrainingMemberPresenceRegistrations_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_Payments_Outfits" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_TrainingMemberPresenceRegistrations_Trainings" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_TrainingStaff_Trainings" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_TrainingStaff_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_UserDocuments_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_UserGroupMembers_UserGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_UserGroupMembers_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_UserGroupPermissions_UserGroups" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_UserImages_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="DFDataModel.FK_UserPermissions_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -49,6 +49,8 @@
       <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,10 +59,192 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBModel\Choreographies.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\ChoreographyChoreographers.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\ChoreographyMembers.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\ContactData.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Costumes.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DanceGroupChoreographies.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DanceGroupLocations.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DanceGroupMembers.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DanceGroupPeriods.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DanceGroups.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DanceGroupStaff.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DanceSelectionChoreographies.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DanceSelectionDanceGroups.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DanceSelectionLocations.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DanceSelectionMembers.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DanceSelectionPeriods.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DanceSelections.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DanceSelectionStaff.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DFDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DFDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DFDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DFDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DFDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DocumentMetadata.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Documents.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DocumentTags.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\DocumentTypes.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\EventChoreographies.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Events.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Images.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Locations.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Log.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Lookup_AgeCategories.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Lookup_DanceStyles.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Lookup_Disciplines.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Lookup_DocumentTags.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Lookup_EventTypes.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\MemberDocuments.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\MemberImages.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\MemberPaymentItems.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\MemberPayments.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\MemberPaymentsForCompanions.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Members.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Outfits.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Payments.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Performances.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Periods.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Permissions.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\TrainingMemberPresenceRegistrations.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Trainings.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\TrainingStaff.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\UserDocuments.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\UserGroupMembers.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\UserGroupPermissions.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\UserGroups.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\UserImages.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\UserPermissions.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBModel\Users.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="DBModel\DFDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DFDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="DBModel\DFDataModel.edmx.diagram">
+      <DependentUpon>DFDataModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +252,21 @@
       <Project>{7172a91c-a932-439e-8ca0-d8548c0e82d6}</Project>
       <Name>DF.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DBModel\DFDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DFDataModel.edmx</DependentUpon>
+      <LastGenOutput>DFDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DBModel\DFDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DFDataModel.edmx</DependentUpon>
+      <LastGenOutput>DFDataModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
