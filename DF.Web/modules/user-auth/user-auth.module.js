@@ -1,17 +1,8 @@
-﻿
-angular.module('UserAuth', ['base64']);
-
-/*** CONSTANTS ***/
+﻿angular.module('UserAuth', ['base64']);
 
 angular.module('UserAuth').constant('WebApiBaseUrl', '/DFApi');
 
-/*** CONSTANTS ***/
-
-
-/*** SERVICES ***/
-
 // AuthenticationService - deals with user login, logout and getting user permissions
-// Authenticated user is stored in session storage (or in the cookie if the session storage is not accessible)
 angular.module('UserAuth').factory('AuthenticationService', authenticationService);
 
 authenticationService.$inject = ['$q', '$http', '$base64', 'WebApiBaseUrl'];
@@ -84,7 +75,6 @@ angular.module('UserAuth').factory('AuthorizationService', authorizationService)
 authorizationService.$inject = ['AuthenticationService'];
 
 function authorizationService(AuthenticationService) {
-
 	var service = {
 	    authorize: authorize,
 	    authorizeByUserGroup: authorizeByUserGroup
@@ -171,10 +161,6 @@ function authorizationService(AuthenticationService) {
 	}
 }
 
-/*** SERVICES ***/
-
-
-/*** DIRECTIVES ***/
 
 // 'authenticatedUser' directive allows that only authenticated users
 // can see the target element
@@ -183,7 +169,6 @@ angular.module('UserAuth').directive('authenticatedUser', authUserDirective);
 authUserDirective.$inject = ['AuthenticationService'];
 
 function authUserDirective(AuthenticationService) {
-
 	return {
 		restrict: 'A',
 
@@ -212,9 +197,7 @@ function authUserDirective(AuthenticationService) {
 			});
 		}
 	};
-
 }
-
 
 // 'permissions' directive takes a list of permissions for which the resource
 // is allowed to be shown
@@ -224,7 +207,6 @@ permissionsDirective.$inject = ['AuthorizationService'];
 
 function permissionsDirective(AuthorizationService) {
 	return {
-
 		restrict: 'A',
 
 		link: function(scope, element, attrs) {
@@ -267,7 +249,6 @@ permissionsDisableElementDirective.$inject = ['AuthorizationService'];
 
 function permissionsDisableElementDirective(AuthorizationService) {
     return {
-
         restrict: 'A',
 
         link: function (scope, element, attrs) {
@@ -302,7 +283,6 @@ function permissionsDisableElementDirective(AuthorizationService) {
     };
 }
 
-
 // 'user-groups' directive takes a list of user groups for which the resource
 // is allowed to be shown
 angular.module('UserAuth').directive('userGroups', userGroupsDirective);
@@ -311,7 +291,6 @@ userGroupsDirective.$inject = ['AuthorizationService'];
 
 function userGroupsDirective(AuthorizationService) {
     return {
-
         restrict: 'A',
 
         link: function (scope, element, attrs) {
@@ -343,8 +322,5 @@ function userGroupsDirective(AuthorizationService) {
                 determineVisibility();
             });
         }
-
     };
 }
-
-/*** DIRECTIVES ***/
