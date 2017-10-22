@@ -19,20 +19,20 @@
 
                         <fieldset>
                             <section>
-                                <label class="label">{{ 'LOGIN.USERNAME' | translate }}</label>
+                                <label class="label">Korisničko ime</label>
                                 <label class="input">
                                     <i class="icon-append fa fa-user"></i>
                                     <input type="text" name="username" ng-model="userLoginModel.Username">
-                                    <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> {{ 'LOGIN.TOOLTIP_USERNAME' | translate }}</b>
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Unesite koriničko ime</b>
                                 </label>
                             </section>
 
                             <section>
-                                <label class="label">{{ 'LOGIN.PASSWORD' | translate }}</label>
+                                <label class="label">Lozinka</label>
                                 <label class="input">
                                     <i class="icon-append fa fa-lock"></i>
                                     <input type="password" name="password" ng-model="userLoginModel.Password">
-                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> {{ 'LOGIN.TOOLTIP_PASSWORD' | translate }}</b>
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Unesite lozinku</b>
                                 </label>
                             </section>
 
@@ -42,7 +42,7 @@
                         </fieldset>
 
                         <footer>
-                            <button class="btn btn-primary" ng-click="login()">{{ 'LOGIN.BTNTEXT' | translate }}</button>
+                            <button class="btn btn-primary" ng-click="login()">Prijava</button>
                         </footer>
                     </form>
                 </div>

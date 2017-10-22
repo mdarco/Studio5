@@ -50,8 +50,8 @@
             <span>
                 <img src="Content/img/avatars/user-avatar-1.png" alt="User" class="online" />
                 <span>{{ userInfo.FullName }}</span>&nbsp;&nbsp;
-                <button type="button" class="btn btn-primary btn-xs" ng-click="changePassword()" title="{{ 'MAIN_MENU.USER_INFO.CHANGE_PASSWORD_TITLE' | translate }}"><i class="fa fa-user-secret"></i></button>
-                <button type="button" class="btn btn-primary btn-xs" ng-click="logout()" title="{{ 'MAIN_MENU.USER_INFO.LOGOUT_TITLE' | translate }}"><i class="fa fa-sign-out"></i></button>
+                <button type="button" class="btn btn-primary btn-xs" ng-click="changePassword()" title="Izmena lozinke"><i class="fa fa-user-secret"></i></button>
+                <button type="button" class="btn btn-primary btn-xs" ng-click="logout()" title="Odjava"><i class="fa fa-sign-out"></i></button>
             </span>
         </div>
         <!-- end user info -->
@@ -60,20 +60,20 @@
             <ul>
                 <!-- Home/Dashboard -->
                 <li id="menuHome" class="active">
-                    <a ng-href="#/home" title="Početna"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">{{ 'MAIN_MENU.HOME.TITLE' | translate }}</span></a>
+                    <a ng-href="#/home" title="Početna"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Početna</span></a>
                 </li>
 
                 <!-- Pretrazivanje -->
                 <li id="menuFileSearch" permissions="Glavni meni - Pretraživanje">
-                    <a ng-href="#/file-search" title="Pretraživanje"><i class="fa fa-lg fa-fw fa-search"></i> <span class="menu-item-parent">{{ 'MAIN_MENU.SEARCH.TITLE' | translate }}</span></a>
+                    <a ng-href="#/file-search" title="Pretraživanje"><i class="fa fa-lg fa-fw fa-search"></i> <span class="menu-item-parent">Pretraživanje</span></a>
                 </li>
 
                 <!-- Settings -->
                 <li user-groups="Admin">
-                    <a ng-href="#" title="Podešavanja"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">{{ 'MAIN_MENU.SETTINGS.TITLE' | translate }}</span></a>
+                    <a ng-href="#" title="Podešavanja"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">Podešavanja</span></a>
                     <ul>
                         <li id="menuFileTypes">
-                            <a ng-href="#/file-types">{{ 'MAIN_MENU.SETTINGS.FILE_TYPES' | translate }}</a>
+                            <a ng-href="#/file-types">Tipovi predmeta</a>
                         </li>
                     </ul>
                 </li>
