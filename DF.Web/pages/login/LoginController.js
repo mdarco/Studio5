@@ -24,26 +24,20 @@
                 return;
             }
 
-            var loadingSpinner = blockUI.instances.get('block-ui-element');
-            loadingSpinner.start();
+            blockUI.start();
 
             // encrypt password for transfer with base64
             var base64Password = $base64.encode($scope.userLoginModel.Password);
 
             AuthenticationService.login($scope.userLoginModel.Username, base64Password).then(
                 function (user) {
-                    loadingSpinner.stop();
-                    $rootScope.$broadcast('user-auth-changed', { userInfo: user }); // this fires an event down the $scope ($emit fires up the $scope)
-
-                    //if (_.includes(user.UserGroups, 'Admin')) {
-                    //    $location.path('/home');
-                    //} else {
-                    //    $location.path('/user-messages');
-                    //}
+                    blockUI.stop();
+                    $rootScope.$broadcast('user-auth-changed', { userInfo: user });
+                    $location.path('/home');
                 },
                 function (errorMsg) {
                     $scope.error.errorMsg = errorMsg;
-                    loadingSpinner.stop();
+                    blockUI.stop();
                 }
             );
         };
