@@ -214,7 +214,16 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\DF.DAL\DF.DAL.csproj">
+      <Project>{9bb2a7fb-20ee-4627-a9b3-7d6f7e6548e1}</Project>
+      <Name>DF.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DF.Models\DF.Models.csproj">
+      <Project>{7172a91c-a932-439e-8ca0-d8548c0e82d6}</Project>
+      <Name>DF.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
