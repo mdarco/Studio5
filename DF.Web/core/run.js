@@ -5,7 +5,7 @@
         .module('DFApp')
         .run(runFn);
 
-    runFn.$inject = ['$rootScope', '$location', 'AuthorizationService', 'editableOptions'];
+    runFn.$inject = ['$rootScope', '$location', 'AuthorizationService'];
 
     function runFn($rootScope, $location, AuthorizationService) {
         // check route permissions
