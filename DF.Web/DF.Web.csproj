@@ -305,6 +305,7 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
+    <Content Include="Content\under-construction.jpg" />
     <Content Include="core\app.js" />
     <Content Include="core\config.js" />
     <Content Include="core\constants.js" />
