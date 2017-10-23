@@ -42,7 +42,7 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
 </head>
 
-<body class="smart-style-0" style="overflow-y: auto;">
+<body class="smart-style-1" style="overflow-y: auto;">
     <!-- Left panel : NAVIGATION AREA -->
     <aside id="left-panel" style="top: 0;" authenticated-user>
         <!-- User info -->
@@ -63,17 +63,83 @@
                     <a ng-href="#/home" title="Početna"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Početna</span></a>
                 </li>
 
-                <!-- Pretrazivanje -->
-                <li id="menuFileSearch" permissions="Glavni meni - Pretraživanje">
-                    <a ng-href="#/file-search" title="Pretraživanje"><i class="fa fa-lg fa-fw fa-search"></i> <span class="menu-item-parent">Pretraživanje</span></a>
+                <!-- Members -->
+                <li id="menuMembers" permissions="Glavni meni - Plesači">
+                    <a ng-href="#/members" title="Plesači"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Plesači</span></a>
+                </li>
+
+                <!-- Trainings -->
+                <li id="menuTrainings" permissions="Glavni meni - Treninzi">
+                    <a ng-href="#/trainings" title="Treninzi"><i class="fa fa-lg fa-fw fa-soccer-ball-o"></i> <span class="menu-item-parent">Treninzi</span></a>
+                </li>
+
+                <!-- Choreographies -->
+                <li id="menuChoreographies" permissions="Glavni meni - Koreografije">
+                    <a ng-href="#/choreos" title="Koreografije"><i class="fa fa-lg fa-fw fa-music"></i> <span class="menu-item-parent">Koreografije</span></a>
+                </li>
+
+                <!-- Events -->
+                <li id="menuEvents" permissions="Glavni meni - Događaji">
+                    <a ng-href="#/events" title="Događaji"><i class="fa fa-lg fa-fw fa-cubes"></i> <span class="menu-item-parent">Događaji</span></a>
+                </li>
+
+                <!-- Outfits -->
+                <li id="menuOutfits" permissions="Glavni meni - Oprema">
+                    <a ng-href="#/outfits" title="Oprema"><i class="fa fa-lg fa-fw fa-archive"></i> <span class="menu-item-parent">Oprema</span></a>
+                </li>
+
+                <!-- Costumes -->
+                <li id="menuCostumes" permissions="Glavni meni - Kostimi">
+                    <a ng-href="#/costumes" title="Kostimi"><i class="fa fa-lg fa-fw fa-female"></i> <span class="menu-item-parent">Kostimi</span></a>
                 </li>
 
                 <!-- Settings -->
                 <li user-groups="Admin">
                     <a ng-href="#" title="Podešavanja"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">Podešavanja</span></a>
                     <ul>
-                        <li id="menuFileTypes">
-                            <a ng-href="#/file-types">Tipovi predmeta</a>
+                        <li id="menuPayments">
+                            <a ng-href="#/payments">Plaćanja</a>
+                        </li>
+                        <li id="menuSearch">
+                            <a ng-href="#"><i class="fa fa-lg fa-fw fa-search"></i> <span class="menu-item-parent">Pretraživanje</span></a>
+                            <ul>
+                                <li id="menuSearchDocs">
+                                    <a ng-href="#/search-docs">Dokumenti</a>
+                                </li>
+                                <li id="menuSearchMemberImages">
+                                    <a ng-href="#/search-member-images">Slike plesača</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li id="menuPeriods">
+                            <a ng-href="#/periods">Termini</a>
+                        </li>
+                        <li id="menuLookup_AgeCategories">
+                            <a ng-href="#/lookup-age-categories">Uzrast</a>
+                        </li>
+                        <li id="menuLookup_DanceStyles">
+                            <a ng-href="#/lookup-dance-styles">Stilovi</a>
+                        </li>
+                        <li id="menuLookup_Disciplines">
+                            <a ng-href="#/lookup-disciplines">Discipline</a>
+                        </li>
+                        <li id="menuLookup_EventTypes">
+                            <a ng-href="#/lookup-event-types">Vrste događaja</a>
+                        </li>
+                        <li id="menuLocations">
+                            <a ng-href="#/locations">Lokacije</a>
+                        </li>
+                        <li id="menuDanceGroups">
+                            <a ng-href="#/dance-groups">Grupe</a>
+                        </li>
+                        <li id="menuDanceSelekcije">
+                            <a ng-href="#/dance-selections">Selekcije</a>
+                        </li>
+                        <li id="menuUsers">
+                            <a ng-href="#/users">Korisnici</a>
+                        </li>
+                        <li id="menuUserGroups">
+                            <a ng-href="#/user-groups">Korisničke grupe</a>
                         </li>
                     </ul>
                 </li>
