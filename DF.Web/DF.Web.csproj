@@ -322,6 +322,8 @@
     <Content Include="Index.html" />
     <Content Include="modules\user-auth\user-auth.module.js" />
     <Content Include="packages.config" />
+    <Content Include="pages\choreographies\choreos.html" />
+    <Content Include="pages\choreographies\ChoreosController.js" />
     <Content Include="pages\common\checkbox-tree-dialog\checkbox-tree-dialog.html" />
     <Content Include="pages\common\checkbox-tree-dialog\CheckboxTreeDialogController.js" />
     <Content Include="pages\common\combo-dialog\combo-dialog.html" />
@@ -519,7 +521,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DocumentStore\" />
-    <Folder Include="pages\choreographies\" />
     <Folder Include="pages\costumes\" />
     <Folder Include="pages\events\" />
     <Folder Include="pages\members\" />
