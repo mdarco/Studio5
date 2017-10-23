@@ -129,6 +129,12 @@ namespace DF.DB
         {
             using (var ctx = new DFAppEntities())
             {
+                var existingJMBG = ctx.Members.FirstOrDefault(x => x.JMBG == model.JMBG);
+                if (existingJMBG != null)
+                {
+                    throw new Exception("error_members_jmbg_exists");
+                }
+
                 DBModel.Members m = new DBModel.Members();
                 m.BirthDate = model.BirthDate;
                 m.BirthPlace = model.BirthPlace;
