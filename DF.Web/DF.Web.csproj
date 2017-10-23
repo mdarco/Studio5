@@ -338,13 +338,43 @@
     <Content Include="pages\common\text-field-dialog\TextFieldDialogController.js" />
     <Content Include="pages\costumes\costumes.html" />
     <Content Include="pages\costumes\CostumesController.js" />
+    <Content Include="pages\events\events.html" />
+    <Content Include="pages\events\EventsController.js" />
     <Content Include="pages\home\home.html" />
     <Content Include="pages\home\HomeController.js" />
     <Content Include="pages\login\login.html" />
     <Content Include="pages\login\LoginController.js" />
+    <Content Include="pages\members\members.html" />
+    <Content Include="pages\members\MembersController.js" />
     <Content Include="pages\NavigationController.js" />
     <Content Include="pages\not-authorised\not-authorised.html" />
     <Content Include="pages\not-authorised\NotAuthorisedController.js" />
+    <Content Include="pages\outfits\outfits.html" />
+    <Content Include="pages\outfits\OutfitsController.js" />
+    <Content Include="pages\settings\dance-groups\dance-groups.html" />
+    <Content Include="pages\settings\dance-groups\DanceGroupsController.js" />
+    <Content Include="pages\settings\dance-selections\dance-selections.html" />
+    <Content Include="pages\settings\dance-selections\DanceSelectionsController.js" />
+    <Content Include="pages\settings\locations\locations.html" />
+    <Content Include="pages\settings\locations\LocationsController.js" />
+    <Content Include="pages\settings\lookup-age-categories\lookup-age-categories.html" />
+    <Content Include="pages\settings\lookup-age-categories\LookupAgeCategoriesController.js" />
+    <Content Include="pages\settings\lookup-dance-styles\lookup-dance-styles.html" />
+    <Content Include="pages\settings\lookup-dance-styles\LookupDanceStylesController.js" />
+    <Content Include="pages\settings\lookup-disciplines\lookup-disciplines.html" />
+    <Content Include="pages\settings\lookup-disciplines\LookupDisciplinesController.js" />
+    <Content Include="pages\settings\lookup-event-types\lookup-event-types.html" />
+    <Content Include="pages\settings\lookup-event-types\LookupEventTypesController.js" />
+    <Content Include="pages\settings\payments\payments.html" />
+    <Content Include="pages\settings\payments\PaymentsController.js" />
+    <Content Include="pages\settings\periods\periods.html" />
+    <Content Include="pages\settings\periods\PeriodsController.js" />
+    <Content Include="pages\settings\search-docs\search-docs.html" />
+    <Content Include="pages\settings\search-docs\SearchDocsController.js" />
+    <Content Include="pages\settings\search-member-images\search-member-images.html" />
+    <Content Include="pages\settings\search-member-images\SearchMemberImagesController.js" />
+    <Content Include="pages\settings\user-groups\user-groups.html" />
+    <Content Include="pages\settings\user-groups\UserGroupsController.js" />
     <Content Include="pages\settings\users\UserInfoController.js" />
     <Content Include="Scripts\angular-base64\angular-base64.min.js" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.js" />
@@ -523,21 +553,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DocumentStore\" />
-    <Folder Include="pages\events\" />
-    <Folder Include="pages\members\" />
-    <Folder Include="pages\outfits\" />
-    <Folder Include="pages\settings\dance-groups\" />
-    <Folder Include="pages\settings\dance-selections\" />
-    <Folder Include="pages\settings\locations\" />
-    <Folder Include="pages\settings\lookup-age-categories\" />
-    <Folder Include="pages\settings\lookup-dance-styles\" />
-    <Folder Include="pages\settings\lookup-disciplines\" />
-    <Folder Include="pages\settings\lookup-event-types\" />
-    <Folder Include="pages\settings\payments\" />
-    <Folder Include="pages\settings\periods\" />
-    <Folder Include="pages\settings\search-docs\" />
-    <Folder Include="pages\settings\search-member-images\" />
-    <Folder Include="pages\settings\user-groups\" />
     <Folder Include="pages\trainings\" />
   </ItemGroup>
   <PropertyGroup>
