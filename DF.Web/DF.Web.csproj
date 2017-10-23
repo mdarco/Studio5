@@ -127,7 +127,7 @@
     <Content Include="Content\img\demo\site-1.jpg" />
     <Content Include="Content\img\demo\site-2.jpg" />
     <Content Include="Content\img\demo\widget-colorpicker.png" />
-    <Content Include="Content\img\df-logo-transparent.png" />
+    <Content Include="Content\img\df-logo.png" />
     <Content Include="Content\img\doc-1.png" />
     <Content Include="Content\img\doc-2.png" />
     <Content Include="Content\img\dropzone\spritemap%402x.png" />
@@ -254,6 +254,7 @@
     <Content Include="Content\img\superbox\superbox-thumb-8.jpg" />
     <Content Include="Content\img\superbox\superbox-thumb-9.jpg" />
     <Content Include="Content\img\ts-logo.png" />
+    <Content Include="Content\img\under-construction.png" />
     <Content Include="Content\ivh-treeview\ivh-treeview-theme-basic.css" />
     <Content Include="Content\ivh-treeview\ivh-treeview.css" />
     <Content Include="Content\ivh-treeview\ivh-treeview.min.css" />
@@ -305,7 +306,7 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
-    <Content Include="Content\under-construction.jpg" />
+    <Content Include="Content\img\under-construction.jpg" />
     <Content Include="core\app.js" />
     <Content Include="core\config.js" />
     <Content Include="core\constants.js" />
