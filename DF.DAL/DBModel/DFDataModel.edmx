@@ -366,6 +366,7 @@
           <Property Name="BirthDate" Type="datetime" />
           <Property Name="BirthPlace" Type="nvarchar" MaxLength="1000" />
           <Property Name="ContactDataID" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="Note" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Outfits">
@@ -2106,6 +2107,7 @@
           <NavigationProperty Name="MemberPaymentsForCompanions" Relationship="Self.FK_MemberPaymentsForCompanions_Members" FromRole="Members" ToRole="MemberPaymentsForCompanions" />
           <NavigationProperty Name="Performances" Relationship="Self.FK_Performances_Members" FromRole="Members" ToRole="Performances" />
           <NavigationProperty Name="TrainingMemberPresenceRegistrations" Relationship="Self.FK_TrainingMemberPresenceRegistrations_Members" FromRole="Members" ToRole="TrainingMemberPresenceRegistrations" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Outfits">
           <Key>
@@ -3807,6 +3809,7 @@
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="DFDataModel.Members">
               <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />

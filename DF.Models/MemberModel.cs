@@ -14,8 +14,10 @@ namespace DF.Models
         public string JMBG { get; set; }
         public DateTime? BirthDate { get; set; }
         public string BirthPlace { get; set; }
-        public int? ContactDataID { get; set; }
+        public bool? IsActive { get; set; }
         public string Note { get; set; }
+
+        public ContactDataModel ContactData { get; set; }
 
         //this.ChoreographyMembers = new HashSet<ChoreographyMembers>();
         //this.DanceGroupMembers = new HashSet<DanceGroupMembers>();

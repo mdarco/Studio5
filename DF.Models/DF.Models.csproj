@@ -40,7 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiTableResponseModel.cs" />
+    <Compile Include="ContactDataModel.cs" />
     <Compile Include="LoginModel.cs" />
+    <Compile Include="MemberFilterModel.cs" />
     <Compile Include="MemberModel.cs" />
     <Compile Include="PermissionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
