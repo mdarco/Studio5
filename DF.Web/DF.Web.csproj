@@ -376,6 +376,8 @@
     <Content Include="pages\settings\user-groups\user-groups.html" />
     <Content Include="pages\settings\user-groups\UserGroupsController.js" />
     <Content Include="pages\settings\users\UserInfoController.js" />
+    <Content Include="pages\trainings\trainings.html" />
+    <Content Include="pages\trainings\TrainingsController.js" />
     <Content Include="Scripts\angular-base64\angular-base64.min.js" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.js" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.min.js" />
@@ -553,7 +555,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DocumentStore\" />
-    <Folder Include="pages\trainings\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
