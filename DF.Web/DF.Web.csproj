@@ -336,6 +336,8 @@
     <Content Include="pages\common\tags-dialog\TagsDialogController.js" />
     <Content Include="pages\common\text-field-dialog\text-field-dialog.html" />
     <Content Include="pages\common\text-field-dialog\TextFieldDialogController.js" />
+    <Content Include="pages\costumes\costumes.html" />
+    <Content Include="pages\costumes\CostumesController.js" />
     <Content Include="pages\home\home.html" />
     <Content Include="pages\home\HomeController.js" />
     <Content Include="pages\login\login.html" />
@@ -521,7 +523,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DocumentStore\" />
-    <Folder Include="pages\costumes\" />
     <Folder Include="pages\events\" />
     <Folder Include="pages\members\" />
     <Folder Include="pages\outfits\" />
