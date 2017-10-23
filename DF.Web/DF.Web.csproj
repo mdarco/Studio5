@@ -545,6 +545,7 @@
     <Content Include="Scripts\sweet-alert\sweet-alert.js" />
     <Content Include="Scripts\sweet-alert\sweet-alert.min.js" />
     <Content Include="services\data\DocumentsService.js" />
+    <Content Include="services\data\MembersService.js" />
     <Content Include="services\data\TagsService.js" />
     <Content Include="services\data\UsersService.js" />
     <Content Include="services\UtilityService.js" />
