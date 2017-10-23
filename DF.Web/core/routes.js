@@ -26,119 +26,208 @@
                 }
             )
 
-            //.when('/file-card',
-            //    {
-            //        controller: 'FileCardController',
-            //        templateUrl: 'pages/file-card/file-card.html',
-            //        access: {
-            //            loginRequired: true
-            //        }
-            //    }
-            //)
+            .when('/members',
+                {
+                    controller: 'MembersController',
+                    templateUrl: 'pages/members/members.html',
+                    access: {
+                        loginRequired: true
+                    }
+                }
+            )
 
-            //.when('/file-types',
-			//    {
-			//        controller: 'FileTypesController',
-			//        templateUrl: 'pages/settings/file-types/file-types.html',
-			//        access: {
-			//            loginRequired: true,
-			//            requiredPermissions: ['Admin']
-			//        }
-			//    }
-		    //)
+            .when('/trainings',
+                {
+                    controller: 'TrainingsController',
+                    templateUrl: 'pages/trainings/trainings.html',
+                    access: {
+                        loginRequired: true
+                    }
+                }
+            )
 
-            //.when('/doc-types',
-			//    {
-			//        controller: 'DocTypesController',
-			//        templateUrl: 'pages/settings/doc-types/doc-types.html',
-			//        access: {
-			//            loginRequired: true,
-			//            requiredPermissions: ['Admin']
-			//        }
-			//    }
-		    //)
+            .when('/choreos',
+                {
+                    controller: 'ChoreosController',
+                    templateUrl: 'pages/choreographies/choreos.html',
+                    access: {
+                        loginRequired: true
+                    }
+                }
+            )
 
-            //.when('/orgunits',
-			//    {
-			//        controller: 'OrgUnitsController',
-			//        templateUrl: 'pages/settings/org-units/org-units.html',
-			//        access: {
-			//            loginRequired: true,
-			//            requiredPermissions: ['Admin']
-			//        }
-			//    }
-		    //)
+            .when('/events',
+                {
+                    controller: 'EventsController',
+                    templateUrl: 'pages/events/events.html',
+                    access: {
+                        loginRequired: true
+                    }
+                }
+            )
 
-            //.when('/taxes',
-			//    {
-			//        controller: 'TaxesController',
-			//        templateUrl: 'pages/settings/taxes/taxes.html',
-			//        access: {
-			//            loginRequired: true,
-			//            requiredPermissions: ['Admin']
-			//        }
-			//    }
-		    //)
+            .when('/outfits',
+                {
+                    controller: 'OutfitsController',
+                    templateUrl: 'pages/outfits/outfits.html',
+                    access: {
+                        loginRequired: true
+                    }
+                }
+            )
 
-            //.when('/workflows',
-			//    {
-			//        controller: 'WorkflowsController',
-			//        templateUrl: 'pages/workflows/workflows.html',
-			//        access: {
-			//            loginRequired: true
-			//        }
-			//    }
-		    //)
+            .when('/costumes',
+                {
+                    controller: 'CostumesController',
+                    templateUrl: 'pages/costumes/costumes.html',
+                    access: {
+                        loginRequired: true
+                    }
+                }
+            )
 
-            //.when('/req-docs',
-			//    {
-			//        controller: 'RequiredDocsController',
-			//        templateUrl: 'pages/settings/required-docs/required-docs.html',
-			//        access: {
-			//            loginRequired: true,
-			//            requiredPermissions: ['Admin']
-			//        }
-			//    }
-		    //)
+            .when('/payments',
+			    {
+			        controller: 'PaymentsController',
+			        templateUrl: 'pages/settings/payments/payments.html',
+			        access: {
+			            loginRequired: true,
+			            requiredPermissions: ['Admin']
+			        }
+			    }
+		    )
 
-            //.when('/file-search',
-            //    {
-            //        controller: 'FileSearchController',
-            //        templateUrl: 'pages/file-search/file-search.html',
-            //        access: {
-            //            loginRequired: true
-            //        }
-            //    }
-            //)
+            .when('/search-docs',
+			    {
+			        controller: 'SearchDocsController',
+			        templateUrl: 'pages/settings/search-docs/search-docs.html',
+			        access: {
+			            loginRequired: true,
+			            requiredPermissions: ['Admin']
+			        }
+			    }
+		    )
 
-            //.when('/users',
-            //    {
-            //        controller: 'UsersController',
-            //        templateUrl: 'pages/settings/users/users.html',
-            //        access: {
-            //            loginRequired: true,
-            //            requiredUserGroups: ['Admin']
-            //        }
-            //    }
-            //)
+            .when('/search-member-images',
+			    {
+			        controller: 'SearchMemberImagesController',
+			        templateUrl: 'pages/settings/search-member-images/search-member-images.html',
+			        access: {
+			            loginRequired: true,
+			            requiredPermissions: ['Admin']
+			        }
+			    }
+		    )
 
-            //.when('/usergroups',
-            //    {
-            //        controller: 'UserGroupsController',
-            //        templateUrl: 'pages/settings/user-groups/user-groups.html',
-            //        access: {
-            //            loginRequired: true,
-            //            requiredUserGroups: ['Admin']
-            //        }
-            //    }
-            //)
+            .when('/periods',
+			    {
+			        controller: 'PeriodsController',
+			        templateUrl: 'pages/settings/periods/periods.html',
+			        access: {
+			            loginRequired: true,
+			            requiredPermissions: ['Admin']
+			        }
+			    }
+		    )
 
-            //.when('/notauthorised',
-            //    {
-            //        controller: 'NotAuthorisedController',
-            //        templateUrl: 'pages/not-authorised/not-authorised.html'
-            //    }
-            //)
+            .when('/lookup-age-categories',
+			    {
+			        controller: 'LookupAgeCategoriesController',
+			        templateUrl: 'pages/settings/lookup-age-categories/lookup-age-categories.html',
+			        access: {
+			            loginRequired: true,
+			            requiredPermissions: ['Admin']
+			        }
+			    }
+		    )
+
+            .when('/lookup-dance-styles',
+			    {
+			        controller: 'LookupDanceStylesController',
+			        templateUrl: 'pages/settings/lookup-dance-styles/lookup-dance-styles.html',
+			        access: {
+			            loginRequired: true,
+			            requiredPermissions: ['Admin']
+			        }
+			    }
+		    )
+
+            .when('/lookup-disciplines',
+			    {
+			        controller: 'LookupDisciplinesController',
+			        templateUrl: 'pages/settings/lookup-disciplines/lookup-disciplines.html',
+			        access: {
+			            loginRequired: true,
+			            requiredPermissions: ['Admin']
+			        }
+			    }
+		    )
+
+            .when('/lookup-event-types',
+			    {
+			        controller: 'LookupEventTypesController',
+			        templateUrl: 'pages/settings/lookup-event-types/lookup-event-types.html',
+			        access: {
+			            loginRequired: true,
+			            requiredPermissions: ['Admin']
+			        }
+			    }
+		    )
+
+            .when('/locations',
+			    {
+			        controller: 'LocationsController',
+			        templateUrl: 'pages/settings/locations/locations.html',
+			        access: {
+			            loginRequired: true,
+			            requiredPermissions: ['Admin']
+			        }
+			    }
+		    )
+
+            .when('/dance-groups',
+			    {
+			        controller: 'DanceGroupsController',
+			        templateUrl: 'pages/settings/dance-groups/dance-groups.html',
+			        access: {
+			            loginRequired: true,
+			            requiredPermissions: ['Admin']
+			        }
+			    }
+		    )
+
+            .when('/dance-selections',
+			    {
+			        controller: 'DanceSelectionsController',
+			        templateUrl: 'pages/settings/dance-selections/dance-selections.html',
+			        access: {
+			            loginRequired: true,
+			            requiredPermissions: ['Admin']
+			        }
+			    }
+		    )
+
+            .when('/users',
+			    {
+			        controller: 'UsersController',
+			        templateUrl: 'pages/settings/users/users.html',
+			        access: {
+			            loginRequired: true,
+			            requiredPermissions: ['Admin']
+			        }
+			    }
+		    )
+
+            .when('/user-groups',
+			    {
+			        controller: 'UserGroupsController',
+			        templateUrl: 'pages/settings/user-groups/user-groups.html',
+			        access: {
+			            loginRequired: true,
+			            requiredPermissions: ['Admin']
+			        }
+			    }
+		    )
 
             .otherwise({ redirectTo: '/login' });
     }
