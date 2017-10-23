@@ -47,12 +47,12 @@
     <aside id="left-panel" style="top: 0;" authenticated-user>
         <!-- User info -->
         <div class="login-info" style="padding-top: 10px" ng-controller="UserInfoController">
-            <span>
+            <div>
                 <img src="Content/img/avatars/user-avatar-1.png" alt="User" class="online" />
                 <span>{{ userInfo.FullName }}</span>&nbsp;&nbsp;
                 <button type="button" class="btn btn-primary btn-xs" ng-click="changePassword()" title="Izmena lozinke"><i class="fa fa-user-secret"></i></button>
                 <button type="button" class="btn btn-primary btn-xs" ng-click="logout()" title="Odjava"><i class="fa fa-sign-out"></i></button>
-            </span>
+            </div>
         </div>
         <!-- end user info -->
 
