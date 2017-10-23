@@ -519,6 +519,24 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DocumentStore\" />
+    <Folder Include="pages\choreographies\" />
+    <Folder Include="pages\costumes\" />
+    <Folder Include="pages\events\" />
+    <Folder Include="pages\members\" />
+    <Folder Include="pages\outfits\" />
+    <Folder Include="pages\settings\dance-groups\" />
+    <Folder Include="pages\settings\dance-selections\" />
+    <Folder Include="pages\settings\locations\" />
+    <Folder Include="pages\settings\lookup-age-categories\" />
+    <Folder Include="pages\settings\lookup-dance-styles\" />
+    <Folder Include="pages\settings\lookup-disciplines\" />
+    <Folder Include="pages\settings\lookup-event-types\" />
+    <Folder Include="pages\settings\payments\" />
+    <Folder Include="pages\settings\periods\" />
+    <Folder Include="pages\settings\search-docs\" />
+    <Folder Include="pages\settings\search-member-images\" />
+    <Folder Include="pages\settings\user-groups\" />
+    <Folder Include="pages\trainings\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
