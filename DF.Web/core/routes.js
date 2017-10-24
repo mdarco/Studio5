@@ -30,6 +30,36 @@
                 {
                     controller: 'MembersController',
                     templateUrl: 'pages/members/members.html',
+                    resolve: {
+                        choreos: function (ChoreosService) {
+                            return ChoreosService.getLookup().then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            );
+                        },
+                        danceGroups: function (DanceGroupsService) {
+                            return DanceGroupsService.getLookup().then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            );
+                        },
+                        danceSelections: function (DanceSelectionsService) {
+                            return DanceSelectionsService.getLookup().then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            );
+                        },
+                        events: function (EventsService) {
+                            return EventsService.getLookup().then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            );
+                        }
+                    },
                     access: {
                         loginRequired: true
                     }
