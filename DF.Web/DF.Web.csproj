@@ -544,7 +544,11 @@
     <Content Include="Scripts\sweet-alert\sweet-alert.css" />
     <Content Include="Scripts\sweet-alert\sweet-alert.js" />
     <Content Include="Scripts\sweet-alert\sweet-alert.min.js" />
+    <Content Include="services\data\ChoreosService.js" />
+    <Content Include="services\data\DanceGroupsService.js" />
+    <Content Include="services\data\DanceSelectionsService.js" />
     <Content Include="services\data\DocumentsService.js" />
+    <Content Include="services\data\EventsService.js" />
     <Content Include="services\data\MembersService.js" />
     <Content Include="services\data\TagsService.js" />
     <Content Include="services\data\UsersService.js" />
