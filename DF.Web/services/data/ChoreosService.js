@@ -8,7 +8,7 @@
     serviceFn.$inject = ['$http', 'WebApiBaseUrl'];
 
     function serviceFn($http, WebApiBaseUrl) {
-        var urlRoot = '/api/events';
+        var urlRoot = '/api/choreos';
 
         var service = {
             getLookup: getLookupChoreos,
