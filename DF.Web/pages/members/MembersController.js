@@ -112,16 +112,8 @@
             var dialog = $uibModal.open(dialogOpts);
 
             dialog.result.then(
-                function (memberObj) {
-                    MembersService.create(memberObj).then(
-                        function () {
-                            toastr.success('Novi plesač uspešno sačuvan.');
-                            $scope.applyFilter();
-                        },
-                        function (error) {
-                            toastr.error('Došlo je do greške na serveru prilikom unošenja novog plesača.');
-                        }
-                    );
+                function () {
+                    $scope.applyFilter();
                 },
                 function () {
                     // modal dismissed => do nothing

@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('MemberDialogController', ctrlFn);
 
-    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'toastr'];
+    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'MembersService', 'toastr'];
 
-    function ctrlFn($scope, $uibModalInstance, toastr) {
+    function ctrlFn($scope, $uibModalInstance, MembersService, toastr) {
         $scope.member = {
             ContactData: {}
         };
@@ -19,7 +19,15 @@
                 return;
             }
 
-            $uibModalInstance.close($scope.member);
+            MembersService.create($scope.member).then(
+                function () {
+                    toastr.success('Novi plesač je uspešno sačuvan.');
+                    $uibModalInstance.close();
+                },
+                function (error) {
+                    resolveErrorMessage(error);
+                }
+            );
         };
 
         $scope.close = function () {
@@ -45,6 +53,18 @@
             }
 
             return { error: false };
+        }
+
+        function resolveErrorMessage(error) {
+            switch (error.statusText) {
+                case 'error_members_jmbg_exists':
+                    toastr.error('Plesač sa datim JMBG već postoji.');
+                    break;
+
+                default:
+                    toastr.error('Došlo je do greške na serveru prilikom unošenja novog plesača.');
+                    break;
+            }
         }
 
         // date picker support
