@@ -101,7 +101,32 @@
         //#region Add member
 
         $scope.addMember = function () {
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/members/member-dialog/member-dialog.html',
+                controller: 'MemberDialogController'
+            };
 
+            var dialog = $uibModal.open(dialogOpts);
+
+            dialog.result.then(
+                function (memberObj) {
+                    MembersService.create(memberObj).then(
+                        function () {
+                            toastr.success('Novi plesač uspešno sačuvan.');
+                            $scope.applyFilter();
+                        },
+                        function (error) {
+                            toastr.error('Došlo je do greške na serveru prilikom unošenja novog plesača.');
+                        }
+                    );
+                },
+                function () {
+                    // modal dismissed => do nothing
+                }
+            );
         };
 
         //#endregion

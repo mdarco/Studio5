@@ -1,0 +1,91 @@
+﻿<div class="modal-header bg-color-darken" style="color: white; background-color: #1B1E24;">
+    <h4>Plesač</h4>
+</div>
+
+<div class="modal-body">
+    <form class="smart-form" novalidate="novalidate">
+        <section>
+            <div>
+                <label class="control-label">JMBG (*)</label>
+                <label class="input"><input type="text" class="form-control" ng-model="member.JMBG"></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Ime (*)</label>
+                <label class="input"><input type="text" class="form-control" ng-model="member.FirstName"></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Prezime (*)</label>
+                <label class="input"><input type="text" class="form-control" ng-model="member.LastName"></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Datum rođenja</label>
+                <label class="input" style="width: 30%">
+                    <input type="text"
+                           uib-datepicker-popup
+                           ng-model="member.BirthDate"
+                           placeholder="yyyy-mm-dd"
+                           class="form-control disabled-input-color"
+                           is-open="datePickers.datePickerOpened_BirthDate"
+                           readonly="readonly" />
+                </label>
+                <button type="button" class="btn btn-sm btn-primary form-control" style="margin-bottom: 3px; width: 30%;" ng-click="openDatePicker('BirthDate', $event)"><i class="fa fa-calendar"></i></button>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Mesto rođenja</label>
+                <label class="input"><input type="text" class="form-control" ng-model="member.BirthPlace"></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Adresa</label>
+                <label class="input"><input type="text" class="form-control" ng-model="member.ContactData.Address"></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">E-Mail adresa</label>
+                <label class="input"><input type="text" class="form-control" ng-model="member.ContactData.Email"></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Telefon 1</label>
+                <label class="input"><input type="text" class="form-control" ng-model="member.ContactData.Phone1"></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Telefon 2</label>
+                <label class="input"><input type="text" class="form-control" ng-model="member.ContactData.Phone2"></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Telefon 3</label>
+                <label class="input"><input type="text" class="form-control" ng-model="member.ContactData.Phone3"></label>
+            </div>
+        </section>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button ng-click="save()" class="btn btn-success">Sačuvaj</button>
+    <button ng-click="close()" class="btn btn-primary">Odustani</button>
+</div>

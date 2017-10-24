@@ -344,6 +344,8 @@
     <Content Include="pages\home\HomeController.js" />
     <Content Include="pages\login\login.html" />
     <Content Include="pages\login\LoginController.js" />
+    <Content Include="pages\members\member-dialog\member-dialog.html" />
+    <Content Include="pages\members\member-dialog\MemberDialogController.js" />
     <Content Include="pages\members\members.html" />
     <Content Include="pages\members\MembersController.js" />
     <Content Include="pages\NavigationController.js" />
