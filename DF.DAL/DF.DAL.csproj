@@ -59,6 +59,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Choreos.cs" />
+    <Compile Include="DanceGroups.cs" />
+    <Compile Include="DanceSelections.cs" />
     <Compile Include="DBModel\Choreographies.cs">
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
@@ -233,6 +236,7 @@
     <Compile Include="DBModel\Users.cs">
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Events.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="Members.cs" />
     <Compile Include="Permissions.cs" />
