@@ -98,6 +98,7 @@ namespace DF.DB
                                     MemberID = x.MemberID,
                                     FirstName = x.FirstName,
                                     LastName = x.LastName,
+                                    FullName = x.FirstName + " " + x.LastName,
                                     IsActive = x.IsActive,
                                     JMBG = x.JMBG,
                                     BirthDate = x.BirthDate,

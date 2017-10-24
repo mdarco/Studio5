@@ -58,25 +58,24 @@
 <!-- Members grid -->
 <div class="row">
     <div class="col-lg-12">
-        <div class="panel panel-default" style="margin-left: 15px; margin-right: 30px;">
+        <div class="panel panel-primary" style="margin-left: 15px; margin-right: 30px;">
+            <div class="panel-heading" style="background-color: #1B1E24;">Plesači</div>
             <div class="panel-body">
                 <p style="font-variant:small-caps; margin-left: 10px" ng-show="showGrid === false">nema podataka.</p>
 
                 <table ng-table="membersTableParams" ng-show="showGrid === true" class="table table-condensed table-striped table-hover table-responsive table-bordered">
                     <tbody>
                         <tr ng-repeat="member in $data">
-                            <td data-title="'Ime i prezime'" header-class="'header-text-left'">{{ member.FullName }}</td>
-                            <td data-title="'JMBG'" header-class="'header-text-left'">{{ member.JMBG }}</td>
-                            <td data-title="'Datum rođenja'" header-class="'header-text-left'">{{ member.BirthDate | date:'dd.MM.yyyy' }}</td>
-                            <td data-title="'Email'" header-class="'header-text-left'">{{ member.ContactData.Email }}</td>
-                            <td data-title="'Telefoni'" header-class="'header-text-left'">{{ member.ContactData.Email }}
-                                <ul>
-                                    <li>{{ member.ContactData.Phone1 }}</li>
-                                    <li>{{ member.ContactData.Phone2 }}</li>
-                                    <li>{{ member.ContactData.Phone3 }}</li>
-                                </ul>
+                            <td data-title="'Ime i prezime'" header-class="'text-left'">{{ member.FullName }}</td>
+                            <td data-title="'JMBG'" header-class="''" style="text-align: center;">{{ member.JMBG }}</td>
+                            <td data-title="'Datum rođenja'" header-class="''" style="text-align: center;">{{ member.BirthDate | date:'dd.MM.yyyy' }}</td>
+                            <td data-title="'Email'" header-class="''" style="text-align: center;">{{ member.ContactData.Email }}</td>
+                            <td data-title="'Telefoni'" header-class="'text-left'">
+                                <div>{{ member.ContactData.Phone1 }}</div>
+                                <div>{{ member.ContactData.Phone2 }}</div>
+                                <div>{{ member.ContactData.Phone3 }}</div>
                             </td>
-                            <td>
+                            <td header-class="''">
                                 <button class="btn btn-primary btn-xs" style="float: right; margin-left: 5px;" title="Dosije plesača" ng-click="openMemberDossier(member)">Dosije</button>
                             </td>
                         </tr>
