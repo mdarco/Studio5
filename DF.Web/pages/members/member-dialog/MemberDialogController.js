@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('MemberDialogController', ctrlFn);
 
-    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'MembersService', 'toastr'];
+    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'MembersService', 'UtilityService', 'toastr'];
 
-    function ctrlFn($scope, $uibModalInstance, MembersService, toastr) {
+    function ctrlFn($scope, $uibModalInstance, MembersService, UtilityService, toastr) {
         $scope.member = {
             ContactData: {}
         };
@@ -18,6 +18,9 @@
                 toastr.warning(modelValidation.errorMsg);
                 return;
             }
+
+            // adjust birth date for transfer
+            $scope.member.BirthDate = UtilityService.convertDateToISODateString($scope.member.BirthDateFromPicker);
 
             MembersService.create($scope.member).then(
                 function () {
