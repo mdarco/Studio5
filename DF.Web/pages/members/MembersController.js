@@ -97,5 +97,13 @@
         };
 
         //#endregion
+
+        //#region Add member
+
+        $scope.addMember = function () {
+
+        };
+
+        //#endregion
     }
 })();
