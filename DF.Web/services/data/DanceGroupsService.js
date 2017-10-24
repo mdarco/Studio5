@@ -20,7 +20,7 @@
         return service;
 
         function getLookupDanceGroups() {
-            var url = WebApiBaseUrl + urlRoot + '?nd=' + Date.now();
+            var url = WebApiBaseUrl + urlRoot + '/lookup?nd=' + Date.now();
             return $http.get(url);
         }
 
