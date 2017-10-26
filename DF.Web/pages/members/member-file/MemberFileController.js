@@ -15,5 +15,13 @@
         var currentUser = AuthenticationService.getCurrentUser();
 
         $scope.member = member;
+
+        //#region Basic data
+
+        $scope.editMember = function (dataType) {
+            alert('Work in progress..');
+        };
+
+        //#endregion
     }
 })();

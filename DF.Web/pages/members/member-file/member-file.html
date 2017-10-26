@@ -12,47 +12,110 @@
                             </td>
                             <td style="width: 30%;"><strong>Ime i prezime</strong></td>
                             <td>{{ member.FullName }}</td>
-                            <td></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary"
+                                        ng-click="editMember('FullName')"
+                                        title="Ažuriranje imena i prezimena"
+                                        permissions="Dosije - izmena osnovnih podataka">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td style="width: 30%;"><strong>JMBG</strong></td>
                             <td>{{ member.JMBG }}</td>
-                            <td></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary"
+                                        ng-click="editMember('JMBG')"
+                                        title="Ažuriranje JMBG"
+                                        permissions="Dosije - izmena osnovnih podataka">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td style="width: 30%;"><strong>Datum rođenja</strong></td>
                             <td>{{ member.BirthDate | date: 'dd.MM.yyyy' }}</td>
-                            <td></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary"
+                                        ng-click="editMember('BirthDate')"
+                                        title="Ažuriranje datuma rođenja"
+                                        permissions="Dosije - izmena osnovnih podataka">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td style="width: 30%;"><strong>Mesto rođenja</strong></td>
                             <td>{{ member.BirthPlace }}</td>
-                            <td></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary"
+                                        ng-click="editMember('BirthPlace')"
+                                        title="Ažuriranje mesta rođenja"
+                                        permissions="Dosije - izmena osnovnih podataka">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td style="width: 30%;"><strong>Adresa</strong></td>
                             <td>{{ member.ContactData.Address }}</td>
-                            <td></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary"
+                                        ng-click="editMember('Address')"
+                                        title="Ažuriranje adrese"
+                                        permissions="Dosije - izmena osnovnih podataka">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td style="width: 30%;"><strong>Email</strong></td>
                             <td>{{ member.ContactData.Email }}</td>
-                            <td></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary"
+                                        ng-click="editMember('Email')"
+                                        title="Ažuriranje e-mail adrese"
+                                        permissions="Dosije - izmena osnovnih podataka">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td style="width: 30%;"><strong>Telefon 1</strong></td>
                             <td>{{ member.ContactData.Phone1 }}</td>
-                            <td></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary"
+                                        ng-click="editMember('Phone1')"
+                                        title="Ažuriranje telefona 1"
+                                        permissions="Dosije - izmena osnovnih podataka">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td style="width: 30%;"><strong>Telefon 2</strong></td>
                             <td>{{ member.ContactData.Phone2 }}</td>
-                            <td></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary"
+                                        ng-click="editMember('Phone2')"
+                                        title="Ažuriranje telefona 2"
+                                        permissions="Dosije - izmena osnovnih podataka">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td style="width: 30%;"><strong>Telefon 3</strong></td>
                             <td>{{ member.ContactData.Phone3 }}</td>
-                            <td></td>
+                            <td>
+                                <button class="btn btn-sm btn-primary"
+                                        ng-click="editMember('Phone3')"
+                                        title="Ažuriranje telefona 3"
+                                        permissions="Dosije - izmena osnovnih podataka">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
