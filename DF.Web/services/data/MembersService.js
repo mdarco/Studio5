@@ -25,7 +25,7 @@
         }
 
         function getMember(id) {
-            var url = WebApiBaseUrl + urlRoot + '?id=' + id + '&nd=' + Date.now();
+            var url = WebApiBaseUrl + urlRoot + '/' + id + '?nd=' + Date.now();
             return $http.get(url);
         }
 

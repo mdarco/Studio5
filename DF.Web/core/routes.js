@@ -66,13 +66,13 @@
                 }
             )
 
-            .when('/member-file',
+            .when('/member-file/:id',
                 {
                     controller: 'MemberFileController',
                     templateUrl: 'pages/members/member-file/member-file.html',
                     resolve: {
                         member: function ($route, MembersService) {
-                            var id = $route.current.params.key;
+                            var id = $route.current.params.id;
                             return MembersService.get(id).then(
                                 function (result) {
                                     return result.data;

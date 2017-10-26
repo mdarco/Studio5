@@ -122,5 +122,14 @@
         };
 
         //#endregion
+
+        //#region Member dossier
+
+        $scope.openMemberDossier = function (member) {
+            //$location.path('/member-file', { id: member.MemberID });
+            $location.path('/member-file/' + member.MemberID);
+        };
+
+        //#endregion
     }
 })();
