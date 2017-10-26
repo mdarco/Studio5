@@ -66,6 +66,26 @@
                 }
             )
 
+            .when('/member-file',
+                {
+                    controller: 'MemberFileController',
+                    templateUrl: 'pages/members/member-file/member-file.html',
+                    resolve: {
+                        member: function ($route, MembersService) {
+                            var id = $route.current.params.key;
+                            return MembersService.get(id).then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            );
+                        }
+                    },
+                    access: {
+                        loginRequired: true
+                    }
+                }
+            )
+
             .when('/trainings',
                 {
                     controller: 'TrainingsController',

@@ -19,6 +19,13 @@ namespace DF.Api.Controllers
             return DB.Members.GetFilteredMembers(filter);
         }
 
+        [Route("{id}")]
+        [HttpGet]
+        public MemberModel GetMember(int id)
+        {
+            return DB.Members.GetMember(id);
+        }
+
         [Route("")]
         [HttpPost]
         public void CreateMember(MemberModel model)

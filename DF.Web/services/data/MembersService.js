@@ -12,6 +12,7 @@
 
         var service = {
             getFiltered: getFilteredMembers,
+            get: getMember,
             create: createMember,
             edit: editMember
         };
@@ -21,6 +22,11 @@
         function getFilteredMembers(filter) {
             var url = WebApiBaseUrl + urlRoot + '/filtered?nd=' + Date.now();
             return $http.post(url, filter);
+        }
+
+        function getMember(id) {
+            var url = WebApiBaseUrl + urlRoot + '?id=' + id + '&nd=' + Date.now();
+            return $http.get(url);
         }
 
         function createMember(model) {

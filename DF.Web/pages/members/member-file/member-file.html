@@ -1,0 +1,61 @@
+﻿<!-- Basic info -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary" style="margin-left: 15px; margin-right: 30px;">
+            <div class="panel-heading" style="background-color: #3a3633">Osnovni podaci</div>
+            <div class="panel-body">
+                <table class="table table-condensed">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%;"><strong>Ime i prezime</strong></td>
+                            <td>{{ member.FullName }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;"><strong>JMBG</strong></td>
+                            <td>{{ member.JMBG }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;"><strong>Datum rođenja</strong></td>
+                            <td>{{ member.BirthDate | date: 'dd.MM.yyyy' }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;"><strong>Mesto rođenja</strong></td>
+                            <td>{{ member.BirthPlace }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;"><strong>Adresa</strong></td>
+                            <td>{{ member.ContactData.Address }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;"><strong>Email</strong></td>
+                            <td>{{ member.ContactData.Email }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;"><strong>Telefon 1</strong></td>
+                            <td>{{ member.Phone1 }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;"><strong>Telefon 1</strong></td>
+                            <td>{{ member.Phone2 }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;"><strong>Telefon 1</strong></td>
+                            <td>{{ member.Phone3 }}</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />

@@ -126,6 +126,40 @@ namespace DF.DB
             return response;
         }
 
+        public static MemberModel GetMember(int id)
+        {
+            MemberModel model = null;
+
+            using (var ctx = new DFAppEntities())
+            {
+                var existing = ctx.Members.Include(t => t.ContactData).FirstOrDefault(x => x.MemberID == id);
+                if (existing != null)
+                {
+                    model = new MemberModel();
+                    model.MemberID = existing.MemberID;
+                    model.FirstName = existing.FirstName;
+                    model.LastName = existing.LastName;
+                    model.FullName = existing.FirstName + " " + existing.LastName;
+                    model.IsActive = existing.IsActive;
+                    model.JMBG = existing.JMBG;
+                    model.BirthDate = existing.BirthDate;
+                    model.BirthPlace = existing.BirthPlace;
+
+                    model.ContactData =
+                        new ContactDataModel()
+                        {
+                            Address = existing.ContactData.Address,
+                            Email = existing.ContactData.Email,
+                            Phone1 = existing.ContactData.Phone1,
+                            Phone2 = existing.ContactData.Phone2,
+                            Phone3 = existing.ContactData.Phone3
+                        };
+                }
+            }
+
+            return model;
+        }
+
         public static void CreateMember(MemberModel model)
         {
             using (var ctx = new DFAppEntities())
