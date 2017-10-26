@@ -174,6 +174,7 @@
     <Content Include="Content\img\mappin-default.png" />
     <Content Include="Content\img\mybg.png" />
     <Content Include="Content\img\not-auth.jpg" />
+    <Content Include="Content\img\not-auth.png" />
     <Content Include="Content\img\pattern\divider.jpg" />
     <Content Include="Content\img\pattern\graphy-xs.png" />
     <Content Include="Content\img\pattern\graphy.png" />
