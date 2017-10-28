@@ -89,6 +89,13 @@ namespace DF.BL
                 docModel.CreatedByUserID = model.UserID;
             }
 
+            // document metadata
+            if (model.DocMetadata != null)
+            {
+                docModel.Metadata = new DocumentMetadataModel();
+                docModel.Metadata.ExpiryDate = model.DocMetadata.ExpiryDate;
+            }
+
             return docModel;
         }
     }

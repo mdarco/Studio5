@@ -12,6 +12,7 @@ namespace DF.Models
         public FileModel File { get; set; }
 
         public int? DocumentTypeID { get; set; }
+        public DocumentMetadataModel DocMetadata { get; set; }
 
         public int? UserID { get; set; }
     }

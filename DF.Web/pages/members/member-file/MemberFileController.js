@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('MemberFileController', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'MembersService', 'DocumentsService', 'AuthenticationService', 'WebApiBaseUrl', 'toastr', 'AppParams', 'member'];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'MembersService', 'DocumentsService', 'UtilityService', 'AuthenticationService', 'WebApiBaseUrl', 'toastr', 'AppParams', 'member'];
 
-    function ctrlFn($rootScope, $scope, $location, $uibModal, MembersService, DocumentsService, AuthenticationService, WebApiBaseUrl, toastr, AppParams, member) {
+    function ctrlFn($rootScope, $scope, $location, $uibModal, MembersService, DocumentsService, UtilityService, AuthenticationService, WebApiBaseUrl, toastr, AppParams, member) {
         // set active menu item
         $("#left-panel nav ul li").removeClass("active");
         $("#menuHome").addClass("active");
@@ -77,6 +77,7 @@
                 function (memberDocModel) {
                     memberDocModel.MemberID = member.MemberID;
                     memberDocModel.UserID = currentUser.UserID;
+                    memberDocModel.DocMetadata.ExpiryDate = UtilityService.convertDateToISODateString(memberDocModel.DocMetadata.ExpiryDate);
 
                     MembersService.addDocument(memberDocModel).then(
                         function () {

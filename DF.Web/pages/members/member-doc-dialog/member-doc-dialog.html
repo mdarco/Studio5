@@ -4,7 +4,7 @@
 
 <div class="modal-body">
     <!-- Doc upload file -->
-    <input type="file" id="uploadMemberDoc" name="uploadMemberDoc" class="filestyle" style="width: 100%;" data-button-text="Dokument" data-placeholder="Izaberite dokument" data-buttonName="btn-primary" />
+    <input type="file" id="uploadMemberDoc" name="uploadMemberDoc" class="filestyle" style="width: 100%;" data-button-text="" data-placeholder="Izaberite dokument" data-buttonName="btn-primary" />
 
     <br /><br />
 
@@ -13,6 +13,20 @@
     <select class="form-control" ng-model="model.DocumentTypeID" ng-options="value.ID as value.Name for (key, value) in docTypes"></select>
 
     <br /><br />
+
+    <label class="control-label">Datum isteka važenja dokumenta</label>
+    <label class="input" style="width: 100%">
+        <input type="text"
+               uib-datepicker-popup
+               ng-model="model.DocMetadata.ExpiryDate"
+               placeholder="yyyy-mm-dd"
+               class="form-control disabled-input-color"
+               is-open="datePickers.datePickerOpened_ExpiryDate"
+               readonly="readonly" />
+    </label>
+    <button type="button" class="btn btn-sm btn-primary form-control" style="margin-bottom: 3px; width: 10%;" ng-click="openDatePicker('ExpiryDate', $event)"><i class="fa fa-calendar"></i></button>
+
+    <br /><br /><br />
 
     <button ng-click="save()" class="btn btn-success">Sačuvaj</button>
 </div>

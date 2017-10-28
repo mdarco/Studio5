@@ -9,7 +9,8 @@
 
     function ctrlFn($scope, $uibModalInstance, toastr, docTypes) {
         $scope.model = {
-            File: {}
+            File: {},
+            DocMetadata: {}
         };
 
         $scope.docTypes = docTypes;
@@ -41,6 +42,15 @@
 
         $scope.close = function () {
             $uibModalInstance.dismiss();
+        };
+
+        // date picker support
+        $scope.datePickers = {};
+        $scope.openDatePicker = function (pickerFor, event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            $scope.datePickers['datePickerOpened_' + pickerFor] = true;
         };
     }
 })();

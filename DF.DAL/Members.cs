@@ -312,6 +312,13 @@ namespace DF.DB
                 doc.CreationDate = docModel.CreationDate;
                 doc.CreatedByUserID = docModel.CreatedByUserID;
                 doc.DocumentPath = docModel.DocumentPath;
+
+                if (docModel.Metadata != null && docModel.Metadata.ExpiryDate.HasValue)
+                {
+                    doc.DocumentMetadata = new DocumentMetadata();
+                    doc.DocumentMetadata.ExpiryDate = docModel.Metadata.ExpiryDate;
+                }
+
                 ctx.Documents.Add(doc);
 
                 DBModel.MemberDocuments md = new MemberDocuments();
