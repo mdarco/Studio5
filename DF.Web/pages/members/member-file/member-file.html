@@ -125,3 +125,24 @@
 </div>
 
 <br />
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary" style="margin-left: 15px; margin-right: 30px;">
+            <div class="panel-body">
+                <uib-tabset active="0">
+                    <uib-tab index="0" heading="Static title">Static content</uib-tab>
+                    <uib-tab index="$index + 1">
+                        TEST
+                    </uib-tab>
+                    <uib-tab index="3" select="alertMe()">
+                        <uib-tab-heading>
+                            <i class="fa fa-bell"></i> Alert!
+                        </uib-tab-heading>
+                        I've got an HTML heading, and a select callback. Pretty cool!
+                    </uib-tab>
+                </uib-tabset>
+            </div>
+        </div>
+    </div>
+</div>
