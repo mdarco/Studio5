@@ -262,5 +262,42 @@ namespace DF.DB
                 }
             }
         }
+
+        #region Documents
+
+        public static List<DocumentModel> GetDocuments(int id)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                return ctx.MemberDocuments
+                            .Include("Documents.DocumentTypes")
+                            .Include("Documents.Users")
+                            .Where(md => md.MemberID == id)
+                            .Select(x =>
+                                new DocumentModel()
+                                {
+                                    DocumentID = x.DocumentID,
+                                    DocumentName = x.Documents.DocumentName,
+                                    DocumentDesc = x.Documents.DocumentDesc,
+                                    DocumentCodedName = x.Documents.DocumentCodedName,
+                                    DocumentFileName = x.Documents.DocumentFileName,
+                                    DocumentFileExtension = x.Documents.DocumentFileExtension,
+                                    DocumentTypeID = x.Documents.DocumentTypeID,
+                                    DocumentType = x.Documents.DocumentTypes.DocumentTypeName,
+                                    CreationDate = x.Documents.CreationDate,
+                                    CreatedByUserID = x.Documents.CreatedByUserID,
+                                    CreatedByUserFullName = (x.Documents.Users != null) ? (x.Documents.Users.FirstName + " " + x.Documents.Users.LastName) : string.Empty,
+                                    DocumentPath = x.Documents.DocumentPath,
+
+                                    Metadata = new DocumentMetadataModel() { ExpiryDate = x.Documents.DocumentMetadata.ExpiryDate }
+                                }
+                            )
+                            .OrderByDescending(d => d.CreationDate)
+                            .ThenBy(d => d.DocumentName)
+                            .ToList();
+            }
+        }
+
+        #endregion
     }
 }

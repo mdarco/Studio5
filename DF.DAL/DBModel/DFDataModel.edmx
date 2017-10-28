@@ -172,9 +172,8 @@
         </EntityType>
         <EntityType Name="DocumentMetadata">
           <Key>
-            <PropertyRef Name="DocumentMetadataID" />
+            <PropertyRef Name="DocumentID" />
           </Key>
-          <Property Name="DocumentMetadataID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DocumentID" Type="int" Nullable="false" />
           <Property Name="ExpiryDate" Type="datetime" />
         </EntityType>
@@ -859,6 +858,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DocumentMetadata_Documents">
+          <End Role="Documents" Type="Self.Documents" Multiplicity="1" />
+          <End Role="DocumentMetadata" Type="Self.DocumentMetadata" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="DocumentID" />
+            </Principal>
+            <Dependent Role="DocumentMetadata">
+              <PropertyRef Name="DocumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Documents_CreatedByUsers">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
@@ -1493,6 +1504,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="DanceSelectionStaff" EntitySet="DanceSelectionStaff" />
           </AssociationSet>
+          <AssociationSet Name="FK_DocumentMetadata_Documents" Association="Self.FK_DocumentMetadata_Documents">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="DocumentMetadata" EntitySet="DocumentMetadata" />
+          </AssociationSet>
           <AssociationSet Name="FK_Documents_CreatedByUsers" Association="Self.FK_Documents_CreatedByUsers">
             <End Role="Users" EntitySet="Users" />
             <End Role="Documents" EntitySet="Documents" />
@@ -1867,14 +1882,6 @@
           <NavigationProperty Name="DanceSelections" Relationship="Self.FK_DanceSelectionStaff_DanceSelections" FromRole="DanceSelectionStaff" ToRole="DanceSelections" />
           <NavigationProperty Name="Users" Relationship="Self.FK_DanceSelectionStaff_Users" FromRole="DanceSelectionStaff" ToRole="Users" />
         </EntityType>
-        <EntityType Name="DocumentMetadata">
-          <Key>
-            <PropertyRef Name="DocumentMetadataID" />
-          </Key>
-          <Property Name="DocumentMetadataID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DocumentID" Type="Int32" Nullable="false" />
-          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="Documents">
           <Key>
             <PropertyRef Name="DocumentID" />
@@ -1894,6 +1901,7 @@
           <NavigationProperty Name="DocumentTags" Relationship="Self.FK_DocumentTags_Documents" FromRole="Documents" ToRole="DocumentTags" />
           <NavigationProperty Name="MemberDocuments" Relationship="Self.FK_MemberDocuments_Documents" FromRole="Documents" ToRole="MemberDocuments" />
           <NavigationProperty Name="UserDocuments" Relationship="Self.FK_UserDocuments_Documents" FromRole="Documents" ToRole="UserDocuments" />
+          <NavigationProperty Name="DocumentMetadata" Relationship="DFDataModel.FK_DocumentMetadata_Documents" FromRole="Documents" ToRole="DocumentMetadata" />
         </EntityType>
         <EntityType Name="DocumentTags">
           <Key>
@@ -3105,7 +3113,6 @@
           <EntitySet Name="DanceSelectionPeriods" EntityType="Self.DanceSelectionPeriods" />
           <EntitySet Name="DanceSelections" EntityType="Self.DanceSelections" />
           <EntitySet Name="DanceSelectionStaff" EntityType="Self.DanceSelectionStaff" />
-          <EntitySet Name="DocumentMetadata" EntityType="Self.DocumentMetadata" />
           <EntitySet Name="Documents" EntityType="Self.Documents" />
           <EntitySet Name="DocumentTags" EntityType="Self.DocumentTags" />
           <EntitySet Name="DocumentTypes" EntityType="Self.DocumentTypes" />
@@ -3408,6 +3415,11 @@
             <End Role="Permissions" EntitySet="Permissions" />
             <End Role="UserPermissions" EntitySet="UserPermissions" />
           </AssociationSet>
+          <EntitySet Name="DocumentMetadata" EntityType="DFDataModel.DocumentMetadata" />
+          <AssociationSet Name="FK_DocumentMetadata_Documents" Association="DFDataModel.FK_DocumentMetadata_Documents">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="DocumentMetadata" EntitySet="DocumentMetadata" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_UserGroupPermissions_Permissions">
           <End Type="DFDataModel.Permissions" Role="Permissions" Multiplicity="1" />
@@ -3430,6 +3442,26 @@
             </Principal>
             <Dependent Role="UserPermissions">
               <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DocumentMetadata">
+          <Key>
+            <PropertyRef Name="DocumentID" />
+          </Key>
+          <Property Name="DocumentID" Type="Int32" Nullable="false" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Documents" Relationship="DFDataModel.FK_DocumentMetadata_Documents" FromRole="DocumentMetadata" ToRole="Documents" />
+        </EntityType>
+        <Association Name="FK_DocumentMetadata_Documents">
+          <End Type="DFDataModel.Documents" Role="Documents" Multiplicity="1" />
+          <End Type="DFDataModel.DocumentMetadata" Role="DocumentMetadata" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="DocumentID" />
+            </Principal>
+            <Dependent Role="DocumentMetadata">
+              <PropertyRef Name="DocumentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3607,15 +3639,6 @@
                 <ScalarProperty Name="DanceSelectionID" ColumnName="DanceSelectionID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DocumentMetadata">
-            <EntityTypeMapping TypeName="DFDataModel.DocumentMetadata">
-              <MappingFragment StoreEntitySet="DocumentMetadata">
-                <ScalarProperty Name="DocumentMetadataID" ColumnName="DocumentMetadataID" />
-                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
-                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3982,6 +4005,14 @@
                 <ScalarProperty Name="ContactDataID" ColumnName="ContactDataID" />
                 <ScalarProperty Name="LastLoginAt" ColumnName="LastLoginAt" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentMetadata">
+            <EntityTypeMapping TypeName="DFDataModel.DocumentMetadata">
+              <MappingFragment StoreEntitySet="DocumentMetadata">
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

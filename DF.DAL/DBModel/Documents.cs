@@ -41,5 +41,6 @@ namespace DF.DB.DBModel
         public virtual ICollection<MemberDocuments> MemberDocuments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserDocuments> UserDocuments { get; set; }
+        public virtual DocumentMetadata DocumentMetadata { get; set; }
     }
 }

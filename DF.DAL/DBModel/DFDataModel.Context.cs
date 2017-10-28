@@ -43,7 +43,6 @@ namespace DF.DB.DBModel
         public virtual DbSet<DanceSelectionPeriods> DanceSelectionPeriods { get; set; }
         public virtual DbSet<DanceSelections> DanceSelections { get; set; }
         public virtual DbSet<DanceSelectionStaff> DanceSelectionStaff { get; set; }
-        public virtual DbSet<DocumentMetadata> DocumentMetadata { get; set; }
         public virtual DbSet<Documents> Documents { get; set; }
         public virtual DbSet<DocumentTags> DocumentTags { get; set; }
         public virtual DbSet<DocumentTypes> DocumentTypes { get; set; }
@@ -78,5 +77,6 @@ namespace DF.DB.DBModel
         public virtual DbSet<UserImages> UserImages { get; set; }
         public virtual DbSet<UserPermissions> UserPermissions { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<DocumentMetadata> DocumentMetadata { get; set; }
     }
 }

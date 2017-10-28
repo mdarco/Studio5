@@ -23,7 +23,6 @@
         <EntityTypeShape EntityType="DFDataModel.DanceSelectionPeriods" Width="1.5" PointX="14.25" PointY="22.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.DanceSelections" Width="1.5" PointX="6" PointY="42.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.DanceSelectionStaff" Width="1.5" PointX="8.25" PointY="36.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="DFDataModel.DocumentMetadata" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.Documents" Width="1.5" PointX="5.25" PointY="37.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.DocumentTags" Width="1.5" PointX="7.5" PointY="39.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.DocumentTypes" Width="1.5" PointX="3" PointY="40.25" IsExpanded="true" />
@@ -125,6 +124,8 @@
         <AssociationConnector Association="DFDataModel.FK_UserPermissions_Users" ManuallyRouted="false" />
         <AssociationConnector Association="DFDataModel.FK_UserGroupPermissions_Permissions" />
         <AssociationConnector Association="DFDataModel.FK_UserPermissions_Permissions" />
+        <EntityTypeShape EntityType="DFDataModel.DocumentMetadata" Width="1.5" PointX="7.5" PointY="50.375" />
+        <AssociationConnector Association="DFDataModel.FK_DocumentMetadata_Documents" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

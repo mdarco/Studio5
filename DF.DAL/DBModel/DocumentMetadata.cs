@@ -14,8 +14,9 @@ namespace DF.DB.DBModel
     
     public partial class DocumentMetadata
     {
-        public int DocumentMetadataID { get; set; }
         public int DocumentID { get; set; }
         public Nullable<System.DateTime> ExpiryDate { get; set; }
+    
+        public virtual Documents Documents { get; set; }
     }
 }
