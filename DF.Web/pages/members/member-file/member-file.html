@@ -151,7 +151,7 @@
                                     <td>{{ doc.CreatedByUserFullName }}</td>
                                     <td>{{ doc.Metadata.ExpiryDate | date: 'dd.MM.yyyy' }}</td>
                                     <td>
-                                        <a class="btn btn-success btn-xs pull-right margin-right-5" title="Preuzmi/štampaj dokument" ng-href="{{ webApiBaseUrl }}/api/download/{{ doc.DocumentID }}"><i class="fa fa-download"></i></a>
+                                        <a class="btn btn-success btn-xs pull-right margin-right-5" title="Preuzmi/štampaj dokument" ng-href="{{ webApiBaseUrl }}/api/documents/{{ doc.DocumentID }}/download"><i class="fa fa-download"></i></a>
                                     </td>
                                 </tr>
                             </tbody>
