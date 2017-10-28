@@ -63,5 +63,16 @@ namespace DF.Api.Controllers
                     });
             }
         }
+
+        #region Documents
+
+        [Route("{id}/documents")]
+        [HttpGet]
+        public List<DocumentModel> GetDocuments(int id)
+        {
+            return DB.Members.GetDocuments(id);
+        }
+
+        #endregion
     }
 }

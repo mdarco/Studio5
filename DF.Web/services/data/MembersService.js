@@ -14,7 +14,9 @@
             getFiltered: getFilteredMembers,
             get: getMember,
             create: createMember,
-            edit: editMember
+            edit: editMember,
+
+            getDocuments: getDocuments
         };
 
         return service;
@@ -38,5 +40,14 @@
             var url = WebApiBaseUrl + urlRoot + '/' + id + '?nd=' + Date.now();
             return $http.put(url, model);
         }
+
+        //#region Documents
+
+        function getDocuments(id) {
+            var url = WebApiBaseUrl + urlRoot + '/' + id + '/documents?nd=' + Date.now();
+            return $http.get(url);
+        }
+
+        //#endregion
     }
 })();
