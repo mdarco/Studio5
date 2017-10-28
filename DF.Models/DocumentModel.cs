@@ -15,6 +15,7 @@ namespace DF.Models
         public string DocumentFileName { get; set; }
         public string DocumentFileExtension { get; set; }
         public string DocumentPath { get; set; }
+        public string DocumentPhysicalPath { get; set; }
 
         public int? DocumentTypeID { get; set; }
         public string DocumentType { get; set; }
@@ -22,6 +23,8 @@ namespace DF.Models
         public DateTime CreationDate { get; set; }
         public int? CreatedByUserID { get; set; }
         public string CreatedByUserFullName { get; set; }
+
+        public byte[] Bytes { get; set; }
 
         public DocumentMetadataModel Metadata { get; set; }
     }

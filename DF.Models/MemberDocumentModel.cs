@@ -11,7 +11,8 @@ namespace DF.Models
         public int MemberID { get; set; }
         public FileModel File { get; set; }
 
-        // doc type
-        public int DocumentTypeID { get; set; }
+        public int? DocumentTypeID { get; set; }
+
+        public int? UserID { get; set; }
     }
 }

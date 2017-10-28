@@ -60,48 +60,36 @@ namespace DF.BL
             return string.Format("{0}{1}{2}{3}.tim", docStoreRoot, string.Empty, separator, documentCodedName);
         }
 
-        private static List<DocumentModel> ConvertDataUrlModelsToDocModels(List<DataUrlModel> models)
+        public static DocumentModel ConvertMemberDocumentModelToDocModel(MemberDocumentModel model)
         {
-            List<DocumentModel> result = new List<DocumentModel>();
+            DocumentModel docModel = new DocumentModel();
+            docModel.DocumentName = Path.GetFileNameWithoutExtension(model.File.FileName);
+            docModel.DocumentTypeID = model.DocumentTypeID;
+            docModel.DocumentCodedName = Guid.NewGuid().ToString();
+            docModel.CreationDate = DateTime.Now;
 
-            for (int i = 0; i < models.Count; i++)
+            // document file name & extension
+            docModel.DocumentFileName = Path.GetFileNameWithoutExtension(model.File.FileName);
+            docModel.DocumentFileExtension = Path.GetExtension(model.File.FileName).Substring(1);
+
+            // get file bytes
+            docModel.Bytes = Helpers.GetBytesFromDataUrl(model.File.DataUrl);
+
+            // determine folder to store the document
+            docModel.DocumentPhysicalPath = string.Format(@"{0}{1}\{2}",
+                GetPhysicalPath(),
+                string.Empty,
+                string.Format("{0}.tim", docModel.DocumentCodedName));
+
+            // document path (relative to the document store path)
+            docModel.DocumentPath = string.Format(@"{0}\{1}", string.Empty, docModel.DocumentCodedName);
+
+            if (model.UserID.HasValue)
             {
-                DataUrlModel dataUrl = models[i];
-
-                DocumentModel docModel = new DocumentModel();
-                docModel.DocumentName = Path.GetFileNameWithoutExtension(dataUrl.FileName);
-                docModel.DocumentTypeID = model.DocumentTypeID;
-                docModel.DocumentCodedName = Guid.NewGuid().ToString();
-                docModel.CreationDate = DateTime.Now;
-
-                // document file name & extension
-                docModel.DocumentFileName = Path.GetFileNameWithoutExtension(dataUrl.FileName);
-                docModel.DocumentFileExtension = Path.GetExtension(dataUrl.FileName).Substring(1);
-
-                // get file bytes
-                docModel.Bytes = GetFileBytesFromDataUrl(dataUrl.DataUrl);
-
-                // determine folder to store the document
-                docModel.DocumentPhysicalPath = string.Format(@"{0}{1}\{2}",
-                    Common.DocumentStore.GetPhysicalPath(),
-                    string.Empty,
-                    string.Format("{0}.tim", docModel.DocumentCodedName));
-
-                // document path (relative to the document store path)
-                docModel.DocumentPath = string.Format(@"{0}\{1}", string.Empty, docModel.DocumentCodedName);
-
-                // document size (in bytes)
-                docModel.DocumentSize = docModel.Bytes.Length;
-
-                if (model.UserID.HasValue)
-                {
-                    docModel.CreatedByUserID = model.UserID;
-                }
-
-                result.Add(docModel);
+                docModel.CreatedByUserID = model.UserID;
             }
 
-            return result;
+            return docModel;
         }
     }
 }

@@ -12,15 +12,15 @@ namespace DF.BL
     {
         public static void InsertDocument(MemberDocumentModel model)
         {
-            DocumentModel docModel = ConvertFileDataUrlModelToDocModel(model);
+            DocumentModel docModel = Documents.ConvertMemberDocumentModelToDocModel(model);
 
             // first save file to file system
             File.WriteAllBytes(docModel.DocumentPhysicalPath, docModel.Bytes);
 
             try
             {
-                // insert into DB
-                DAL.Files.Insert(new FileModel() { FileID = model.FileID }, docModels, null);
+                // then insert doc data into DB
+                DB.Members.InsertDocument(model.MemberID, docModel);
             }
             catch (Exception ex)
             {

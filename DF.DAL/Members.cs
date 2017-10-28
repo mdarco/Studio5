@@ -298,11 +298,28 @@ namespace DF.DB
             }
         }
 
-        public static void InsertDocument(MemberDocumentModel model)
+        public static void InsertDocument(int id, DocumentModel docModel)
         {
             using (var ctx = new DFAppEntities())
             {
+                DBModel.Documents doc = new DBModel.Documents();
+                doc.DocumentName = docModel.DocumentName;
+                doc.DocumentDesc = docModel.DocumentDesc;
+                doc.DocumentCodedName = docModel.DocumentCodedName;
+                doc.DocumentFileName = docModel.DocumentFileName;
+                doc.DocumentFileExtension = docModel.DocumentFileExtension;
+                doc.DocumentTypeID = docModel.DocumentTypeID;
+                doc.CreationDate = docModel.CreationDate;
+                doc.CreatedByUserID = docModel.CreatedByUserID;
+                doc.DocumentPath = docModel.DocumentPath;
+                ctx.Documents.Add(doc);
 
+                DBModel.MemberDocuments md = new MemberDocuments();
+                md.DocumentID = doc.DocumentID;
+                md.MemberID = id;
+                ctx.MemberDocuments.Add(md);
+
+                ctx.SaveChanges();
             }
         }
 
