@@ -100,6 +100,7 @@ namespace DF.DB
                                     LastName = x.LastName,
                                     FullName = x.FirstName + " " + x.LastName,
                                     IsActive = x.IsActive,
+                                    IsCompetitor = x.IsCompetitor,
                                     JMBG = x.JMBG,
                                     BirthDate = x.BirthDate,
                                     BirthPlace = x.BirthPlace,
@@ -141,6 +142,7 @@ namespace DF.DB
                     model.LastName = existing.LastName;
                     model.FullName = existing.FirstName + " " + existing.LastName;
                     model.IsActive = existing.IsActive;
+                    model.IsCompetitor = existing.IsCompetitor;
                     model.JMBG = existing.JMBG;
                     model.BirthDate = existing.BirthDate;
                     model.BirthPlace = existing.BirthPlace;
@@ -177,6 +179,15 @@ namespace DF.DB
                 m.LastName = model.LastName;
                 m.JMBG = model.JMBG;
                 m.IsActive = true;
+
+                if (model.IsCompetitor.HasValue)
+                {
+                    m.IsCompetitor = (bool)model.IsCompetitor;
+                }
+                else
+                {
+                    m.IsCompetitor = false;
+                }
 
                 m.ContactData = new ContactData();
                 m.ContactData.Address = model.ContactData.Address;
@@ -240,6 +251,11 @@ namespace DF.DB
                     if (model.IsActive.HasValue)
                     {
                         existing.IsActive = (bool)model.IsActive;
+                    }
+
+                    if (model.IsCompetitor.HasValue)
+                    {
+                        existing.IsCompetitor = (bool)model.IsCompetitor;
                     }
 
                     ctx.SaveChanges();
