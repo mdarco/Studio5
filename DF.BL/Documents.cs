@@ -63,7 +63,9 @@ namespace DF.BL
         public static DocumentModel ConvertMemberDocumentModelToDocModel(MemberDocumentModel model)
         {
             DocumentModel docModel = new DocumentModel();
-            docModel.DocumentName = Path.GetFileNameWithoutExtension(model.File.FileName);
+            //docModel.DocumentName = Path.GetFileNameWithoutExtension(model.File.FileName);
+            docModel.DocumentName = model.DocumentName;
+            docModel.DocumentDesc = model.DocumentDesc;
             docModel.DocumentTypeID = model.DocumentTypeID;
             docModel.DocumentCodedName = Guid.NewGuid().ToString();
             docModel.CreationDate = DateTime.Now;

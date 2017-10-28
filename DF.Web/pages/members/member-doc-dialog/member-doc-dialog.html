@@ -6,14 +6,27 @@
     <!-- Doc upload file -->
     <input type="file" id="uploadMemberDoc" name="uploadMemberDoc" class="filestyle" style="width: 100%;" data-button-text="" data-placeholder="Izaberite dokument" data-buttonName="btn-primary" />
 
-    <br /><br />
+    <br />
 
     <!-- Doc type -->
-    <label class="control-label">Vrsta dokumenta</label>
+    <label class="control-label">Vrsta dokumenta (*)</label>
     <select class="form-control" ng-model="model.DocumentTypeID" ng-options="value.ID as value.Name for (key, value) in docTypes"></select>
 
-    <br /><br />
+    <br />
 
+    <!-- Doc name -->
+    <label class="control-label">Naziv dokumenta (*)</label>
+    <input type="text" class="form-control" ng-model="model.DocumentName" />
+
+    <br />
+
+    <!-- Doc desc -->
+    <label class="control-label">Opis dokumenta</label>
+    <input type="text" class="form-control" ng-model="model.DocumentDesc" />
+
+    <br />
+
+    <!-- Metadata: expiry date -->
     <label class="control-label">Datum isteka važenja dokumenta</label>
     <label class="input" style="width: 100%">
         <input type="text"

@@ -21,6 +21,8 @@
                 toastr.warning('Dokument nije izabran.');
             } else if (!$scope.model.DocumentTypeID) {
                 toastr.warning('Nije izabrana vrsta dokumenta.');
+            } else if (!$scope.model.DocumentName || $scope.model.DocumentName === '') {
+                toastr.warning('Niste zadali naziv dokumenta.');
             } else {
                 var file = f.files[0];
 
