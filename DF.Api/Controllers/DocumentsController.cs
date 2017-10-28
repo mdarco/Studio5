@@ -23,7 +23,7 @@ namespace DF.Api.Controllers
             string docPath = Documents.GetPath(id, true);
 
             // decoded document file name
-            string docFileName = Documents.GetFileName(id);
+            string docFileName = DB.Documents.GetFileName(id);
 
             byte[] fileBytes = File.ReadAllBytes(docPath);
 
