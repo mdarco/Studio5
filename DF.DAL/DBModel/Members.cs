@@ -38,6 +38,7 @@ namespace DF.DB.DBModel
         public Nullable<int> ContactDataID { get; set; }
         public string Note { get; set; }
         public bool IsActive { get; set; }
+        public bool IsCompetitor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChoreographyMembers> ChoreographyMembers { get; set; }
