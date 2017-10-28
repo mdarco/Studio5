@@ -9,10 +9,10 @@
 
     function serviceFn($http, WebApiBaseUrl) {
         var urlRoot = '/api/documents';
-        var urlRoot_docTypes = '/api/settings/doctypes';
+        var urlRoot_docTypes = '/api/doc-types';
 
         var service = {
-            getDocTypesFlat: getDocTypesFlat,
+            getDocTypesAsLookup: getDocTypesAsLookup,
             manageDocTypes: manageDocTypes,
             deleteDocType: deleteDocType,
 
@@ -26,8 +26,8 @@
 
         //#region Doc types
 
-        function getDocTypesFlat() {
-            var url = WebApiBaseUrl + urlRoot_docTypes + '/flat?nd=' + Date.now();
+        function getDocTypesAsLookup() {
+            var url = WebApiBaseUrl + urlRoot_docTypes + '/lookup?nd=' + Date.now();
             return $http.get(url);
         }
 

@@ -1,4 +1,5 @@
 ﻿using DF.DB.DBModel;
+using DF.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,5 +37,25 @@ namespace DF.DB
                 return string.Empty;
             }
         }
+
+        #region Doc types
+
+        public static List<LookupModel> GetDocTypesAsLookup()
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                return ctx.DocumentTypes
+                            .Select(x =>
+                                new LookupModel()
+                                {
+                                    ID = x.DocumentTypeID,
+                                    Name = x.DocumentTypeName
+                                }
+                            )
+                            .ToList();
+            }
+        }
+
+        #endregion
     }
 }
