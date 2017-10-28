@@ -51,7 +51,7 @@
                 }
             );
         };
-        $scope.getDocuments();
+        //$scope.getDocuments();
 
         $scope.addDocument = function () {
             var dialogOpts = {

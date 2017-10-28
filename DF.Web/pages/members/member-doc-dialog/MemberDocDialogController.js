@@ -36,7 +36,7 @@
         function _save(fileData) {
             $scope.model.File.FileName = fileData.FileName;
             $scope.model.File.DataUrl = fileData.DataUrl;
-            $uibModalInstance.close(model);
+            $uibModalInstance.close($scope.model);
         }
 
         $scope.close = function () {
