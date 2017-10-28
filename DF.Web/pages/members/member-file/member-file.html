@@ -132,7 +132,9 @@
             <div class="panel-body">
                 <uib-tabset active="0">
                     <uib-tab index="0" heading="Dokumenti" select="getDocuments()">
-                        <table class="table table-condensed table-hover table-responsive table-striped" style="width: 100%">
+                        <p style="font-variant:small-caps; margin-left: 10px" ng-show="showDocuments === false">nema podataka.</p>
+                        <button class="btn btn-success" ng-click="addDocument()"><i class="fa fa-plus"></i>  Dodaj dokument</button>
+                        <table ng-show="showDocuments === true" class="table table-condensed table-hover table-responsive table-striped" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>Naziv</th>
@@ -155,7 +157,11 @@
                                     </td>
                                 </tr>
                             </tbody>
-                            <tfoot></tfoot>
+                            <tfoot>
+                                <tr>
+                                    <td><strong>Ukupno dokumenata {{ documents.length }}.</strong></td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </uib-tab>
                     <uib-tab index="1" heading="Slike">

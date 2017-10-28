@@ -1,0 +1,22 @@
+﻿<div class="modal-header bg-color-darken" style="color: white; background-color: #1B1E24;">
+    <h4>Unos dokumenta</h4>
+</div>
+
+<div class="modal-body">
+    <!-- Doc upload file -->
+    <input type="file" id="uploadMemberDoc" name="uploadMemberDoc" class="filestyle" style="width: 100%;" data-button-text="Dokument" data-placeholder="Izaberite dokument" data-buttonName="btn-primary" />
+
+    <br /><br />
+
+    <!-- Doc type -->
+    <label class="control-label">Vrsta dokumenta</label>
+    <select class="form-control" ng-model="model.DocumentTypeID" ng-options="value.DocumentTypeID as value.DocumentTypeName for (key, value) in docTypes"></select>
+
+    <br /><br />
+
+    <button ng-click="save()" class="btn btn-success">Sačuvaj</button>
+</div>
+
+<div class="modal-footer">
+    <button ng-click="close()" class="btn btn-primary">Zatvori</button>
+</div>

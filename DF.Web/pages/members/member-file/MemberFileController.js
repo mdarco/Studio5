@@ -29,8 +29,8 @@
         //#region Documents
 
         $scope.documents = [];
+        $scope.showDocuments = false;
 
-        $scope.getDocuments();
         $scope.getDocuments = function () {
             MembersService.getDocuments(member.MemberID).then(
                 function (result) {
@@ -40,13 +40,18 @@
                         if (AppParams.DEBUG) {
                             toastr.success('Dokumenti uspešno učitani.');
                         }
+
+                        $scope.showDocuments = ($scope.documents.length > 0);
                     }
                 },
                 function (error) {
                     toastr.error('Došlo je do greške na serveru prilikom preuzimanja dokumenata.');
+                    $scope.documents = [];
+                    $scope.showDocuments = false;
                 }
             );
         };
+        $scope.getDocuments();
 
         //#endregion
     }

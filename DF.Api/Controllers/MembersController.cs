@@ -73,6 +73,13 @@ namespace DF.Api.Controllers
             return DB.Members.GetDocuments(id);
         }
 
+        [Route("{id}/documents")]
+        [HttpPost]
+        public void AddDocument(MemberDocumentModel model)
+        {
+            BL.Members.InsertDocument(model);
+        }
+
         #endregion
     }
 }

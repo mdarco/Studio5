@@ -348,6 +348,8 @@
     <Content Include="pages\login\LoginController.js" />
     <Content Include="pages\members\member-dialog\member-dialog.html" />
     <Content Include="pages\members\member-dialog\MemberDialogController.js" />
+    <Content Include="pages\members\member-doc-dialog\member-doc-dialog.html" />
+    <Content Include="pages\members\member-doc-dialog\MemberDocDialogController.js" />
     <Content Include="pages\members\member-file\member-file.html" />
     <Content Include="pages\members\member-file\MemberFileController.js" />
     <Content Include="pages\members\members.html" />

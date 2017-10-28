@@ -16,7 +16,8 @@
             create: createMember,
             edit: editMember,
 
-            getDocuments: getDocuments
+            getDocuments: getDocuments,
+            addDocument: addDocument
         };
 
         return service;
@@ -46,6 +47,11 @@
         function getDocuments(id) {
             var url = WebApiBaseUrl + urlRoot + '/' + id + '/documents?nd=' + Date.now();
             return $http.get(url);
+        }
+
+        function addDocument(model) {
+            var url = WebApiBaseUrl + urlRoot + '/' + model.MemberID + '/documents';
+            return $http.post(url, model);
         }
 
         //#endregion
