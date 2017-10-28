@@ -131,8 +131,32 @@
         <div class="panel panel-primary" style="margin-left: 15px; margin-right: 30px;">
             <div class="panel-body">
                 <uib-tabset active="0">
-                    <uib-tab index="0" heading="Dokumenti">
-                        Dokumenti
+                    <uib-tab index="0" heading="Dokumenti" select="getDocuments()">
+                        <table class="table table-condensed table-hover table-responsive table-striped" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>Naziv</th>
+                                    <th>Tip</th>
+                                    <th>Datum unosa</th>
+                                    <th>Uneo</th>
+                                    <th>Datum isteka</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="doc in documents">
+                                    <td>{{ doc.DocumentName }}</td>
+                                    <td>{{ doc.DocumentType }}</td>
+                                    <td>{{ doc.DocumentCreatedDate | date: 'dd.MM.yyyy' }}</td>
+                                    <td>{{ doc.CreatedByUserFullName }}</td>
+                                    <td>{{ doc.Metadata.ExpiryDate | date: 'dd.MM.yyyy' }}</td>
+                                    <td>
+                                        <a class="btn btn-success btn-xs pull-right margin-right-5" title="Preuzmi/štampaj dokument" ng-href="{{ webApiBaseUrl }}/api/download/{{ doc.DocumentID }}"><i class="fa fa-download"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot></tfoot>
+                        </table>
                     </uib-tab>
                     <uib-tab index="1" heading="Slike">
                         Work in progress..
