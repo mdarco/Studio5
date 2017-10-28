@@ -172,6 +172,7 @@
     <Compile Include="Controllers\ChoreosController.cs" />
     <Compile Include="Controllers\DanceGroupsController.cs" />
     <Compile Include="Controllers\DanceSelectionsController.cs" />
+    <Compile Include="Controllers\DocumentsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -233,6 +234,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DF.BL\DF.BL.csproj">
+      <Project>{3c952c32-3dcf-4762-a6ba-eaf1435ab806}</Project>
+      <Name>DF.BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DF.DAL\DF.DAL.csproj">
       <Project>{9bb2a7fb-20ee-4627-a9b3-7d6f7e6548e1}</Project>
       <Name>DF.DAL</Name>

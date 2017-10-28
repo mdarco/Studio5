@@ -236,6 +236,7 @@
     <Compile Include="DBModel\Users.cs">
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Documents.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="Members.cs" />
