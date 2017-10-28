@@ -43,5 +43,13 @@ namespace DF.BL
                     return "application/octet-stream"; // arbitrary binary data
             }
         }
+
+        public static byte[] GetBytesFromDataUrl(string dataUrl)
+        {
+            string base64Data = dataUrl.Split(';')[1];
+            string data = base64Data.Split(',')[1];
+
+            return Convert.FromBase64String(data);
+        }
     }
 }

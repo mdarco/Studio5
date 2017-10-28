@@ -298,6 +298,14 @@ namespace DF.DB
             }
         }
 
+        public static void InsertDocument(MemberDocumentModel model)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+
+            }
+        }
+
         #endregion
     }
 }
