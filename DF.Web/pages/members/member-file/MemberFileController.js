@@ -54,6 +54,38 @@
                     });
                     break;
 
+                case 'IsCompetitor':
+                    var msg_IsCompetitor = $scope.member.IsCompetitor ? 'Prebaciti plesača u rekreativce?' : 'Prebaciti plesača u takmičare?';
+                    bootbox.confirm({
+                        message: msg_IsCompetitor,
+                        buttons: {
+                            confirm: {
+                                label: 'Da',
+                                className: 'btn-primary'
+                            },
+                            cancel: {
+                                label: 'Ne',
+                                className: 'btn-default'
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                MembersService.edit(member.MemberID, { IsCompetitor: !$scope.member.IsCompetitor }).then(
+                                    function () {
+                                        if (AppParams.DEBUG) {
+                                            toastr.success('Plesač uspešno ažuriran.');
+                                        }
+                                        $scope.member.IsCompetitor = !$scope.member.IsCompetitor;
+                                    },
+                                    function (error) {
+                                        toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                                    }
+                                );
+                            }
+                        }
+                    });
+                    break;
+
                 default:
                     alert('Work in progress..');
                     break;
