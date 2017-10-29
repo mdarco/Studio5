@@ -26,6 +26,7 @@ namespace DF.DB
                                 .Include(t => t.DanceGroupMembers)
                                 .Include(t => t.DanceSelectionMembers)
                                 .Include(t => t.ContactData)
+                                .Include(t => t.Lookup_AgeCategories)
                                 .Include("Performances.Events")
                                 .AsQueryable();
 
@@ -104,7 +105,9 @@ namespace DF.DB
                                     JMBG = x.JMBG,
                                     BirthDate = x.BirthDate,
                                     BirthPlace = x.BirthPlace,
-                                    
+                                    AgeCategoryID = x.AgeCategoryID,
+                                    AgeCategory = x.Lookup_AgeCategories.Name,
+
                                     ContactData =
                                         new ContactDataModel()
                                         {
@@ -133,7 +136,11 @@ namespace DF.DB
 
             using (var ctx = new DFAppEntities())
             {
-                var existing = ctx.Members.Include(t => t.ContactData).FirstOrDefault(x => x.MemberID == id);
+                var existing = ctx.Members
+                                    .Include(t => t.ContactData)
+                                    .Include(t => t.Lookup_AgeCategories)
+                                    .FirstOrDefault(x => x.MemberID == id);
+
                 if (existing != null)
                 {
                     model = new MemberModel();
@@ -146,6 +153,8 @@ namespace DF.DB
                     model.JMBG = existing.JMBG;
                     model.BirthDate = existing.BirthDate;
                     model.BirthPlace = existing.BirthPlace;
+                    model.AgeCategoryID = existing.AgeCategoryID;
+                    model.AgeCategory = existing.Lookup_AgeCategories.Name;
 
                     model.ContactData =
                         new ContactDataModel()
@@ -178,6 +187,7 @@ namespace DF.DB
                 m.FirstName = model.FirstName;
                 m.LastName = model.LastName;
                 m.JMBG = model.JMBG;
+                m.AgeCategoryID = model.AgeCategoryID;
                 m.IsActive = true;
 
                 if (model.IsCompetitor.HasValue)
@@ -216,6 +226,11 @@ namespace DF.DB
                     if (!string.IsNullOrEmpty(model.BirthPlace))
                     {
                         existing.BirthPlace = model.BirthPlace;
+                    }
+
+                    if (model.AgeCategoryID.HasValue)
+                    {
+                        existing.AgeCategoryID = model.AgeCategoryID;
                     }
 
                     if (model.ContactData != null && !string.IsNullOrEmpty(model.ContactData.Address))
