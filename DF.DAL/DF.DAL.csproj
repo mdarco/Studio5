@@ -239,6 +239,7 @@
     <Compile Include="Documents.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="Login.cs" />
+    <Compile Include="Lookups.cs" />
     <Compile Include="Members.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
