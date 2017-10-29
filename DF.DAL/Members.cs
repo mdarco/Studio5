@@ -302,6 +302,16 @@ namespace DF.DB
         {
             using (var ctx = new DFAppEntities())
             {
+                var memberDocs = ctx.MemberDocuments.Include(t => t.Documents).Where(mdoc => mdoc.MemberID == id);
+                if (memberDocs != null)
+                {
+                    var existing = memberDocs.FirstOrDefault(d => d.Documents.DocumentName.ToLower() == docModel.DocumentName.ToLower());
+                    if (existing != null)
+                    {
+                        throw new Exception("error_member_documents_doc_name_exists");
+                    }
+                }
+
                 DBModel.Documents doc = new DBModel.Documents();
                 doc.DocumentName = docModel.DocumentName;
                 doc.DocumentDesc = docModel.DocumentDesc;

@@ -77,7 +77,19 @@ namespace DF.Api.Controllers
         [HttpPost]
         public void AddDocument(MemberDocumentModel model)
         {
-            BL.Members.InsertDocument(model);
+            try
+            {
+                BL.Members.InsertDocument(model);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(
+                    new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.Forbidden,
+                        ReasonPhrase = ex.Message
+                    });
+            }
         }
 
         #endregion
