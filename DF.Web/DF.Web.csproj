@@ -255,6 +255,7 @@
     <Content Include="Content\img\superbox\superbox-thumb-7.jpg" />
     <Content Include="Content\img\superbox\superbox-thumb-8.jpg" />
     <Content Include="Content\img\superbox\superbox-thumb-9.jpg" />
+    <Content Include="Content\img\trophy-icon-disabled.png" />
     <Content Include="Content\img\trophy-icon.png" />
     <Content Include="Content\img\ts-logo.png" />
     <Content Include="Content\img\under-construction.png" />
