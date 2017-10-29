@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('MemberDocDialogController', ctrlFn);
 
-    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'toastr', 'docTypes'];
+    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'MembersService', 'UtilityService', 'toastr', 'AppParams', 'docTypes', 'memberID', 'userID'];
 
-    function ctrlFn($scope, $uibModalInstance, toastr, docTypes) {
+    function ctrlFn($scope, $uibModalInstance, MembersService, UtilityService, toastr, AppParams, docTypes, memberID, userID) {
         $scope.model = {
             File: {},
             DocMetadata: {}
@@ -39,12 +39,39 @@
         function _save(fileData) {
             $scope.model.File.FileName = fileData.FileName;
             $scope.model.File.DataUrl = fileData.DataUrl;
-            $uibModalInstance.close($scope.model);
+            $scope.model.MemberID = memberID;
+            $scope.model.UserID = userID;
+            $scope.model.DocMetadata.ExpiryDate = UtilityService.convertDateToISODateString($scope.model.DocMetadata.ExpiryDateForDisplay);
+
+            MembersService.addDocument($scope.model).then(
+                function () {
+                    if (AppParams.DEBUG) {
+                        toastr.success('Dokument uspešno dodat.');
+                    }
+
+                    $uibModalInstance.close();
+                },
+                function (error) {
+                    resolveError(error);
+                }
+            );
         }
 
         $scope.close = function () {
             $uibModalInstance.dismiss();
         };
+
+        function resolveError(error) {
+            switch (error.statusText) {
+                case 'error_member_documents_doc_name_exists':
+                    toastr.warning('Dokument sa datim nazivom već postoji.');
+                    break;
+
+                default:
+                    toastr.error('Došlo je do greške na serveru prilikom unosa dokumenta.');
+                    break;
+            }
+        }
 
         // date picker support
         $scope.datePickers = {};

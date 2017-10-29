@@ -66,6 +66,12 @@
                                 return result.data;
                             }
                         );
+                    },
+                    memberID: function () {
+                        return member.MemberID;
+                    },
+                    userID: function () {
+                        return currentUser.UserID;
                     }
                 }
             };
@@ -73,23 +79,8 @@
             var dialog = $uibModal.open(dialogOpts);
 
             dialog.result.then(
-                function (memberDocModel) {
-                    memberDocModel.MemberID = member.MemberID;
-                    memberDocModel.UserID = currentUser.UserID;
-                    memberDocModel.DocMetadata.ExpiryDate = UtilityService.convertDateToISODateString(memberDocModel.DocMetadata.ExpiryDate);
-
-                    MembersService.addDocument(memberDocModel).then(
-                        function () {
-                            if (AppParams.DEBUG) {
-                                toastr.success('Dokument uspešno dodat.');
-                            }
-
-                            $scope.getDocuments();
-                        },
-                        function (error) {
-                            toastr.error('Došlo je do greške na serveru prilikom unosa dokumenta.');
-                        }
-                    );
+                function () {
+                    $scope.getDocuments();
                 },
                 function () {
                     // modal dismissed => do nothing
