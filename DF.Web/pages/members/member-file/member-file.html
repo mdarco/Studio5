@@ -9,8 +9,8 @@
                         <tr>
                             <td rowspan="9" style="vertical-align: middle; text-align: center;">
                                 <div class="margin-bottom-10"><img src="Content/img/no-photo.png" alt="No Photo" /></div>
-                                <div class="label label-success text-bold margin-bottom-10">Aktivan</div>
-                                <div class="margin-top-10"><img src="Content/img/trophy-icon.png" alt="Competitor" /></div>
+                                <div ng-class="(member.IsActive) ? 'label label-success text-bold margin-bottom-10' : 'label label-danger text-bold margin-bottom-10'">{{ (member.IsActive) ? 'Aktivan' : 'Neaktivan' }}</div>
+                                <div class="margin-top-10"><img ng-src="{{ (member.IsActive) ? 'Content/img/trophy-icon.png' : 'Content/img/trophy-icon-disabled.png' }}" alt="Competitor" /></div>
                             </td>
                             <td style="width: 30%;"><strong>Ime i prezime</strong></td>
                             <td>{{ member.FullName }}</td>

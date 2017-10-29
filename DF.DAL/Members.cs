@@ -29,7 +29,7 @@ namespace DF.DB
                                 .Include("Performances.Events")
                                 .AsQueryable();
 
-                    bool excludeNonActive = true;
+                    bool excludeNonActive = false;
                     if (filter.ExcludeNonActive.HasValue)
                     {
                         excludeNonActive = (bool)filter.ExcludeNonActive;
