@@ -82,6 +82,13 @@
                 <label class="input"><input type="text" class="form-control" ng-model="member.ContactData.Phone3"></label>
             </div>
         </section>
+
+        <section>
+            <div>
+                <label class="control-label">Uzrast</label>
+                <select class="form-control" ng-model="model.AgeCategoryID" ng-options="value.ID as value.Name for (key, value) in ageCategories"></select>
+            </div>
+        </section>
     </form>
 </div>
 

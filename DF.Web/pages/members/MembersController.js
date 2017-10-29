@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('MembersController', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'NgTableParams', 'AuthenticationService', 'MembersService', 'toastr', 'choreos', 'danceGroups', 'danceSelections', 'events'];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'NgTableParams', 'AuthenticationService', 'MembersService', 'LookupsService', 'toastr', 'choreos', 'danceGroups', 'danceSelections', 'events'];
 
-    function ctrlFn($rootScope, $scope, $location, $uibModal, NgTableParams, AuthenticationService, MembersService, toastr, choreos, danceGroups, danceSelections, events) {
+    function ctrlFn($rootScope, $scope, $location, $uibModal, NgTableParams, AuthenticationService, MembersService, LookupsService, toastr, choreos, danceGroups, danceSelections, events) {
         // set active menu item
         $("#left-panel nav ul li").removeClass("active");
         $("#menuMembers").addClass("active");
@@ -106,7 +106,16 @@
                 keyboard: false,
                 backdropClick: false,
                 templateUrl: 'pages/members/member-dialog/member-dialog.html',
-                controller: 'MemberDialogController'
+                controller: 'MemberDialogController',
+                resolve: {
+                    ageCategories: function (LookupsService) {
+                        return LookupsService.getAgeCategories().then(
+                            function (result) {
+                                return result.data;
+                            }
+                        );
+                    }
+                }
             };
 
             var dialog = $uibModal.open(dialogOpts);

@@ -5,9 +5,11 @@
         .module('DFApp')
         .controller('MemberDialogController', ctrlFn);
 
-    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'MembersService', 'UtilityService', 'toastr'];
+    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'MembersService', 'UtilityService', 'toastr', 'ageCategories'];
 
-    function ctrlFn($scope, $uibModalInstance, MembersService, UtilityService, toastr) {
+    function ctrlFn($scope, $uibModalInstance, MembersService, UtilityService, toastr, ageCategories) {
+        $scope.ageCategories = ageCategories;
+
         $scope.member = {
             ContactData: {}
         };

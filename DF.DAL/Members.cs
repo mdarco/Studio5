@@ -106,7 +106,7 @@ namespace DF.DB
                                     BirthDate = x.BirthDate,
                                     BirthPlace = x.BirthPlace,
                                     AgeCategoryID = x.AgeCategoryID,
-                                    AgeCategory = x.Lookup_AgeCategories.Name,
+                                    AgeCategory = (x.Lookup_AgeCategories != null) ? x.Lookup_AgeCategories.Name : string.Empty,
 
                                     ContactData =
                                         new ContactDataModel()
@@ -154,7 +154,7 @@ namespace DF.DB
                     model.BirthDate = existing.BirthDate;
                     model.BirthPlace = existing.BirthPlace;
                     model.AgeCategoryID = existing.AgeCategoryID;
-                    model.AgeCategory = existing.Lookup_AgeCategories.Name;
+                    model.AgeCategory = (existing.Lookup_AgeCategories != null) ? existing.Lookup_AgeCategories.Name : string.Empty;
 
                     model.ContactData =
                         new ContactDataModel()

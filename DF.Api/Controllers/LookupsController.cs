@@ -11,7 +11,7 @@ namespace DF.Api.Controllers
     [RoutePrefix("api/lookups")]
     public class LookupsController : ApiController
     {
-        [Route("/age-categories")]
+        [Route("age-categories")]
         [HttpGet]
         public List<LookupModel> GetAgeCategories()
         {
