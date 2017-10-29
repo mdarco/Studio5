@@ -39,6 +39,7 @@ namespace DF.DB.DBModel
         public string Note { get; set; }
         public bool IsActive { get; set; }
         public bool IsCompetitor { get; set; }
+        public Nullable<int> AgeCategoryID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChoreographyMembers> ChoreographyMembers { get; set; }
@@ -61,5 +62,6 @@ namespace DF.DB.DBModel
         public virtual ICollection<Performances> Performances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TrainingMemberPresenceRegistrations> TrainingMemberPresenceRegistrations { get; set; }
+        public virtual Lookup_AgeCategories Lookup_AgeCategories { get; set; }
     }
 }

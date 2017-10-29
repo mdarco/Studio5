@@ -15,6 +15,7 @@ namespace DF.Models
         public string JMBG { get; set; }
         public DateTime? BirthDate { get; set; }
         public string BirthPlace { get; set; }
+        public int? AgeCategoryID { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsCompetitor { get; set; }
         public string Note { get; set; }

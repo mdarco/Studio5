@@ -364,6 +364,7 @@
           <Property Name="JMBG" Type="nvarchar" MaxLength="300" />
           <Property Name="BirthDate" Type="datetime" />
           <Property Name="BirthPlace" Type="nvarchar" MaxLength="1000" />
+          <Property Name="AgeCategoryID" Type="int" />
           <Property Name="ContactDataID" Type="int" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsCompetitor" Type="bit" Nullable="false" />
@@ -1086,6 +1087,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Members_Lookup_AgeCategories">
+          <End Role="Lookup_AgeCategories" Type="Self.Lookup_AgeCategories" Multiplicity="0..1" />
+          <End Role="Members" Type="Self.Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup_AgeCategories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="AgeCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Payments_Costumes">
           <End Role="Costumes" Type="Self.Costumes" Multiplicity="1" />
           <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
@@ -1580,6 +1593,10 @@
             <End Role="ContactData" EntitySet="ContactData" />
             <End Role="Members" EntitySet="Members" />
           </AssociationSet>
+          <AssociationSet Name="FK_Members_Lookup_AgeCategories" Association="Self.FK_Members_Lookup_AgeCategories">
+            <End Role="Lookup_AgeCategories" EntitySet="Lookup_AgeCategories" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
           <AssociationSet Name="FK_Payments_Costumes" Association="Self.FK_Payments_Costumes">
             <End Role="Costumes" EntitySet="Costumes" />
             <End Role="Payments" EntitySet="Payments" />
@@ -1995,6 +2012,7 @@
           <Property Name="Name" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Choreographies" Relationship="Self.FK_Choreographies_Lookup_AgeCategories" FromRole="Lookup_AgeCategories" ToRole="Choreographies" />
+          <NavigationProperty Name="Members" Relationship="DFDataModel.FK_Members_Lookup_AgeCategories" FromRole="Lookup_AgeCategories" ToRole="Members" />
         </EntityType>
         <EntityType Name="Lookup_DanceStyles">
           <Key>
@@ -2118,6 +2136,8 @@
           <NavigationProperty Name="TrainingMemberPresenceRegistrations" Relationship="Self.FK_TrainingMemberPresenceRegistrations_Members" FromRole="Members" ToRole="TrainingMemberPresenceRegistrations" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsCompetitor" Type="Boolean" Nullable="false" />
+          <Property Name="AgeCategoryID" Type="Int32" />
+          <NavigationProperty Name="Lookup_AgeCategories" Relationship="DFDataModel.FK_Members_Lookup_AgeCategories" FromRole="Members" ToRole="Lookup_AgeCategories" />
         </EntityType>
         <EntityType Name="Outfits">
           <Key>
@@ -3420,6 +3440,10 @@
             <End Role="Documents" EntitySet="Documents" />
             <End Role="DocumentMetadata" EntitySet="DocumentMetadata" />
           </AssociationSet>
+          <AssociationSet Name="FK_Members_Lookup_AgeCategories" Association="DFDataModel.FK_Members_Lookup_AgeCategories">
+            <End Role="Lookup_AgeCategories" EntitySet="Lookup_AgeCategories" />
+            <End Role="Members" EntitySet="Members" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_UserGroupPermissions_Permissions">
           <End Type="DFDataModel.Permissions" Role="Permissions" Multiplicity="1" />
@@ -3462,6 +3486,18 @@
             </Principal>
             <Dependent Role="DocumentMetadata">
               <PropertyRef Name="DocumentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Members_Lookup_AgeCategories">
+          <End Type="DFDataModel.Lookup_AgeCategories" Role="Lookup_AgeCategories" Multiplicity="0..1" />
+          <End Type="DFDataModel.Members" Role="Members" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup_AgeCategories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Members">
+              <PropertyRef Name="AgeCategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3834,6 +3870,7 @@
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="DFDataModel.Members">
               <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="AgeCategoryID" ColumnName="AgeCategoryID" />
                 <ScalarProperty Name="IsCompetitor" ColumnName="IsCompetitor" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />

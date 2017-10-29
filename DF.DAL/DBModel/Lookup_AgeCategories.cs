@@ -18,6 +18,7 @@ namespace DF.DB.DBModel
         public Lookup_AgeCategories()
         {
             this.Choreographies = new HashSet<Choreographies>();
+            this.Members = new HashSet<Members>();
         }
     
         public int ID { get; set; }
@@ -26,5 +27,7 @@ namespace DF.DB.DBModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Choreographies> Choreographies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Members> Members { get; set; }
     }
 }
