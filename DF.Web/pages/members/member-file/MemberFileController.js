@@ -21,7 +21,43 @@
         //#region Basic data
 
         $scope.editMember = function (dataType) {
-            alert('Work in progress..');
+            switch (dataType) {
+                case 'IsActive':
+                    var msg_IsActive = $scope.member.IsActive ? 'Deaktivirati plesača?' : 'Aktivirati plesača?';
+                    bootbox.confirm({
+                        message: msg_IsActive,
+                        buttons: {
+                            confirm: {
+                                label: 'Da',
+                                className: 'btn-primary'
+                            },
+                            cancel: {
+                                label: 'Ne',
+                                className: 'btn-default'
+                            }
+                        },
+                        callback: function (result) {
+                            if (result) {
+                                MembersService.edit(member.MemberID, { IsActive: !$scope.member.IsActive }).then(
+                                    function () {
+                                        if (AppParams.DEBUG) {
+                                            toastr.success('Plesač uspešno ažuriran.');
+                                        }
+                                        $scope.member.IsActive = !$scope.member.IsActive;
+                                    },
+                                    function (error) {
+                                        toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                                    }
+                                );
+                            }
+                        }
+                    });
+                    break;
+
+                default:
+                    alert('Work in progress..');
+                    break;
+            }
         };
 
         //#endregion
