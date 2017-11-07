@@ -493,6 +493,7 @@
     <Content Include="Content\img\pattern\Thumbs.db" />
     <Content Include="Content\img\splash\Thumbs.db" />
     <Content Include="Content\img\superbox\Thumbs.db" />
+    <None Include="Properties\PublishProfiles\DFApp - localhost.pubxml" />
     <None Include="Scripts\jquery\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\blob\Blob.js" />
     <Content Include="Scripts\bootbox\bootbox.js" />
