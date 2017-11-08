@@ -391,6 +391,7 @@
     <Content Include="Scripts\angular-base64\angular-base64.min.js" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.js" />
     <Content Include="Scripts\angular-block-ui\angular-block-ui.min.js" />
+    <Content Include="Scripts\angular-cache-buster\angular-cache-buster.js" />
     <Content Include="Scripts\angular-checkboxes\angular-checkboxes.js" />
     <Content Include="Scripts\angular-file-saver\angular-file-saver.bundle.js" />
     <Content Include="Scripts\angular-file-saver\angular-file-saver.bundle.min.js" />
