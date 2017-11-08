@@ -16,6 +16,7 @@
         'toastr',
         'sprintf',
 		'ngFileSaver',
-        'ngTagsInput'
+        'ngTagsInput',
+        'ngCacheBuster'
     ]);
 })();
