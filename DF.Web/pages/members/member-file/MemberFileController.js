@@ -17,6 +17,9 @@
         $scope.webApiBaseUrl = WebApiBaseUrl;
 
         $scope.member = member;
+        if (!member.ProfileImage) {
+            member.ProfileImage = 'Content/img/no-photo.png';
+        }
 
         //#region Basic data
 

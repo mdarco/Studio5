@@ -368,6 +368,7 @@
           <Property Name="ContactDataID" Type="int" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsCompetitor" Type="bit" Nullable="false" />
+          <Property Name="ProfileImage" Type="nvarchar(max)" />
           <Property Name="Note" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Outfits">
@@ -2138,6 +2139,7 @@
           <Property Name="IsCompetitor" Type="Boolean" Nullable="false" />
           <Property Name="AgeCategoryID" Type="Int32" />
           <NavigationProperty Name="Lookup_AgeCategories" Relationship="DFDataModel.FK_Members_Lookup_AgeCategories" FromRole="Members" ToRole="Lookup_AgeCategories" />
+          <Property Name="ProfileImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Outfits">
           <Key>
@@ -3870,6 +3872,7 @@
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="DFDataModel.Members">
               <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
                 <ScalarProperty Name="AgeCategoryID" ColumnName="AgeCategoryID" />
                 <ScalarProperty Name="IsCompetitor" ColumnName="IsCompetitor" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />

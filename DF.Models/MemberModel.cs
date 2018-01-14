@@ -20,6 +20,7 @@ namespace DF.Models
         public bool? IsActive { get; set; }
         public bool? IsCompetitor { get; set; }
         public string Note { get; set; }
+        public string ProfileImage { get; set; }
 
         public ContactDataModel ContactData { get; set; }
 

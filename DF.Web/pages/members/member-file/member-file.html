@@ -9,7 +9,7 @@
                         <tr>
                             <td rowspan="10" style="vertical-align: middle; text-align: center;">
                                 <div class="margin-bottom-10">
-                                    <img src="Content/img/no-photo.png" alt="No Photo" />
+                                    <img src="{{ member.ProfileImage }}" alt="No Photo" />
                                 </div>
                                 <div ng-click="editMember('IsActive')" ng-class="(member.IsActive) ? 'label label-success text-bold margin-bottom-10 cursor-pointer' : 'label label-danger text-bold margin-bottom-10 cursor-pointer'">{{ (member.IsActive) ? 'Aktivan' : 'Neaktivan' }}</div>
                                 <div class="margin-top-10" style="cursor: pointer" ng-click="editMember('IsCompetitor')">

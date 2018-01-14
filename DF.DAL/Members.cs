@@ -107,6 +107,7 @@ namespace DF.DB
                                     BirthPlace = x.BirthPlace,
                                     AgeCategoryID = x.AgeCategoryID,
                                     AgeCategory = (x.Lookup_AgeCategories != null) ? x.Lookup_AgeCategories.Name : string.Empty,
+                                    ProfileImage = x.ProfileImage,
 
                                     ContactData =
                                         new ContactDataModel()
@@ -155,6 +156,7 @@ namespace DF.DB
                     model.BirthPlace = existing.BirthPlace;
                     model.AgeCategoryID = existing.AgeCategoryID;
                     model.AgeCategory = (existing.Lookup_AgeCategories != null) ? existing.Lookup_AgeCategories.Name : string.Empty;
+                    model.ProfileImage = existing.ProfileImage;
 
                     model.ContactData =
                         new ContactDataModel()
@@ -188,6 +190,7 @@ namespace DF.DB
                 m.LastName = model.LastName;
                 m.JMBG = model.JMBG;
                 m.AgeCategoryID = model.AgeCategoryID;
+                m.ProfileImage = model.ProfileImage;
                 m.IsActive = true;
 
                 if (model.IsCompetitor.HasValue)
@@ -231,6 +234,11 @@ namespace DF.DB
                     if (model.AgeCategoryID.HasValue)
                     {
                         existing.AgeCategoryID = model.AgeCategoryID;
+                    }
+
+                    if (!string.IsNullOrEmpty(model.ProfileImage))
+                    {
+                        existing.ProfileImage = model.ProfileImage;
                     }
 
                     if (model.ContactData != null && !string.IsNullOrEmpty(model.ContactData.Address))
