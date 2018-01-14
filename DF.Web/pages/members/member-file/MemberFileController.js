@@ -95,6 +95,29 @@
             }
         };
 
+        $scope.triggerUploadProfileImage = function () {
+            $('#uploadProfileImage').trigger('click');
+        };
+
+        // profile image select event
+        $('#uploadProfileImage').change(function () {
+            var f = document.getElementById('uploadProfileImage');
+            if (!f.files[0]) {
+                return;
+            } else {
+                var file = f.files[0];
+
+                var fileReader = new FileReader();
+                fileReader.onloadend = function (event) {
+                    var fileData = event.target.result; // file data URL
+                    //_save({ DataUrl: fileData, FileName: file.name });
+                    alert(fileData);
+                };
+
+                fileReader.readAsDataURL(file);
+            }
+        });
+
         //#endregion
 
         //#region Documents

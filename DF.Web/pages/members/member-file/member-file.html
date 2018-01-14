@@ -8,6 +8,8 @@
                     <tbody>
                         <tr>
                             <td rowspan="10" style="vertical-align: middle; text-align: center;">
+                                <input type="file" id="uploadProfileImage" name="uploadProfileImage" style="display: none;" />
+                                <button class="btn btn-sm btn-primary" title="Izmeni sliku" ng-click="triggerUploadProfileImage()"><i class="fa fa-camera"></i></button>
                                 <div class="margin-bottom-10">
                                     <img src="{{ member.ProfileImage }}" alt="No Photo" />
                                 </div>
