@@ -92,6 +92,19 @@
                     });
                     break;
 
+                case 'ProfileImage':
+                    MembersService.edit(member.MemberID, { ProfileImage: $scope.member.ProfileImage }).then(
+                        function () {
+                            if (AppParams.DEBUG) {
+                                toastr.success('Plesač uspešno ažuriran.');
+                            }
+                        },
+                        function (error) {
+                            toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                        }
+                    );
+                    break;
+
                 default:
                     alert('Work in progress..');
                     break;
@@ -120,7 +133,8 @@
                     var fileData = event.target.result; // file data URL
 
                     $timeout(function () {
-                        member.ProfileImage = fileData;
+                        $scope.member.ProfileImage = fileData;
+                        $scope.editMember('ProfileImage');
                     }, 1000);
                 };
 
