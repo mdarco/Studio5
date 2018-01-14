@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('MemberFileController', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'MembersService', 'DocumentsService', 'UtilityService', 'AuthenticationService', 'WebApiBaseUrl', 'toastr', 'AppParams', 'member'];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$timeout', '$uibModal', 'MembersService', 'DocumentsService', 'UtilityService', 'AuthenticationService', 'WebApiBaseUrl', 'toastr', 'AppParams', 'member'];
 
-    function ctrlFn($rootScope, $scope, $location, $uibModal, MembersService, DocumentsService, UtilityService, AuthenticationService, WebApiBaseUrl, toastr, AppParams, member) {
+    function ctrlFn($rootScope, $scope, $location, $timeout, $uibModal, MembersService, DocumentsService, UtilityService, AuthenticationService, WebApiBaseUrl, toastr, AppParams, member) {
         // set active menu item
         $("#left-panel nav ul li").removeClass("active");
         $("#menuHome").addClass("active");
@@ -111,7 +111,8 @@
                 fileReader.onloadend = function (event) {
                     var fileData = event.target.result; // file data URL
                     //_save({ DataUrl: fileData, FileName: file.name });
-                    alert(fileData);
+
+                    $timeout(function () { member.ProfileImage = fileData; }, 1000);
                 };
 
                 fileReader.readAsDataURL(file);
