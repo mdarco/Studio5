@@ -12,6 +12,9 @@
         $("#left-panel nav ul li").removeClass("active");
         $("#menuHome").addClass("active");
 
+        // image file types
+        const imageFileTypes = ['image/png', 'image/jpeg', 'image/gif'];
+
         var currentUser = AuthenticationService.getCurrentUser();
 
         $scope.webApiBaseUrl = WebApiBaseUrl;
@@ -107,12 +110,18 @@
             } else {
                 var file = f.files[0];
 
+                if (!_.includes(imageFileTypes, file.type)) {
+                    toastr.warning('Niste izabrali sliku.');
+                    return;
+                }
+
                 var fileReader = new FileReader();
                 fileReader.onloadend = function (event) {
                     var fileData = event.target.result; // file data URL
-                    //_save({ DataUrl: fileData, FileName: file.name });
 
-                    $timeout(function () { member.ProfileImage = fileData; }, 1000);
+                    $timeout(function () {
+                        member.ProfileImage = fileData;
+                    }, 1000);
                 };
 
                 fileReader.readAsDataURL(file);
