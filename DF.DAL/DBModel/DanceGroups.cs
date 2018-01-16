@@ -42,5 +42,6 @@ namespace DF.DB.DBModel
         public virtual ICollection<DanceGroupStaff> DanceGroupStaff { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanceSelectionDanceGroups> DanceSelectionDanceGroups { get; set; }
+        public virtual Lookup_AgeCategories Lookup_AgeCategories { get; set; }
     }
 }

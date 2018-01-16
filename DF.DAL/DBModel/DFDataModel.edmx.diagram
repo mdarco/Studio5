@@ -127,6 +127,7 @@
         <EntityTypeShape EntityType="DFDataModel.DocumentMetadata" Width="1.5" PointX="7.5" PointY="50.375" />
         <AssociationConnector Association="DFDataModel.FK_DocumentMetadata_Documents" />
         <AssociationConnector Association="DFDataModel.FK_Members_Lookup_AgeCategories" />
+        <AssociationConnector Association="DFDataModel.FK_DanceGroups_Lookup_AgeCategories" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,9 +12,10 @@
 
         var service = {
             getLookup: getLookupDanceGroups,
-            getFiltered: getFilteredDanceGroups,
-            create: createDanceGroup,
-            edit: editDanceGroup
+            getDanceGroups: getFilteredDanceGroups,
+            createDanceGroup: createDanceGroup,
+            editDanceGroup: editDanceGroup,
+            deleteDanceGroup: deleteDanceGroup
         };
 
         return service;
@@ -35,8 +36,13 @@
         }
 
         function editDanceGroup(id, model) {
-            var url = WebApiBaseUrl + urlRoot + '/' + id + '?nd=' + Date.now();
+            var url = WebApiBaseUrl + urlRoot + '/' + id;
             return $http.put(url, model);
+        }
+
+        function deleteDanceGroup(id) {
+            var url = WebApiBaseUrl + urlRoot + '/' + id;
+            return $http.delete(url);
         }
     }
 })();

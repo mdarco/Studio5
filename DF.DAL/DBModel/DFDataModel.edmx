@@ -692,6 +692,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DanceGroups_Lookup_AgeCategories">
+          <End Role="Lookup_AgeCategories" Type="Self.Lookup_AgeCategories" Multiplicity="0..1" />
+          <End Role="DanceGroups" Type="Self.DanceGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup_AgeCategories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DanceGroups">
+              <PropertyRef Name="AgeCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DanceGroupSelections_Members">
           <End Role="Members" Type="Self.Members" Multiplicity="1" />
           <End Role="DanceSelectionMembers" Type="Self.DanceSelectionMembers" Multiplicity="*" />
@@ -1462,6 +1474,10 @@
             <End Role="Periods" EntitySet="Periods" />
             <End Role="DanceGroupPeriods" EntitySet="DanceGroupPeriods" />
           </AssociationSet>
+          <AssociationSet Name="FK_DanceGroups_Lookup_AgeCategories" Association="Self.FK_DanceGroups_Lookup_AgeCategories">
+            <End Role="Lookup_AgeCategories" EntitySet="Lookup_AgeCategories" />
+            <End Role="DanceGroups" EntitySet="DanceGroups" />
+          </AssociationSet>
           <AssociationSet Name="FK_DanceGroupSelections_Members" Association="Self.FK_DanceGroupSelections_Members">
             <End Role="Members" EntitySet="Members" />
             <End Role="DanceSelectionMembers" EntitySet="DanceSelectionMembers" />
@@ -1808,6 +1824,7 @@
           <NavigationProperty Name="DanceGroupPeriods" Relationship="Self.FK_DanceGroupPeriods_DanceGroups" FromRole="DanceGroups" ToRole="DanceGroupPeriods" />
           <NavigationProperty Name="DanceGroupStaff" Relationship="Self.FK_DanceGroupStaff_DanceGroups" FromRole="DanceGroups" ToRole="DanceGroupStaff" />
           <NavigationProperty Name="DanceSelectionDanceGroups" Relationship="Self.FK_DanceSelectionDanceGroups_DanceGroups" FromRole="DanceGroups" ToRole="DanceSelectionDanceGroups" />
+          <NavigationProperty Name="Lookup_AgeCategories" Relationship="DFDataModel.FK_DanceGroups_Lookup_AgeCategories" FromRole="DanceGroups" ToRole="Lookup_AgeCategories" />
         </EntityType>
         <EntityType Name="DanceGroupStaff">
           <Key>
@@ -2014,6 +2031,7 @@
           <Property Name="Description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Choreographies" Relationship="Self.FK_Choreographies_Lookup_AgeCategories" FromRole="Lookup_AgeCategories" ToRole="Choreographies" />
           <NavigationProperty Name="Members" Relationship="DFDataModel.FK_Members_Lookup_AgeCategories" FromRole="Lookup_AgeCategories" ToRole="Members" />
+          <NavigationProperty Name="DanceGroups" Relationship="DFDataModel.FK_DanceGroups_Lookup_AgeCategories" FromRole="Lookup_AgeCategories" ToRole="DanceGroups" />
         </EntityType>
         <EntityType Name="Lookup_DanceStyles">
           <Key>
@@ -3446,6 +3464,10 @@
             <End Role="Lookup_AgeCategories" EntitySet="Lookup_AgeCategories" />
             <End Role="Members" EntitySet="Members" />
           </AssociationSet>
+          <AssociationSet Name="FK_DanceGroups_Lookup_AgeCategories" Association="DFDataModel.FK_DanceGroups_Lookup_AgeCategories">
+            <End Role="Lookup_AgeCategories" EntitySet="Lookup_AgeCategories" />
+            <End Role="DanceGroups" EntitySet="DanceGroups" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_UserGroupPermissions_Permissions">
           <End Type="DFDataModel.Permissions" Role="Permissions" Multiplicity="1" />
@@ -3499,6 +3521,18 @@
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="Members">
+              <PropertyRef Name="AgeCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DanceGroups_Lookup_AgeCategories">
+          <End Type="DFDataModel.Lookup_AgeCategories" Role="Lookup_AgeCategories" Multiplicity="0..1" />
+          <End Type="DFDataModel.DanceGroups" Role="DanceGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lookup_AgeCategories">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DanceGroups">
               <PropertyRef Name="AgeCategoryID" />
             </Dependent>
           </ReferentialConstraint>

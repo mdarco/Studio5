@@ -19,6 +19,7 @@ namespace DF.DB.DBModel
         {
             this.Choreographies = new HashSet<Choreographies>();
             this.Members = new HashSet<Members>();
+            this.DanceGroups = new HashSet<DanceGroups>();
         }
     
         public int ID { get; set; }
@@ -29,5 +30,7 @@ namespace DF.DB.DBModel
         public virtual ICollection<Choreographies> Choreographies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Members> Members { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DanceGroups> DanceGroups { get; set; }
     }
 }
