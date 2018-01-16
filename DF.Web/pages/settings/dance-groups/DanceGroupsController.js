@@ -15,6 +15,10 @@
         var currentUser = AuthenticationService.getCurrentUser();
 
         $scope.webApiBaseUrl = WebApiBaseUrl;
+        $scope.filter = {};
+
+        $scope.totalRecords = 0;
+        $scope.initialDocListLoad = true;
         $scope.showTable = false;
 
         $scope.danceGroupsList = new NgTableParams(
@@ -25,38 +29,46 @@
             {
                 total: 0,
                 getData: function (params) {
+                    if ($scope.initialDocListLoad) {
+                        $scope.initialDocListLoad = false;
+                        return [];
+                    }
+
                     $scope.filter = $scope.filter || {};
 
                     $scope.filter.PageNo = params.page();
                     $scope.filter.RecordsPerPage = params.count();
 
-                    if (!_.isEmpty($scope.filter.DanceGroupName) && $scope.filter.DanceGroupName !== '') {
-                        return DanceGroupsService.getDanceGroups($scope.filter).then(
-                            function (result) {
-                                if (result.data.Data.length > 0) {
-                                    $scope.showTable = true;
-                                } else {
-                                    $scope.showTable = false;
-                                }
+                    return DanceGroupsService.getDanceGroups($scope.filter).then(
+                        function (result) {
+                            if (!result || !result.data || !result.data.Data) {
+                                $scope.showTable = false;
+                                return [];
+                            }
 
-                                params.total(result.Total);
-                                return result.data.Data;
-                            },
-                            function (error) {
-                                toastr.error('Došlo je do greške prilikom učitavanja spiska grupa.');
+                            if (result.data.Data.length > 0) {
+                                $scope.showTable = true;
+                            } else {
                                 $scope.showTable = false;
                             }
-                        );
-                    }
+
+                            params.total(result.Total);
+                            $scope.totalRecords = result.data.Total;
+
+                            return result.data.Data;
+                        },
+                        function (error) {
+                            toastr.error('Došlo je do greške prilikom učitavanja spiska grupa.');
+                            $scope.showTable = false;
+                        }
+                    );
                 }
             }
         );
 
         // filter
         $scope.applyFilter = function () {
-            if (!_.isEmpty($scope.filter.DanceGroupName) && $scope.filter.DanceGroupName !== '') {
-                $scope.danceGroupsList.reload();
-            }
+            $scope.danceGroupsList.reload();
         };
 
         $scope.clearFilter = function () {
@@ -83,6 +95,8 @@
                 }
             );
         };
+
+        //#region Dialog
 
         $scope.openDialog = function (group) {
             var dialogOpts = {
@@ -127,5 +141,7 @@
                 }
             );
         };
+
+        //#endregion
     }
 })();

@@ -70,6 +70,7 @@ namespace DF.DB
                         new DanceGroupModel()
                         {
                             DanceGroupID = x.DanceGroupID,
+                            DanceGroupName = x.DanceGroupName,
                             DanceGroupDesc = x.DanceGroupDesc,
                             AgeCategoryID = x.AgeCategoryID,
                             AgeCategory = (x.Lookup_AgeCategories != null) ? x.Lookup_AgeCategories.Name : string.Empty
@@ -94,6 +95,7 @@ namespace DF.DB
                             new DanceGroupModel()
                             {
                                 DanceGroupID = x.DanceGroupID,
+                                DanceGroupName = x.DanceGroupName,
                                 DanceGroupDesc = x.DanceGroupDesc,
                                 AgeCategoryID = x.AgeCategoryID,
                                 AgeCategory = (x.Lookup_AgeCategories != null) ? x.Lookup_AgeCategories.Name : string.Empty
