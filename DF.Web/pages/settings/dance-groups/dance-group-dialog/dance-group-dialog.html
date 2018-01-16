@@ -1,0 +1,31 @@
+﻿<div class="modal-header bg-color-darken" style="color: white;">
+    <h4>Grupa</h4>
+</div>
+
+<div class="modal-body">
+    <form id="formDanceGroupDialog" class="smart-form" novalidate="novalidate">
+        <section>
+            <div>
+                <label class="control-label">Naziv (*)</label>
+                <label class="input"><input type="text" class="form-control" ng-model="group.DanceGroupName"></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Opis</label>
+                <label class="input"><input type="text" class="form-control" ng-model="group.DanceGroupDesc"></label>
+            </div>
+        </section>
+
+        <section>
+            <label class="control-label">Uzrast</label>
+            <select class="form-control" ng-model="group.AgeCategoryID" ng-options="value.ID as value.Name for (key, value) in ageCategories"></select>
+        </section>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button ng-click="save()" class="btn btn-success">Sačuvaj</button>
+    <button ng-click="close()" class="btn btn-primary">Odustani</button>
+</div>

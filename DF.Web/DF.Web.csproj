@@ -362,6 +362,8 @@
     <Content Include="pages\not-authorised\NotAuthorisedController.js" />
     <Content Include="pages\outfits\outfits.html" />
     <Content Include="pages\outfits\OutfitsController.js" />
+    <Content Include="pages\settings\dance-groups\dance-group-dialog\dance-group-dialog.html" />
+    <Content Include="pages\settings\dance-groups\dance-group-dialog\DanceGroupDialogController.js" />
     <Content Include="pages\settings\dance-groups\dance-groups.html" />
     <Content Include="pages\settings\dance-groups\DanceGroupsController.js" />
     <Content Include="pages\settings\dance-selections\dance-selections.html" />

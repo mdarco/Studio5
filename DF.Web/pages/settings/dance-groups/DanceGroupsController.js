@@ -108,6 +108,17 @@
                 resolve: {
                     group: function () {
                         return angular.copy(group);
+                    },
+                    ageCategories: function (LookupsService) {
+                        return LookupsService.getAgeCategories().then(
+                            function (resultAgeCategories) {
+                                if (resultAgeCategories && resultAgeCategories.data) {
+                                    return resultAgeCategories.data;
+                                } else {
+                                    return null;
+                                }
+                            }
+                        );
                     }
                 }
             };
