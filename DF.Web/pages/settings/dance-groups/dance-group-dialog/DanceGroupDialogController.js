@@ -27,8 +27,8 @@
 
         // helpers
         function validate() {
-            if (!$scope.tax.DanceGroupName ||
-                ($scope.tax.DanceGroupName && $scope.tax.DanceGroupName === '')
+            if (!$scope.group.DanceGroupName ||
+                ($scope.group.DanceGroupName && $scope.group.DanceGroupName === '')
             ) {
                 return { error: true, errorMsg: 'Naziv je obavezan podatak.' };
             }

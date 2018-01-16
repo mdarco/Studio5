@@ -137,7 +137,7 @@
                             }
                         );
                     } else {
-                        DanceGroupsService.updateDanceGroup(danceGroupData).then(
+                        DanceGroupsService.editDanceGroup(group.id, danceGroupData).then(
                             function () {
                                 $scope.danceGroupsList.reload();
                             },
