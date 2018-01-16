@@ -13,6 +13,7 @@
         var service = {
             getLookup: getLookupDanceGroups,
             getDanceGroups: getFilteredDanceGroups,
+            getDanceGroup: getDanceGroup,
             createDanceGroup: createDanceGroup,
             editDanceGroup: editDanceGroup,
             deleteDanceGroup: deleteDanceGroup
@@ -27,6 +28,11 @@
 
         function getFilteredDanceGroups(filter) {
             var url = WebApiBaseUrl + urlRoot + '/filtered?nd=' + Date.now();
+            return $http.post(url, filter);
+        }
+
+        function getDanceGroup(id) {
+            var url = WebApiBaseUrl + urlRoot + '/' + id + '?nd=' + Date.now();
             return $http.post(url, filter);
         }
 

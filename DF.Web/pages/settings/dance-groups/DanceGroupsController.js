@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('DanceGroupsController', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$http', '$q', '$uibModal', 'WebApiBaseUrl', 'NgTableParams', 'DanceGroupsService', 'toastr'];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$http', '$q', '$uibModal', 'WebApiBaseUrl', 'NgTableParams', 'DanceGroupsService', 'AuthenticationService', 'toastr'];
 
-    function ctrlFn($rootScope, $scope, $http, $q, $uibModal, WebApiBaseUrl, NgTableParams, DanceGroupsService, toastr) {
+    function ctrlFn($rootScope, $scope, $http, $q, $uibModal, WebApiBaseUrl, NgTableParams, DanceGroupsService, AuthenticationService, toastr) {
         // set active menu item
         $("#left-panel nav ul li").removeClass("active");
         $("#menuDanceGroups").addClass("active");
@@ -55,7 +55,7 @@
         // filter
         $scope.applyFilter = function () {
             if (!_.isEmpty($scope.filter.DanceGroupName) && $scope.filter.DanceGroupName !== '') {
-                $scope.danceGroupList.reload();
+                $scope.danceGroupsList.reload();
             }
         };
 
