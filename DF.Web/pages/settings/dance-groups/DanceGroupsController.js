@@ -81,19 +81,36 @@
             $scope.openDialog({ id: -1 });
         };
 
-        $scope.edit = function (tax) {
-            $scope.openDialog(tax);
+        $scope.edit = function (group) {
+            $scope.openDialog(group);
         };
 
-        $scope.delete = function (tax) {
-            DanceGroupsService.deleteDanceGroup(group.DanceGroupID).then(
-                function () {
-                    $scope.danceGroupsList.reload();
+        $scope.delete = function (group) {
+            bootbox.confirm({
+                message: 'Da li ste sigurni?',
+                buttons: {
+                    confirm: {
+                        label: 'Da',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: 'Ne',
+                        className: 'btn-default'
+                    }
                 },
-                function (error) {
-                    toastr.warning('Grupa se ne može obrisati jer se koristi.');
+                callback: function (result) {
+                    if (result) {
+                        DanceGroupsService.deleteDanceGroup(group.DanceGroupID).then(
+                            function () {
+                                $scope.danceGroupsList.reload();
+                            },
+                            function (error) {
+                                toastr.warning('Grupa se ne može obrisati jer se koristi.');
+                            }
+                        );
+                    }
                 }
-            );
+            });
         };
 
         //#region Dialog
