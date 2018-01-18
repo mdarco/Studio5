@@ -24,7 +24,7 @@
                 return settings.AutocompleteFn(query);
             } else {
                 var filteredTags = _.filter($scope.allTags, function (tag) {
-                    if (tag.TagName.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+                    if (tag[settings.DisplayProperty].toLowerCase().indexOf(query.toLowerCase()) > -1) {
                         return true;
                     } else {
                         return false;

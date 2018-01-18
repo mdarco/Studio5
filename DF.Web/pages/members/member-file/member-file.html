@@ -194,7 +194,28 @@
                     </uib-tab>
 
                     <uib-tab index="1" heading="Grupe">
-                        Work in progress..
+                        <div style="padding: 30px">
+                            <p style="font-variant:small-caps; margin-left: 10px" ng-show="showDanceGroups === false">nije izabrana nijedna grupa.</p>
+
+                            <br />
+
+                            <button class="btn btn-sm btn-success" ng-click="selectDanceGroups()"><i class="fa fa-plus"></i>  Izaberi grupe</button>
+
+                            <br /><br />
+
+                            <table ng-show="showDanceGroups === true" class="table table-condensed table-hover table-responsive table-striped" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>Naziv</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="group in danceGroups">
+                                        <td>{{ group.Name }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </uib-tab>
 
                     <uib-tab index="2" heading="Selekcije">

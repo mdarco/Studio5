@@ -207,5 +207,59 @@
         };
 
         //#endregion
+
+        //#region Dance groups
+
+        $scope.danceGroups = [];
+        $scope.showDanceGroups = false;
+
+        $scope.selectDanceGroups = function () {
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/common/tags-dialog/tags-dialog.html',
+                controller: 'TagsDialogController',
+                resolve: {
+                    settings: function () {
+                        return {
+                            DisplayTitle: 'Grupe',
+                            LabelTitle: 'Izaberite grupe',
+                            DisplayProperty: 'Name',
+                            KeyProperty: 'ID',
+                            AddFromAutocompleteOnly: true
+                        };
+                    },
+                    allTags: function (DanceGroupsService) {
+                        return DanceGroupsService.getLookup();
+                    },
+                    tags: function () {
+                        return angular.copy($scope.danceGroups);
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            dialog.result.then(
+                function (danceGroups) {
+                    // save doc tags to DB
+                    //DocumentsService.insertTags(fileDoc.DocumentID, tags).then(
+                    //    function () {
+                    //        toastr.success('Atributi uspešno ažurirani.');
+                    //        fileDoc.Tags = tags;
+                    //    },
+                    //    function (error) {
+                    //        toastr.error('Došlo je do greške na serveru prilikom ažuriranja atributa.');
+                    //    }
+                    //);
+                },
+                function () {
+                    // modal dismissed => do nothing
+                }
+            );
+        };
+
+        //#endregion
     }
 })();

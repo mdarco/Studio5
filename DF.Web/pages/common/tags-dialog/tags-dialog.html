@@ -4,8 +4,8 @@
 
 <div class="modal-body" style="min-height: 300px;">
     <label class="control-label">{{ settings.LabelTitle }}</label>
-    <tags-input ng-model="tags" display-property="TagName" palceholder="" spellcheck="false">
-        <auto-complete source="loadTags($query)" select-first-match="false"></auto-complete>
+    <tags-input ng-model="tags" display-property="{{ settings.DisplayProperty }}" key-property="{{ settings.KeyProperty }}" add-from-autocomplete-only="{{ settings.AddFromAutocompleteOnly }}" placeholder="" spellcheck="false">
+        <auto-complete source="loadTags($query)" select-first-match="false" load-on-down-arrow="true" load-on-empty="true"></auto-complete>
     </tags-input>
 </div>
 
