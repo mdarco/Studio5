@@ -130,7 +130,7 @@ tags-input .autocomplete .suggestion-list {
   padding: 0;
   list-style-type: none;
   max-height: 280px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   position: relative;
 }
 tags-input .autocomplete .suggestion-item {
