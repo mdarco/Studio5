@@ -123,6 +123,42 @@
                     );
                     break;
 
+                case 'BirthPlace':
+                    openTextFieldDialog($scope.member.BirthPlace).then(
+                        function (result) {
+                            MembersService.edit(member.MemberID, { BirthPlace: result }).then(
+                                function () {
+                                    if (AppParams.DEBUG) {
+                                        toastr.success('Plesač uspešno ažuriran.');
+                                    }
+                                    $scope.member.BirthPlace = result;
+                                },
+                                function (error) {
+                                    toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                                }
+                            );
+                        }
+                    );
+                    break;
+
+                case 'Address':
+                    openTextFieldDialog($scope.member.ContactData.Address).then(
+                        function (result) {
+                            MembersService.edit(member.MemberID, { ContactData: { Address: result } }).then(
+                                function () {
+                                    if (AppParams.DEBUG) {
+                                        toastr.success('Plesač uspešno ažuriran.');
+                                    }
+                                    $scope.member.ContactData.Address = result;
+                                },
+                                function (error) {
+                                    toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                                }
+                            );
+                        }
+                    );
+                    break;
+
                 default:
                     alert('Work in progress..');
                     break;

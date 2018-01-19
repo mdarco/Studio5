@@ -218,9 +218,14 @@ namespace DF.DB
         {
             using (var ctx = new DFAppEntities())
             {
-                var existing = ctx.Members.FirstOrDefault(x => x.MemberID == id);
+                var existing = ctx.Members.Include(t => t.ContactData).FirstOrDefault(x => x.MemberID == id);
                 if (existing != null)
                 {
+                    if (!string.IsNullOrEmpty(model.JMBG))
+                    {
+                        existing.JMBG = model.JMBG;
+                    }
+
                     if (model.BirthDate.HasValue)
                     {
                         existing.BirthDate = model.BirthDate;
@@ -249,11 +254,6 @@ namespace DF.DB
                     if (model.ContactData != null && !string.IsNullOrEmpty(model.ContactData.Email))
                     {
                         existing.ContactData.Email = model.ContactData.Email;
-                    }
-
-                    if (model.ContactData != null && !string.IsNullOrEmpty(model.ContactData.Address))
-                    {
-                        existing.ContactData.Address = model.ContactData.Address;
                     }
 
                     if (model.ContactData != null && !string.IsNullOrEmpty(model.ContactData.Phone1))
