@@ -48,6 +48,7 @@
     <Compile Include="FileModel.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="LookupModel.cs" />
+    <Compile Include="MemberDanceGroupModel.cs" />
     <Compile Include="MemberDocumentModel.cs" />
     <Compile Include="MemberFilterModel.cs" />
     <Compile Include="MemberModel.cs" />

@@ -193,7 +193,7 @@
                         </div>
                     </uib-tab>
 
-                    <uib-tab index="1" heading="Grupe">
+                    <uib-tab index="1" heading="Grupe" select="getDanceGroups()">
                         <div style="padding: 30px">
                             <p style="font-variant:small-caps; margin-left: 10px" ng-show="showDanceGroups === false">nije izabrana nijedna grupa.</p>
 
@@ -211,7 +211,7 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="group in danceGroups">
-                                        <td>{{ group.Name }}</td>
+                                        <td>{{ group.DanceGroupName }}</td>
                                     </tr>
                                 </tbody>
                             </table>

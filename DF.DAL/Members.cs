@@ -364,5 +364,59 @@ namespace DF.DB
         }
 
         #endregion
+
+        #region Dance groups
+
+        public static List<DanceGroupModel> GetDanceGroups(int id)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                return ctx.DanceGroupMembers
+                            .Include("DanceGroups.Lookup_AgeCategories")
+                            .Where(md => md.MemberID == id)
+                            .Select(x =>
+                                new DanceGroupModel()
+                                {
+                                    DanceGroupID = x.DanceGroupID,
+                                    DanceGroupName = x.DanceGroups.DanceGroupName,
+                                    DanceGroupDesc = x.DanceGroups.DanceGroupDesc,
+                                    AgeCategoryID = x.DanceGroups.AgeCategoryID,
+                                    AgeCategory = x.DanceGroups.Lookup_AgeCategories.Name
+                                }
+                            )
+                            .OrderByDescending(d => d.DanceGroupName)
+                            .ToList();
+            }
+        }
+
+        public static void UpdateDanceGroups(int id, List<MemberDanceGroupModel> danceGroups)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var member = ctx.Members.Include(t => t.DanceGroupMembers).FirstOrDefault(m => m.MemberID == id);
+                if (member != null)
+                {
+                    if (member.DanceGroupMembers != null && member.DanceGroupMembers.Count() > 0)
+                    {
+                        for (int i = member.DanceGroupMembers.Count() - 1; i >= 0; i--)
+                        {
+                            ctx.DanceGroupMembers.Remove(member.DanceGroupMembers.ElementAt(i));
+                        }
+                    }
+
+                    foreach (var danceGroupModel in danceGroups)
+                    {
+                        DBModel.DanceGroupMembers memberGroup = new DanceGroupMembers();
+                        memberGroup.MemberID = id;
+                        memberGroup.DanceGroupID = danceGroupModel.DanceGroupID;
+                        ctx.DanceGroupMembers.Add(memberGroup);
+                    }
+
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
+        #endregion
     }
 }

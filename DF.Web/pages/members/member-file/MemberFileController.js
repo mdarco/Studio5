@@ -213,6 +213,27 @@
         $scope.danceGroups = [];
         $scope.showDanceGroups = false;
 
+        $scope.getDanceGroups = function () {
+            MembersService.getDanceGroups(member.MemberID).then(
+                function (result) {
+                    if (result && result.data) {
+                        $scope.danceGroups = result.data;
+
+                        if (AppParams.DEBUG) {
+                            toastr.success('Grupe uspešno učitane.');
+                        }
+
+                        $scope.showDanceGroups = ($scope.danceGroups.length > 0);
+                    }
+                },
+                function (error) {
+                    toastr.error('Došlo je do greške na serveru prilikom preuzimanja grupa.');
+                    $scope.danceGroups = [];
+                    $scope.showDanceGroups = false;
+                }
+            );
+        };
+
         $scope.selectDanceGroups = function () {
             var dialogOpts = {
                 backdrop: 'static',
@@ -243,16 +264,22 @@
 
             dialog.result.then(
                 function (danceGroups) {
-                    // save doc tags to DB
-                    //DocumentsService.insertTags(fileDoc.DocumentID, tags).then(
-                    //    function () {
-                    //        toastr.success('Atributi uspešno ažurirani.');
-                    //        fileDoc.Tags = tags;
-                    //    },
-                    //    function (error) {
-                    //        toastr.error('Došlo je do greške na serveru prilikom ažuriranja atributa.');
-                    //    }
-                    //);
+                    var model = _.map(danceGroups, function (item) {
+                        return {
+                            MemberID: member.MemberID,
+                            DanceGroupID: item.ID
+                        };
+                    });
+
+                    MembersService.updateDanceGroups(member.MemberID, model).then(
+                        function () {
+                            toastr.success('Grupe uspešno ažurirane.');
+                            $scope.getDanceGroups();
+                        },
+                        function (error) {
+                            toastr.error('Došlo je do greške na serveru prilikom ažuriranja grupa.');
+                        }
+                    );
                 },
                 function () {
                     // modal dismissed => do nothing

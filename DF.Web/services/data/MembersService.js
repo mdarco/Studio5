@@ -17,7 +17,10 @@
             edit: editMember,
 
             getDocuments: getDocuments,
-            addDocument: addDocument
+            addDocument: addDocument,
+
+            getDanceGroups: getDanceGroups,
+            updateDanceGroups: updateDanceGroups
         };
 
         return service;
@@ -51,6 +54,20 @@
 
         function addDocument(model) {
             var url = WebApiBaseUrl + urlRoot + '/' + model.MemberID + '/documents';
+            return $http.post(url, model);
+        }
+
+        //#endregion
+
+        //#region Dance groups
+
+        function getDanceGroups(id) {
+            var url = WebApiBaseUrl + urlRoot + '/' + id + '/dance-groups?nd=' + Date.now();
+            return $http.get(url);
+        }
+
+        function updateDanceGroups(id, model) {
+            var url = WebApiBaseUrl + urlRoot + '/' + id + '/dance-groups';
             return $http.post(url, model);
         }
 

@@ -93,5 +93,35 @@ namespace DF.Api.Controllers
         }
 
         #endregion
+
+        #region Dance groups
+
+        [Route("{id}/dance-groups")]
+        [HttpGet]
+        public List<DanceGroupModel> GetDanceGroups(int id)
+        {
+            return DB.Members.GetDanceGroups(id);
+        }
+
+        [Route("{id}/dance-groups")]
+        [HttpPost]
+        public void UpdateDanceGroups(int id, List<MemberDanceGroupModel> model)
+        {
+            try
+            {
+                DB.Members.UpdateDanceGroups(id, model);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(
+                    new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.Forbidden,
+                        ReasonPhrase = ex.Message
+                    });
+            }
+        }
+
+        #endregion
     }
 }
