@@ -123,6 +123,24 @@
                     );
                     break;
 
+                case 'BirthDate':
+                    openDateFieldDialog(UtilityService.convertISODateStringToDate($scope.member.BirthDate)).then(
+                        function (result) {
+                            MembersService.edit(member.MemberID, { BirthDate: result }).then(
+                                function () {
+                                    if (AppParams.DEBUG) {
+                                        toastr.success('Plesač uspešno ažuriran.');
+                                    }
+                                    $scope.member.BirthDate = UtilityService.convertISODateStringToDate(result);
+                                },
+                                function (error) {
+                                    toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                                }
+                            );
+                        }
+                    );
+                    break;
+
                 case 'BirthPlace':
                     openTextFieldDialog($scope.member.BirthPlace).then(
                         function (result) {
@@ -435,6 +453,29 @@
                     settings: function () {
                         return {
                             FieldValue: text
+                        };
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            return dialog.result;
+        }
+
+        function openDateFieldDialog(date) {
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/common/date-dialog/date-dialog.html',
+                controller: 'DateDialogController',
+                resolve: {
+                    settings: function () {
+                        return {
+                            DisplayTitle: 'Datum rođenja',
+                            LabelTitle: 'Izaberite datum rođenja',
+                            DateValue: date
                         };
                     }
                 }

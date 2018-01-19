@@ -10,7 +10,7 @@
     function ctrlFn($scope, $uibModalInstance, toastr, settings) {
         $scope.viewSettings = settings;
 
-        $scope.dateObj = {};
+        $scope.dateObj = { Value: '' };
 
         if (settings.DateValue) {
             $scope.dateObj.Value = settings.DateValue;
@@ -23,7 +23,7 @@
                 return;
             }
 
-            $uibModalInstance.close($scope.dateObj);
+            $uibModalInstance.close($scope.dateObj.Value.getFullYear() + '-' + ($scope.dateObj.Value.getMonth() + 1) + '-' + $scope.dateObj.Value.getDate() + 'T00:00:00');
         };
 
         $scope.close = function () {
