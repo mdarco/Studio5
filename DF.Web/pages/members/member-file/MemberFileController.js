@@ -255,7 +255,14 @@
                         return DanceGroupsService.getLookup();
                     },
                     tags: function () {
-                        return angular.copy($scope.danceGroups);
+                        var selectedDanceGroups = _.map($scope.danceGroups, function (item) {
+                            return {
+                                ID: item.DanceGroupID,
+                                Name: item.DanceGroupName
+                            };
+                        });
+
+                        return angular.copy(selectedDanceGroups);
                     }
                 }
             };
