@@ -159,6 +159,78 @@
                     );
                     break;
 
+                case 'Email':
+                    openTextFieldDialog($scope.member.ContactData.Email).then(
+                        function (result) {
+                            MembersService.edit(member.MemberID, { ContactData: { Email: result } }).then(
+                                function () {
+                                    if (AppParams.DEBUG) {
+                                        toastr.success('Plesač uspešno ažuriran.');
+                                    }
+                                    $scope.member.ContactData.Email = result;
+                                },
+                                function (error) {
+                                    toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                                }
+                            );
+                        }
+                    );
+                    break;
+
+                case 'Phone1':
+                    openTextFieldDialog($scope.member.ContactData.Phone1).then(
+                        function (result) {
+                            MembersService.edit(member.MemberID, { ContactData: { Phone1: result } }).then(
+                                function () {
+                                    if (AppParams.DEBUG) {
+                                        toastr.success('Plesač uspešno ažuriran.');
+                                    }
+                                    $scope.member.ContactData.Phone1 = result;
+                                },
+                                function (error) {
+                                    toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                                }
+                            );
+                        }
+                    );
+                    break;
+
+                case 'Phone2':
+                    openTextFieldDialog($scope.member.ContactData.Phone2).then(
+                        function (result) {
+                            MembersService.edit(member.MemberID, { ContactData: { Phone2: result } }).then(
+                                function () {
+                                    if (AppParams.DEBUG) {
+                                        toastr.success('Plesač uspešno ažuriran.');
+                                    }
+                                    $scope.member.ContactData.Phone2 = result;
+                                },
+                                function (error) {
+                                    toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                                }
+                            );
+                        }
+                    );
+                    break;
+
+                case 'Phone3':
+                    openTextFieldDialog($scope.member.ContactData.Phone3).then(
+                        function (result) {
+                            MembersService.edit(member.MemberID, { ContactData: { Phone3: result } }).then(
+                                function () {
+                                    if (AppParams.DEBUG) {
+                                        toastr.success('Plesač uspešno ažuriran.');
+                                    }
+                                    $scope.member.ContactData.Phone3 = result;
+                                },
+                                function (error) {
+                                    toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                                }
+                            );
+                        }
+                    );
+                    break;
+
                 default:
                     alert('Work in progress..');
                     break;
