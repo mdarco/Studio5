@@ -159,6 +159,25 @@
                     );
                     break;
 
+                case 'AgeCategory':
+                    openComboFieldDialog($scope.member.AgeCategoryID).then(
+                        function (result) {
+                            MembersService.edit(member.MemberID, { AgeCategoryID: result.Value }).then(
+                                function () {
+                                    if (AppParams.DEBUG) {
+                                        toastr.success('Plesač uspešno ažuriran.');
+                                    }
+                                    $scope.member.AgeCategoryID = result.Value;
+                                    $scope.member.AgeCategory = result.ValueText;
+                                },
+                                function (error) {
+                                    toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                                }
+                            );
+                        }
+                    );
+                    break;
+
                 case 'Address':
                     openTextFieldDialog($scope.member.ContactData.Address).then(
                         function (result) {
@@ -477,6 +496,37 @@
                             LabelTitle: 'Izaberite datum rođenja',
                             DateValue: date
                         };
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            return dialog.result;
+        }
+
+        function openComboFieldDialog(value) {
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/common/combo-dialog/combo-dialog.html',
+                controller: 'ComboDialogController',
+                resolve: {
+                    settings: function () {
+                        return {
+                            DisplayTitle: 'Uzrast',
+                            ComboLabel: 'Izaberite uzrast',
+                            FieldMappings: {
+                                idField: 'ID',
+                                displayTextField: 'Name'
+                            },
+                            HideNote: true,
+                            ComboValue: value
+                        };
+                    },
+                    comboValues: function (LookupsService) {
+                        return LookupsService.getAgeCategories();
                     }
                 }
             };
