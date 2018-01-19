@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('MemberFileController', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$timeout', '$uibModal', 'MembersService', 'DocumentsService', 'UtilityService', 'AuthenticationService', 'WebApiBaseUrl', 'toastr', 'AppParams', 'member'];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$q', '$location', '$timeout', '$uibModal', 'MembersService', 'DocumentsService', 'UtilityService', 'AuthenticationService', 'WebApiBaseUrl', 'toastr', 'AppParams', 'member'];
 
-    function ctrlFn($rootScope, $scope, $location, $timeout, $uibModal, MembersService, DocumentsService, UtilityService, AuthenticationService, WebApiBaseUrl, toastr, AppParams, member) {
+    function ctrlFn($rootScope, $scope, $q, $location, $timeout, $uibModal, MembersService, DocumentsService, UtilityService, AuthenticationService, WebApiBaseUrl, toastr, AppParams, member) {
         // set active menu item
         $("#left-panel nav ul li").removeClass("active");
         $("#menuHome").addClass("active");
@@ -101,6 +101,24 @@
                         },
                         function (error) {
                             toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                        }
+                    );
+                    break;
+
+                case 'JMBG':
+                    openTextFieldDialog($scope.member.JMBG).then(
+                        function (result) {
+                            MembersService.edit(member.MemberID, { JMBG: result }).then(
+                                function () {
+                                    if (AppParams.DEBUG) {
+                                        toastr.success('Plesač uspešno ažuriran.');
+                                    }
+                                    $scope.member.JMBG = result;
+                                },
+                                function (error) {
+                                    toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                                }
+                            );
                         }
                     );
                     break;
@@ -293,6 +311,31 @@
                 }
             );
         };
+
+        //#endregion
+
+        //#region Helpers
+
+        function openTextFieldDialog(text) {
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/common/text-field-dialog/text-field-dialog.html',
+                controller: 'TextFieldDialogController',
+                resolve: {
+                    settings: function () {
+                        return {
+                            FieldValue: text
+                        };
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            return dialog.result;
+        }
 
         //#endregion
     }
