@@ -18,11 +18,12 @@ namespace DF.DB
             using (var ctx = new DFAppEntities())
             {
                 return ctx.DanceGroups
+                        .Include(t => t.Lookup_AgeCategories)
                         .Select(x =>
                             new LookupModel()
                             {
                                 ID = x.DanceGroupID,
-                                Name = x.DanceGroupName
+                                Name = x.DanceGroupName + " (" + x.Lookup_AgeCategories.Name + ")"
                             }
                         )
                         .OrderBy(lkp => lkp.Name)

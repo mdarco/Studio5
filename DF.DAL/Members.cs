@@ -378,7 +378,7 @@ namespace DF.DB
                                 new DanceGroupModel()
                                 {
                                     DanceGroupID = x.DanceGroupID,
-                                    DanceGroupName = x.DanceGroups.DanceGroupName,
+                                    DanceGroupName = x.DanceGroups.DanceGroupName + " (" + x.DanceGroups.Lookup_AgeCategories.Name + ")",
                                     DanceGroupDesc = x.DanceGroups.DanceGroupDesc,
                                     AgeCategoryID = x.DanceGroups.AgeCategoryID,
                                     AgeCategory = x.DanceGroups.Lookup_AgeCategories.Name
