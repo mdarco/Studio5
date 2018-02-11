@@ -370,7 +370,33 @@
         };
 
         $scope.deleteDocument = function (doc) {
-            alert('Deleting doc ID: ' + doc.DocumentID);
+            bootbox.confirm({
+                message: "Da li ste sigurni?",
+                buttons: {
+                    confirm: {
+                        label: 'Da',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'Ne',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        // delete doc
+                        MembersService.deleteDocument($scope.member.MemberID, doc).then(
+                            () => {
+                                toastr.success('Dokument uspešno obrisan.');
+                                $scope.getDocuments();
+                            },
+                            (error) => {
+                                toastr.error('Došlo je do greške prilikom brisanja dokumenta.');
+                            }
+                        );
+                    }
+                }
+            });
         };
 
         //#endregion

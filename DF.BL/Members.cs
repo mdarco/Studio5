@@ -29,5 +29,17 @@ namespace DF.BL
                 throw ex;
             }
         }
+
+        public static void DeleteDocument(int documentID)
+        {
+            var docModel = DB.Members.GetIndividualDocument(documentID);
+            if (docModel != null)
+            {
+                string docPath = string.Format("{0}{1}.tim", Documents.GetPhysicalPath(), docModel.DocumentPath);
+
+                DB.Members.DeleteDocument(documentID);
+                File.Delete(docPath);
+            }
+        }
     }
 }

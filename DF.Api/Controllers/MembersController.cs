@@ -94,11 +94,11 @@ namespace DF.Api.Controllers
 
         [Route("{id}/documents/{documentID}")]
         [HttpDelete]
-        public void DeleteDocument(int documentID)
+        public void DeleteDocument(int id, int documentID)
         {
             try
             {
-                DB.Members.DeleteDocument(documentID);
+                BL.Members.DeleteDocument(documentID);
             }
             catch (Exception ex)
             {

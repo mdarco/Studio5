@@ -321,6 +321,28 @@ namespace DF.DB
             }
         }
 
+        public static DocumentModel GetIndividualDocument(int id)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var doc = ctx.Documents.FirstOrDefault(d => d.DocumentID == id);
+                if (doc != null)
+                {
+                    return new DocumentModel()
+                    {
+                        CreatedByUserID = doc.CreatedByUserID,
+                        CreationDate = doc.CreationDate,
+                        DocumentCodedName = doc.DocumentCodedName,
+                        DocumentFileName = doc.DocumentFileName,
+                        DocumentFileExtension = doc.DocumentFileExtension,
+                        DocumentPath = doc.DocumentPath
+                    };
+                }
+
+                return null;
+            }
+        }
+
         public static void InsertDocument(int id, DocumentModel docModel)
         {
             using (var ctx = new DFAppEntities())
@@ -369,7 +391,8 @@ namespace DF.DB
             {
                 var memberDocs = ctx.MemberDocuments
                                 .Include(t => t.Documents)
-                                .Where(x => x.DocumentID == id);
+                                .Where(x => x.DocumentID == id)
+                                .ToList();
 
                 for (int i = memberDocs.Count() - 1; i >= 0; i--)
                 {

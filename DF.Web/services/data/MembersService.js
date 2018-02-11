@@ -58,8 +58,8 @@
             return $http.post(url, model);
         }
 
-        function deleteDocument(documentID) {
-            var url = WebApiBaseUrl + urlRoot + '/' + model.MemberID + '/documents/' + documentID;
+        function deleteDocument(memberID, doc) {
+            var url = WebApiBaseUrl + urlRoot + '/' + memberID + '/documents/' + doc.DocumentID;
             return $http.delete(url);
         }
 
