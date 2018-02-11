@@ -369,6 +369,10 @@
             );
         };
 
+        $scope.deleteDocument = function (doc) {
+            alert('Deleting doc ID: ' + doc.DocumentID);
+        };
+
         //#endregion
 
         //#region Dance groups

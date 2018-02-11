@@ -92,6 +92,25 @@ namespace DF.Api.Controllers
             }
         }
 
+        [Route("{id}/documents/{documentID}")]
+        [HttpDelete]
+        public void DeleteDocument(int documentID)
+        {
+            try
+            {
+                DB.Members.DeleteDocument(documentID);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(
+                    new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.Forbidden,
+                        ReasonPhrase = ex.Message
+                    });
+            }
+        }
+
         #endregion
 
         #region Dance groups

@@ -363,6 +363,27 @@ namespace DF.DB
             }
         }
 
+        public static void DeleteDocument(int id)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var memberDocs = ctx.MemberDocuments
+                                .Include(t => t.Documents)
+                                .Where(x => x.DocumentID == id);
+
+                for (int i = memberDocs.Count() - 1; i >= 0; i--)
+                {
+                    var memberDoc = memberDocs.ElementAt(i);
+                    var doc = memberDoc.Documents;
+
+                    ctx.MemberDocuments.Remove(memberDoc);
+                    ctx.Documents.Remove(doc);
+                }
+
+                ctx.SaveChanges();
+            }
+        }
+
         #endregion
 
         #region Dance groups

@@ -181,6 +181,7 @@
                                         <td>{{ doc.Metadata.ExpiryDate | date: 'dd.MM.yyyy' }}</td>
                                         <td>
                                             <a class="btn btn-success btn-xs pull-right margin-right-5" title="Preuzmi/štampaj dokument" ng-href="{{ webApiBaseUrl }}/api/documents/{{ doc.DocumentID }}/download"><i class="fa fa-download"></i></a>
+                                            <button class="btn btn-danger btn-xs pull-right margin-right-5" title="Brisanje dokumenta" ng-click="deleteDocument(doc)"><i class="fa fa-times"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>

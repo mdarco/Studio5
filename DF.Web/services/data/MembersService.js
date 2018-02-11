@@ -18,6 +18,7 @@
 
             getDocuments: getDocuments,
             addDocument: addDocument,
+            deleteDocument: deleteDocument,
 
             getDanceGroups: getDanceGroups,
             updateDanceGroups: updateDanceGroups
@@ -55,6 +56,11 @@
         function addDocument(model) {
             var url = WebApiBaseUrl + urlRoot + '/' + model.MemberID + '/documents';
             return $http.post(url, model);
+        }
+
+        function deleteDocument(documentID) {
+            var url = WebApiBaseUrl + urlRoot + '/' + model.MemberID + '/documents/' + documentID;
+            return $http.delete(url);
         }
 
         //#endregion
