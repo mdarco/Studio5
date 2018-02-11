@@ -82,6 +82,7 @@
                                 <div>{{ member.ContactData.Phone2 }}</div>
                                 <div>{{ member.ContactData.Phone3 }}</div>
                             </td>
+                            <td data-title="'Status'" header-class="''" style="text-align: center;"><span ng-class="member.IsActive ? 'label label-success' :'label label-danger'">{{ member.IsActive ? 'Aktivan' : 'Neaktivan' }}</span></td>
                             <td header-class="''">
                                 <button class="btn btn-primary btn-xs" style="float: right; margin-left: 5px;" title="Dosije plesača" ng-click="openMemberDossier(member)">Dosije</button>
                             </td>
