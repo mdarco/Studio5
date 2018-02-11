@@ -28,6 +28,12 @@
         $scope.danceSelections = danceSelections;
         $scope.events = events;
 
+        $scope.statuses = [
+            { ID: 'all', Name: 'Svi' },
+            { ID: 'active', Name: 'Aktivni' }//,
+            //{ ID: 'inactive', Name: 'Neaktivni' }
+        ];
+
         //#region Filter members
 
         $scope.totalRecords = 0;
@@ -55,6 +61,8 @@
 
                     $scope.filter.PageNo = params.page();
                     $scope.filter.RecordsPerPage = params.count();
+
+                    resolveStatusFilter();
 
                     return MembersService.getFiltered($scope.filter).then(
                         function (result) {
@@ -95,6 +103,28 @@
             $scope.totalRecords = 0;
             $scope.membersTableParams.data = {};
         };
+
+        function resolveStatusFilter() {
+            if (!$scope.filter.Status) {
+                $scope.filter.ExcludeNonActive = false;
+                return;
+            }
+
+            switch ($scope.filter.Status.toLowerCase()) {
+                case '':
+                case 'all':
+                    $scope.filter.ExcludeNonActive = false;
+                    break;
+
+                case 'active':
+                    $scope.filter.ExcludeNonActive = true;
+                    break;
+
+                default:
+                    $scope.filter.ExcludeNonActive = false;
+                    break;
+            }
+        }
 
         //#endregion
 
