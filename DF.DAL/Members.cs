@@ -465,7 +465,67 @@ namespace DF.DB
 
         #region Payments
 
+        public static List<MemberPaymentModel> GetMemberPayments(int id)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var payments = ctx.MemberPayments
+                                    .Include(t => t.Members.Lookup_AgeCategories)
+                                    .Include(t => t.Payments.MemberPaymentsForCompanions)
+                                    .Include(t => t.Payments.MemberPaymentInstallments)
+                                    .Where(p => p.MemberID == id);
 
+                return payments.Select(x =>
+                            new MemberPaymentModel()
+                            {
+                                PaymentID = x.PaymentID,
+                                Payment =
+                                    new PaymentModel()
+                                    {
+                                        Name = x.Payments.Name,
+                                        Description = x.Payments.Description,
+                                        Type = x.Payments.Type,
+                                        Amount = x.Payments.Amount,
+                                        AmountForCompanion = x.Payments.AmountForCompanion,
+                                        Currency = x.Payments.Currency,
+                                        NumberOfInstallments = x.Payments.NumberOfInstallments,
+                                        InstallmentAmounts = x.Payments.InstallmentAmounts,
+                                        InstallmentAmountsForCompanion = x.Payments.InstallmentAmountsForCompanion
+                                    },
+
+                                DiscountAmount = x.DiscountAmount,
+                                DiscountPercentage = x.DiscountPercentage,
+
+                                Companions = 
+                                    x.Payments.MemberPaymentsForCompanions.Select(c =>
+                                        new CompanionModel()
+                                        {
+                                            Name = c.CompanionName,
+                                            Phone = c.CompanionPhone,
+                                            Email = c.CompanionEmail
+                                        }
+                                    )
+                                    .ToList(),
+
+                                Installments 
+                                    = x.Payments.MemberPaymentInstallments.Select(i =>
+                                        new InstallmentModel()
+                                        {
+                                            ID = i.ID,
+                                            InstallmentDate = i.InstallmentDate,
+                                            Amount = (decimal)i.Amount,
+                                            IsPaid = i.IsPaid,
+                                            PaymentDate = i.PaymentDate,
+                                            Note = i.Note
+                                        }
+                                    )
+                                    .ToList()
+                            }
+                       )
+                       .OrderBy(p => p.Payment.Name)
+                       .ToList();
+            }
+        }
 
         #endregion
     }
