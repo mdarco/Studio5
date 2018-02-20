@@ -12,16 +12,14 @@ namespace DF.DB.DBModel
     using System;
     using System.Collections.Generic;
     
-    public partial class MemberPaymentItems
+    public partial class MemberPaymentInstallments
     {
         public int ID { get; set; }
         public int MemberID { get; set; }
         public int PaymentID { get; set; }
-        public System.DateTime DueDate { get; set; }
-        public System.DateTime PaymentDate { get; set; }
-        public decimal Amount { get; set; }
+        public System.DateTime InstallmentDate { get; set; }
         public bool IsPaid { get; set; }
-        public Nullable<int> InstallmentNo { get; set; }
+        public System.DateTime PaymentDate { get; set; }
         public string Note { get; set; }
     
         public virtual Members Members { get; set; }

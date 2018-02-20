@@ -14,13 +14,14 @@ namespace DF.DB.DBModel
     
     public partial class MemberPaymentsForCompanions
     {
+        public int ID { get; set; }
         public int MemberID { get; set; }
         public int PaymentID { get; set; }
         public string CompanionName { get; set; }
-        public decimal AmountForCompanion { get; set; }
-        public string Note { get; set; }
+        public string CompanionPhone { get; set; }
+        public string CompanionEmail { get; set; }
     
-        public virtual Payments Payments { get; set; }
         public virtual Members Members { get; set; }
+        public virtual Payments Payments { get; set; }
     }
 }

@@ -58,12 +58,8 @@ namespace DF.DB.DBModel
         public virtual DbSet<Lookup_EventTypes> Lookup_EventTypes { get; set; }
         public virtual DbSet<MemberDocuments> MemberDocuments { get; set; }
         public virtual DbSet<MemberImages> MemberImages { get; set; }
-        public virtual DbSet<MemberPaymentItems> MemberPaymentItems { get; set; }
-        public virtual DbSet<MemberPayments> MemberPayments { get; set; }
-        public virtual DbSet<MemberPaymentsForCompanions> MemberPaymentsForCompanions { get; set; }
         public virtual DbSet<Members> Members { get; set; }
         public virtual DbSet<Outfits> Outfits { get; set; }
-        public virtual DbSet<Payments> Payments { get; set; }
         public virtual DbSet<Performances> Performances { get; set; }
         public virtual DbSet<Periods> Periods { get; set; }
         public virtual DbSet<Permissions> Permissions { get; set; }
@@ -78,5 +74,9 @@ namespace DF.DB.DBModel
         public virtual DbSet<UserPermissions> UserPermissions { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<DocumentMetadata> DocumentMetadata { get; set; }
+        public virtual DbSet<MemberPaymentInstallments> MemberPaymentInstallments { get; set; }
+        public virtual DbSet<MemberPayments> MemberPayments { get; set; }
+        public virtual DbSet<MemberPaymentsForCompanions> MemberPaymentsForCompanions { get; set; }
+        public virtual DbSet<Payments> Payments { get; set; }
     }
 }

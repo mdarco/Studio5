@@ -17,6 +17,7 @@ namespace DF.DB.DBModel
         public int MemberID { get; set; }
         public int PaymentID { get; set; }
         public Nullable<int> DiscountPercentage { get; set; }
+        public Nullable<decimal> DiscountAmount { get; set; }
     
         public virtual Members Members { get; set; }
         public virtual Payments Payments { get; set; }

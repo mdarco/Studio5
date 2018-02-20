@@ -18,8 +18,8 @@ namespace DF.DB.DBModel
         public Events()
         {
             this.EventChoreographies = new HashSet<EventChoreographies>();
-            this.Payments = new HashSet<Payments>();
             this.Performances = new HashSet<Performances>();
+            this.Payments = new HashSet<Payments>();
         }
     
         public int EventID { get; set; }
@@ -35,8 +35,8 @@ namespace DF.DB.DBModel
         public virtual ICollection<EventChoreographies> EventChoreographies { get; set; }
         public virtual Lookup_EventTypes Lookup_EventTypes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payments> Payments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Performances> Performances { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Payments> Payments { get; set; }
     }
 }

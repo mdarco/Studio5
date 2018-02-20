@@ -22,11 +22,11 @@ namespace DF.DB.DBModel
             this.DanceSelectionMembers = new HashSet<DanceSelectionMembers>();
             this.MemberDocuments = new HashSet<MemberDocuments>();
             this.MemberImages = new HashSet<MemberImages>();
-            this.MemberPaymentItems = new HashSet<MemberPaymentItems>();
-            this.MemberPayments = new HashSet<MemberPayments>();
-            this.MemberPaymentsForCompanions = new HashSet<MemberPaymentsForCompanions>();
             this.Performances = new HashSet<Performances>();
             this.TrainingMemberPresenceRegistrations = new HashSet<TrainingMemberPresenceRegistrations>();
+            this.MemberPaymentInstallments = new HashSet<MemberPaymentInstallments>();
+            this.MemberPayments = new HashSet<MemberPayments>();
+            this.MemberPaymentsForCompanions = new HashSet<MemberPaymentsForCompanions>();
         }
     
         public int MemberID { get; set; }
@@ -54,15 +54,15 @@ namespace DF.DB.DBModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MemberImages> MemberImages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MemberPaymentItems> MemberPaymentItems { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MemberPayments> MemberPayments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MemberPaymentsForCompanions> MemberPaymentsForCompanions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Performances> Performances { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TrainingMemberPresenceRegistrations> TrainingMemberPresenceRegistrations { get; set; }
         public virtual Lookup_AgeCategories Lookup_AgeCategories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MemberPaymentInstallments> MemberPaymentInstallments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MemberPayments> MemberPayments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MemberPaymentsForCompanions> MemberPaymentsForCompanions { get; set; }
     }
 }

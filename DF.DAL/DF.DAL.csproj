@@ -179,7 +179,7 @@
     <Compile Include="DBModel\MemberImages.cs">
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBModel\MemberPaymentItems.cs">
+    <Compile Include="DBModel\MemberPaymentInstallments.cs">
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBModel\MemberPayments.cs">

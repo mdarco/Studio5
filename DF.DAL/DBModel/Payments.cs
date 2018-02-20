@@ -17,7 +17,7 @@ namespace DF.DB.DBModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Payments()
         {
-            this.MemberPaymentItems = new HashSet<MemberPaymentItems>();
+            this.MemberPaymentInstallments = new HashSet<MemberPaymentInstallments>();
             this.MemberPayments = new HashSet<MemberPayments>();
             this.MemberPaymentsForCompanions = new HashSet<MemberPaymentsForCompanions>();
         }
@@ -27,19 +27,22 @@ namespace DF.DB.DBModel
         public string Description { get; set; }
         public string Currency { get; set; }
         public string Type { get; set; }
-        public string RecurringType { get; set; }
         public decimal Amount { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> EndDate { get; set; }
+        public System.DateTime DueDate { get; set; }
+        public Nullable<System.DateTime> StopDate { get; set; }
+        public Nullable<int> NumberOfInstallments { get; set; }
+        public string InstallmentAmounts { get; set; }
+        public Nullable<decimal> AmountForCompanion { get; set; }
+        public string InstallmentAmountsForCompanion { get; set; }
         public bool Active { get; set; }
-        public int EventID { get; set; }
-        public int CostumeID { get; set; }
-        public int OutfitID { get; set; }
+        public Nullable<int> EventID { get; set; }
+        public Nullable<int> CostumeID { get; set; }
+        public Nullable<int> OutfitID { get; set; }
     
         public virtual Costumes Costumes { get; set; }
         public virtual Events Events { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MemberPaymentItems> MemberPaymentItems { get; set; }
+        public virtual ICollection<MemberPaymentInstallments> MemberPaymentInstallments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MemberPayments> MemberPayments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
