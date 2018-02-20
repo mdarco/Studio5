@@ -52,6 +52,39 @@ namespace DF.DB
             }
         }
 
+        public static PaymentModel GetPayment(int id)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var p = ctx.Payments.FirstOrDefault(x => x.ID == id);
+                if (p != null)
+                {
+                    return
+                        new PaymentModel()
+                        {
+                            ID = p.ID,
+                            Name = p.Name,
+                            Description = p.Description,
+                            Type = p.Type,
+                            Currency = p.Currency,
+                            Amount = p.Amount,
+                            DueDate = p.DueDate,
+                            StopDate = p.StopDate,
+                            NumberOfInstallments = p.NumberOfInstallments,
+                            InstallmentAmounts = p.InstallmentAmounts,
+                            AmountForCompanion = p.AmountForCompanion,
+                            InstallmentAmountsForCompanion = p.InstallmentAmountsForCompanion,
+                            Active = p.Active,
+                            EventID = p.EventID,
+                            CostumeID = p.CostumeID,
+                            OutfitID = p.OutfitID
+                        };
+                }
+
+                return null;
+            }
+        }
+
         public static void AddPayment(PaymentModel model)
         {
             using (var ctx = new DFAppEntities())

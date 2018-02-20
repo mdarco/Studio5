@@ -10,6 +10,8 @@ namespace DF.BL
 {
     public static class Members
     {
+        #region Documents
+
         public static void InsertDocument(MemberDocumentModel model)
         {
             DocumentModel docModel = Documents.ConvertMemberDocumentModelToDocModel(model);
@@ -41,5 +43,111 @@ namespace DF.BL
                 File.Delete(docPath);
             }
         }
+
+        #endregion
+
+        #region Payments
+
+        public static void AddMemberPayment(int memberID, MemberPaymentModel model)
+        {
+            // get payment info
+            var paymentInfo = DB.Payments.GetPayment(model.PaymentID);
+
+            // check discount
+            if (model.DiscountPercentage.HasValue)
+            {
+                model.DiscountAmount = paymentInfo.Amount * (1 - (model.DiscountPercentage / 100));
+            }
+
+            // generate installments
+            model.Installments = new List<InstallmentModel>();
+
+            if (paymentInfo.Type.ToUpper() == "ONE-TIME")
+            {
+                if (paymentInfo.NumberOfInstallments == 1)
+                {
+                    // full one-time payment => treated as one-time payment with only one installment
+                    decimal installmentAmount = model.DiscountAmount.HasValue ? (decimal)model.DiscountAmount : paymentInfo.Amount;
+                    if (model.Companions.Count() > 0)
+                    {
+                        foreach (var c in model.Companions)
+                        {
+                            installmentAmount += (decimal)paymentInfo.AmountForCompanion;
+                        }
+                    }
+
+                    var oneTimePayment = new InstallmentModel()
+                    {
+                        InstallmentDate = paymentInfo.DueDate,
+                        Amount = installmentAmount,
+                        IsPaid = false
+                    };
+
+                    model.Installments.Add(oneTimePayment);
+                }
+
+                if (paymentInfo.NumberOfInstallments > 1)
+                {
+                    // one-time payment with installments
+                    List<decimal> installmentAmounts = new List<decimal>();
+                    if (!string.IsNullOrEmpty(paymentInfo.InstallmentAmounts))
+                    {
+                        installmentAmounts = paymentInfo.InstallmentAmounts.Split(';').Select(x => decimal.Parse(x)).ToList();
+                    }
+                    else
+                    {
+                        for (int xx = 1; xx <= paymentInfo.NumberOfInstallments; xx++)
+                        {
+                            installmentAmounts.Add(paymentInfo.Amount / (int)paymentInfo.NumberOfInstallments);
+                        }
+                    }
+
+                    List<decimal> installmentAmountsForCompanion = new List<decimal>();
+                    if (model.Companions.Count() > 0)
+                    {
+                        if (!string.IsNullOrEmpty(paymentInfo.InstallmentAmountsForCompanion))
+                        {
+                            installmentAmountsForCompanion = paymentInfo.InstallmentAmountsForCompanion.Split(';').Select(x => decimal.Parse(x)).ToList();
+                        }
+                        else
+                        {
+                            for (int xx = 1; xx <= paymentInfo.NumberOfInstallments; xx++)
+                            {
+                                installmentAmountsForCompanion.Add((decimal)paymentInfo.AmountForCompanion / (int)paymentInfo.NumberOfInstallments);
+                            }
+                        }
+                    }
+
+                    decimal totalAmount = paymentInfo.Amount;
+                    if (model.DiscountPercentage.HasValue)
+                    {
+                        totalAmount = totalAmount * (1 - ((decimal)model.DiscountPercentage / 100));
+                        installmentAmounts = installmentAmounts.Select(x => x * (1 - ((decimal)model.DiscountPercentage / 100))).ToList();
+                    }
+
+                    for (int i = 0; i < paymentInfo.NumberOfInstallments; i++)
+                    {
+                        DateTime installmentDate = (i == 0) ? (DateTime)paymentInfo.DueDate : ((DateTime)paymentInfo.DueDate).AddMonths(i);
+
+                        decimal installmentAmount = installmentAmounts.ElementAt(i);
+                        foreach (var c in model.Companions)
+                        {
+                            installmentAmount += installmentAmountsForCompanion.ElementAt(i);
+                        }
+
+                        var installment = new InstallmentModel()
+                        {
+                            InstallmentDate = installmentDate,
+                            Amount = installmentAmount,
+                            IsPaid = false
+                        };
+
+                        model.Installments.Add(installment);
+                    }
+                }
+            }
+        }
+
+        #endregion
     }
 }

@@ -527,6 +527,34 @@ namespace DF.DB
             }
         }
 
+        public static List<InstallmentModel> GetMemberPaymentInstallments(int memberID, int paymentID)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var mp = ctx.MemberPaymentInstallments
+                                .Where(x => x.MemberID == memberID && x.PaymentID == paymentID);
+
+                if (mp != null)
+                {
+                    return mp.Select(x =>
+                                new InstallmentModel()
+                                {
+                                    ID = x.ID,
+                                    InstallmentDate = x.InstallmentDate,
+                                    Amount = (decimal)x.Amount,
+                                    IsPaid = x.IsPaid,
+                                    PaymentDate = x.PaymentDate,
+                                    Note = x.Note
+                                }
+                           )
+                           .OrderByDescending(i => i.InstallmentDate)
+                           .ToList();
+                }
+
+                return null;
+            }
+        }
+
         #endregion
     }
 }
