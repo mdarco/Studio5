@@ -51,5 +51,33 @@ namespace DF.DB
                 return null;
             }
         }
+
+        public static void AddPayment(PaymentModel model)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var p = new DBModel.Payments()
+                {
+                    Name = model.Name,
+                    Description = model.Description,
+                    Type = model.Type,
+                    Currency = model.Currency,
+                    Amount = model.Amount,
+                    DueDate = (DateTime)model.DueDate,
+                    StopDate = model.StopDate,
+                    NumberOfInstallments = model.NumberOfInstallments,
+                    InstallmentAmounts = model.InstallmentAmounts,
+                    AmountForCompanion = model.AmountForCompanion,
+                    InstallmentAmountsForCompanion = model.InstallmentAmountsForCompanion,
+                    Active = model.Active,
+                    EventID = model.EventID,
+                    CostumeID = model.CostumeID,
+                    OutfitID = model.OutfitID
+                };
+
+                ctx.Payments.Add(p);
+                ctx.SaveChanges();
+            }
+        }
     }
 }

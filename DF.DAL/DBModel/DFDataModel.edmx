@@ -328,6 +328,7 @@
           <Property Name="MemberID" Type="int" Nullable="false" />
           <Property Name="PaymentID" Type="int" Nullable="false" />
           <Property Name="InstallmentDate" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="15" Scale="5" />
           <Property Name="IsPaid" Type="bit" Nullable="false" />
           <Property Name="PaymentDate" Type="datetime" Nullable="false" />
           <Property Name="Note" Type="nvarchar" MaxLength="4000" />
@@ -3380,6 +3381,7 @@
           <Property Name="Note" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Members" Relationship="DFDataModel.FK_MemberPaymentItems_Members" FromRole="MemberPaymentInstallments" ToRole="Members" />
           <NavigationProperty Name="Payments" Relationship="DFDataModel.FK_MemberPaymentItems_Payments" FromRole="MemberPaymentInstallments" ToRole="Payments" />
+          <Property Name="Amount" Type="Decimal" Precision="15" Scale="5" />
         </EntityType>
         <EntityType Name="MemberPayments">
           <Key>
@@ -4043,6 +4045,7 @@
           <EntitySetMapping Name="MemberPaymentInstallments">
             <EntityTypeMapping TypeName="DFDataModel.MemberPaymentInstallments">
               <MappingFragment StoreEntitySet="MemberPaymentInstallments">
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
                 <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />

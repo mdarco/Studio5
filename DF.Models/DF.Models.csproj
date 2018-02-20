@@ -41,17 +41,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiTableResponseModel.cs" />
+    <Compile Include="CompanionModel.cs" />
     <Compile Include="ContactDataModel.cs" />
     <Compile Include="DanceGroupModel.cs" />
     <Compile Include="DocumentMetadataModel.cs" />
     <Compile Include="DocumentModel.cs" />
     <Compile Include="FileModel.cs" />
+    <Compile Include="InstallmentModel.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="LookupModel.cs" />
     <Compile Include="MemberDanceGroupModel.cs" />
     <Compile Include="MemberDocumentModel.cs" />
     <Compile Include="MemberFilterModel.cs" />
     <Compile Include="MemberModel.cs" />
+    <Compile Include="MemberPaymentModel.cs" />
     <Compile Include="PaymentFilter.cs" />
     <Compile Include="PaymentModel.cs" />
     <Compile Include="PermissionModel.cs" />
