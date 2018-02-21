@@ -62,11 +62,19 @@ namespace DF.BL
             // generate installments
             model.Installments = new List<InstallmentModel>();
 
-            if (paymentInfo.Type.ToUpper() == "ONE-TIME")
+            if (paymentInfo.Type.ToUpper() == "ONE-TIME" || paymentInfo.Type.ToUpper() == "MONTHLY")
             {
                 if (paymentInfo.NumberOfInstallments == 1)
                 {
-                    // full one-time payment => treated as one-time payment with only one installment
+                    /* 
+                     * FULL ONE-TIME PAYMENT - treated as one-time payment with only one installment
+                     * 
+                     * MONTHLY PAYMENTS - treated as full one-time payments
+                     * Recurring can go indefinitely if there is no stop date
+                     * Service agent is in charge of creating new monthly payments at the beginning of each month
+                     * 
+                     */
+
                     decimal installmentAmount = model.DiscountAmount.HasValue ? (decimal)model.DiscountAmount : paymentInfo.Amount;
                     if (model.Companions.Count() > 0)
                     {
@@ -88,7 +96,10 @@ namespace DF.BL
 
                 if (paymentInfo.NumberOfInstallments > 1)
                 {
-                    // one-time payment with installments
+                    /*
+                     * ONE-TIME PAYMENT WITH INSTALLMENTS
+                     */
+
                     List<decimal> installmentAmounts = new List<decimal>();
                     if (!string.IsNullOrEmpty(paymentInfo.InstallmentAmounts))
                     {
