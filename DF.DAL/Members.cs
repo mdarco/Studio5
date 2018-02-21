@@ -555,6 +555,52 @@ namespace DF.DB
             }
         }
 
+        public static void AddMemberPayment(int memberID, MemberPaymentModel model)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var member = ctx.Members.FirstOrDefault(m => m.MemberID == memberID);
+                if (member != null)
+                {
+                    MemberPayments memberPayment = new MemberPayments()
+                    {
+                        MemberID = memberID,
+                        PaymentID = model.PaymentID,
+                        DiscountPercentage = model.DiscountPercentage
+                    };
+                    ctx.MemberPayments.Add(memberPayment);
+
+                    foreach (var companion in model.Companions)
+                    {
+                        MemberPaymentsForCompanions companionPayment = new MemberPaymentsForCompanions()
+                        {
+                            MemberID = memberID,
+                            PaymentID = model.PaymentID,
+                            CompanionName = companion.Name,
+                            CompanionPhone = companion.Phone,
+                            CompanionEmail = companion.Email
+                        };
+                        ctx.MemberPaymentsForCompanions.Add(companionPayment);
+                    }
+
+                    foreach (var installment in model.Installments)
+                    {
+                        MemberPaymentInstallments memberInstallment = new MemberPaymentInstallments()
+                        {
+                            MemberID = memberID,
+                            PaymentID = model.PaymentID,
+                            InstallmentDate = (DateTime)installment.InstallmentDate,
+                            Amount = installment.Amount,
+                            IsPaid = false
+                        };
+                        ctx.MemberPaymentInstallments.Add(memberInstallment);
+                    }
+
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
         #endregion
     }
 }

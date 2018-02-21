@@ -157,6 +157,8 @@ namespace DF.BL
                     }
                 }
             }
+
+            DB.Members.AddMemberPayment(memberID, model);
         }
 
         #endregion
