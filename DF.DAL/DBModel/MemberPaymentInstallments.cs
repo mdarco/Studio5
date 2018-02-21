@@ -22,6 +22,7 @@ namespace DF.DB.DBModel
         public bool IsPaid { get; set; }
         public Nullable<System.DateTime> PaymentDate { get; set; }
         public string Note { get; set; }
+        public bool IsCanceled { get; set; }
     
         public virtual Members Members { get; set; }
         public virtual Payments Payments { get; set; }

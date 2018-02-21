@@ -543,6 +543,7 @@ namespace DF.DB
                                     InstallmentDate = x.InstallmentDate,
                                     Amount = (decimal)x.Amount,
                                     IsPaid = x.IsPaid,
+                                    IsCanceled = x.IsCanceled,
                                     PaymentDate = x.PaymentDate,
                                     Note = x.Note
                                 }
@@ -591,7 +592,8 @@ namespace DF.DB
                             PaymentID = model.PaymentID,
                             InstallmentDate = (DateTime)installment.InstallmentDate,
                             Amount = installment.Amount,
-                            IsPaid = false
+                            IsPaid = false,
+                            IsCanceled = false
                         };
                         ctx.MemberPaymentInstallments.Add(memberInstallment);
                     }
@@ -626,6 +628,11 @@ namespace DF.DB
                     if (model.PaymentDate.HasValue && installment.IsPaid)
                     {
                         installment.PaymentDate = model.PaymentDate;
+                    }
+
+                    if (model.IsCanceled.HasValue)
+                    {
+                        installment.IsCanceled = (bool)model.IsCanceled;
                     }
 
                     if (!string.IsNullOrEmpty(model.Note))

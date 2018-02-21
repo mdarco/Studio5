@@ -15,6 +15,7 @@ namespace DF.Models
         public decimal Amount { get; set; }
         public bool? IsPaid { get; set; }
         public DateTime? PaymentDate { get; set; }
+        public bool? IsCanceled { get; set; }
         public string Note { get; set; }
     }
 }
