@@ -115,20 +115,20 @@
         <AssociationConnector Association="DFDataModel.FK_DocumentMetadata_Documents" />
         <AssociationConnector Association="DFDataModel.FK_Members_Lookup_AgeCategories" />
         <AssociationConnector Association="DFDataModel.FK_DanceGroups_Lookup_AgeCategories" />
-        <EntityTypeShape EntityType="DFDataModel.MemberPaymentInstallments" Width="1.5" PointX="14.25" PointY="31.625" />
         <EntityTypeShape EntityType="DFDataModel.MemberPayments" Width="1.5" PointX="5.25" PointY="19.875" />
         <EntityTypeShape EntityType="DFDataModel.MemberPaymentsForCompanions" Width="1.5" PointX="11.25" PointY="26.75" />
         <EntityTypeShape EntityType="DFDataModel.Payments" Width="1.5" PointX="3" PointY="17" />
         <AssociationConnector Association="DFDataModel.FK_Payments_Costumes" />
         <AssociationConnector Association="DFDataModel.FK_Payments_Events" />
-        <AssociationConnector Association="DFDataModel.FK_MemberPaymentItems_Members" />
-        <AssociationConnector Association="DFDataModel.FK_MemberPaymentItems_Payments" />
         <AssociationConnector Association="DFDataModel.FK_MemberPayments_Members" />
         <AssociationConnector Association="DFDataModel.FK_MemberPayments_Payments" />
         <AssociationConnector Association="DFDataModel.FK_MemberPaymentsForCompanions_Members" />
         <AssociationConnector Association="DFDataModel.FK_MemberPaymentsForCompanions_Payments" />
         <AssociationConnector Association="DFDataModel.FK_Payments_Outfits" />
-      </Diagram>
+        <EntityTypeShape EntityType="DFDataModel.MemberPaymentInstallments" Width="1.5" PointX="14.25" PointY="31.5" />
+        <AssociationConnector Association="DFDataModel.FK_MemberPaymentItems_Members" />
+        <AssociationConnector Association="DFDataModel.FK_MemberPaymentItems_Payments" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

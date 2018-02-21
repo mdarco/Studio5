@@ -24,9 +24,9 @@ namespace DF.DB.DBModel
             this.MemberImages = new HashSet<MemberImages>();
             this.Performances = new HashSet<Performances>();
             this.TrainingMemberPresenceRegistrations = new HashSet<TrainingMemberPresenceRegistrations>();
-            this.MemberPaymentInstallments = new HashSet<MemberPaymentInstallments>();
             this.MemberPayments = new HashSet<MemberPayments>();
             this.MemberPaymentsForCompanions = new HashSet<MemberPaymentsForCompanions>();
+            this.MemberPaymentInstallments = new HashSet<MemberPaymentInstallments>();
         }
     
         public int MemberID { get; set; }
@@ -59,10 +59,10 @@ namespace DF.DB.DBModel
         public virtual ICollection<TrainingMemberPresenceRegistrations> TrainingMemberPresenceRegistrations { get; set; }
         public virtual Lookup_AgeCategories Lookup_AgeCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MemberPaymentInstallments> MemberPaymentInstallments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MemberPayments> MemberPayments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MemberPaymentsForCompanions> MemberPaymentsForCompanions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MemberPaymentInstallments> MemberPaymentInstallments { get; set; }
     }
 }

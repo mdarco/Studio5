@@ -74,9 +74,9 @@ namespace DF.DB.DBModel
         public virtual DbSet<UserPermissions> UserPermissions { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<DocumentMetadata> DocumentMetadata { get; set; }
-        public virtual DbSet<MemberPaymentInstallments> MemberPaymentInstallments { get; set; }
         public virtual DbSet<MemberPayments> MemberPayments { get; set; }
         public virtual DbSet<MemberPaymentsForCompanions> MemberPaymentsForCompanions { get; set; }
         public virtual DbSet<Payments> Payments { get; set; }
+        public virtual DbSet<MemberPaymentInstallments> MemberPaymentInstallments { get; set; }
     }
 }

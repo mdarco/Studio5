@@ -17,9 +17,9 @@ namespace DF.DB.DBModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Payments()
         {
-            this.MemberPaymentInstallments = new HashSet<MemberPaymentInstallments>();
             this.MemberPayments = new HashSet<MemberPayments>();
             this.MemberPaymentsForCompanions = new HashSet<MemberPaymentsForCompanions>();
+            this.MemberPaymentInstallments = new HashSet<MemberPaymentInstallments>();
         }
     
         public int ID { get; set; }
@@ -42,11 +42,11 @@ namespace DF.DB.DBModel
         public virtual Costumes Costumes { get; set; }
         public virtual Events Events { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MemberPaymentInstallments> MemberPaymentInstallments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MemberPayments> MemberPayments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MemberPaymentsForCompanions> MemberPaymentsForCompanions { get; set; }
         public virtual Outfits Outfits { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MemberPaymentInstallments> MemberPaymentInstallments { get; set; }
     }
 }

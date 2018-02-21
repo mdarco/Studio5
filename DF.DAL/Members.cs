@@ -601,6 +601,43 @@ namespace DF.DB
             }
         }
 
+        public static void EditMemberPaymentInstallment(int id, InstallmentModel model)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var installment = ctx.MemberPaymentInstallments.FirstOrDefault(x => x.ID == id);
+                if (installment != null)
+                {
+                    if (model.IsPaid.HasValue)
+                    {
+                        installment.IsPaid = (bool)model.IsPaid;
+
+                        if (installment.IsPaid && !model.PaymentDate.HasValue)
+                        {
+                            installment.PaymentDate = DateTime.Now;
+                        }
+
+                        if (!installment.IsPaid)
+                        {
+                            installment.PaymentDate = null;
+                        }
+                    }
+
+                    if (model.PaymentDate.HasValue && installment.IsPaid)
+                    {
+                        installment.PaymentDate = model.PaymentDate;
+                    }
+
+                    if (!string.IsNullOrEmpty(model.Note))
+                    {
+                        installment.Note = model.Note;
+                    }
+
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
         #endregion
     }
 }

@@ -328,9 +328,9 @@
           <Property Name="MemberID" Type="int" Nullable="false" />
           <Property Name="PaymentID" Type="int" Nullable="false" />
           <Property Name="InstallmentDate" Type="datetime" Nullable="false" />
-          <Property Name="Amount" Type="decimal" Precision="15" Scale="5" />
+          <Property Name="Amount" Type="decimal" Precision="15" Scale="5" Nullable="false" />
           <Property Name="IsPaid" Type="bit" Nullable="false" />
-          <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" />
           <Property Name="Note" Type="nvarchar" MaxLength="4000" />
         </EntityType>
         <EntityType Name="MemberPayments">
@@ -2118,9 +2118,9 @@
           <Property Name="AgeCategoryID" Type="Int32" />
           <NavigationProperty Name="Lookup_AgeCategories" Relationship="DFDataModel.FK_Members_Lookup_AgeCategories" FromRole="Members" ToRole="Lookup_AgeCategories" />
           <Property Name="ProfileImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="MemberPaymentInstallments" Relationship="DFDataModel.FK_MemberPaymentItems_Members" FromRole="Members" ToRole="MemberPaymentInstallments" />
           <NavigationProperty Name="MemberPayments" Relationship="DFDataModel.FK_MemberPayments_Members" FromRole="Members" ToRole="MemberPayments" />
           <NavigationProperty Name="MemberPaymentsForCompanions" Relationship="DFDataModel.FK_MemberPaymentsForCompanions_Members" FromRole="Members" ToRole="MemberPaymentsForCompanions" />
+          <NavigationProperty Name="MemberPaymentInstallments" Relationship="DFDataModel.FK_MemberPaymentItems_Members" FromRole="Members" ToRole="MemberPaymentInstallments" />
         </EntityType>
         <EntityType Name="Outfits">
           <Key>
@@ -3259,7 +3259,6 @@
             <End Role="Lookup_AgeCategories" EntitySet="Lookup_AgeCategories" />
             <End Role="DanceGroups" EntitySet="DanceGroups" />
           </AssociationSet>
-          <EntitySet Name="MemberPaymentInstallments" EntityType="DFDataModel.MemberPaymentInstallments" />
           <EntitySet Name="MemberPayments" EntityType="DFDataModel.MemberPayments" />
           <EntitySet Name="MemberPaymentsForCompanions" EntityType="DFDataModel.MemberPaymentsForCompanions" />
           <EntitySet Name="Payments" EntityType="DFDataModel.Payments" />
@@ -3270,14 +3269,6 @@
           <AssociationSet Name="FK_Payments_Events" Association="DFDataModel.FK_Payments_Events">
             <End Role="Events" EntitySet="Events" />
             <End Role="Payments" EntitySet="Payments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MemberPaymentItems_Members" Association="DFDataModel.FK_MemberPaymentItems_Members">
-            <End Role="Members" EntitySet="Members" />
-            <End Role="MemberPaymentInstallments" EntitySet="MemberPaymentInstallments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MemberPaymentItems_Payments" Association="DFDataModel.FK_MemberPaymentItems_Payments">
-            <End Role="Payments" EntitySet="Payments" />
-            <End Role="MemberPaymentInstallments" EntitySet="MemberPaymentInstallments" />
           </AssociationSet>
           <AssociationSet Name="FK_MemberPayments_Members" Association="DFDataModel.FK_MemberPayments_Members">
             <End Role="Members" EntitySet="Members" />
@@ -3299,7 +3290,16 @@
             <End Role="Outfits" EntitySet="Outfits" />
             <End Role="Payments" EntitySet="Payments" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="MemberPaymentInstallments" EntityType="DFDataModel.MemberPaymentInstallments" />
+          <AssociationSet Name="FK_MemberPaymentItems_Members" Association="DFDataModel.FK_MemberPaymentItems_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MemberPaymentInstallments" EntitySet="MemberPaymentInstallments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberPaymentItems_Payments" Association="DFDataModel.FK_MemberPaymentItems_Payments">
+            <End Role="Payments" EntitySet="Payments" />
+            <End Role="MemberPaymentInstallments" EntitySet="MemberPaymentInstallments" />
+          </AssociationSet>
+          </EntityContainer>
         <Association Name="FK_UserGroupPermissions_Permissions">
           <End Type="DFDataModel.Permissions" Role="Permissions" Multiplicity="1" />
           <End Type="DFDataModel.UserGroupPermissions" Role="UserGroupPermissions" Multiplicity="*" />
@@ -3368,21 +3368,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="MemberPaymentInstallments">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MemberID" Type="Int32" Nullable="false" />
-          <Property Name="PaymentID" Type="Int32" Nullable="false" />
-          <Property Name="InstallmentDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IsPaid" Type="Boolean" Nullable="false" />
-          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Note" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Members" Relationship="DFDataModel.FK_MemberPaymentItems_Members" FromRole="MemberPaymentInstallments" ToRole="Members" />
-          <NavigationProperty Name="Payments" Relationship="DFDataModel.FK_MemberPaymentItems_Payments" FromRole="MemberPaymentInstallments" ToRole="Payments" />
-          <Property Name="Amount" Type="Decimal" Precision="15" Scale="5" />
-        </EntityType>
         <EntityType Name="MemberPayments">
           <Key>
             <PropertyRef Name="MemberID" />
@@ -3430,10 +3415,10 @@
           <Property Name="OutfitID" Type="Int32" />
           <NavigationProperty Name="Costumes" Relationship="DFDataModel.FK_Payments_Costumes" FromRole="Payments" ToRole="Costumes" />
           <NavigationProperty Name="Events" Relationship="DFDataModel.FK_Payments_Events" FromRole="Payments" ToRole="Events" />
-          <NavigationProperty Name="MemberPaymentInstallments" Relationship="DFDataModel.FK_MemberPaymentItems_Payments" FromRole="Payments" ToRole="MemberPaymentInstallments" />
           <NavigationProperty Name="MemberPayments" Relationship="DFDataModel.FK_MemberPayments_Payments" FromRole="Payments" ToRole="MemberPayments" />
           <NavigationProperty Name="MemberPaymentsForCompanions" Relationship="DFDataModel.FK_MemberPaymentsForCompanions_Payments" FromRole="Payments" ToRole="MemberPaymentsForCompanions" />
           <NavigationProperty Name="Outfits" Relationship="DFDataModel.FK_Payments_Outfits" FromRole="Payments" ToRole="Outfits" />
+          <NavigationProperty Name="MemberPaymentInstallments" Relationship="DFDataModel.FK_MemberPaymentItems_Payments" FromRole="Payments" ToRole="MemberPaymentInstallments" />
         </EntityType>
         <Association Name="FK_Payments_Costumes">
           <End Type="DFDataModel.Costumes" Role="Costumes" Multiplicity="0..1" />
@@ -3456,30 +3441,6 @@
             </Principal>
             <Dependent Role="Payments">
               <PropertyRef Name="EventID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MemberPaymentItems_Members">
-          <End Type="DFDataModel.Members" Role="Members" Multiplicity="1" />
-          <End Type="DFDataModel.MemberPaymentInstallments" Role="MemberPaymentInstallments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Members">
-              <PropertyRef Name="MemberID" />
-            </Principal>
-            <Dependent Role="MemberPaymentInstallments">
-              <PropertyRef Name="MemberID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MemberPaymentItems_Payments">
-          <End Type="DFDataModel.Payments" Role="Payments" Multiplicity="1" />
-          <End Type="DFDataModel.MemberPaymentInstallments" Role="MemberPaymentInstallments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Payments">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="MemberPaymentInstallments">
-              <PropertyRef Name="PaymentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3543,7 +3504,46 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="MemberPaymentInstallments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentID" Type="Int32" Nullable="false" />
+          <Property Name="InstallmentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="Note" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Members" Relationship="DFDataModel.FK_MemberPaymentItems_Members" FromRole="MemberPaymentInstallments" ToRole="Members" />
+          <NavigationProperty Name="Payments" Relationship="DFDataModel.FK_MemberPaymentItems_Payments" FromRole="MemberPaymentInstallments" ToRole="Payments" />
+        </EntityType>
+        <Association Name="FK_MemberPaymentItems_Members">
+          <End Type="DFDataModel.Members" Role="Members" Multiplicity="1" />
+          <End Type="DFDataModel.MemberPaymentInstallments" Role="MemberPaymentInstallments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="MemberPaymentInstallments">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberPaymentItems_Payments">
+          <End Type="DFDataModel.Payments" Role="Payments" Multiplicity="1" />
+          <End Type="DFDataModel.MemberPaymentInstallments" Role="MemberPaymentInstallments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payments">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MemberPaymentInstallments">
+              <PropertyRef Name="PaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -4042,20 +4042,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MemberPaymentInstallments">
-            <EntityTypeMapping TypeName="DFDataModel.MemberPaymentInstallments">
-              <MappingFragment StoreEntitySet="MemberPaymentInstallments">
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
-                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
-                <ScalarProperty Name="InstallmentDate" ColumnName="InstallmentDate" />
-                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="MemberPayments">
             <EntityTypeMapping TypeName="DFDataModel.MemberPayments">
               <MappingFragment StoreEntitySet="MemberPayments">
@@ -4096,6 +4082,20 @@
                 <ScalarProperty Name="Currency" ColumnName="Currency" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberPaymentInstallments">
+            <EntityTypeMapping TypeName="DFDataModel.MemberPaymentInstallments">
+              <MappingFragment StoreEntitySet="MemberPaymentInstallments">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="InstallmentDate" ColumnName="InstallmentDate" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
