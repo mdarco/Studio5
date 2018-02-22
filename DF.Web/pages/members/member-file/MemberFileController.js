@@ -489,6 +489,34 @@
 
         //#endregion
 
+        //#region Payments
+
+        $scope.memberPayments = [];
+        $scope.showPayments = false;
+
+        $scope.getMemberPayments = function () {
+            MembersService.getMemberPayments(member.MemberID).then(
+                function (result) {
+                    if (result && result.data) {
+                        $scope.memberPayments = result.data;
+
+                        if (AppParams.DEBUG) {
+                            toastr.success('Plaćanja uspešno učitana.');
+                        }
+
+                        $scope.showPayments = ($scope.memberPayments.length > 0);
+                    }
+                },
+                function (error) {
+                    toastr.error('Došlo je do greške na serveru prilikom preuzimanja spiska plaćanja.');
+                    $scope.memberPayments = [];
+                    $scope.showPayments = false;
+                }
+            );
+        };
+
+        //#endregion
+
         //#region Helpers
 
         function openTextFieldDialog(text) {
