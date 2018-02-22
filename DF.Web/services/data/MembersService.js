@@ -21,7 +21,12 @@
             deleteDocument: deleteDocument,
 
             getDanceGroups: getDanceGroups,
-            updateDanceGroups: updateDanceGroups
+            updateDanceGroups: updateDanceGroups,
+
+            getMemberPayments: getMemberPayments,
+            getMemberPaymentInstallments: getMemberPaymentInstallments,
+            addMemberPayment: addMemberPayment,
+            editMemberPaymentInstallment: editMemberPaymentInstallment
         };
 
         return service;
@@ -75,6 +80,30 @@
         function updateDanceGroups(id, model) {
             var url = WebApiBaseUrl + urlRoot + '/' + id + '/dance-groups';
             return $http.post(url, model);
+        }
+
+        //#endregion
+
+        //#region Payments
+
+        function getMemberPayments(id) {
+            var url = WebApiBaseUrl + urlRoot + '/' + id + '/payments?nd=' + Date.now();
+            return $http.get(url);
+        }
+
+        function getMemberPaymentInstallments(id, paymentID) {
+            var url = WebApiBaseUrl + urlRoot + '/' + id + '/payments/' + paymentID + 'installments' + '?nd=' + Date.now();
+            return $http.get(url);
+        }
+
+        function addMemberPayment(id, model) {
+            var url = WebApiBaseUrl + urlRoot + '/' + id + '/payments';
+            return $http.post(url, model);
+        }
+
+        function editMemberPaymentInstallment(id, paymentID, installmentID, model) {
+            var url = WebApiBaseUrl + urlRoot + '/' + id + '/payments/' + paymentID + '/installments/' + installmentID;
+            return $http.put(url, model);
         }
 
         //#endregion
