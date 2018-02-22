@@ -56,6 +56,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DF.BL\DF.BL.csproj">
+      <Project>{3c952c32-3dcf-4762-a6ba-eaf1435ab806}</Project>
+      <Name>DF.BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DF.DAL\DF.DAL.csproj">
       <Project>{9bb2a7fb-20ee-4627-a9b3-7d6f7e6548e1}</Project>
       <Name>DF.DAL</Name>

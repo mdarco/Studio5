@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DF.Test
@@ -62,6 +63,65 @@ namespace DF.Test
             };
 
             DB.Payments.AddPayment(model);
+        }
+
+        [TestMethod]
+        public void AddMemberPayment_FullOneTime()
+        {
+            const int MEMBER_ID = 1;
+            const int PAYMENT_ID = 1;
+
+            Models.MemberPaymentModel model = new Models.MemberPaymentModel()
+            {
+                MemberID = MEMBER_ID,
+                PaymentID = PAYMENT_ID,
+
+                Companions =
+                    new List<Models.CompanionModel>()
+                    {
+                        new Models.CompanionModel() { Name = "Pratilac-1", Phone = "111-222", Email = "fake@dummy.com" },
+                        new Models.CompanionModel() { Name = "Pratilac-2", Phone = "333-444", Email = "dummy@dummy.com" }
+                    }
+            };
+
+            BL.Members.AddMemberPayment(MEMBER_ID, model);
+        }
+
+        [TestMethod]
+        public void AddMemberPayment_OneTimeWithInstallments()
+        {
+            const int MEMBER_ID = 2;
+            const int PAYMENT_ID = 2;
+
+            Models.MemberPaymentModel model = new Models.MemberPaymentModel()
+            {
+                MemberID = MEMBER_ID,
+                PaymentID = PAYMENT_ID,
+                DiscountPercentage = 10,
+
+                Companions =
+                    new List<Models.CompanionModel>()
+                    {
+                        new Models.CompanionModel() { Name = "Pratilac-3", Phone = "555-555", Email = "john.doe@dummy.com" },
+                    }
+            };
+
+            BL.Members.AddMemberPayment(MEMBER_ID, model);
+        }
+
+        [TestMethod]
+        public void AddMemberPayment_Monthly()
+        {
+            const int MEMBER_ID = 3;
+            const int PAYMENT_ID = 3;
+
+            Models.MemberPaymentModel model = new Models.MemberPaymentModel()
+            {
+                MemberID = MEMBER_ID,
+                PaymentID = PAYMENT_ID
+            };
+
+            BL.Members.AddMemberPayment(MEMBER_ID, model);
         }
     }
 }

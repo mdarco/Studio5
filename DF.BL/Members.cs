@@ -56,7 +56,7 @@ namespace DF.BL
             // check discount
             if (model.DiscountPercentage.HasValue)
             {
-                model.DiscountAmount = paymentInfo.Amount * (1 - (model.DiscountPercentage / 100));
+                model.DiscountAmount = paymentInfo.Amount * (1 - ((decimal)model.DiscountPercentage / 100));
             }
 
             // generate installments
@@ -76,7 +76,7 @@ namespace DF.BL
                      */
 
                     decimal installmentAmount = model.DiscountAmount.HasValue ? (decimal)model.DiscountAmount : paymentInfo.Amount;
-                    if (model.Companions.Count() > 0)
+                    if (model.Companions != null && model.Companions.Count() > 0)
                     {
                         foreach (var c in model.Companions)
                         {
@@ -109,7 +109,7 @@ namespace DF.BL
                     {
                         for (int xx = 1; xx <= paymentInfo.NumberOfInstallments; xx++)
                         {
-                            installmentAmounts.Add(paymentInfo.Amount / (int)paymentInfo.NumberOfInstallments);
+                            installmentAmounts.Add((decimal)paymentInfo.Amount / (int)paymentInfo.NumberOfInstallments);
                         }
                     }
 

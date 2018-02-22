@@ -571,17 +571,20 @@ namespace DF.DB
                     };
                     ctx.MemberPayments.Add(memberPayment);
 
-                    foreach (var companion in model.Companions)
+                    if (model.Companions != null && model.Companions.Count() > 0)
                     {
-                        MemberPaymentsForCompanions companionPayment = new MemberPaymentsForCompanions()
+                        foreach (var companion in model.Companions)
                         {
-                            MemberID = memberID,
-                            PaymentID = model.PaymentID,
-                            CompanionName = companion.Name,
-                            CompanionPhone = companion.Phone,
-                            CompanionEmail = companion.Email
-                        };
-                        ctx.MemberPaymentsForCompanions.Add(companionPayment);
+                            MemberPaymentsForCompanions companionPayment = new MemberPaymentsForCompanions()
+                            {
+                                MemberID = memberID,
+                                PaymentID = model.PaymentID,
+                                CompanionName = companion.Name,
+                                CompanionPhone = companion.Phone,
+                                CompanionEmail = companion.Email
+                            };
+                            ctx.MemberPaymentsForCompanions.Add(companionPayment);
+                        }
                     }
 
                     foreach (var installment in model.Installments)
