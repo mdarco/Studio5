@@ -142,5 +142,37 @@ namespace DF.Api.Controllers
         }
 
         #endregion
+
+        #region Payments
+
+        [Route("{id}/payments")]
+        [HttpGet]
+        public List<MemberPaymentModel> GetMemberPayments(int id)
+        {
+            return DB.Members.GetMemberPayments(id);
+        }
+
+        [Route("{id}/payments/{paymentID}/installments")]
+        [HttpGet]
+        public List<InstallmentModel> GetMemberPaymentInstallments(int id, int paymentID)
+        {
+            return DB.Members.GetMemberPaymentInstallments(id, paymentID);
+        }
+
+        [Route("{id}/payments")]
+        [HttpPost]
+        public void AddMemberPayment(int id, MemberPaymentModel model)
+        {
+            BL.Members.AddMemberPayment(id, model);
+        }
+
+        [Route("{id}/payments/{paymentID}/installments/{installmentID}")]
+        [HttpPut]
+        public void EditMemberPaymentInstallment(int installmentID, InstallmentModel model)
+        {
+            DB.Members.EditMemberPaymentInstallment(installmentID, model);
+        }
+
+        #endregion
     }
 }
