@@ -1,24 +1,75 @@
-﻿<style>
-    #main {
-        margin-left: 0;
-    }
-</style>
-
-<table style="width: 100%;">
-    <tbody>
-        <tr>
-            <td style="text-align: center; padding-top: 50px;">
-                <img src="Content/img/under-construction.png" />
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: center;">
-                <div style="width: 500px; margin: auto;">
-                    <div class="page-header">
-                        <h1><strong></strong></h1>
+﻿<!-- Filter -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary" style="margin-left: 15px; margin-right: 30px;">
+            <div class="panel-heading" style="background-color: #1B1E24;">Pretraživanje</div>
+            <div class="panel-body">
+                <form id="searchForm" role="form" ng-submit="applyFilter()">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Naziv</label>
+                                <label class="input" style="width: 100%">
+                                    <input type="text" class="form-control" ng-model="filter.Name" />
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <button type="submit" class="btn btn-sm btn-primary">Pronađi</button>
+                            <button type="button" class="btn btn-sm btn-danger" ng-click="clearFilter()">Obriši filter</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Payments grid -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary" style="margin-left: 15px; margin-right: 30px;">
+            <div class="panel-heading" style="background-color: #1B1E24;">
+                <span>Definicije plaćanja</span>
+                <button type="button" class="btn btn-success btn-xs pull-right margin-right-5" ng-click="addPayment()"><i class="fa fa-plus"></i> Novo plaćanje</button>
+            </div>
+            <div class="panel-body">
+                <p style="font-variant:small-caps; margin-left: 10px" ng-show="showGrid === false">nema podataka.</p>
+
+                <table ng-show="showGrid === true" class="table table-condensed table-hover table-responsive table-striped" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Naziv</th>
+                            <th>Opis</th>
+                            <th>Valuta</th>
+                            <th>Tip</th>
+                            <th>Iznos</th>
+                            <th>Br. rata</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="payment in payments">
+                            <td>{{ payment.Name }}</td>
+                            <td>{{ payment.Description }}</td>
+                            <td>{{ payment.Currency }}</td>
+                            <td>{{ payment.Type.toUpperCase() === 'ONE-TIME' ? 'Jednokratno' : 'Mesečno' }}</td>
+                            <td>{{ payment.Amount }}</td>
+                            <td ng-style="{ 'font-variant': payment.NumberOfInstallments === 1 ? 'small-caps' : '' }">
+                                {{ payment.NumberOfInstallments === 1 ? (payment.Type.toUpperCase() === 'ONE-TIME' ? 'Jednokratno' : 'Mesečno') : payment.NumberOfInstallments }}
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-xs pull-right margin-right-5" title="Brisanje plaćanja" ng-click="deletePayment(payment)"><i class="fa fa-times"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -566,6 +566,7 @@
     <Content Include="services\data\EventsService.js" />
     <Content Include="services\data\LookupsService.js" />
     <Content Include="services\data\MembersService.js" />
+    <Content Include="services\data\PaymentsService.js" />
     <Content Include="services\data\TagsService.js" />
     <Content Include="services\data\UsersService.js" />
     <Content Include="services\UtilityService.js" />
