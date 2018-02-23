@@ -13,7 +13,8 @@
         var service = {
             getFiltered: getFiltered,
             getPayment: getPayment,
-            addPayment: addPayment
+            addPayment: addPayment,
+            deletePayment: deletePayment
         };
 
         return service;
@@ -31,6 +32,11 @@
         function addPayment(model) {
             var url = WebApiBaseUrl + urlRoot;
             return $http.post(url, model);
+        }
+
+        function deletePayment(id) {
+            var url = WebApiBaseUrl + urlRoot + '/' + id;
+            return $http.delete(url);
         }
     }
 })();

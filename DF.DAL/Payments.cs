@@ -112,5 +112,26 @@ namespace DF.DB
                 ctx.SaveChanges();
             }
         }
+
+        public static void DeletePayment(int id)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var p = ctx.Payments
+                                .Include(t => t.MemberPayments)
+                                .FirstOrDefault(x => x.ID == id);
+
+                if (p != null)
+                {
+                    if (p.MemberPayments != null && p.MemberPayments.Count() > 0)
+                    {
+                        throw new Exception("Placanje je vezano za clanove i ne moze se obrisati.");
+                    }
+
+                    ctx.Payments.Remove(p);
+                    ctx.SaveChanges();
+                }
+            }
+        }
     }
 }

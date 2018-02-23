@@ -43,5 +43,24 @@ namespace DF.Api.Controllers
                     });
             }
         }
+
+        [Route("{id}")]
+        [HttpDelete]
+        public void DeletePayment(int id)
+        {
+            try
+            {
+                DB.Payments.DeletePayment(id);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(
+                    new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.Forbidden,
+                        ReasonPhrase = ex.Message
+                    });
+            }
+        }
     }
 }

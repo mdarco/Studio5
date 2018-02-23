@@ -50,5 +50,33 @@
             $scope.showGrid = false;
             $scope.payments = [];
         };
+
+        $scope.deletePayment = function (payment) {
+            bootbox.confirm({
+                message: 'Da li ste sigurni?',
+                buttons: {
+                    confirm: {
+                        label: 'Da',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: 'Ne',
+                        className: 'btn-default'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        PaymentsService.deletePayment(payment.ID).then(
+                            function () {
+                                getPayments();
+                            },
+                            function (error) {
+                                toastr.warning('Plaćanje se ne može obrisati jer se koristi.');
+                            }
+                        );
+                    }
+                }
+            });
+        };
     }
 })();
