@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('PaymentsController', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'PaymentsService' /* , 'AuthenticationService' */];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'PaymentsService', 'toastr' /* , 'AuthenticationService' */];
 
-    function ctrlFn($rootScope, $scope, $location, $uibModal, PaymentsService /* , AuthenticationService */) {
+    function ctrlFn($rootScope, $scope, $location, $uibModal, PaymentsService, toastr /* , AuthenticationService */) {
         // set active menu item
         $("#left-panel nav ul li").removeClass("active");
         $("#menuPayments").addClass("active");
