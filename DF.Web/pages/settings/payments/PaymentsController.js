@@ -51,6 +51,27 @@
             $scope.payments = [];
         };
 
+        $scope.addPayment = function () {
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/settings/payments/payment-dialog/payment-dialog.html',
+                controller: 'PaymentDialogController'
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            dialog.result.then(
+                function () {
+                    getPayments();
+                },
+                function () {
+                    // modal dismissed => do nothing
+                }
+            );
+        };
+
         $scope.deletePayment = function (payment) {
             bootbox.confirm({
                 message: 'Da li ste sigurni?',
