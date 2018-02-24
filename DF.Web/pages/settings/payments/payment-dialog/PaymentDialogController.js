@@ -12,6 +12,18 @@
           Companions: []
       };
 
+      $scope.companion = {};
+
+      $scope.paymentTypes = [
+          { Name: 'Jednokratno', ID: 'ONE-TIME' },
+          { Name: 'Mesečno', ID: 'Monthly' }
+      ];
+
+      $scope.paymentCurrencies = [
+          { Name: 'RSD', ID: 'RSD' },
+          { Name: 'EUR', ID: 'EUR' }
+      ];
+
       $scope.save = function () {
           var modelValidation = validate();
           if (modelValidation.error) {
@@ -40,19 +52,19 @@
       // helpers
       function validate() {
         // mandatory fields
-        if (!$scope.model.Name || ($scope.model.Name && $scope.member.Name === '')) {
+        if (!$scope.model.Name || ($scope.model.Name && $scope.model.Name === '')) {
             return { error: true, errorMsg: 'Naziv je obavezan podatak.' };
         }
 
-        if (!$scope.model.Type || ($scope.model.Type && $scope.member.Type === '')) {
+        if (!$scope.model.Type || ($scope.model.Type && $scope.model.Type === '')) {
             return { error: true, errorMsg: 'Tip plaćanja je obavezan podatak.' };
         }
 
-        if (!$scope.model.Currency || ($scope.model.Currency && $scope.member.Currency === '')) {
+        if (!$scope.model.Currency || ($scope.model.Currency && $scope.model.Currency === '')) {
             return { error: true, errorMsg: 'Valuta je obavezan podatak.' };
         }
 
-        if (!$scope.model.Amount || ($scope.model.Amount && $scope.member.Amount === '')) {
+        if (!$scope.model.Amount || ($scope.model.Amount && $scope.model.Amount === '')) {
             return { error: true, errorMsg: 'Iznos je obavezan podatak.' };
         } else {
             if (!$.isNumeric($scope.model.Amount)) {
@@ -60,7 +72,7 @@
             }
         }
 
-        if (!$scope.model.DueDatePicker || ($scope.model.DueDatePicker && $scope.member.DueDatePicker === '')) {
+        if (!$scope.model.DueDatePicker || ($scope.model.DueDatePicker && $scope.model.DueDatePicker === '')) {
             return { error: true, errorMsg: 'Rok za plaćanje je obavezan podatak.' };
         }
 
@@ -88,7 +100,7 @@
                 return { error: true, errorMsg: 'Iznos za pratioca nije ispravan.' };
             }
 
-            if (!$scope.model.Companions.CompanionName || ($scope.model.Companions.CompanionName && $scope.model.Companions.CompanionName === '')) {
+            if (!companion.CompanionName || (companion.CompanionName && companions.CompanionName === '')) {
                 return { error: true, errorMsg: 'Naziv pratioca je obavezan ako je zadat iznos za pratioca.' };
             }
 

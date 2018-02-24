@@ -5,138 +5,110 @@
 <div class="modal-body">
     <form class="smart-form" novalidate="novalidate">
         <section>
-            <div>
-                <label class="control-label">Naziv (*)</label>
-                <label class="input"><input type="text" class="form-control" ng-model="model.Name"></label>
-            </div>
+            <label class="control-label">Naziv (*)</label>
+            <label class="input"><input type="text" class="form-control" ng-model="model.Name"></label>
         </section>
 
         <section>
-            <div>
-                <label class="control-label">Opis</label>
-                <label class="input"><input type="text" class="form-control" ng-model="model.Description"></label>
-            </div>
+            <label class="control-label">Opis</label>
+            <label class="input"><input type="text" class="form-control" ng-model="model.Description"></label>
         </section>
 
         <section>
-            <div>
-                <label class="control-label">Tip (*)</label>
-                <select class="form-control" ng-model="model.Type" ng-options="value.Name as value.Name for (key, value) in paymentTypes"></select>
-            </div>
+            <label class="control-label">Tip (*)</label>
+            <select class="form-control" ng-model="model.Type" ng-options="value.ID as value.Name for (key, value) in paymentTypes"></select>
         </section>
 
         <section>
-            <div>
-                <label class="control-label">Valuta (*)</label>
-                <select class="form-control" ng-model="model.Currency" ng-options="value.Name as value.Name for (key, value) in paymentCurrencies"></select>
-            </div>
+            <label class="control-label">Valuta (*)</label>
+            <select class="form-control" ng-model="model.Currency" ng-options="value.ID as value.Name for (key, value) in paymentCurrencies"></select>
         </section>
 
         <section>
-            <div>
-                <label class="control-label">Iznos (*)</label>
-                <label class="input"><input type="text" class="form-control" ng-model="model.Amount"></label>
-            </div>
+            <label class="control-label">Iznos (*)</label>
+            <label class="input"><input type="text" class="form-control" ng-model="model.Amount"></label>
         </section>
 
         <section>
-            <div>
-                <label class="control-label">Rok za plaćanje (*)</label>
-                <div style="font-size: xx-small; color: lightgray;">
-                    (U slučaju plaćanja na rate - rok za plaćanje prve rate)
-                </div>
-                <label class="input" style="width: 100%">
-                    <input type="text"
-                            uib-datepicker-popup
-                            ng-model="model.DueDatePicker"
-                            placeholder="yyyy-mm-dd"
-                            class="form-control disabled-input-color"
-                            is-open="datePickers.datePickerOpened_DueDate"
-                            readonly="readonly" />
-                </label>
-                <button type="button" class="btn btn-sm btn-primary form-control" style="margin-bottom: 3px; width: 10%;" ng-click="openDatePicker('DueDate', $event)"><i class="fa fa-calendar"></i></button>
+            <label class="control-label">Rok za plaćanje (*)</label>
+            <div style="font-size: xx-small; color: gray;">
+                (U slučaju plaćanja na rate - rok za plaćanje prve rate)
             </div>
+            <label class="input" style="width: 100%">
+                <input type="text"
+                        uib-datepicker-popup
+                        ng-model="model.DueDatePicker"
+                        placeholder="yyyy-mm-dd"
+                        class="form-control disabled-input-color"
+                        is-open="datePickers.datePickerOpened_DueDate"
+                        readonly="readonly" />
+            </label>
+            <button type="button" class="btn btn-sm btn-primary form-control" style="margin-bottom: 3px; width: 10%;" ng-click="openDatePicker('DueDate', $event)"><i class="fa fa-calendar"></i></button>
         </section>
 
         <section>
-            <div>
-                <label class="control-label">Datum deaktiviranja</label>
-                <div style="font-size: xx-small; color: lightgray;">
-                    (U slučaju mesečnog plaćanja)
-                </div>
-                <label class="input" style="width: 100%">
-                    <input type="text"
-                            uib-datepicker-popup
-                            ng-model="model.DueDatePicker"
-                            placeholder="yyyy-mm-dd"
-                            class="form-control disabled-input-color"
-                            is-open="datePickers.datePickerOpened_DueDate"
-                            readonly="readonly" />
-                </label>
-                <button type="button" class="btn btn-sm btn-primary form-control" style="margin-bottom: 3px; width: 10%;" ng-click="openDatePicker('DueDate', $event)"><i class="fa fa-calendar"></i></button>
+            <label class="control-label">Datum deaktiviranja</label>
+            <div style="font-size: xx-small; color: gray;">
+                (U slučaju mesečnog plaćanja)
             </div>
+            <label class="input" style="width: 100%">
+                <input type="text"
+                        uib-datepicker-popup
+                        ng-model="model.StopDatePicker"
+                        placeholder="yyyy-mm-dd"
+                        class="form-control disabled-input-color"
+                        is-open="datePickers.datePickerOpened_StopDate"
+                        readonly="readonly" />
+            </label>
+            <button type="button" class="btn btn-sm btn-primary form-control" style="margin-bottom: 3px; width: 10%;" ng-click="openDatePicker('StopDate', $event)"><i class="fa fa-calendar"></i></button>
         </section>
 
         <section>
-            <div>
-                <label class="control-label">Broj rata</label>
-                <label class="input"><input type="text" class="form-control" ng-model="model.NumberOfInstallments"></label>
-            </div>
+            <label class="control-label">Broj rata</label>
+            <label class="input"><input type="text" class="form-control" ng-model="model.NumberOfInstallments"></label>
         </section>
 
         <section>
-            <div>
-                <label class="control-label">Iznosi rata</label>
-                <div style="font-size: xx-small; color: lightgray;">
-                    Format: [ Iznos-prve-rate;Iznos-druge-rate;Iznos-trece-rate; ... ]<br />
-                    (Zbir iznosa svih rata mora biti jednak iznosu plaćanja)<br />
-                    (Ukoliko se iznosi ne zadaju, iznosi rata će biti jednaki)
-                </div>
-                <label class="input"><input type="text" class="form-control" ng-model="model.InstallmentAmounts"></label>
+            <label class="control-label">Iznosi rata</label>
+            <div style="font-size: xx-small; color: gray;">
+                Format: [ Iznos-prve-rate;Iznos-druge-rate;Iznos-trece-rate; ... ]<br />
+                (Zbir iznosa svih rata mora biti jednak iznosu plaćanja)<br />
+                (Ukoliko se iznosi ne zadaju, iznosi rata će biti jednaki)
             </div>
+            <label class="input"><input type="text" class="form-control" ng-model="model.InstallmentAmounts"></label>
         </section>
 
         <fieldset>
             <legend>Pratilac</legend>
 
             <section>
-                <div>
-                    <label class="control-label">Ime i prezime</label>
-                    <label class="input"><input type="text" class="form-control" ng-model="model.Companions.CompanionName"></label>
-                </div>
+                <label class="control-label">Ime i prezime</label>
+                <label class="input"><input type="text" class="form-control" ng-model="companion.CompanionName"></label>
             </section>
 
             <section>
-                <div>
-                    <label class="control-label">Br. telefona</label>
-                    <label class="input"><input type="text" class="form-control" ng-model="model.Companions.CompanionPhone"></label>
-                </div>
+                <label class="control-label">Br. telefona</label>
+                <label class="input"><input type="text" class="form-control" ng-model="companion.CompanionPhone"></label>
             </section>
 
             <section>
-                <div>
-                    <label class="control-label">E-mail</label>
-                    <label class="input"><input type="text" class="form-control" ng-model="model.Companions.CompanionEmail"></label>
-                </div>
+                <label class="control-label">E-mail</label>
+                <label class="input"><input type="text" class="form-control" ng-model="companion.CompanionEmail"></label>
             </section>
 
             <section>
-                <div>
-                    <label class="control-label">Iznos</label>
-                    <label class="input"><input type="text" class="form-control" ng-model="model.AmountForCompanion"></label>
-                </div>
+                <label class="control-label">Iznos</label>
+                <label class="input"><input type="text" class="form-control" ng-model="model.AmountForCompanion"></label>
             </section>
 
             <section>
-                <div>
-                    <label class="control-label">Iznosi rata</label>
-                    <div style="font-size: xx-small; color: lightgray;">
-                        Format: [ Iznos-prve-rate;Iznos-druge-rate;Iznos-trece-rate; ... ]<br />
-                        (Zbir iznosa svih rata mora biti jednak iznosu plaćanja za pratioca)<br />
-                        (Ukoliko se iznosi ne zadaju, iznosi rata će biti jednaki)
-                    </div>
-                    <label class="input"><input type="text" class="form-control" ng-model="model.InstallmentAmountsForCompanion"></label>
+                <label class="control-label">Iznosi rata</label>
+                <div style="font-size: xx-small; color: gray;">
+                    Format: [ Iznos-prve-rate;Iznos-druge-rate;Iznos-trece-rate; ... ]<br />
+                    (Zbir iznosa svih rata mora biti jednak iznosu plaćanja za pratioca)<br />
+                    (Ukoliko se iznosi ne zadaju, iznosi rata će biti jednaki)
                 </div>
+                <label class="input"><input type="text" class="form-control" ng-model="model.InstallmentAmountsForCompanion"></label>
             </section>
         </fieldset>
     </form>
