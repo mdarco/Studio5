@@ -74,6 +74,11 @@
         // additional checks
         if ($scope.model.InstallmentAmounts && $scope.model.InstallmentAmounts !== '') {
             var installmentAmounts = $scope.model.InstallmentAmounts.split(';');
+
+            if (installmentAmounts.length !== parseInt($scope.model.NumberOfInstallments)) {
+                return { error: true, errorMsg: 'Broj iznosa za rate se ne poklapa sa brojem rata.' };
+            }
+
             if (installmentAmounts && installmentAmounts.length > 0) {
                 var sum = 0.0;
                 _.each(installmentAmounts, (amount) => {
@@ -101,6 +106,11 @@
 
             if ($scope.model.InstallmentAmountsForCompanion && $scope.model.InstallmentAmountsForCompanion !== '') {
                 var installmentAmountsForCompanion = $scope.model.InstallmentAmountsForCompanion.split(';');
+
+                if (installmentAmountsForCompanion.length !== parseInt($scope.model.NumberOfInstallments)) {
+                    return { error: true, errorMsg: 'Broj iznosa za rate pratioca se ne poklapa sa brojem rata.' };
+                }
+
                 if (installmentAmountsForCompanion && installmentAmountsForCompanion.length > 0) {
                     var sum = 0.0;
                     _.each(installmentAmountsForCompanion, (amountForCompanion) => {
