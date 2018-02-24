@@ -9,7 +9,6 @@
 
   function ctrlFn($rootScope, $scope, $uibModalInstance, PaymentsService, UtilityService, toastr) {
       $scope.model = {};
-      $scope.companion = {};
 
       $scope.paymentTypes = [
           { Name: 'Jednokratno', ID: 'ONE-TIME' },
@@ -29,16 +28,6 @@
           }
 
           //$scope.model.DueDate = UtilityService.convertDateToISODateString($scope.model.DueDatePicker);
-
-          if ($scope.companion.CompanionName && $scope.companion.CompanionName !== '') {
-              $scope.model.Companions = [
-                  {
-                      CompanionName: $scope.companion.CompanionName,
-                      CompanionPhone: $scope.companion.CompanionPhone,
-                      CompanionEmail: $scope.companion.CompanionEmail
-                  }
-              ];
-          }
 
           PaymentsService.addPayment($scope.model).then(
               function () {
