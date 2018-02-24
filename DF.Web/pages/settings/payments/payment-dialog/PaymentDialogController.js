@@ -72,6 +72,10 @@
         }
 
         // additional checks
+        if (!moment($scope.model.DueDate + 'T00:00:00', moment.ISO_8601).isValid()) {
+            return { error: true, errorMsg: 'Rok za plaćanje nije ispravan datum.' };
+        }
+
         if ($scope.model.InstallmentAmounts && $scope.model.InstallmentAmounts !== '') {
             var installmentAmounts = $scope.model.InstallmentAmounts.split(';');
 
