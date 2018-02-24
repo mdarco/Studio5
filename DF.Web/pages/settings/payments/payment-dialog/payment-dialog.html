@@ -35,15 +35,16 @@
                 (U slučaju plaćanja na rate - rok za plaćanje prve rate)
             </div>
             <label class="input" style="width: 100%">
-                <input type="text"
+                <!--<input type="text"
                         uib-datepicker-popup
-                        ng-model="model.DueDatePicker"
+                        ng-model="dueDate"
                         placeholder="yyyy-mm-dd"
                         class="form-control disabled-input-color"
-                        is-open="datePickers.datePickerOpened_DueDate"
-                        readonly="readonly" />
+                        is-open="datePickerOpened_DueDate"
+                        readonly="readonly" />-->
+                <input type="text" ng-model="model.DueDate" placeholder="YYYY-MM-DD" />
             </label>
-            <button type="button" class="btn btn-sm btn-primary form-control" style="margin-bottom: 3px; width: 10%;" ng-click="openDatePicker('DueDate', $event)"><i class="fa fa-calendar"></i></button>
+            <!--<button type="button" class="btn btn-sm btn-primary form-control" style="margin-bottom: 3px; width: 10%;" ng-click="openDatePicker('DueDate', $event)"><i class="fa fa-calendar"></i></button>-->
         </section>
 
         <section>
@@ -52,15 +53,16 @@
                 (U slučaju mesečnog plaćanja)
             </div>
             <label class="input" style="width: 100%">
-                <input type="text"
+                <!--<input type="text"
                         uib-datepicker-popup
                         ng-model="model.StopDatePicker"
                         placeholder="yyyy-mm-dd"
                         class="form-control disabled-input-color"
-                        is-open="datePickers.datePickerOpened_StopDate"
-                        readonly="readonly" />
+                        is-open="datePickerOpened_StopDate"
+                        readonly="readonly" />-->
+                <input type="text" ng-model="model.StartDate" placeholder="YYYY-MM-DD" />
             </label>
-            <button type="button" class="btn btn-sm btn-primary form-control" style="margin-bottom: 3px; width: 10%;" ng-click="openDatePicker('StopDate', $event)"><i class="fa fa-calendar"></i></button>
+            <!--<button type="button" class="btn btn-sm btn-primary form-control" style="margin-bottom: 3px; width: 10%;" ng-click="openDatePicker('StopDate', $event)"><i class="fa fa-calendar"></i></button>-->
         </section>
 
         <section>

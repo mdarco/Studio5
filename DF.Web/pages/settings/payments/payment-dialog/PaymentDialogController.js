@@ -5,13 +5,10 @@
       .module('DFApp')
       .controller('PaymentDialogController', ctrlFn);
 
-  ctrlFn.$inject = ['$scope', '$uibModalInstance', 'PaymentsService', 'UtilityService', 'toastr'];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$uibModalInstance', 'PaymentsService', 'UtilityService', 'toastr'];
 
-  function ctrlFn($scope, $uibModalInstance, PaymentssService, UtilityService, toastr) {
-      $scope.model = {
-          Companions: []
-      };
-
+  function ctrlFn($rootScope, $scope, $uibModalInstance, PaymentsService, UtilityService, toastr) {
+      $scope.model = {};
       $scope.companion = {};
 
       $scope.paymentTypes = [
@@ -31,10 +28,19 @@
               return;
           }
 
-          // adjust birth date for transfer
-          $scope.model.DueDate = UtilityService.convertDateToISODateString($scope.model.DueDatePicker);
+          //$scope.model.DueDate = UtilityService.convertDateToISODateString($scope.model.DueDatePicker);
 
-          PaymentsService.create($scope.model).then(
+          if ($scope.companion.CompanionName && $scope.companion.CompanionName !== '') {
+              $scope.model.Companions = [
+                  {
+                      CompanionName: $scope.companion.CompanionName,
+                      CompanionPhone: $scope.companion.CompanionPhone,
+                      CompanionEmail: $scope.companion.CompanionEmail
+                  }
+              ];
+          }
+
+          PaymentsService.addPayment($scope.model).then(
               function () {
                   toastr.success('Plaćanje uspešno sačuvano.');
                   $uibModalInstance.close();
@@ -72,7 +78,7 @@
             }
         }
 
-        if (!$scope.model.DueDatePicker || ($scope.model.DueDatePicker && $scope.model.DueDatePicker === '')) {
+        if (!$scope.model.DueDate || ($scope.model.DueDate && $scope.model.DueDate === '')) {
             return { error: true, errorMsg: 'Rok za plaćanje je obavezan podatak.' };
         }
 
@@ -139,12 +145,12 @@
       }
 
       // date picker support
-      $scope.datePickers = {};
+      //$scope.datePickers = {};
       $scope.openDatePicker = function (pickerFor, event) {
           event.preventDefault();
           event.stopPropagation();
 
-          $scope.datePickers['datePickerOpened_' + pickerFor] = true;
+          $scope['datePickerOpened_' + pickerFor] = true;
       };
   }
 })();
