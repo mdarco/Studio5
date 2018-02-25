@@ -90,20 +90,20 @@ namespace DF.Test
         [TestMethod]
         public void AddMemberPayment_OneTimeWithInstallments()
         {
-            const int MEMBER_ID = 2;
-            const int PAYMENT_ID = 2;
+            const int MEMBER_ID = 3;
+            const int PAYMENT_ID = 1;
 
             Models.MemberPaymentModel model = new Models.MemberPaymentModel()
             {
                 MemberID = MEMBER_ID,
                 PaymentID = PAYMENT_ID,
-                DiscountPercentage = 10,
+                DiscountPercentage = 10//,
 
-                Companions =
-                    new List<Models.CompanionModel>()
-                    {
-                        new Models.CompanionModel() { Name = "Pratilac-3", Phone = "555-555", Email = "john.doe@dummy.com" },
-                    }
+                //Companions =
+                //    new List<Models.CompanionModel>()
+                //    {
+                //        new Models.CompanionModel() { Name = "Pratilac-3", Phone = "555-555", Email = "john.doe@dummy.com" },
+                //    }
             };
 
             BL.Members.AddMemberPayment(MEMBER_ID, model);

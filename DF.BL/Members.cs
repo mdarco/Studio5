@@ -103,6 +103,11 @@ namespace DF.BL
                     List<decimal> installmentAmounts = new List<decimal>();
                     if (!string.IsNullOrEmpty(paymentInfo.InstallmentAmounts))
                     {
+                        if (paymentInfo.InstallmentAmounts.EndsWith(";"))
+                        {
+                            paymentInfo.InstallmentAmounts = paymentInfo.InstallmentAmounts.Substring(0, paymentInfo.InstallmentAmounts.Length - 1);
+                        }
+
                         installmentAmounts = paymentInfo.InstallmentAmounts.Split(';').Select(x => decimal.Parse(x)).ToList();
                     }
                     else
@@ -114,10 +119,15 @@ namespace DF.BL
                     }
 
                     List<decimal> installmentAmountsForCompanion = new List<decimal>();
-                    if (model.Companions.Count() > 0)
+                    if (model.Companions != null && model.Companions.Count() > 0)
                     {
                         if (!string.IsNullOrEmpty(paymentInfo.InstallmentAmountsForCompanion))
                         {
+                            if (paymentInfo.InstallmentAmountsForCompanion.EndsWith(";"))
+                            {
+                                paymentInfo.InstallmentAmountsForCompanion = paymentInfo.InstallmentAmountsForCompanion.Substring(0, paymentInfo.InstallmentAmountsForCompanion.Length - 1);
+                            }
+
                             installmentAmountsForCompanion = paymentInfo.InstallmentAmountsForCompanion.Split(';').Select(x => decimal.Parse(x)).ToList();
                         }
                         else
@@ -141,9 +151,13 @@ namespace DF.BL
                         DateTime installmentDate = (i == 0) ? (DateTime)paymentInfo.DueDate : ((DateTime)paymentInfo.DueDate).AddMonths(i);
 
                         decimal installmentAmount = installmentAmounts.ElementAt(i);
-                        foreach (var c in model.Companions)
+
+                        if (model.Companions != null && model.Companions.Count() > 0)
                         {
-                            installmentAmount += installmentAmountsForCompanion.ElementAt(i);
+                            foreach (var c in model.Companions)
+                            {
+                                installmentAmount += installmentAmountsForCompanion.ElementAt(i);
+                            }
                         }
 
                         var installment = new InstallmentModel()
