@@ -220,11 +220,11 @@
                         </div>
                     </uib-tab>
 
-                    <uib-tab index="2" heading="Selekcije">
+                    <!--<uib-tab index="2" heading="Selekcije">
                         <div style="padding: 30px">
                             Work in progress..
                         </div>
-                    </uib-tab>
+                    </uib-tab>-->
 
                     <uib-tab index="3" heading="Slike">
                         <div style="padding: 30px">
@@ -281,6 +281,7 @@
                                         <th>Tip</th>
                                         <th>Iznos</th>
                                         <th>Br. rata</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -292,6 +293,9 @@
                                         <td>{{ memberPayment.Payment.Amount }}</td>
                                         <td ng-style="{ 'font-variant': memberPayment.Payment.NumberOfInstallments === 1 ? 'small-caps' : '' }">
                                             {{ memberPayment.Payment.NumberOfInstallments === 1 ? (memberPayment.Payment.Type.toUpperCase() === 'ONE-TIME' ? 'Jednokratno' : 'Mesečno') : memberPayment.Payment.NumberOfInstallments }}
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary btn-xs pull-right margin-right-5" title="Pregled plaćanja" ng-click="showInstallments(memberPayment)"><i class="fa fa-dollar"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>

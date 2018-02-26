@@ -1,0 +1,48 @@
+﻿<div class="modal-header bg-color-darken" style="color: white;">
+    <h4>{{ member.FirstName + ' ' + member.LastName + ' - pregled plaćanja' }}</h4>
+</div>
+
+<div class="modal-body">
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <td style="font-weight: bold">Rok za plaćanje</td>
+                <td style="font-weight: bold">Suma</td>
+                <td style="font-weight: bold">Status</td>
+                <td style="font-weight: bold">Datum plaćanja</td>
+                <td style="font-weight: bold">Poništeno?</td>
+                <td style="font-weight: bold">Komentar</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="installment in installments">
+                <td>{{ installment.InstallmentDate | date: 'dd.MM.yyyy' }}</td>
+                <td>{{ installment.Amount }}</td>
+                <td>
+                    <span ng-class="resolveStatusCssClass(installment)">{{ installment.IsPaid ? 'Plaćeno' : 'Nije plaćeno' }}</span>
+                    <span><i class="fa fa-pencil pull-right cursor-pointer" ng-click="editInstallment(installment, 'IsPaid')"></i></span>
+                </td>
+                <td>
+                    <span ng-class="{ 'df-text-gray-smallcaps' : !installment.PaymentDate }">
+                        {{ installment.PaymentDate ? (installment.PaymentDate | date: 'dd.MM.yyyy') : 'rata nije plaćena' }}
+                    </span>
+                    <span><i class="fa fa-pencil pull-right cursor-pointer" ng-click="editInstallment(installment, 'PaymentDate')"></i></span>
+                </td>
+                <td>
+                    <span ng-class="{ 'df-text-gray-smallcaps' : !installment.Note }">
+                        {{ installment.Note ? installment.Note : 'nema komentara' }}
+                    </span>
+                    <span><i class="fa fa-pencil pull-right cursor-pointer" ng-click="editInstallment(installment, 'Note')"></i></span>
+                </td>
+                <td style="text-align: center;">
+                    <span>{{ installment.IsCanceled ? 'Da' : 'Ne' }}</span>
+                    <span><i class="fa fa-pencil pull-right cursor-pointer" ng-click="editInstallment(installment, 'IsCanceled')"></i></span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal-footer">
+    <button ng-click="close()" class="btn btn-primary">Zatvori</button>
+</div>

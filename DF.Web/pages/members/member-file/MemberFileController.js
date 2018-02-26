@@ -515,6 +515,40 @@
             );
         };
 
+        $scope.showInstallments = function (memberPayment) {
+            var dialogOpts = {
+                size: 'lg',
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/members/installments-list-dialog/installments-list-dialog.html',
+                controller: 'InstallmentsListDialogController',
+                resolve: {
+                    installments: function () {
+                        return MembersService.getMemberPaymentInstallments(memberPayment.MemberID, memberPayment.PaymentID);
+                    },
+                    context: function () {
+                        return {
+                            member: angular.copy($scope.member),
+                            paymentID: memberPayment.PaymentID
+                        };
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            dialog.result.then(
+                function () {
+
+                },
+                function () {
+                    // modal dismissed => re-calculate total outstanding amount for vehicle registration
+                    // calculateTotalOutstandingAmount(vehicleRegistration);
+                }
+            );
+        };
+
         //#endregion
 
         //#region Helpers

@@ -478,6 +478,7 @@ namespace DF.DB
                 return payments.Select(x =>
                             new MemberPaymentModel()
                             {
+                                MemberID = x.MemberID,
                                 PaymentID = x.PaymentID,
                                 Payment =
                                     new PaymentModel()

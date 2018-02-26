@@ -92,7 +92,7 @@
         }
 
         function getMemberPaymentInstallments(id, paymentID) {
-            var url = WebApiBaseUrl + urlRoot + '/' + id + '/payments/' + paymentID + 'installments' + '?nd=' + Date.now();
+            var url = WebApiBaseUrl + urlRoot + '/' + id + '/payments/' + paymentID + '/installments' + '?nd=' + Date.now();
             return $http.get(url);
         }
 
