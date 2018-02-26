@@ -32,7 +32,7 @@
                         msg = 'Aktivirate plaćanje?';
                     }
 
-                    newFieldValue = !installment.IsAdminBan;
+                    newFieldValue = !installment.IsCanceled;
                 }
 
                 bootbox.confirm({

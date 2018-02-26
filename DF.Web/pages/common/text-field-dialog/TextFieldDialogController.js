@@ -34,7 +34,7 @@
             if (!$scope.field.Value ||
                ($scope.field.Value && $scope.field.Value === '')
             ) {
-                return { error: true, errorMsg: sprintf('%s je obavezan podatak.', $scope.viewSettings.Label) };
+                return { error: true, errorMsg: sprintf('%s je obavezan podatak.', $scope.viewSettings.FieldLabel) };
             }
 
             return { error: false };

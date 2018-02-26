@@ -543,8 +543,7 @@
 
                 },
                 function () {
-                    // modal dismissed => re-calculate total outstanding amount for vehicle registration
-                    // calculateTotalOutstandingAmount(vehicleRegistration);
+                    // modal dismissed
                 }
             );
         };
