@@ -137,7 +137,7 @@
 
       function resolveErrorMessage(error) {
           switch (error.statusText) {
-              case 'error_members_jmbg_exists':
+              case 'error_payments_name_exists':
                   toastr.error('Plaćanje sa datim nazivom već postoji.');
                   break;
 

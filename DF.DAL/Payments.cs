@@ -89,6 +89,12 @@ namespace DF.DB
         {
             using (var ctx = new DFAppEntities())
             {
+                var existing = ctx.Payments.FirstOrDefault(x => x.Name.ToLower() == model.Name.ToLower());
+                if (existing != null)
+                {
+                    throw new Exception("error_payments_name_exists");
+                }
+
                 var p = new DBModel.Payments()
                 {
                     Name = model.Name,
