@@ -76,6 +76,10 @@
             return { error: true, errorMsg: 'Rok za plaćanje nije ispravan datum.' };
         }
 
+        if (moment($scope.model.DueDate + 'T00:00:00', moment.ISO_8601) < moment(new Date())) {
+            return { error: true, errorMsg: 'Rok za plaćanje ne može biti u prošlosti.' };
+        }
+
         if ($scope.model.InstallmentAmounts && $scope.model.InstallmentAmounts !== '') {
             var installmentAmounts = $scope.model.InstallmentAmounts.split(';');
 
