@@ -138,6 +138,21 @@ caption {
     font-weight: bold;
 }
 
+.df-text-gray-smallcaps {
+    color: lightgray;
+    font-variant: small-caps;
+}
+
+.df-alert-row {
+    color: red;
+    font-weight: bold;
+}
+
+.df-ok-row {
+    color: green;
+    font-weight: bold;
+}
+
 /* Reports */
 .report-result-file-redirection {
     border: 1px solid lightgray;

@@ -10,8 +10,8 @@
                 <td style="font-weight: bold">Suma</td>
                 <td style="font-weight: bold">Status</td>
                 <td style="font-weight: bold">Datum plaćanja</td>
-                <td style="font-weight: bold">Poništeno?</td>
                 <td style="font-weight: bold">Komentar</td>
+                <td style="font-weight: bold">Poništeno?</td>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +24,7 @@
                 </td>
                 <td>
                     <span ng-class="{ 'df-text-gray-smallcaps' : !installment.PaymentDate }">
-                        {{ installment.PaymentDate ? (installment.PaymentDate | date: 'dd.MM.yyyy') : 'rata nije plaćena' }}
+                        {{ installment.PaymentDate ? (installment.PaymentDate | date: 'dd.MM.yyyy') : 'nije plaćeno' }}
                     </span>
                     <span><i class="fa fa-pencil pull-right cursor-pointer" ng-click="editInstallment(installment, 'PaymentDate')"></i></span>
                 </td>
