@@ -548,6 +548,41 @@
             );
         };
 
+        $scope.resolveMemberPaymentCssClass = function (memberPayment) {
+            var installments = memberPayment.Installments;
+
+            if (installments && installments.length > 0) {
+                var isProblematic = false;
+                var isCompleted = true;
+
+                // 'return false;' breaks the _.each() loop
+                _.each(installments, installment => {
+                    if (!installment.IsPaid && !installment.IsCanceled) {
+                        isCompleted = false;
+
+                        if (!isProblematic) {
+                            var today = moment(Date.now());
+                            var installmentDate = moment(installment.InstallmentDate);
+
+                            if (installmentDate < today) {
+                                isProblematic = true;
+                            }
+                        }
+                    }
+                });
+
+                if (isProblematic) {
+                    return 'df-alert-row';
+                }
+
+                if (isCompleted) {
+                    return 'df-ok-row';
+                }
+            }
+
+            return '';
+        };
+
         //#endregion
 
         //#region Helpers

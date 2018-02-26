@@ -285,7 +285,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="memberPayment in memberPayments">
+                                    <tr ng-repeat="memberPayment in memberPayments" ng-class="resolveMemberPaymentCssClass(memberPayment)">
                                         <td>{{ memberPayment.Payment.Name }}</td>
                                         <td>{{ memberPayment.Payment.Description }}</td>
                                         <td>{{ memberPayment.Payment.Currency }}</td>
