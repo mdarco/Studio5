@@ -525,7 +525,7 @@
                 controller: 'InstallmentsListDialogController',
                 resolve: {
                     installments: function () {
-                        return MembersService.getMemberPaymentInstallments(memberPayment.MemberID, memberPayment.PaymentID);
+                        return memberPayment.Installments;
                     },
                     context: function () {
                         return {
