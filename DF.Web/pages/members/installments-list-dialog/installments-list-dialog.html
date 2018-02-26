@@ -15,7 +15,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="installment in installments">
+            <tr ng-repeat="installment in installments" ng-style="{ 'color': installment.IsCanceled ? 'lightgray' : '' }">
                 <td>{{ installment.InstallmentDate | date: 'dd.MM.yyyy' }}</td>
                 <td>{{ installment.Amount }}</td>
                 <td>
