@@ -12,6 +12,11 @@
         $scope.member = context.member;
 
         $scope.editInstallment = function (installment, dataField) {
+            if (dataField !== 'IsCanceled' && installment.IsCanceled) {
+                toastr.warning('Plaćanje je deaktivirano.');
+                return;
+            }
+
             if (dataField === 'IsPaid' || dataField === 'IsCanceled') {
                 // boolean fields
                 var msg = null;
