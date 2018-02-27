@@ -545,6 +545,11 @@
                         });
 
                         return _.cloneDeep(payments);
+                    },
+                    viewSettings: function () {
+                        return {
+                            dialogTitle: `${$scope.member.FirstName} ${$scope.member.LastName} - novo plaćanje`
+                        };
                     }
                 }
             };

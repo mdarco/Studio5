@@ -5,10 +5,10 @@
         .module('DFApp')
         .controller('TableSelectDialogController', ctrlFn);
 
-    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'toastr', 'tableStructure', 'tableData', 'additionalChkboxCol', 'tableSelectedData'];
+    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'toastr', 'tableStructure', 'tableData', 'additionalChkboxCol', 'tableSelectedData', 'viewSettings'];
 
-    function ctrlFn($scope, $uibModalInstance, toastr, tableStructure, tableData, additionalChkboxCol, tableSelectedData) {
-        $scope.viewSettings = {};
+    function ctrlFn($scope, $uibModalInstance, toastr, tableStructure, tableData, additionalChkboxCol, tableSelectedData, viewSettings) {
+        $scope.viewSettings = viewSettings;
 
         $scope.additionalCol = additionalChkboxCol;
 
