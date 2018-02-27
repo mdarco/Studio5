@@ -607,6 +607,53 @@ namespace DF.DB
             }
         }
 
+        public static void DeleteMemberPayment(int memberID, int paymentID)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var memberPayment = 
+                    ctx.MemberPayments
+                        .FirstOrDefault(mp => mp.MemberID == memberID && mp.PaymentID == paymentID);
+
+                if (memberPayment != null)
+                {
+                    // can be deleted only if all installments are not paid or canceled
+                    // and if there are no overdue installments
+                    var installments = ctx.MemberPaymentInstallments.Where(mpi => mpi.MemberID == memberID && mpi.PaymentID == paymentID);
+                    if (installments != null && installments.Count() > 0)
+                    {
+                        foreach (var installment in installments)
+                        {
+                            bool isOverdue = (!installment.IsPaid && (installment.InstallmentDate.Date < DateTime.Now.Date));
+                            bool notDeletable = installment.IsPaid || (!installment.IsPaid && isOverdue && !installment.IsCanceled);
+
+                            if (notDeletable)
+                            {
+                                throw new Exception("error_member_payments_cannot_be_deleted");
+                            }
+
+                            ctx.MemberPaymentInstallments.Remove(installment);
+                        }
+                    }
+
+                    // delete member payment companions
+                    var companions = ctx.MemberPaymentsForCompanions.Where(mpc => mpc.MemberID == memberID && mpc.PaymentID == paymentID);
+                    if (companions != null && companions.Count() > 0)
+                    {
+                        foreach (var companion in companions)
+                        {
+                            ctx.MemberPaymentsForCompanions.Remove(companion);
+                        }
+                    }
+
+                    // delete member payment
+                    ctx.MemberPayments.Remove(memberPayment);
+
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
         public static void EditMemberPaymentInstallment(int id, InstallmentModel model)
         {
             using (var ctx = new DFAppEntities())
