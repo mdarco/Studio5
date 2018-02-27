@@ -515,6 +515,10 @@
             );
         };
 
+        $scope.addMemberPayment = function () {
+            alert('ADD');
+        };
+
         $scope.deleteMemberPayment = function (memberID, paymentID) {
             MembersService.deleteMemberPayment(memberID, paymentID).then(
                 () => {

@@ -85,12 +85,12 @@
                 openDateFieldDialog(dataField, installment[dataField]).then(
                     function (result) {
                         var editObj = {};
-                        editObj[dataField] = UtilityService.convertDateToISODateString(result.Value);
+                        editObj[dataField] = result;
 
                         MembersService.editMemberPaymentInstallment($scope.member.MemberID, context.paymentID, installment.ID, editObj).then(
                             function () {
                                 toastr.success('Podatak uspešno ažuriran.');
-                                installment[dataField] = result.Value;
+                                installment[dataField] = UtilityService.convertISODateStringToDate(result);
                             },
                             function (error) {
                                 toastr.error(error.statusText);

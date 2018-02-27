@@ -102,7 +102,7 @@
             return $http.post(url, model);
         }
 
-        function dewleteMemberPayment(id, paymentID) {
+        function deleteMemberPayment(id, paymentID) {
             var url = WebApiBaseUrl + urlRoot + '/' + id + '/payments/' + paymentID;
             return $http.delete(url);
         }
