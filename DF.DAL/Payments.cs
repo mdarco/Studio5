@@ -29,6 +29,11 @@ namespace DF.DB
                         q = q.Where(x => !filter.ExcludeID.Contains(x.ID));
                     }
 
+                    if (filter.IsActive.HasValue)
+                    {
+                        q = q.Where(x => x.Active == filter.IsActive);
+                    }
+
                     return q.Select(x =>
                                 new PaymentModel()
                                 {
@@ -113,7 +118,7 @@ namespace DF.DB
                     InstallmentAmounts = model.InstallmentAmounts,
                     AmountForCompanion = model.AmountForCompanion,
                     InstallmentAmountsForCompanion = model.InstallmentAmountsForCompanion,
-                    Active = model.Active,
+                    Active = true,
                     EventID = model.EventID,
                     CostumeID = model.CostumeID,
                     OutfitID = model.OutfitID

@@ -562,7 +562,7 @@
                             return mp.Payment.ID;
                         });
 
-                        return PaymentsService.getFiltered({ ExcludeID: excludeID });
+                        return PaymentsService.getFiltered({ ExcludeID: excludeID, IsActive: true });
                     },
                     additionalChkboxCol: function () {
                         return null;
@@ -585,8 +585,19 @@
             var dialog = $uibModal.open(dialogOpts);
 
             dialog.result.then(
-                function (selectedPayments) {
-                    // TODO:
+                function (models) {
+                    MembersService.addMemberPaymentBulk($scope.member.MemberID, models).then(
+                        () => {
+                            if (AppParams.DEBUG) {
+                                toastr.success('Plaćanja uspešno dodeljena.');
+                                $scope.getMemberPayments();
+                            }
+                        },
+                        error => {
+                            toastr.error('Došlo je do greške prilikom dodeljivanja plaćanja.');
+                            toastr.error(error.statusText);
+                        }
+                    );
                 },
                 function () {
                     // modal dismissed => do nothing

@@ -5,9 +5,9 @@
         .module('DFApp')
         .factory('MembersService', serviceFn);
 
-    serviceFn.$inject = ['$http', 'WebApiBaseUrl'];
+    serviceFn.$inject = ['$http', '$q', 'WebApiBaseUrl'];
 
-    function serviceFn($http, WebApiBaseUrl) {
+    function serviceFn($http, $q, WebApiBaseUrl) {
         var urlRoot = '/api/members';
 
         var service = {
@@ -26,6 +26,7 @@
             getMemberPayments: getMemberPayments,
             getMemberPaymentInstallments: getMemberPaymentInstallments,
             addMemberPayment: addMemberPayment,
+            addMemberPaymentBulk: addMemberPaymentBulk,
             deleteMemberPayment: deleteMemberPayment,
             editMemberPaymentInstallment: editMemberPaymentInstallment
         };
@@ -100,6 +101,15 @@
         function addMemberPayment(id, model) {
             var url = WebApiBaseUrl + urlRoot + '/' + id + '/payments';
             return $http.post(url, model);
+        }
+
+        function addMemberPaymentBulk(id, models) {
+            var promises = [];
+            _.each(models, model => {
+                promises.push(addMemberPayment(id, model));
+            });
+
+            return $q.all(promises);
         }
 
         function deleteMemberPayment(id, paymentID) {
