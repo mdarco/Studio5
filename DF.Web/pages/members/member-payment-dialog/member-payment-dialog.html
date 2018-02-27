@@ -1,0 +1,29 @@
+﻿<div class="modal-header bg-color-darken" style="color: white;">
+    <h4>{{ viewSettings.dialogTitle }}</h4>
+</div>
+
+<div class="modal-body" style="height: 300px;">
+    <table class="table table-condensed table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th><input type="checkbox" ng-model="chkState.selectAll" ng-change="selectAll()" /></th>
+                <th ng-repeat="headerName in tableStructure.header">{{ headerName }}</th>
+                <th ng-if="resolveAdditionalCol()">{{ additionalCol.name }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="d in tableData">
+                <td><input type="checkbox" ng-model="d.selected" ng-change="selectRow(d)" /></td>
+                <td ng-repeat="dataName in tableStructure.data">{{ tableStructure.dataTransformationFn[dataName](d[dataName]) }}</td>
+                <td ng-if="resolveAdditionalCol()">
+                    <input type="checkbox" ng-model="d.selectedAdditionalCol" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal-footer">
+    <button ng-click="save()" class="btn btn-success">Sačuvaj</button>
+    <button ng-click="close()" class="btn btn-primary">Odustani</button>
+</div>

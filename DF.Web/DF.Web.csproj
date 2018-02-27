@@ -357,6 +357,8 @@
     <Content Include="pages\members\member-doc-dialog\MemberDocDialogController.js" />
     <Content Include="pages\members\member-file\member-file.html" />
     <Content Include="pages\members\member-file\MemberFileController.js" />
+    <Content Include="pages\members\member-payment-dialog\member-payment-dialog.html" />
+    <Content Include="pages\members\member-payment-dialog\MemberPaymentDialogController.js" />
     <Content Include="pages\members\members.html" />
     <Content Include="pages\members\MembersController.js" />
     <Content Include="pages\NavigationController.js" />

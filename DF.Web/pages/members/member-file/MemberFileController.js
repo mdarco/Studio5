@@ -550,8 +550,8 @@
                 backdrop: 'static',
                 keyboard: true,
                 backdropClick: false,
-                templateUrl: 'pages/common/table-select-dialog/table-select-dialog.html',
-                controller: 'TableSelectDialogController',
+                templateUrl: 'pages/members/member-payment-dialog/member-payment-dialog.html',
+                controller: 'MemberPaymentDialogController',
                 resolve: {
                     tableStructure: function () {
                         return paymentsTableStructure;
