@@ -517,12 +517,13 @@
 
         $scope.addMemberPayment = function () {
             var paymentsTableStructure = {
-                header: ['ID', 'Naziv', 'Iznos (din)', 'Tip', 'Br. rata', 'Opis'],
-                data: ['ID', 'Name', 'Amount', 'Type', 'NumberOfInstallments', 'Description'],
+                header: ['Naziv', 'Iznos (din)', 'Tip', 'Br. rata', 'Opis'],
+                data: ['Name', 'Amount', 'Type', 'NumberOfInstallments', 'Description'],
                 idCol: 'ID'
             };
 
             var dialogOpts = {
+                size: 'lg',
                 backdrop: 'static',
                 keyboard: true,
                 backdropClick: false,
