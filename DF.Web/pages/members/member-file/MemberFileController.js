@@ -557,8 +557,12 @@
                         return paymentsTableStructure;
                     },
                     tableData: function (PaymentsService) {
-                        // TODO: exclude already assigned payments
-                        return PaymentsService.getFiltered({});
+                        // first exclude already assigned payments
+                        var excludeID = _.map($scope.memberPayments, mp => {
+                            return mp.Payment.ID;
+                        });
+
+                        return PaymentsService.getFiltered({ ExcludeID: excludeID });
                     },
                     additionalChkboxCol: function () {
                         return null;
