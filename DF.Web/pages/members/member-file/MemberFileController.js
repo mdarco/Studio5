@@ -533,13 +533,18 @@
                         return paymentsTableStructure;
                     },
                     tableData: function (PaymentsService) {
+                        // TODO: exclude already assigned payments
                         return PaymentsService.getFiltered({});
                     },
                     additionalChkboxCol: function () {
                         return null;
                     },
                     tableSelectedData: function () {
-                        return _.cloneDeep($scope.memberPayments);
+                        var payments = _.map($scope.memberPayments, mp => {
+                            return mp.Payment;
+                        });
+
+                        return _.cloneDeep(payments);
                     }
                 }
             };

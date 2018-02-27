@@ -483,6 +483,7 @@ namespace DF.DB
                                 Payment =
                                     new PaymentModel()
                                     {
+                                        ID = x.PaymentID,
                                         Name = x.Payments.Name,
                                         Description = x.Payments.Description,
                                         Type = x.Payments.Type,

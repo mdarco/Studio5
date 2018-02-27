@@ -24,6 +24,11 @@ namespace DF.DB
                         q = q.Where(x => x.Name.ToLower().Contains(filter.Name.ToLower()));
                     }
 
+                    if (filter.ExcludeID != null && filter.ExcludeID.Count() > 0)
+                    {
+                        q = q.Where(x => !filter.ExcludeID.Contains(x.ID));
+                    }
+
                     return q.Select(x =>
                                 new PaymentModel()
                                 {
