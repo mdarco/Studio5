@@ -516,7 +516,44 @@
         };
 
         $scope.addMemberPayment = function () {
-            alert('ADD');
+            var paymentsTableStructure = {
+                header: ['ID', 'Naziv', 'Iznos (din)', 'Tip', 'Br. rata', 'Opis'],
+                data: ['ID', 'Name', 'Amount', 'Type', 'NumberOfInstallments', 'Description'],
+                idCol: 'ID'
+            };
+
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: true,
+                backdropClick: false,
+                templateUrl: 'pages/common/table-select-dialog/table-select-dialog.html',
+                controller: 'TableSelectDialogController',
+                resolve: {
+                    tableStructure: function () {
+                        return paymentsTableStructure;
+                    },
+                    tableData: function (PaymentsService) {
+                        return PaymentsService.getFiltered({});
+                    },
+                    additionalChkboxCol: function () {
+                        return null;
+                    },
+                    tableSelectedData: function () {
+                        return _.cloneDeep($scope.memberPayments);
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            dialog.result.then(
+                function (selectedPayments) {
+                    // TODO:
+                },
+                function () {
+                    // modal dismissed => do nothing
+                }
+            );
         };
 
         $scope.deleteMemberPayment = function (memberID, paymentID) {
