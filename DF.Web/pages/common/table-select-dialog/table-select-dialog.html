@@ -14,7 +14,7 @@
         <tbody>
             <tr ng-repeat="d in tableData">
                 <td><input type="checkbox" ng-model="d.selected" ng-change="selectRow(d)" /></td>
-                <td ng-repeat="dataName in tableStructure.data">{{ d[dataName] }}</td>
+                <td ng-repeat="dataName in tableStructure.data">{{ tableStructure.dataTransformationFn[dataName](d[dataName]) }}</td>
                 <td ng-if="resolveAdditionalCol()">
                     <input type="checkbox" ng-model="d.selectedAdditionalCol" />
                 </td>

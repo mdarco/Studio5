@@ -516,10 +516,33 @@
         };
 
         $scope.addMemberPayment = function () {
+            var regularTransformFn = function (data) {
+                return data;
+            };
+
+            var colTypeTransformFn = function (data) {
+                return (data === 'ONE-TIME') ? 'Jednokratno' : 'Mesečno';
+            };
+
+            var colNumberOfInstallmentsTransformFn = function (data) {
+                if (!data) {
+                    return ' - ';
+                }
+
+                return data;
+            };
+
             var paymentsTableStructure = {
                 header: ['Naziv', 'Iznos (din)', 'Tip', 'Br. rata', 'Opis'],
                 data: ['Name', 'Amount', 'Type', 'NumberOfInstallments', 'Description'],
-                idCol: 'ID'
+                idCol: 'ID',
+                dataTransformationFn: {
+                    Name: regularTransformFn,
+                    Amount: regularTransformFn,
+                    Type: colTypeTransformFn,
+                    NumberOfInstallments: colNumberOfInstallmentsTransformFn,
+                    Description: regularTransformFn
+                }
             };
 
             var dialogOpts = {
