@@ -26,6 +26,7 @@
             getMemberPayments: getMemberPayments,
             getMemberPaymentInstallments: getMemberPaymentInstallments,
             addMemberPayment: addMemberPayment,
+            deleteMemberPayment: deleteMemberPayment,
             editMemberPaymentInstallment: editMemberPaymentInstallment
         };
 
@@ -99,6 +100,11 @@
         function addMemberPayment(id, model) {
             var url = WebApiBaseUrl + urlRoot + '/' + id + '/payments';
             return $http.post(url, model);
+        }
+
+        function dewleteMemberPayment(id, paymentID) {
+            var url = WebApiBaseUrl + urlRoot + '/' + id + '/payments/' + paymentID;
+            return $http.delete(url);
         }
 
         function editMemberPaymentInstallment(id, paymentID, installmentID, model) {

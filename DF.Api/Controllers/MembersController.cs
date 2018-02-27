@@ -166,6 +166,25 @@ namespace DF.Api.Controllers
             BL.Members.AddMemberPayment(id, model);
         }
 
+        [Route("{id}/payments/{paymentID}")]
+        [HttpDelete]
+        public void DeleteMemberPayment(int id, int paymentID)
+        {
+            try
+            {
+                DB.Members.DeleteMemberPayment(id, paymentID);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(
+                    new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.Forbidden,
+                        ReasonPhrase = ex.Message
+                    });
+            }
+        }
+
         [Route("{id}/payments/{paymentID}/installments/{installmentID}")]
         [HttpPut]
         public void EditMemberPaymentInstallment(int installmentID, InstallmentModel model)

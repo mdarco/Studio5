@@ -515,6 +515,19 @@
             );
         };
 
+        $scope.deleteMemberPayment = function (memberID, paymentID) {
+            MembersService.deleteMemberPayment(memberID, paymentID).then(
+                () => {
+                    if (AppParams.DEBUG) {
+                        toastr.success('Plaćanje uspešno obrisano.');
+                    }
+                },
+                error => {
+                    toastr.error('Plaćanje se ne može izbrisati - postoje plaćene rate i/ili dugovanja.');
+                }
+            );
+        };
+
         $scope.showInstallments = function (memberPayment) {
             var dialogOpts = {
                 size: 'lg',
