@@ -1,6 +1,8 @@
 ﻿(function () {
     'use strict';
 
+    Dropzone.autoDiscover = false;
+
     var app = angular.module('DFApp', [
         'ngRoute',
         'ngAnimate',
@@ -17,6 +19,7 @@
         'sprintf',
 		'ngFileSaver',
         'ngTagsInput',
+        'thatisuday.dropzone',
         'ngCacheBuster'
     ]);
 })();
