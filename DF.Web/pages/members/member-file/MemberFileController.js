@@ -364,7 +364,8 @@
                     $scope.getDocuments();
                 },
                 function () {
-                    // modal dismissed => do nothing
+                    // modal dismissed
+                    $scope.getDocuments();
                 }
             );
         };
