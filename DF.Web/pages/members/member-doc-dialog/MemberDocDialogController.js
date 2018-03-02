@@ -114,47 +114,7 @@
 
         $scope.save = function () {
             $scope.dzMethods.processQueue();
-
-            //var f = document.getElementById('uploadMemberDoc');
-            //if (!f.files[0]) {
-            //    toastr.warning('Dokument nije izabran.');
-            //} else if (!$scope.model.DocumentTypeID) {
-            //    toastr.warning('Nije izabrana vrsta dokumenta.');
-            //} else if (!$scope.model.DocumentName || $scope.model.DocumentName === '') {
-            //    toastr.warning('Niste zadali naziv dokumenta.');
-            //} else {
-            //    var file = f.files[0];
-
-            //    var fileReader = new FileReader();
-            //    fileReader.onloadend = function (event) {
-            //        var fileData = event.target.result; // file data URL
-            //        _save({ DataUrl: fileData, FileName: file.name });
-            //    };
-
-            //    fileReader.readAsDataURL(file);
-            //}
         };
-
-        function _save(fileData) {
-            $scope.model.File.FileName = fileData.FileName;
-            $scope.model.File.DataUrl = fileData.DataUrl;
-            $scope.model.MemberID = memberID;
-            $scope.model.UserID = userID;
-            $scope.model.DocMetadata.ExpiryDate = UtilityService.convertDateToISODateString($scope.model.DocMetadata.ExpiryDateForDisplay);
-
-            MembersService.addDocument($scope.model).then(
-                function () {
-                    if (AppParams.DEBUG) {
-                        toastr.success('Dokument uspešno dodat.');
-                    }
-
-                    $uibModalInstance.close();
-                },
-                function (error) {
-                    resolveError(error);
-                }
-            );
-        }
 
         $scope.close = function () {
             $uibModalInstance.dismiss();
