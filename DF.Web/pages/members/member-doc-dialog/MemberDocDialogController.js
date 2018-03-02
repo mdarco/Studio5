@@ -15,6 +15,19 @@
 
         $scope.docTypes = docTypes;
 
+        //#region ngDropzone
+
+        $scope.dzOptions = {
+            autoProcessQueue: false,
+            url: '/',
+            paramName: 'dfdoc',
+            //maxFilesize: '10',
+            maxFiles: 1,
+            addRemoveLinks: true
+	    };
+
+        //#endregion
+
         $scope.save = function () {
             var f = document.getElementById('uploadMemberDoc');
             if (!f.files[0]) {

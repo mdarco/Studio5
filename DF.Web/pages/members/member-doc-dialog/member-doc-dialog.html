@@ -4,7 +4,9 @@
 
 <div class="modal-body">
     <!-- Doc upload file -->
-    <input type="file" id="uploadMemberDoc" name="uploadMemberDoc" class="filestyle" style="width: 100%;" data-button-text="" data-placeholder="Izaberite dokument" data-buttonName="btn-primary" />
+    <!--<input type="file" id="uploadMemberDoc" name="uploadMemberDoc" class="filestyle" style="width: 100%;" data-button-text="" data-placeholder="Izaberite dokument" data-buttonName="btn-primary" />-->
+
+    <ng-dropzone class="dropzone" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods"></ng-dropzone>
 
     <br />
 
