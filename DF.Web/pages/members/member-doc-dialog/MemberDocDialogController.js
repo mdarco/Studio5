@@ -24,14 +24,23 @@
             maxFiles: 1,
             addRemoveLinks: true,
 
-            // previewTemplate: document.getElementById('preview-template').innerHTML,
+            //previewTemplate: `
+            //    <div id="preview-template" style="display: none;">
+            //        <div class="dz-preview dz-file-preview">
+            //            <div class="dz-details" style="border: 1px dotted navy; width: 100px; background-color: #ffffe0;">
+            //                <div class="dz-filename"><span data-dz-name></span></div>
+            //            </div>
+            //            <div class="btn btn-primary" style="width: 100%">Atributi</div>
+            //        </div>
+            //    </div>
+            //`,
 
             dictDefaultMessage: 'Kliknite ili prevucite dokument ovde..',
             dictFallbackMessage: 'Vaš Web browser ne podržava prevlačenje dokumenata.',
             dictInvalidFileType: 'Pogrešan tip datoteke.',
             dictFileTooBig: 'Dokument je preveliki.',
             dictMaxFilesExceeded: 'Prekoračili ste dozvoljen broj dokumenata.',
-            dictRemoveFile: 'Ukloni',
+            dictRemoveFile: 'Ukloni dokument',
 
             init: function () { },
             accept: function (file, done) {
@@ -77,6 +86,7 @@
 
             'success': function (file, serverResponse) {
                 // fires once for each file
+                clearModel();
             },
 
             'successmultiple': function (files, serverResponse) {
@@ -95,6 +105,11 @@
         };
 
         $scope.dzMethods = {};
+
+        function clearModel() {
+            $scope.model = {};
+            $scope.dzMethods.removeAllFiles();
+        }
 
         //#endregion
 
