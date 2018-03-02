@@ -34,7 +34,7 @@
             //    </div>
             //`,
 
-            dictDefaultMessage: 'Kliknite ili prevucite dokument ovde..',
+            dictDefaultMessage: '<h1 style="font-variant: small-caps;"><strong>Kliknite ili prevucite dokument ovde..</strong></h1>',
             dictFallbackMessage: 'Vaš Web browser ne podržava prevlačenje dokumenata.',
             dictInvalidFileType: 'Pogrešan tip datoteke.',
             dictFileTooBig: 'Dokument je preveliki.',
