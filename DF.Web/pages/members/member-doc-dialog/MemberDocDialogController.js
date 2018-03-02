@@ -25,13 +25,12 @@
             addRemoveLinks: true,
 
             //previewTemplate: `
-            //    <div id="preview-template" style="display: none;">
-            //        <div class="dz-preview dz-file-preview">
-            //            <div class="dz-details" style="border: 1px dotted navy; width: 100px; background-color: #ffffe0;">
-            //                <div class="dz-filename"><span data-dz-name></span></div>
-            //            </div>
-            //            <div class="btn btn-primary" style="width: 100%">Atributi</div>
+            //    <div class="dz-preview dz-file-preview" style="width: 100%;">
+            //        <div class="dz-details" style="border: 1px dotted navy; width: 100px; background-color: #ffffe0;">
+            //            <div class="dz-filename"><span data-dz-name></span></div>
+            //            <div class="dz-size" data-dz-size></div>
             //        </div>
+            //        <button class="btn btn-xs btn-danger dz-remove" title="Ukloni dokument" data-dz-remove><i class="fa fa-times"></i>  Ukloni</button>
             //    </div>
             //`,
 
