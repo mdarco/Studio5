@@ -108,10 +108,6 @@
                 return { error: true, errorMsg: 'Iznos za pratioca nije ispravan.' };
             }
 
-            if (!companion.CompanionName || (companion.CompanionName && companions.CompanionName === '')) {
-                return { error: true, errorMsg: 'Naziv pratioca je obavezan ako je zadat iznos za pratioca.' };
-            }
-
             if ($scope.model.InstallmentAmountsForCompanion && $scope.model.InstallmentAmountsForCompanion !== '') {
                 var installmentAmountsForCompanion = $scope.model.InstallmentAmountsForCompanion.split(';');
 

@@ -534,12 +534,13 @@
             };
 
             var paymentsTableStructure = {
-                header: ['Naziv', 'Iznos (din)', 'Tip', 'Br. rata', 'Opis'],
-                data: ['Name', 'Amount', 'Type', 'NumberOfInstallments', 'Description'],
+                header: ['Naziv', 'Iznos', 'Valuta', 'Tip', 'Br. rata', 'Opis'],
+                data: ['Name', 'Amount', 'Currency', 'Type', 'NumberOfInstallments', 'Description'],
                 idCol: 'ID',
                 dataTransformationFn: {
                     Name: regularTransformFn,
                     Amount: regularTransformFn,
+                    Currency: regularTransformFn,
                     Type: colTypeTransformFn,
                     NumberOfInstallments: colNumberOfInstallmentsTransformFn,
                     Description: regularTransformFn
