@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('MemberDocDialogController', ctrlFn);
 
-    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'MembersService', 'UtilityService', 'toastr', 'AppParams', 'docTypes', 'memberID', 'userID'];
+    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'MembersService', 'UtilityService', 'WebApiBaseUrl', 'toastr', 'AppParams', 'docTypes', 'memberID', 'userID'];
 
-    function ctrlFn($scope, $uibModalInstance, MembersService, UtilityService, toastr, AppParams, docTypes, memberID, userID) {
+    function ctrlFn($scope, $uibModalInstance, MembersService, UtilityService, WebApiBaseUrl, toastr, AppParams, docTypes, memberID, userID) {
         $scope.model = {
             File: {},
             DocMetadata: {}
@@ -19,34 +19,106 @@
 
         $scope.dzOptions = {
             autoProcessQueue: false,
-            url: '/',
+            url: WebApiBaseUrl + '/api/members/' + memberID + '/documents',
             paramName: 'dfdoc',
-            //maxFilesize: '10',
             maxFiles: 1,
-            addRemoveLinks: true
-	    };
+            addRemoveLinks: true,
+
+            // previewTemplate: document.getElementById('preview-template').innerHTML,
+
+            dictDefaultMessage: 'Kliknite ili prevucite dokument ovde..',
+            dictFallbackMessage: 'Vaš Web browser ne podržava prevlačenje dokumenata.',
+            dictInvalidFileType: 'Pogrešan tip datoteke.',
+            dictFileTooBig: 'Dokument je preveliki.',
+            dictMaxFilesExceeded: 'Prekoračili ste dozvoljen broj dokumenata.',
+            dictRemoveFile: 'Ukloni',
+
+            init: function () { },
+            accept: function (file, done) {
+                // file validation logic can be put here
+
+                // has to be called in order for all the events to work properly
+                // done() means everything's ok, done([errorMessage]) signifies error
+                done();
+            }
+        };
+
+        $scope.dzCallbacks = {
+            'addedfile': function (file) {
+                
+            },
+
+            'removedfile': function (file) {
+                
+            },
+
+            'maxfilesexceeded': function (file) {
+                $scope.dzMethods.removeFile(file);
+                toastr.warning('Prekoračili ste dozvoljen broj dokumenata.');
+            },
+
+            'uploadprogress': function (file, progressPercentage, bytesSent) { },
+
+            'sending': function (file, xhrObject, formData) {
+                // fires once for each file
+
+                // send file model along with the real files (documents)
+                $scope.model.File.FileName = file.name;
+                $scope.model.MemberID = memberID;
+                $scope.model.UserID = userID;
+                $scope.model.DocMetadata.ExpiryDate = UtilityService.convertDateToISODateString($scope.model.DocMetadata.ExpiryDateForDisplay);
+
+                formData.append("model", JSON.stringify($scope.model));
+            },
+
+            'sendingmultiple': function (files, xhrObject, formData) {
+                // fires once per processQueue();
+            },
+
+            'success': function (file, serverResponse) {
+                // fires once for each file
+            },
+
+            'successmultiple': function (files, serverResponse) {
+                
+            },
+
+            'complete': function (file) { },
+
+            'completemultiple': function (files) {
+                // fires once per completed file
+            },
+
+            'error': function (file, errorMessage) {
+                toastr.error('Došlo je do greške prilikom upisivanja dokumenta.');
+            }
+        };
+
+        $scope.dzMethods = {};
 
         //#endregion
 
         $scope.save = function () {
-            var f = document.getElementById('uploadMemberDoc');
-            if (!f.files[0]) {
-                toastr.warning('Dokument nije izabran.');
-            } else if (!$scope.model.DocumentTypeID) {
-                toastr.warning('Nije izabrana vrsta dokumenta.');
-            } else if (!$scope.model.DocumentName || $scope.model.DocumentName === '') {
-                toastr.warning('Niste zadali naziv dokumenta.');
-            } else {
-                var file = f.files[0];
+            $scope.dzMethods.processQueue();
 
-                var fileReader = new FileReader();
-                fileReader.onloadend = function (event) {
-                    var fileData = event.target.result; // file data URL
-                    _save({ DataUrl: fileData, FileName: file.name });
-                };
+            //var f = document.getElementById('uploadMemberDoc');
+            //if (!f.files[0]) {
+            //    toastr.warning('Dokument nije izabran.');
+            //} else if (!$scope.model.DocumentTypeID) {
+            //    toastr.warning('Nije izabrana vrsta dokumenta.');
+            //} else if (!$scope.model.DocumentName || $scope.model.DocumentName === '') {
+            //    toastr.warning('Niste zadali naziv dokumenta.');
+            //} else {
+            //    var file = f.files[0];
 
-                fileReader.readAsDataURL(file);
-            }
+            //    var fileReader = new FileReader();
+            //    fileReader.onloadend = function (event) {
+            //        var fileData = event.target.result; // file data URL
+            //        _save({ DataUrl: fileData, FileName: file.name });
+            //    };
+
+            //    fileReader.readAsDataURL(file);
+            //}
         };
 
         function _save(fileData) {

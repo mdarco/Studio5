@@ -75,7 +75,8 @@ namespace DF.BL
             docModel.DocumentFileExtension = Path.GetExtension(model.File.FileName).Substring(1);
 
             // get file bytes
-            docModel.Bytes = Helpers.GetBytesFromDataUrl(model.File.DataUrl);
+            //docModel.Bytes = Helpers.GetBytesFromDataUrl(model.File.DataUrl);
+            docModel.Bytes = model.File.FileBytes;
 
             // determine folder to store the document
             docModel.DocumentPhysicalPath = string.Format(@"{0}{1}\{2}",

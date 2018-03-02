@@ -9,6 +9,6 @@ namespace DF.Models
     public class FileModel
     {
         public string FileName { get; set; }
-        public string DataUrl { get; set; }
+        public byte[] FileBytes { get; set; }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using DF.Models;
-
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace DF.Api.Controllers
@@ -75,11 +77,30 @@ namespace DF.Api.Controllers
 
         [Route("{id}/documents")]
         [HttpPost]
-        public void AddDocument(MemberDocumentModel model)
+        public void AddDocument()
         {
             try
             {
-                BL.Members.InsertDocument(model);
+                var httpRequest = HttpContext.Current.Request;
+
+                if (httpRequest.Files.Count > 0)
+                {
+                    HttpPostedFile file = httpRequest.Files[0];
+
+                    MemberDocumentModel model = new MemberDocumentModel();
+                    if (httpRequest.Form["model"] != null && !string.IsNullOrWhiteSpace(httpRequest.Form["model"]))
+                    {
+                        model = JsonConvert.DeserializeObject<MemberDocumentModel>(httpRequest.Form["model"]);
+
+                        // get file bytes
+                        using (BinaryReader binaryReader = new BinaryReader(file.InputStream))
+                        {
+                            model.File.FileBytes = binaryReader.ReadBytes(file.ContentLength);
+                        }
+
+                        BL.Members.InsertDocument(model);
+                    }
+                }
             }
             catch (Exception ex)
             {
