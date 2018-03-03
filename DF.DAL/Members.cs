@@ -390,7 +390,7 @@ namespace DF.DB
             using (var ctx = new DFAppEntities())
             {
                 var memberDocs = ctx.MemberDocuments
-                                .Include(t => t.Documents)
+                                .Include(t => t.Documents.DocumentMetadata)
                                 .Where(x => x.DocumentID == id)
                                 .ToList();
 
