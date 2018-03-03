@@ -2,11 +2,11 @@
     <h4>{{ viewSettings.dialogTitle }}</h4>
 </div>
 
-<div class="modal-body" style="height: 300px;">
+<div class="modal-body" style="height: 500px; overflow-y: auto;">
     <table class="table table-condensed table-bordered table-striped table-hover">
         <thead>
             <tr>
-                <th><input type="checkbox" ng-model="chkState.selectAll" ng-change="selectAll()" /></th>
+                <th><!--<input type="checkbox" ng-model="chkState.selectAll" ng-change="selectAll()" />--></th>
                 <th ng-repeat="headerName in tableStructure.header">{{ headerName }}</th>
                 <th ng-if="resolveAdditionalCol()">{{ additionalCol.name }}</th>
             </tr>
@@ -21,6 +21,55 @@
             </tr>
         </tbody>
     </table>
+
+    <div ng-repeat="selectedPayment in selectedData">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ selectedPayment.Name + ' - pratioci' }}</div>
+            <div class="panel-body">
+                <!-- Companion input row -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control input-sm" placeholder="Ime i prezime" ng-model="selectedPayment.newCompanion.Name" />
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control input-sm" placeholder="Telefon" ng-model="selectedPayment.newCompanion.Phone" />
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control input-sm" placeholder="Email" ng-model="selectedPayment.newCompanion.Email" />
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-sm btn-success pull-left" ng-click="addCompanion(selectedPayment)"><i class="fa fa-plus"></i></button>
+                    </div>
+                </div><br />
+
+                <!-- Companions list -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-condensed table-hover" ng-show="selectedPayment.Companions && selectedPayment.Companions.length > 0">
+                            <thead>
+                                <tr>
+                                    <th>Ime</th>
+                                    <th>Telefon</th>
+                                    <th>Email</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="companion in selectedPayment.Companions">
+                                    <td>{{ companion.Name }}</td>
+                                    <td>{{ companion.Phone }}</td>
+                                    <td>{{ companion.Email }}</td>
+                                    <td>
+                                        <button class="btn btn-xs btn-danger pull-right" ng-click="deleteCompanion(companion, selectedPayment)"><i class="fa fa-times"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal-footer">

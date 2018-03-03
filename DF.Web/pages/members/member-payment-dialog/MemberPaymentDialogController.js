@@ -62,6 +62,8 @@
         $scope.selectRow = function (dataItem) {
             if (dataItem.selected) {
                 // add data item to selected list
+                dataItem.Companions = [];
+                dataItem.newCompanion = {};
                 $scope.selectedData.push(dataItem);
             } else {
                 // remove data item from selected list
@@ -101,6 +103,39 @@
                 return true;
             }
             return false;
+        };
+
+        // companions
+        $scope.addCompanion = function (dataItem) {
+            if (!dataItem.Companions) {
+                dataItem.Companions = [];
+            }
+
+            // check name
+            var existing = _.find(dataItem.Companions, companion => {
+                return companion.Name.toLowerCase() === dataItem.newCompanion.Name.toLowerCase();
+            });
+
+            if (existing) {
+                toastr.warning('Pratilac sa datim imenom već postoji.');
+                return;
+            }
+
+            dataItem.Companions.push({
+                Name: dataItem.newCompanion.Name,
+                Phone: dataItem.newCompanion.Phone,
+                Email: dataItem.newCompanion.Email
+            });
+
+            dataItem.newCompanion = {};
+        };
+
+        $scope.deleteCompanion = function (companion, dataItem) {
+            if (dataItem.Companions && dataItem.Companions.length > 0) {
+                dataItem.Companions = _.filter(dataItem.Companions, c => {
+                    return c.Name.toLowerCase() !== companion.Name.toLowerCase();
+                });
+            }
         };
     }
 })();
