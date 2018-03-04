@@ -292,12 +292,26 @@
                 }
 
                 var fileReader = new FileReader();
-                fileReader.onloadend = function (event) {
+                fileReader.onload = function (event) {
+                    if (!event.target.result) {
+                        toastr.warning('Slika je prevelika.');
+                        return;
+                    }
+
                     var fileData = event.target.result; // file data URL
 
                     $timeout(function () {
-                        $scope.member.ProfileImage = fileData;
-                        $scope.editMember('ProfileImage');
+                        EXIF.getData(file, function () {
+                            var orientation = EXIF.getTag(this, "Orientation");
+                            switch (orientation) {
+                                case 6:
+                                    angular.element('imgProfileImage').css('transform', 'rotate(90deg)');
+                                    break;
+                            }
+
+                            $scope.member.ProfileImage = fileData;
+                            $scope.editMember('ProfileImage');
+                        });
                     }, 1000);
                 };
 
