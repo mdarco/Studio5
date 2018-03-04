@@ -10,7 +10,10 @@
     function serviceFn($http, WebApiBaseUrl) {
         var service = {
             convertISODateStringToDate: convertISODateStringToDate,
-            convertDateToISODateString: convertDateToISODateString
+            convertDateToISODateString: convertDateToISODateString,
+
+            arrayBufferToBase64: arrayBufferToBase64,
+            dataURItoBlob: dataURItoBlob
         };
 
         return service;
@@ -34,6 +37,37 @@
                 var day = date.getDate();
                 return year + '-' + month + '-' + day;
             }
+        }
+
+        function arrayBufferToBase64(buffer) {
+            var binary = '';
+            var bytes = new Uint8Array(buffer);
+            var len = bytes.byteLength;
+
+            for (var i = 0; i < len; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+
+            return window.btoa(binary);
+        }
+
+        function dataURItoBlob(dataURI) {
+            // convert base64 to raw binary data held in a string
+            var byteString = atob(dataURI.split(',')[1]);
+
+            // separate out the mime component
+            var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+            // write the bytes of the string to an ArrayBuffer
+            var arrayBuffer = new ArrayBuffer(byteString.length);
+            var _ia = new Uint8Array(arrayBuffer);
+            for (var i = 0; i < byteString.length; i++) {
+                _ia[i] = byteString.charCodeAt(i);
+            }
+
+            var dataView = new DataView(arrayBuffer);
+            var blob = new Blob([dataView], { type: mimeString });
+            return blob;
         }
     }
 })();

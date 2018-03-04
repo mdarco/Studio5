@@ -12,9 +12,6 @@
         $("#left-panel nav ul li").removeClass("active");
         $("#menuHome").addClass("active");
 
-        // image file types
-        const imageFileTypes = ['image/png', 'image/jpeg', 'image/gif'];
-
         var currentUser = AuthenticationService.getCurrentUser();
 
         $scope.webApiBaseUrl = WebApiBaseUrl;
@@ -286,36 +283,71 @@
             } else {
                 var file = f.files[0];
 
-                if (!_.includes(imageFileTypes, file.type)) {
+                if (!_.includes(AppParams.IMAGE_FILE_TYPES, file.type)) {
                     toastr.warning('Niste izabrali sliku.');
                     return;
                 }
 
                 var fileReader = new FileReader();
+
+                var size = file.size;
+                var chunk_size = 1024000;
+                var chunks = [];
+
+                var offset = 0;
+                var chunk_length = 0;
+
                 fileReader.onloadend = function (event) {
-                    if (!event.target.result) {
-                        toastr.warning('Slika je prevelika.');
-                        return;
-                    }
+                    if (event.target.readyState == FileReader.DONE) {
+                        var chunk = event.target.result;
+                        chunk_length += chunk.length;
+                        chunks.push(chunk);
 
-                    var fileData = event.target.result; // file data URL
+                        if (offset < size) {
+                            offset += chunk_size;
 
-                    $timeout(function () {
-                        EXIF.getData(file, function () {
-                            var orientation = EXIF.getTag(this, "Orientation");
-                            switch (orientation) {
-                                case 6:
-                                    angular.element('imgProfileImage').css('transform', 'rotate(90deg)');
-                                    break;
+                            var file_slice = file.slice(offset, offset + chunk_size);
+                            fileReader.readAsArrayBuffer(file_slice);
+                        } else {
+                            var fileData = [], fileDataSize = 0;
+                            _.each(chunks, c => {
+                                var base64chunk = UtilityService.arrayBufferToBase64(c);
+                                fileData.push(base64chunk);
+                                fileDataSize += base64chunk.length;
+                            });
+
+                            if (fileDataSize > AppParams.IMAGE_BASE64_SIZE_LIMIT) {
+                                toastr.warning('Slika je prevelika.');
+                                return;
                             }
 
-                            $scope.member.ProfileImage = fileData;
-                            $scope.editMember('ProfileImage');
-                        });
-                    }, 1000);
+                            $timeout(function () {
+                                $scope.member.ProfileImage = 'data:' + file.type + ';base64,' + fileData.join(''); // create dataURL
+
+                                EXIF.getData(file, function () {
+                                    var orientation = EXIF.getTag(this, "Orientation");
+                                    switch (orientation) {
+                                        case 3:
+                                            angular.element('imgProfileImage').css('transform', 'rotate(180deg)');
+                                            break;
+
+                                        case 6:
+                                            angular.element('imgProfileImage').css('transform', 'rotate(90deg)');
+                                            break;
+
+                                        case 8:
+                                            angular.element('imgProfileImage').css('transform', 'rotate(270deg)');
+                                            break;
+                                    }
+                                    $scope.editMember('ProfileImage');
+                                });
+                            }, 1000);
+                        }
+                    }
                 };
 
-                fileReader.readAsDataURL(file);
+                var file_slice = file.slice(offset, offset + chunk_size);
+                fileReader.readAsArrayBuffer(file_slice);
             }
         });
 
