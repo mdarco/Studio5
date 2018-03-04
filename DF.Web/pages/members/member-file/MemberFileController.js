@@ -292,7 +292,7 @@
                 }
 
                 var fileReader = new FileReader();
-                fileReader.onload = function (event) {
+                fileReader.onloadend = function (event) {
                     if (!event.target.result) {
                         toastr.warning('Slika je prevelika.');
                         return;
