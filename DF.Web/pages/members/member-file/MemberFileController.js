@@ -19,6 +19,25 @@
         $scope.member = member;
         if (!member.ProfileImage) {
             member.ProfileImage = 'Content/img/no-photo.png';
+        } else {
+            // fix image orientation if needed
+            var imageBlob = UtilityService.dataURItoBlob(member.ProfileImage);
+            EXIF.getData(imageBlob, function () {
+                var orientation = EXIF.getTag(this, "Orientation");
+                switch (orientation) {
+                    case 3:
+                        angular.element('imgProfileImage').css('transform', 'rotate(180deg)');
+                        break;
+
+                    case 6:
+                        angular.element('imgProfileImage').css('transform', 'rotate(90deg)');
+                        break;
+
+                    case 8:
+                        angular.element('imgProfileImage').css('transform', 'rotate(270deg)');
+                        break;
+                }
+            });
         }
 
         //#region Basic data
