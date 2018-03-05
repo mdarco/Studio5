@@ -62,5 +62,12 @@ namespace DF.Api.Controllers
                     });
             }
         }
+
+        [Route("create-new-monthly-installments")]
+        [HttpGet]
+        public void CreateNewMonthlyInstallments()
+        {
+            DB.Payments.CreateNewMonthlyInstallments();
+        }
     }
 }

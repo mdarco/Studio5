@@ -11,5 +11,11 @@ namespace DF.Test
         {
             var latestMonthlyInstallments = DB.Payments.GetLatestMonthlyInstallments();
         }
+
+        [TestMethod]
+        public void CreateNewMonthlyInstallments()
+        {
+            DB.Payments.CreateNewMonthlyInstallments();
+        }
     }
 }

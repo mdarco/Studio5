@@ -160,6 +160,34 @@ namespace DF.DB
             }
         }
 
+        // this should be executed by an agent every first day of the month
+        public static void CreateNewMonthlyInstallments()
+        {
+            var latestMonthlyInstallments = Payments.GetLatestMonthlyInstallments();
+            if (latestMonthlyInstallments != null && latestMonthlyInstallments.Count() > 0)
+            {
+                using (var ctx = new DFAppEntities())
+                {
+                    foreach (var monthlyInstallment in latestMonthlyInstallments)
+                    {
+                        MemberPaymentInstallments newMonthlyInstallment = new MemberPaymentInstallments()
+                        {
+                            MemberID = monthlyInstallment.MemberID,
+                            PaymentID = monthlyInstallment.PaymentID,
+                            InstallmentDate = monthlyInstallment.InstallmentDate.AddMonths(1),
+                            Amount = monthlyInstallment.Amount,
+                            IsCanceled = monthlyInstallment.IsCanceled,
+                            IsPaid = false
+                        };
+
+                        ctx.MemberPaymentInstallments.Add(newMonthlyInstallment);
+                    }
+
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
         #endregion
     }
 }
