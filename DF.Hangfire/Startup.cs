@@ -20,7 +20,7 @@ namespace DF.Hangfire
             app.UseHangfireDashboard("/dashboard");
             app.UseHangfireServer();
 
-            RecurringJob.AddOrUpdate(() => Debug.WriteLine("Minutely Job"), Cron.Monthly(1));
+            RecurringJob.AddOrUpdate(() => Jobs.Payments.CreateNewMonthlyInstallments(), Cron.Monthly(1));
         }
     }
 }
