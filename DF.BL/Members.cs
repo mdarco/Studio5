@@ -51,7 +51,7 @@ namespace DF.BL
         public static void AddMemberPayment(int memberID, MemberPaymentModel model)
         {
             // get payment info
-            var paymentInfo = DB.Payments.GetPayment(model.PaymentID);
+            var paymentInfo = DB.Payments.GetPayment(model.ID);
 
             // check discount
             if (model.DiscountPercentage.HasValue)

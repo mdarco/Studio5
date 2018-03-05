@@ -74,7 +74,7 @@ namespace DF.Test
             Models.MemberPaymentModel model = new Models.MemberPaymentModel()
             {
                 MemberID = MEMBER_ID,
-                PaymentID = PAYMENT_ID,
+                ID = PAYMENT_ID,
 
                 Companions =
                     new List<Models.CompanionModel>()
@@ -96,7 +96,7 @@ namespace DF.Test
             Models.MemberPaymentModel model = new Models.MemberPaymentModel()
             {
                 MemberID = MEMBER_ID,
-                PaymentID = PAYMENT_ID,
+                ID = PAYMENT_ID,
                 DiscountPercentage = 10//,
 
                 //Companions =
@@ -118,7 +118,7 @@ namespace DF.Test
             Models.MemberPaymentModel model = new Models.MemberPaymentModel()
             {
                 MemberID = MEMBER_ID,
-                PaymentID = PAYMENT_ID
+                ID = PAYMENT_ID
             };
 
             BL.Members.AddMemberPayment(MEMBER_ID, model);

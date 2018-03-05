@@ -479,7 +479,7 @@ namespace DF.DB
                             new MemberPaymentModel()
                             {
                                 MemberID = x.MemberID,
-                                PaymentID = x.PaymentID,
+                                ID = x.PaymentID,
                                 Payment =
                                     new PaymentModel()
                                     {
@@ -492,14 +492,15 @@ namespace DF.DB
                                         Currency = x.Payments.Currency,
                                         NumberOfInstallments = x.Payments.NumberOfInstallments,
                                         InstallmentAmounts = x.Payments.InstallmentAmounts,
-                                        InstallmentAmountsForCompanion = x.Payments.InstallmentAmountsForCompanion
+                                        InstallmentAmountsForCompanion = x.Payments.InstallmentAmountsForCompanion,
+                                        DueDate = x.Payments.DueDate
                                     },
 
                                 DiscountAmount = x.DiscountAmount,
                                 DiscountPercentage = x.DiscountPercentage,
 
                                 Companions = 
-                                    x.Payments.MemberPaymentsForCompanions.Select(c =>
+                                    x.Payments.MemberPaymentsForCompanions.Where(mpc => mpc.MemberID == id).Select(c =>
                                         new CompanionModel()
                                         {
                                             Name = c.CompanionName,
@@ -510,7 +511,7 @@ namespace DF.DB
                                     .ToList(),
 
                                 Installments 
-                                    = x.Payments.MemberPaymentInstallments.Select(i =>
+                                    = x.Payments.MemberPaymentInstallments.Where(mpi => mpi.MemberID == id).Select(i =>
                                         new InstallmentModel()
                                         {
                                             ID = i.ID,
@@ -574,7 +575,7 @@ namespace DF.DB
                     MemberPayments memberPayment = new MemberPayments()
                     {
                         MemberID = memberID,
-                        PaymentID = model.PaymentID,
+                        PaymentID = model.ID,
                         DiscountPercentage = model.DiscountPercentage
                     };
                     ctx.MemberPayments.Add(memberPayment);
@@ -586,7 +587,7 @@ namespace DF.DB
                             MemberPaymentsForCompanions companionPayment = new MemberPaymentsForCompanions()
                             {
                                 MemberID = memberID,
-                                PaymentID = model.PaymentID,
+                                PaymentID = model.ID,
                                 CompanionName = companion.Name,
                                 CompanionPhone = companion.Phone,
                                 CompanionEmail = companion.Email
@@ -600,7 +601,7 @@ namespace DF.DB
                         MemberPaymentInstallments memberInstallment = new MemberPaymentInstallments()
                         {
                             MemberID = memberID,
-                            PaymentID = model.PaymentID,
+                            PaymentID = model.ID,
                             InstallmentDate = (DateTime)installment.InstallmentDate,
                             Amount = installment.Amount,
                             IsPaid = false,
@@ -701,6 +702,11 @@ namespace DF.DB
                     ctx.SaveChanges();
                 }
             }
+        }
+
+        public static void CreateMonthlyInstallments()
+        {
+
         }
 
         #endregion
