@@ -12,6 +12,8 @@ namespace DF.DB.DBModel
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DFAppEntities : DbContext
     {
@@ -78,5 +80,10 @@ namespace DF.DB.DBModel
         public virtual DbSet<MemberPaymentsForCompanions> MemberPaymentsForCompanions { get; set; }
         public virtual DbSet<Payments> Payments { get; set; }
         public virtual DbSet<MemberPaymentInstallments> MemberPaymentInstallments { get; set; }
+    
+        public virtual ObjectResult<GetLatestMonthlyInstallments_Result> GetLatestMonthlyInstallments()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLatestMonthlyInstallments_Result>("GetLatestMonthlyInstallments");
+        }
     }
 }

@@ -149,5 +149,17 @@ namespace DF.DB
                 }
             }
         }
+
+        #region Installments
+
+        public static List<GetLatestMonthlyInstallments_Result> GetLatestMonthlyInstallments()
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                return ctx.GetLatestMonthlyInstallments().ToList();
+            }
+        }
+
+        #endregion
     }
 }

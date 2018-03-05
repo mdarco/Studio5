@@ -328,7 +328,7 @@
           <Property Name="MemberID" Type="int" Nullable="false" />
           <Property Name="PaymentID" Type="int" Nullable="false" />
           <Property Name="InstallmentDate" Type="datetime" Nullable="false" />
-          <Property Name="Amount" Type="decimal" Precision="15" Scale="5" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="15" Scale="5" />
           <Property Name="IsPaid" Type="bit" Nullable="false" />
           <Property Name="PaymentDate" Type="datetime" />
           <Property Name="IsCanceled" Type="bit" Nullable="false" />
@@ -1368,6 +1368,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetLatestMonthlyInstallments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DFDataModelStoreContainer">
           <EntitySet Name="Choreographies" EntityType="Self.Choreographies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ChoreographyChoreographers" EntityType="Self.ChoreographyChoreographers" Schema="dbo" store:Type="Tables" />
@@ -3300,6 +3301,7 @@
             <End Role="Payments" EntitySet="Payments" />
             <End Role="MemberPaymentInstallments" EntitySet="MemberPaymentInstallments" />
           </AssociationSet>
+          <FunctionImport Name="GetLatestMonthlyInstallments" ReturnType="Collection(DFDataModel.GetLatestMonthlyInstallments_Result)" />
           </EntityContainer>
         <Association Name="FK_UserGroupPermissions_Permissions">
           <End Type="DFDataModel.Permissions" Role="Permissions" Multiplicity="1" />
@@ -3513,7 +3515,7 @@
           <Property Name="MemberID" Type="Int32" Nullable="false" />
           <Property Name="PaymentID" Type="Int32" Nullable="false" />
           <Property Name="InstallmentDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="15" Scale="5" />
+          <Property Name="Amount" Type="Decimal" Precision="15" Scale="5" />
           <Property Name="IsPaid" Type="Boolean" Nullable="false" />
           <Property Name="PaymentDate" Type="DateTime" Precision="3" />
           <Property Name="Note" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
@@ -3545,6 +3547,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="GetLatestMonthlyInstallments_Result" >
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="Int32" Name="MemberID" Nullable="false" />
+          <Property Type="Int32" Name="PaymentID" Nullable="false" />
+          <Property Type="DateTime" Name="InstallmentDate" Nullable="false" />
+          <Property Type="Decimal" Name="Amount" Nullable="false" />
+          <Property Type="Boolean" Name="IsCanceled" Nullable="false" />
+          <Property Type="Int64" Name="Rank" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4103,6 +4114,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetLatestMonthlyInstallments" FunctionName="DFDataModel.Store.GetLatestMonthlyInstallments" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DFDataModel.GetLatestMonthlyInstallments_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="InstallmentDate" ColumnName="InstallmentDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="IsCanceled" ColumnName="IsCanceled" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

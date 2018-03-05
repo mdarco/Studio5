@@ -149,6 +149,9 @@
     <Compile Include="DBModel\Events.cs">
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBModel\GetLatestMonthlyInstallments_Result.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBModel\Images.cs">
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
