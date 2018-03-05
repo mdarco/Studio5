@@ -29,6 +29,10 @@
 
           //$scope.model.DueDate = UtilityService.convertDateToISODateString($scope.model.DueDatePicker);
 
+          if (!$scope.model.NumberOfInstallments || $scope.model.NumberOfInstallments === '') {
+              $scope.model.NumberOfInstallments = 1;
+          }
+
           PaymentsService.addPayment($scope.model).then(
               function () {
                   toastr.success('Plaćanje uspešno sačuvano.');
