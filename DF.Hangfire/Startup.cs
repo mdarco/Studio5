@@ -20,6 +20,7 @@ namespace DF.Hangfire
             app.UseHangfireDashboard("/dashboard");
             app.UseHangfireServer();
 
+            // Job: creating new monthly installments --> fired every first day of the month
             RecurringJob.AddOrUpdate(() => Jobs.Payments.CreateNewMonthlyInstallments(), Cron.Monthly(1));
         }
     }
