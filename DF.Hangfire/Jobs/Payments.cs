@@ -18,13 +18,9 @@ namespace DF.Hangfire.Jobs
             client.BaseAddress = new Uri(dfApiBaseAddress);
 
             HttpResponseMessage response = client.GetAsync(dfCreateNewMonthlyInstallmentsEndpoint).Result; // '.Result' makes this synchronous
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
             {
-                // TODO: log success...
-            }
-            else
-            {
-                // TODO: log error...
+                throw new Exception("New monthly installments not created!");
             }
         }
     }
