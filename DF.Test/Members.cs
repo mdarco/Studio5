@@ -123,5 +123,11 @@ namespace DF.Test
 
             BL.Members.AddMemberPayment(MEMBER_ID, model);
         }
+
+        [TestMethod]
+        public void CreateNewMonthlyInstallments()
+        {
+            DB.Members.CreateNewMonthlyInstallments();
+        }
     }
 }
