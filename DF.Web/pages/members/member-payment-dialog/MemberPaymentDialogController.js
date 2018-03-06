@@ -64,6 +64,7 @@
                 // add data item to selected list
                 dataItem.Companions = [];
                 dataItem.newCompanion = {};
+                dataItem.DiscountPercentage = null;
                 $scope.selectedData.push(dataItem);
             } else {
                 // remove data item from selected list

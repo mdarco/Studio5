@@ -24,8 +24,15 @@
 
     <div ng-repeat="selectedPayment in selectedData">
         <div class="panel panel-default">
-            <div class="panel-heading">{{ selectedPayment.Name + ' - pratioci' }}</div>
+            <div class="panel-heading">{{ selectedPayment.Name + ' - popust i pratioci' }}</div>
             <div class="panel-body">
+                <!-- Discount row -->
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control input-sm" placeholder="Popust (%)" ng-model="selectedPayment.DiscountPercentage" numeric decimals="0" max="100" />
+                    </div>
+                </div><br />
+
                 <!-- Companion input row -->
                 <div class="row">
                     <div class="col-md-3">

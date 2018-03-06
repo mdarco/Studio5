@@ -329,6 +329,7 @@
     <Content Include="directives\abn-tree\abntree.js" />
     <Content Include="directives\checklist-model\checklist-model.js" />
     <Content Include="directives\filestyle\filestyle.js" />
+    <Content Include="directives\input-numeric-directive\numeric-directive.js" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\df-logo.jpg" />

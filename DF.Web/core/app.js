@@ -20,6 +20,7 @@
 		'ngFileSaver',
         'ngTagsInput',
         'thatisuday.dropzone',
+        'purplefox.numeric',
         'ngCacheBuster'
     ]);
 })();
