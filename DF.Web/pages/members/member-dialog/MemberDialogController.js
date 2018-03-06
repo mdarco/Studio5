@@ -41,15 +41,15 @@
 
         // helpers
         function validate() {
-            if (!$scope.member.JMBG || ($scope.member.JMBG && $scope.member.JMBG === '')) {
-                return { error: true, errorMsg: 'JMBG je obavezan podatak.' };
-            }
+            //if (!$scope.member.JMBG || ($scope.member.JMBG && $scope.member.JMBG === '')) {
+            //    return { error: true, errorMsg: 'JMBG je obavezan podatak.' };
+            //}
 
             // check JMBG
-            var validJMBG = dataValidator.prototype.validanJMBG($scope.member.JMBG);
-            if (!validJMBG) {
-                return { error: true, errorMsg: 'Nevalidan JMBG.' };
-            }
+            //var validJMBG = dataValidator.prototype.validanJMBG($scope.member.JMBG);
+            //if (!validJMBG) {
+            //    return { error: true, errorMsg: 'Nevalidan JMBG.' };
+            //}
 
             if (!$scope.member.FirstName || !$scope.member.LastName ||
                ($scope.member.FirstName && $scope.member.FirstName === '') || ($scope.member.LastName && $scope.member.LastName === '')
