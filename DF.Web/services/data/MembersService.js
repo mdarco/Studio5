@@ -8,9 +8,14 @@
     serviceFn.$inject = ['$http', '$q', 'WebApiBaseUrl'];
 
     function serviceFn($http, $q, WebApiBaseUrl) {
+        var _searchFilter = null;
+
         var urlRoot = '/api/members';
 
         var service = {
+            getSearchFilter: getSearchFilter,
+            setSearchFilter: setSearchFilter,
+
             getFiltered: getFilteredMembers,
             get: getMember,
             create: createMember,
@@ -32,6 +37,18 @@
         };
 
         return service;
+
+        //#region Search filter getter and setter
+
+        function getSearchFilter() {
+            return _searchFilter;
+        }
+
+        function setSearchFilter(filter) {
+            _searchFilter = filter;
+        }
+
+        //#endregion
 
         function getFilteredMembers(filter) {
             var url = WebApiBaseUrl + urlRoot + '/filtered?nd=' + Date.now();

@@ -21,7 +21,11 @@
 
         var currentUser = AuthenticationService.getCurrentUser();
 
-        $scope.filter = {};
+        var isBack = false; // determines if we're back from the dossier page
+        var queryString = $location.search();
+        if (queryString && queryString.back) {
+            isBack = queryString.back;
+        }
 
         $scope.choreos = choreos;
         $scope.danceGroups = danceGroups;
@@ -55,14 +59,12 @@
 
                     $scope.filter = $scope.filter || {};
 
-                    //if ($scope.newSearch === true) {
-                    //    params.page(1);
-                    //}
-
                     $scope.filter.PageNo = params.page();
                     $scope.filter.RecordsPerPage = params.count();
 
                     resolveStatusFilter();
+
+                    MembersService.setSearchFilter(angular.copy($scope.filter));
 
                     return MembersService.getFiltered($scope.filter).then(
                         function (result) {
@@ -128,6 +130,14 @@
 
         //#endregion
 
+        $scope.filter = {};
+        if (isBack) {
+            if (MembersService.getSearchFilter()) {
+                $scope.filter = MembersService.getSearchFilter();
+                $scope.applyFilter();
+            }
+        }
+
         //#region Add member
 
         $scope.addMember = function () {
@@ -165,6 +175,7 @@
         //#region Member dossier
 
         $scope.openMemberDossier = function (member) {
+            MembersService.setSearchFilter(angular.copy($scope.filter));
             $location.path('/member-file/' + member.MemberID);
         };
 

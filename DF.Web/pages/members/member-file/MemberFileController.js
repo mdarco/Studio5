@@ -832,6 +832,10 @@
             return dialog.result;
         }
 
+        $scope.backToSearch = function () {
+            $location.path('/members').search({ back: true });
+        };
+
         //#endregion
     }
 })();
