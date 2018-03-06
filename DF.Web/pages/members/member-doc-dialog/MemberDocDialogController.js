@@ -53,11 +53,11 @@
 
         $scope.dzCallbacks = {
             'addedfile': function (file) {
-                
+                $scope.model.DocumentName = file.name;
             },
 
             'removedfile': function (file) {
-                
+                $scope.model.DocumentName = '';
             },
 
             'maxfilesexceeded': function (file) {
