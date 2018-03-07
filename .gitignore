@@ -1,8 +1,9 @@
+*.user
+*.cache
+
 .vs
 
 packages
 
 bin
 obj
-
-*.cache
