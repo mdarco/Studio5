@@ -328,7 +328,7 @@
           <Property Name="MemberID" Type="int" Nullable="false" />
           <Property Name="PaymentID" Type="int" Nullable="false" />
           <Property Name="InstallmentDate" Type="datetime" Nullable="false" />
-          <Property Name="Amount" Type="decimal" Precision="15" Scale="5" />
+          <Property Name="Amount" Type="decimal" Precision="15" Scale="5" Nullable="false" />
           <Property Name="IsPaid" Type="bit" Nullable="false" />
           <Property Name="PaymentDate" Type="datetime" />
           <Property Name="IsCanceled" Type="bit" Nullable="false" />
@@ -454,13 +454,14 @@
           <Property Name="TrainingDanceGroupID" Type="int" />
           <Property Name="TrainingDanceSelectionID" Type="int" />
         </EntityType>
-        <EntityType Name="TrainingStaff">
+        <EntityType Name="UserDanceGroups">
           <Key>
-            <PropertyRef Name="TrainingID" />
             <PropertyRef Name="UserID" />
+            <PropertyRef Name="DanceGroupID" />
           </Key>
-          <Property Name="TrainingID" Type="int" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="DanceGroupID" Type="int" Nullable="false" />
+          <Property Name="HasPaymentAbility" Type="bit" Nullable="false" />
           <Property Name="Note" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="UserDocuments">
@@ -1212,26 +1213,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TrainingStaff_Trainings">
-          <End Role="Trainings" Type="Self.Trainings" Multiplicity="1" />
-          <End Role="TrainingStaff" Type="Self.TrainingStaff" Multiplicity="*" />
+        <Association Name="FK_UserDanceGroups_DanceGroups">
+          <End Role="DanceGroups" Type="Self.DanceGroups" Multiplicity="1" />
+          <End Role="UserDanceGroups" Type="Self.UserDanceGroups" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Trainings">
-              <PropertyRef Name="TrainingID" />
+            <Principal Role="DanceGroups">
+              <PropertyRef Name="DanceGroupID" />
             </Principal>
-            <Dependent Role="TrainingStaff">
-              <PropertyRef Name="TrainingID" />
+            <Dependent Role="UserDanceGroups">
+              <PropertyRef Name="DanceGroupID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TrainingStaff_Users">
+        <Association Name="FK_UserDanceGroups_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="TrainingStaff" Type="Self.TrainingStaff" Multiplicity="*" />
+          <End Role="UserDanceGroups" Type="Self.UserDanceGroups" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="TrainingStaff">
+            <Dependent Role="UserDanceGroups">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1415,7 +1416,7 @@
           <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrainingMemberPresenceRegistrations" EntityType="Self.TrainingMemberPresenceRegistrations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trainings" EntityType="Self.Trainings" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TrainingStaff" EntityType="Self.TrainingStaff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDanceGroups" EntityType="Self.UserDanceGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDocuments" EntityType="Self.UserDocuments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroupMembers" EntityType="Self.UserGroupMembers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroupPermissions" EntityType="Self.UserGroupPermissions" Schema="dbo" store:Type="Tables" />
@@ -1651,13 +1652,13 @@
             <End Role="Trainings" EntitySet="Trainings" />
             <End Role="TrainingMemberPresenceRegistrations" EntitySet="TrainingMemberPresenceRegistrations" />
           </AssociationSet>
-          <AssociationSet Name="FK_TrainingStaff_Trainings" Association="Self.FK_TrainingStaff_Trainings">
-            <End Role="Trainings" EntitySet="Trainings" />
-            <End Role="TrainingStaff" EntitySet="TrainingStaff" />
+          <AssociationSet Name="FK_UserDanceGroups_DanceGroups" Association="Self.FK_UserDanceGroups_DanceGroups">
+            <End Role="DanceGroups" EntitySet="DanceGroups" />
+            <End Role="UserDanceGroups" EntitySet="UserDanceGroups" />
           </AssociationSet>
-          <AssociationSet Name="FK_TrainingStaff_Users" Association="Self.FK_TrainingStaff_Users">
+          <AssociationSet Name="FK_UserDanceGroups_Users" Association="Self.FK_UserDanceGroups_Users">
             <End Role="Users" EntitySet="Users" />
-            <End Role="TrainingStaff" EntitySet="TrainingStaff" />
+            <End Role="UserDanceGroups" EntitySet="UserDanceGroups" />
           </AssociationSet>
           <AssociationSet Name="FK_UserDocuments_Documents" Association="Self.FK_UserDocuments_Documents">
             <End Role="Documents" EntitySet="Documents" />
@@ -1830,6 +1831,7 @@
           <NavigationProperty Name="DanceGroupStaff" Relationship="Self.FK_DanceGroupStaff_DanceGroups" FromRole="DanceGroups" ToRole="DanceGroupStaff" />
           <NavigationProperty Name="DanceSelectionDanceGroups" Relationship="Self.FK_DanceSelectionDanceGroups_DanceGroups" FromRole="DanceGroups" ToRole="DanceSelectionDanceGroups" />
           <NavigationProperty Name="Lookup_AgeCategories" Relationship="DFDataModel.FK_DanceGroups_Lookup_AgeCategories" FromRole="DanceGroups" ToRole="Lookup_AgeCategories" />
+          <NavigationProperty Name="UserDanceGroups" Relationship="DFDataModel.FK_UserDanceGroups_DanceGroups" FromRole="DanceGroups" ToRole="UserDanceGroups" />
         </EntityType>
         <EntityType Name="DanceGroupStaff">
           <Key>
@@ -2195,18 +2197,6 @@
           <Property Name="TrainingDanceGroupID" Type="Int32" />
           <Property Name="TrainingDanceSelectionID" Type="Int32" />
           <NavigationProperty Name="TrainingMemberPresenceRegistrations" Relationship="Self.FK_TrainingMemberPresenceRegistrations_Trainings" FromRole="Trainings" ToRole="TrainingMemberPresenceRegistrations" />
-          <NavigationProperty Name="TrainingStaff" Relationship="Self.FK_TrainingStaff_Trainings" FromRole="Trainings" ToRole="TrainingStaff" />
-        </EntityType>
-        <EntityType Name="TrainingStaff">
-          <Key>
-            <PropertyRef Name="TrainingID" />
-            <PropertyRef Name="UserID" />
-          </Key>
-          <Property Name="TrainingID" Type="Int32" Nullable="false" />
-          <Property Name="UserID" Type="Int32" Nullable="false" />
-          <Property Name="Note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Trainings" Relationship="Self.FK_TrainingStaff_Trainings" FromRole="TrainingStaff" ToRole="Trainings" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_TrainingStaff_Users" FromRole="TrainingStaff" ToRole="Users" />
         </EntityType>
         <EntityType Name="UserDocuments">
           <Key>
@@ -2289,11 +2279,11 @@
           <NavigationProperty Name="DanceGroupStaff" Relationship="Self.FK_DanceGroupStaff_Users" FromRole="Users" ToRole="DanceGroupStaff" />
           <NavigationProperty Name="DanceSelectionStaff" Relationship="Self.FK_DanceSelectionStaff_Users" FromRole="Users" ToRole="DanceSelectionStaff" />
           <NavigationProperty Name="Documents" Relationship="Self.FK_Documents_CreatedByUsers" FromRole="Users" ToRole="Documents" />
-          <NavigationProperty Name="TrainingStaff" Relationship="Self.FK_TrainingStaff_Users" FromRole="Users" ToRole="TrainingStaff" />
           <NavigationProperty Name="UserDocuments" Relationship="Self.FK_UserDocuments_Users" FromRole="Users" ToRole="UserDocuments" />
           <NavigationProperty Name="UserGroupMembers" Relationship="Self.FK_UserGroupMembers_Users" FromRole="Users" ToRole="UserGroupMembers" />
           <NavigationProperty Name="UserImages" Relationship="Self.FK_UserImages_Users" FromRole="Users" ToRole="UserImages" />
           <NavigationProperty Name="UserPermissions" Relationship="Self.FK_UserPermissions_Users" FromRole="Users" ToRole="UserPermissions" />
+          <NavigationProperty Name="UserDanceGroups" Relationship="DFDataModel.FK_UserDanceGroups_Users" FromRole="Users" ToRole="UserDanceGroups" />
         </EntityType>
         <Association Name="FK_Choreographies_Lookup_AgeCategories">
           <End Role="Lookup_AgeCategories" Type="Self.Lookup_AgeCategories" Multiplicity="0..1" />
@@ -2871,30 +2861,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TrainingStaff_Trainings">
-          <End Role="Trainings" Type="Self.Trainings" Multiplicity="1" />
-          <End Role="TrainingStaff" Type="Self.TrainingStaff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Trainings">
-              <PropertyRef Name="TrainingID" />
-            </Principal>
-            <Dependent Role="TrainingStaff">
-              <PropertyRef Name="TrainingID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TrainingStaff_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="TrainingStaff" Type="Self.TrainingStaff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="TrainingStaff">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserDocuments_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="UserDocuments" Type="Self.UserDocuments" Multiplicity="*" />
@@ -3008,7 +2974,6 @@
           <EntitySet Name="Permissions" EntityType="Self.Permissions" />
           <EntitySet Name="TrainingMemberPresenceRegistrations" EntityType="Self.TrainingMemberPresenceRegistrations" />
           <EntitySet Name="Trainings" EntityType="Self.Trainings" />
-          <EntitySet Name="TrainingStaff" EntityType="Self.TrainingStaff" />
           <EntitySet Name="UserDocuments" EntityType="Self.UserDocuments" />
           <EntitySet Name="UserGroupMembers" EntityType="Self.UserGroupMembers" />
           <EntitySet Name="UserGroupPermissions" EntityType="Self.UserGroupPermissions" />
@@ -3208,14 +3173,6 @@
             <End Role="Trainings" EntitySet="Trainings" />
             <End Role="TrainingMemberPresenceRegistrations" EntitySet="TrainingMemberPresenceRegistrations" />
           </AssociationSet>
-          <AssociationSet Name="FK_TrainingStaff_Trainings" Association="Self.FK_TrainingStaff_Trainings">
-            <End Role="Trainings" EntitySet="Trainings" />
-            <End Role="TrainingStaff" EntitySet="TrainingStaff" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TrainingStaff_Users" Association="Self.FK_TrainingStaff_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="TrainingStaff" EntitySet="TrainingStaff" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserDocuments_Users" Association="Self.FK_UserDocuments_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="UserDocuments" EntitySet="UserDocuments" />
@@ -3302,6 +3259,15 @@
             <End Role="MemberPaymentInstallments" EntitySet="MemberPaymentInstallments" />
           </AssociationSet>
           <FunctionImport Name="GetLatestMonthlyInstallments" ReturnType="Collection(DFDataModel.GetLatestMonthlyInstallments_Result)" />
+          <EntitySet Name="UserDanceGroups" EntityType="DFDataModel.UserDanceGroups" />
+          <AssociationSet Name="FK_UserDanceGroups_DanceGroups" Association="DFDataModel.FK_UserDanceGroups_DanceGroups">
+            <End Role="DanceGroups" EntitySet="DanceGroups" />
+            <End Role="UserDanceGroups" EntitySet="UserDanceGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserDanceGroups_Users" Association="DFDataModel.FK_UserDanceGroups_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserDanceGroups" EntitySet="UserDanceGroups" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_UserGroupPermissions_Permissions">
           <End Type="DFDataModel.Permissions" Role="Permissions" Multiplicity="1" />
@@ -3515,7 +3481,7 @@
           <Property Name="MemberID" Type="Int32" Nullable="false" />
           <Property Name="PaymentID" Type="Int32" Nullable="false" />
           <Property Name="InstallmentDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Amount" Type="Decimal" Precision="15" Scale="5" />
+          <Property Name="Amount" Type="Decimal" Precision="15" Scale="5" Nullable="false" />
           <Property Name="IsPaid" Type="Boolean" Nullable="false" />
           <Property Name="PaymentDate" Type="DateTime" Precision="3" />
           <Property Name="Note" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
@@ -3556,6 +3522,42 @@
           <Property Type="Boolean" Name="IsCanceled" Nullable="false" />
           <Property Type="Int64" Name="Rank" Nullable="false" />
         </ComplexType>
+        <EntityType Name="UserDanceGroups">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="DanceGroupID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="DanceGroupID" Type="Int32" Nullable="false" />
+          <Property Name="HasPaymentAbility" Type="Boolean" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DanceGroups" Relationship="DFDataModel.FK_UserDanceGroups_DanceGroups" FromRole="UserDanceGroups" ToRole="DanceGroups" />
+          <NavigationProperty Name="Users" Relationship="DFDataModel.FK_UserDanceGroups_Users" FromRole="UserDanceGroups" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_UserDanceGroups_DanceGroups">
+          <End Type="DFDataModel.DanceGroups" Role="DanceGroups" Multiplicity="1" />
+          <End Type="DFDataModel.UserDanceGroups" Role="UserDanceGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DanceGroups">
+              <PropertyRef Name="DanceGroupID" />
+            </Principal>
+            <Dependent Role="UserDanceGroups">
+              <PropertyRef Name="DanceGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserDanceGroups_Users">
+          <End Type="DFDataModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="DFDataModel.UserDanceGroups" Role="UserDanceGroups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserDanceGroups">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3971,15 +3973,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TrainingStaff">
-            <EntityTypeMapping TypeName="DFDataModel.TrainingStaff">
-              <MappingFragment StoreEntitySet="TrainingStaff">
-                <ScalarProperty Name="TrainingID" ColumnName="TrainingID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserDocuments">
             <EntityTypeMapping TypeName="DFDataModel.UserDocuments">
               <MappingFragment StoreEntitySet="UserDocuments">
@@ -4127,6 +4120,16 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="UserDanceGroups">
+            <EntityTypeMapping TypeName="DFDataModel.UserDanceGroups">
+              <MappingFragment StoreEntitySet="UserDanceGroups">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="HasPaymentAbility" ColumnName="HasPaymentAbility" />
+                <ScalarProperty Name="DanceGroupID" ColumnName="DanceGroupID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

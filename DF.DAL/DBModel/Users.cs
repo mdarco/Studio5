@@ -21,11 +21,11 @@ namespace DF.DB.DBModel
             this.DanceGroupStaff = new HashSet<DanceGroupStaff>();
             this.DanceSelectionStaff = new HashSet<DanceSelectionStaff>();
             this.Documents = new HashSet<Documents>();
-            this.TrainingStaff = new HashSet<TrainingStaff>();
             this.UserDocuments = new HashSet<UserDocuments>();
             this.UserGroupMembers = new HashSet<UserGroupMembers>();
             this.UserImages = new HashSet<UserImages>();
             this.UserPermissions = new HashSet<UserPermissions>();
+            this.UserDanceGroups = new HashSet<UserDanceGroups>();
         }
     
         public int UserID { get; set; }
@@ -47,8 +47,6 @@ namespace DF.DB.DBModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Documents> Documents { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TrainingStaff> TrainingStaff { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserDocuments> UserDocuments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserGroupMembers> UserGroupMembers { get; set; }
@@ -56,5 +54,7 @@ namespace DF.DB.DBModel
         public virtual ICollection<UserImages> UserImages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserPermissions> UserPermissions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserDanceGroups> UserDanceGroups { get; set; }
     }
 }
