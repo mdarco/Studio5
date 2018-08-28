@@ -78,10 +78,22 @@ namespace DF.DB
                             Password = u.Password,
                             FirstName = u.FirstName,
                             LastName = u.LastName,
-                            FullName = u.FirstName + " " + u.LastName
+                            FullName = u.FirstName + " " + u.LastName,
+
+                            UserGroups =
+                                u.UserGroupMembers.Select(ugm =>
+                                    new UserGroupModel()
+                                    {
+                                        UserGroupID = ugm.UserGroupID,
+                                        UserGroupName = ugm.UserGroups.UserGroupName
+                                    }
+                                )
+                                .OrderBy(ug => ug.UserGroupName)
+                                .ToList()
                         }
                     )
                     .OrderBy(u => u.FullName)
+                    .ThenBy(u => u. LastName)
                     .ToList();
             }
         }
@@ -144,6 +156,7 @@ namespace DF.DB
 
                 u.FirstName = model.FirstName;
                 u.LastName = model.LastName;
+                u.IsActive = true;
 
                 ctx.Users.Add(u);
                 ctx.SaveChanges();
@@ -159,14 +172,16 @@ namespace DF.DB
                 var user = ctx.Users.FirstOrDefault(u => u.UserID == model.UserID);
                 if (user != null)
                 {
-                    var existing = ctx.Users.FirstOrDefault(x => x.Username.ToLower() == model.Username.ToLower());
-                    if (existing != null)
+                    if (model.Username != user.Username)
                     {
-                        throw new Exception("error_users_username_exists");
-                    }
+                        var existing = ctx.Users.FirstOrDefault(x => x.Username.ToLower() == model.Username.ToLower());
+                        if (existing != null)
+                        {
+                            throw new Exception("error_users_username_exists");
+                        }
 
-                    //UserID = model.UserID;
-                    user.Username = model.Username;
+                        user.Username = model.Username;
+                    }
 
                     // decode password from base64
                     byte[] decodedData = Convert.FromBase64String(model.Password);
@@ -175,10 +190,26 @@ namespace DF.DB
                     byte[] data = Encoding.UTF8.GetBytes(decodedPass);
                     data = new SHA256Managed().ComputeHash(data);
                     string hashPassword = Encoding.UTF8.GetString(data);
-                    user.Password = hashPassword;
 
-                    user.FirstName = model.FirstName;
-                    user.LastName = model.LastName;
+                    if (hashPassword != user.Password)
+                    {
+                        user.Password = hashPassword;
+                    }
+
+                    if (model.FirstName != user.FirstName)
+                    {
+                        user.FirstName = model.FirstName;
+                    }
+
+                    if (model.LastName != user.LastName)
+                    {
+                        user.LastName = model.LastName;
+                    }
+
+                    if (model.IsActive != user.IsActive)
+                    {
+                        user.IsActive = model.IsActive;
+                    }
 
                     ctx.SaveChanges();
                 }
@@ -213,6 +244,7 @@ namespace DF.DB
                     byte[] data = Encoding.UTF8.GetBytes(decodedPass);
                     data = new SHA256Managed().ComputeHash(data);
                     string hashPassword = Encoding.UTF8.GetString(data);
+
                     user.Password = hashPassword;
 
                     ctx.SaveChanges();

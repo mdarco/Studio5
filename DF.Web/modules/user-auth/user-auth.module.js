@@ -40,12 +40,19 @@ function authenticationService($q, $http, $base64, WebApiBaseUrl) {
 					deferred.resolve(currentUser);
 				}
 				else {
-					deferred.reject('Neispravno korisničko ime ili lozinka!');
+					deferred.reject('Neispravno korisničko ime ili lozinka.');
 				}
 
 			},
-			function(errorMsg) {
-				deferred.reject('Neispravno korisničko ime ili lozinka!');
+            function (error) {
+                var errorMsg = 'Neispravno korisničko ime ili lozinka.';
+                switch (error.statusText) {
+                    case 'errors_login_user_not_active':
+                        errorMsg = 'Korisnik nije aktivan.';
+                        break;
+                }
+
+                deferred.reject(errorMsg);
 			}
 		);
 

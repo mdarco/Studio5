@@ -1,0 +1,47 @@
+﻿<div class="modal-header bg-color-darken" style="color: white; background-color: #1B1E24;">
+    <h4>Korisnik</h4>
+</div>
+
+<div class="modal-body">
+    <form class="smart-form" novalidate="novalidate">
+        <section>
+            <div>
+                <label class="control-label">Ime</label>
+                <label class="input"><input type="text" class="form-control" ng-model="user.FirstName"></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Prezime</label>
+                <label class="input"><input type="text" class="form-control" ng-model="user.LastName"></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Korisničko ime (*)</label>
+                <label class="input"><input type="text" class="form-control" ng-model="user.Username"></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Lozinka (*)</label>
+                <label class="input"><input type="password" class="form-control" ng-model="user.Password"></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Potvrda lozinke (*)</label>
+                <label class="input"><input type="password" class="form-control" ng-model="user.ConfirmPassword"></label>
+            </div>
+        </section>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button ng-click="save()" class="btn btn-success">Sačuvaj</button>
+    <button ng-click="close()" class="btn btn-primary">Odustani</button>
+</div>

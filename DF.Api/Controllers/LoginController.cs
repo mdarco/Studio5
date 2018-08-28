@@ -21,7 +21,21 @@ namespace DF.Api.Controllers
             byte[] data = Convert.FromBase64String(model.Password);
             string decodedPass = Encoding.UTF8.GetString(data);
 
-            UserModel user = Login.AuthenticateUser(model.Username, decodedPass);
+            UserModel user = null;
+
+            try
+            {
+                user = Login.AuthenticateUser(model.Username, decodedPass);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(
+                    new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.Forbidden,
+                        ReasonPhrase = ex.Message
+                    });
+            }
 
             if (user == null)
             {
@@ -42,7 +56,8 @@ namespace DF.Api.Controllers
                 model.Password = string.Empty;
 
                 // get user groups
-                List<UserGroupModel> userGroups = UserGroups.GetUserGroupsByUser(user.UserID);
+                //List<UserGroupModel> userGroups = UserGroups.GetUserGroupsByUser(user.UserID);
+                List<UserGroupModel> userGroups = user.UserGroups;
                 model.UserGroups = userGroups.Select(ug => ug.UserGroupName).ToList();
 
                 // get effective permissions

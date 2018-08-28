@@ -19,33 +19,33 @@ namespace DF.Api.Controllers
             return Users.GetUsers();
         }
 
-        //[Route("filter")]
-        //[HttpPost]
-        //public List<UserModel> GetUsersFiltered(UserFilterModel filter)
-        //{
-        //    return Users.GetUsersFilter(filter);
-        //}
+        [Route("filtered")]
+        [HttpPost]
+        public List<UserModel> GetUsersFiltered(UserFilterModel filter)
+        {
+            return Users.GetUsersFiltered(filter);
+        }
 
-        //[Route("{id}")]
-        //[HttpGet]
-        //public UserModel GetIndividualUser(int id)
-        //{
-        //    return Users.GetIndividualUser(id);
-        //}
+        [Route("{id}")]
+        [HttpGet]
+        public UserModel GetIndividualUser(int id)
+        {
+            return Users.GetIndividualUser(id);
+        }
 
-        //[Route("")]
-        //[HttpPost]
-        //public void ManageUser(UserModel model)
-        //{
-        //    Users.ManageUser(model);
-        //}
+        [Route("")]
+        [HttpPost]
+        public void ManageUser(UserModel model)
+        {
+            Users.ManageUser(model);
+        }
 
-        //[Route("{id}")]
-        //[HttpDelete]
-        //public void DeleteUser(int id)
-        //{
-        //    Users.DeleteUser(id);
-        //}
+        [Route("{id}")]
+        [HttpDelete]
+        public void DeleteUser(int id)
+        {
+            Users.DeleteUser(id);
+        }
 
         //[Route("change-password")]
         //[HttpPost]
@@ -54,12 +54,12 @@ namespace DF.Api.Controllers
         //    Users.ChangePassword(model);
         //}
 
-        //[Route("{id}/usergroups")]
-        //[HttpGet]
-        //public List<UserGroupModel> GetUserGroups(int id)
-        //{
-        //    return Users.GetUserGroups(id);
-        //}
+        [Route("{id}/usergroups")]
+        [HttpGet]
+        public List<UserGroupModel> GetUserGroups(int id)
+        {
+            return Users.GetUserGroups(id);
+        }
 
         #region User group members
 

@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('UsersController', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'NgTableParams', /* 'AuthenticationService', */ 'UsersService', 'LookupsService', 'toastr'];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'NgTableParams', 'AuthenticationService', 'UsersService', 'LookupsService', 'toastr'];
 
-    function ctrlFn($rootScope, $scope, $location, $uibModal, NgTableParams, /* AuthenticationService, */ UsersService, LookupsService, toastr) {
+    function ctrlFn($rootScope, $scope, $location, $uibModal, NgTableParams, AuthenticationService, UsersService, LookupsService, toastr) {
         // set active menu item
         $("#left-panel nav ul li").removeClass("active");
         $("#menuUsers").addClass("active");
@@ -19,12 +19,12 @@
         //    }
         //});
 
-        //var currentUser = AuthenticationService.getCurrentUser();
+        var currentUser = AuthenticationService.getCurrentUser();
 
         //$scope.users = [];
         //$scope.filter = {};
 
-        //#region Filter users
+        //#region User list
 
         $scope.totalRecords = 0;
         //$scope.initialDocListLoad = true;
@@ -33,7 +33,7 @@
         $scope.usersTableParams = new NgTableParams(
             {
                 page: 1,
-                count: 10
+                count: 10000
             },
             {
                 total: 0,
@@ -82,7 +82,7 @@
 
         $scope.applyFilter = function () {
             //$scope.newSearch = true;
-            $scope.membersTableParams.reload();
+            $scope.usersTableParams.reload();
         };
 
         $scope.clearFilter = function () {
