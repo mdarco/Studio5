@@ -90,12 +90,12 @@ function authorizationService(AuthenticationService) {
 		var userPermissions = (user !== null) ? user.EffectivePermissions : [];
 		var userGroups = (user !== null) ? user.UserGroups : [];
 
-	    // 'Admin' user group => can access everything
-		if (_.includes(userGroups, 'Admin')) {
+	    // 'ADMIN' user group => can access everything
+        if (_.includes(userGroups, 'ADMIN')) {
 		    return 'authorised';
 		} else {
-		    // 'Admin' permission => can access everything
-		    if (_.includes(userPermissions, 'Admin')) {
+		    // 'ADMIN' permission => can access everything
+            if (_.includes(userPermissions, 'ADMIN')) {
 		        return 'authorised';
 		    }
 		}
@@ -131,8 +131,8 @@ function authorizationService(AuthenticationService) {
 	    var user = AuthenticationService.getCurrentUser();
 	    var userGroups = (user !== null) ? user.UserGroups : [];
 
-	    // 'Admin' user group can access everything
-	    if (_.includes(userGroups, 'Admin')) {
+	    // 'ADMIN' user group can access everything
+        if (_.includes(userGroups, 'ADMIN')) {
 	        return 'authorised';
 	    }
 

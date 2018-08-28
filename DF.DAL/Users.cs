@@ -3,6 +3,7 @@ using DF.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace DF.DB
             using (var ctx = new DFAppEntities())
             {
                 return ctx.Users
+                    .Include("UserGroupMembers.UserGroups")
                     .Where(x => x.Username.ToLower() != "mdarco")
                     .Select(u =>
                         new UserModel()
@@ -25,15 +27,29 @@ namespace DF.DB
                             Password = u.Password,
                             FirstName = u.FirstName,
                             LastName = u.LastName,
-                            FullName = u.FirstName + " " + u.LastName
+                            LastLoginAt = u.LastLoginAt,
+                            IsActive = u.IsActive,
+                            FullName = u.FirstName + " " + u.LastName,
+
+                            UserGroups = 
+                                u.UserGroupMembers.Select(ugm =>
+                                    new UserGroupModel()
+                                    {
+                                        UserGroupID = ugm.UserGroupID,
+                                        UserGroupName = ugm.UserGroups.UserGroupName
+                                    }
+                                )
+                                .OrderBy(ug => ug.UserGroupName)
+                                .ToList()
                         }
                     )
                     .OrderBy(u => u.FirstName)
+                    .ThenBy(u => u.LastName)
                     .ToList();
             }
         }
 
-        public static List<UserModel> GetUsersFilter(UserFilterModel filter)
+        public static List<UserModel> GetUsersFiltered(UserFilterModel filter)
         {
             using (var ctx = new DFAppEntities())
             {
@@ -258,22 +274,6 @@ namespace DF.DB
             }
         }
 
-        public static void DeleteAllPermissionsByUser(int userID)
-        {
-            using (var ctx = new DFAppEntities())
-            {
-                var ugm = ctx.UserPermissions.Where(u => u.UserID == userID).ToList();
-                if (ugm.Count() > 0)
-                {
-                    foreach (UserPermissions gm in ugm)
-                    {
-                        ctx.UserPermissions.Remove(gm);
-                        ctx.SaveChanges();
-                    }
-                }
-            }
-        }
-
         public static void AddUserPermissions(int userID, List<PermissionModel> permissions)
         {
             for (int i = 0; i < permissions.Count; i++)
@@ -306,7 +306,7 @@ namespace DF.DB
 
         #region User group members
 
-        public static void DeleteUserGroupMembers(int userGroupID, int userID)
+        public static void DeleteUserGroupMember(int userID, int userGroupID)
         {
             using (var ctx = new DFAppEntities())
             {
@@ -319,32 +319,16 @@ namespace DF.DB
             }
         }
 
-        public static void DeleteAllUserGroupMembersByUser(int userID)
-        {
-            using (var ctx = new DFAppEntities())
-            {
-                var ugm = ctx.UserGroupMembers.Where(u => u.UserID == userID).ToList();
-                if (ugm.Count() > 0)
-                {
-                    foreach (UserGroupMembers gm in ugm)
-                    {
-                        ctx.UserGroupMembers.Remove(gm);
-                        ctx.SaveChanges();
-                    }
-                }
-            }
-        }
-
-        public static void AddUserInGroups(int userID, List<UserGroupModel> userGroups)
+        public static void AddUserToGroups(int userID, List<UserGroupModel> userGroups)
         {
             for (int i = 0; i < userGroups.Count; i++)
             {
                 int currentUserGroupID = userGroups[i].UserGroupID;
-                AddUserInGroup(userID, currentUserGroupID);
+                AddUserToGroup(userID, currentUserGroupID);
             }
         }
 
-        private static void AddUserInGroup(int userID, int currentUserGroupID)
+        private static void AddUserToGroup(int userID, int currentUserGroupID)
         {
             using (var ctx = new DFAppEntities())
             {

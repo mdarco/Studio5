@@ -10,32 +10,25 @@
                 <p style="font-variant:small-caps; margin-left: 10px" ng-show="showGrid === false">nema podataka.</p>
 
                 <table ng-table="usersTableParams" ng-show="showGrid === true" class="table table-condensed table-striped table-hover table-responsive table-bordered">
-                    <thead>
-                        <tr>
-                            <th style="width: 10%">Ime</th>
-                            <th style="width: 10%">Prezime</th>
-                            <th style="width: 10%">Korisničko ime</th>
-                            <th style="width: 10%">Aktivan?</th>
-                            <th></th>
-                        </tr>
-                    </thead>
                     <tbody>
-                        <tr ng-repeat="user in users">
-                            <td style="width: 10%">{{ user.FirstName }}</td>
-                            <td style="width: 10%">{{ user.LastName }}</td>
-                            <td style="width: 10%">{{ user.Username }}</td>
-                            <td style="width: 10%">{{ user.IsActive }}</td>
+                        <tr ng-repeat="user in $data">
+                            <td data-title="'Ime i prezime'" header-class="'text-left'">
+                                {{ user.FullName }}
+                                <p style="font-size: smaller; color: gray;">Korisničke grupe: {{ user.DisplayUserGroups }}</p>
+                            </td>
+                            <td data-title="'Korisničko ime'" header-class="'text-left'">{{ user.Username }}</td>
+                            <td data-title="'Aktivan?'" header-class="'text-left'">{{ user.IsActive === true ? 'Da' : 'Ne' }}</td>
                             <td>
                                 <button class="btn btn-danger btn-xs" style="float: right; margin-left: 5px;" title="Brisanje korisnika" ng-click="deleteUser(user.UserID)"><i class="fa fa-times"></i></button>
                                 <!--<button class="btn btn-info btn-xs" style="float: right; margin-left: 5px;" title="Ažuriranje dozvola za korisnika" ng-click="OpenUserPermissionsDialog(user)"><i class="fa fa-group"></i></button>-->
-                                <button class="btn btn-primary btn-xs" style="float: right; margin-left: 5px;" title="Dodavanje korisnika u grupu" ng-click="manageUserGroups(user)"><i class="fa fa-group"></i></button>
+                                <button class="btn btn-primary btn-xs" style="float: right; margin-left: 5px;" title="Korisničke grupe" ng-click="manageUserGroups(user)"><i class="fa fa-group"></i></button>
                                 <button class="btn btn-primary btn-xs" style="float: right;" title="Izmena korisnika" ng-click="editUser(user)"><i class="fa fa-edit"></i></button>
                             </td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td><strong>Ukupno {{ totalRecords }} korisnik(a).</strong></td>
+                            <td style="font-size: smaller"><strong>Ukupno {{ totalRecords }} korisnik(a).</strong></td>
                         </tr>
                     </tfoot>
                 </table>

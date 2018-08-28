@@ -142,7 +142,7 @@
 			        templateUrl: 'pages/settings/payments/payments.html?nd=' + Date.now(),
 			        access: {
 			            loginRequired: true,
-			            requiredPermissions: ['Admin']
+			            requiredPermissions: ['ADMIN']
 			        }
 			    }
 		    )
@@ -153,7 +153,7 @@
 			        templateUrl: 'pages/settings/search-docs/search-docs.html?nd=' + Date.now(),
 			        access: {
 			            loginRequired: true,
-			            requiredPermissions: ['Admin']
+                        requiredPermissions: ['ADMIN']
 			        }
 			    }
 		    )
@@ -164,7 +164,7 @@
 			        templateUrl: 'pages/settings/search-member-images/search-member-images.html?nd=' + Date.now(),
 			        access: {
 			            loginRequired: true,
-			            requiredPermissions: ['Admin']
+                        requiredPermissions: ['ADMIN']
 			        }
 			    }
 		    )
@@ -175,7 +175,7 @@
 			        templateUrl: 'pages/settings/periods/periods.html?nd=' + Date.now(),
 			        access: {
 			            loginRequired: true,
-			            requiredPermissions: ['Admin']
+                        requiredPermissions: ['ADMIN']
 			        }
 			    }
 		    )
@@ -186,7 +186,7 @@
 			        templateUrl: 'pages/settings/lookup-age-categories/lookup-age-categories.html?nd=' + Date.now(),
 			        access: {
 			            loginRequired: true,
-			            requiredPermissions: ['Admin']
+                        requiredPermissions: ['ADMIN']
 			        }
 			    }
 		    )
@@ -197,7 +197,7 @@
 			        templateUrl: 'pages/settings/lookup-dance-styles/lookup-dance-styles.html?nd=' + Date.now(),
 			        access: {
 			            loginRequired: true,
-			            requiredPermissions: ['Admin']
+                        requiredPermissions: ['ADMIN']
 			        }
 			    }
 		    )
@@ -208,7 +208,7 @@
 			        templateUrl: 'pages/settings/lookup-disciplines/lookup-disciplines.html?nd=' + Date.now(),
 			        access: {
 			            loginRequired: true,
-			            requiredPermissions: ['Admin']
+                        requiredPermissions: ['ADMIN']
 			        }
 			    }
 		    )
@@ -219,7 +219,7 @@
 			        templateUrl: 'pages/settings/lookup-event-types/lookup-event-types.html?nd=' + Date.now(),
 			        access: {
 			            loginRequired: true,
-			            requiredPermissions: ['Admin']
+                        requiredPermissions: ['ADMIN']
 			        }
 			    }
 		    )
@@ -230,7 +230,7 @@
 			        templateUrl: 'pages/settings/locations/locations.html?nd=' + Date.now(),
 			        access: {
 			            loginRequired: true,
-			            requiredPermissions: ['Admin']
+                        requiredPermissions: ['ADMIN']
 			        }
 			    }
 		    )
@@ -241,7 +241,7 @@
 			        templateUrl: 'pages/settings/dance-groups/dance-groups.html?nd=' + Date.now(),
 			        access: {
 			            loginRequired: true,
-			            requiredPermissions: ['Admin']
+                        requiredPermissions: ['ADMIN']
 			        }
 			    }
 		    )
@@ -252,7 +252,7 @@
 			        templateUrl: 'pages/settings/dance-selections/dance-selections.html?nd=' + Date.now(),
 			        access: {
 			            loginRequired: true,
-			            requiredPermissions: ['Admin']
+                        requiredPermissions: ['ADMIN']
 			        }
 			    }
 		    )
@@ -263,7 +263,7 @@
 			        templateUrl: 'pages/settings/users/users.html?nd=' + Date.now(),
 			        access: {
 			            loginRequired: true,
-			            requiredPermissions: ['Admin']
+                        requiredPermissions: ['ADMIN']
 			        }
 			    }
 		    )
@@ -274,7 +274,7 @@
 			        templateUrl: 'pages/settings/user-groups/user-groups.html?nd=' + Date.now(),
 			        access: {
 			            loginRequired: true,
-			            requiredPermissions: ['Admin']
+                        requiredPermissions: ['ADMIN']
 			        }
 			    }
 		    )

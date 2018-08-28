@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('UsersController', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'NgTableParams', 'AuthenticationService', 'UsersService', 'LookupsService'];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'NgTableParams', /* 'AuthenticationService', */ 'UsersService', 'LookupsService', 'toastr'];
 
-    function ctrlFn($rootScope, $scope, $location, $uibModal, NgTableParams, AuthenticationService, UsersService, LookupsService) {
+    function ctrlFn($rootScope, $scope, $location, $uibModal, NgTableParams, /* AuthenticationService, */ UsersService, LookupsService, toastr) {
         // set active menu item
         $("#left-panel nav ul li").removeClass("active");
         $("#menuUsers").addClass("active");
@@ -19,15 +19,15 @@
         //    }
         //});
 
-        var currentUser = AuthenticationService.getCurrentUser();
+        //var currentUser = AuthenticationService.getCurrentUser();
 
-        $scope.users = [];
-        $scope.filter = {};
+        //$scope.users = [];
+        //$scope.filter = {};
 
         //#region Filter users
 
         $scope.totalRecords = 0;
-        $scope.initialDocListLoad = true;
+        //$scope.initialDocListLoad = true;
         $scope.showGrid = false;
 
         $scope.usersTableParams = new NgTableParams(
@@ -38,35 +38,38 @@
             {
                 total: 0,
                 getData: function (params) {
-                    if ($scope.initialDocListLoad) {
-                        $scope.initialDocListLoad = false;
-                        return [];
-                    }
+                    //if ($scope.initialDocListLoad) {
+                    //    $scope.initialDocListLoad = false;
+                    //    return [];
+                    //}
 
                     $scope.filter = $scope.filter || {};
 
                     $scope.filter.PageNo = params.page();
                     $scope.filter.RecordsPerPage = params.count();
 
-                    UsersService.setSearchFilter(angular.copy($scope.filter));
+                    //UsersService.setSearchFilter(angular.copy($scope.filter));
 
-                    return UsersService.getFiltered($scope.filter).then(
+                    //return UsersService.getFiltered($scope.filter).then(
+                    return UsersService.getUsers().then(
                         function (result) {
-                            if (!result || !result.data || !result.data.Data) {
+                            if (!result || !result.data) {
                                 $scope.showGrid = false;
                                 return [];
                             }
 
-                            if (result.data.Data.length > 0) {
+                            if (result.data.length > 0) {
                                 $scope.showGrid = true;
                             } else {
                                 $scope.showGrid = false;
                             }
 
-                            params.total(result.data.Total);
-                            $scope.totalRecords = result.data.Total;
+                            params.total(result.data.length);
+                            $scope.totalRecords = result.data.length;
 
-                            return result.data.Data;
+                            createUserGroupsArrays(result.data);
+
+                            return result.data;
                         },
                         function (error) {
                             toastr.error('Došlo je do greške prilikom pretraživanja.');
@@ -83,12 +86,18 @@
         };
 
         $scope.clearFilter = function () {
-            $scope.filter = {};
+            //$scope.filter = {};
             $scope.showGrid = false;
             //$scope.newSearch = true;
             $scope.totalRecords = 0;
             $scope.usersTableParams.data = {};
         };
+
+        function createUserGroupsArrays(users) {
+            users.forEach((user) => {
+                user.DisplayUserGroups = _.join(_.map(user.UserGroups, 'UserGroupName'), ', ');
+            });
+        }
 
         //#endregion
 
