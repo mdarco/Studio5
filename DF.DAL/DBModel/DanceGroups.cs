@@ -23,6 +23,7 @@ namespace DF.DB.DBModel
             this.DanceGroupPeriods = new HashSet<DanceGroupPeriods>();
             this.DanceGroupStaff = new HashSet<DanceGroupStaff>();
             this.DanceSelectionDanceGroups = new HashSet<DanceSelectionDanceGroups>();
+            this.UserDanceGroups = new HashSet<UserDanceGroups>();
         }
     
         public int DanceGroupID { get; set; }
@@ -43,5 +44,7 @@ namespace DF.DB.DBModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanceSelectionDanceGroups> DanceSelectionDanceGroups { get; set; }
         public virtual Lookup_AgeCategories Lookup_AgeCategories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserDanceGroups> UserDanceGroups { get; set; }
     }
 }

@@ -18,7 +18,6 @@ namespace DF.DB.DBModel
         public Trainings()
         {
             this.TrainingMemberPresenceRegistrations = new HashSet<TrainingMemberPresenceRegistrations>();
-            this.TrainingStaff = new HashSet<TrainingStaff>();
         }
     
         public int TrainingID { get; set; }
@@ -30,7 +29,5 @@ namespace DF.DB.DBModel
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TrainingMemberPresenceRegistrations> TrainingMemberPresenceRegistrations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TrainingStaff> TrainingStaff { get; set; }
     }
 }

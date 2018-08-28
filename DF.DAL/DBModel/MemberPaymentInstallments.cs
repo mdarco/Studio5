@@ -18,7 +18,7 @@ namespace DF.DB.DBModel
         public int MemberID { get; set; }
         public int PaymentID { get; set; }
         public System.DateTime InstallmentDate { get; set; }
-        public Nullable<decimal> Amount { get; set; }
+        public decimal Amount { get; set; }
         public bool IsPaid { get; set; }
         public Nullable<System.DateTime> PaymentDate { get; set; }
         public string Note { get; set; }

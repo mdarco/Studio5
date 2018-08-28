@@ -67,7 +67,6 @@ namespace DF.DB.DBModel
         public virtual DbSet<Permissions> Permissions { get; set; }
         public virtual DbSet<TrainingMemberPresenceRegistrations> TrainingMemberPresenceRegistrations { get; set; }
         public virtual DbSet<Trainings> Trainings { get; set; }
-        public virtual DbSet<TrainingStaff> TrainingStaff { get; set; }
         public virtual DbSet<UserDocuments> UserDocuments { get; set; }
         public virtual DbSet<UserGroupMembers> UserGroupMembers { get; set; }
         public virtual DbSet<UserGroupPermissions> UserGroupPermissions { get; set; }
@@ -80,6 +79,7 @@ namespace DF.DB.DBModel
         public virtual DbSet<MemberPaymentsForCompanions> MemberPaymentsForCompanions { get; set; }
         public virtual DbSet<Payments> Payments { get; set; }
         public virtual DbSet<MemberPaymentInstallments> MemberPaymentInstallments { get; set; }
+        public virtual DbSet<UserDanceGroups> UserDanceGroups { get; set; }
     
         public virtual ObjectResult<GetLatestMonthlyInstallments_Result> GetLatestMonthlyInstallments()
         {

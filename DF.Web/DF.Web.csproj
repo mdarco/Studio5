@@ -404,6 +404,8 @@
     <Content Include="pages\settings\user-groups\user-groups.html" />
     <Content Include="pages\settings\user-groups\UserGroupsController.js" />
     <Content Include="pages\settings\users\UserInfoController.js" />
+    <Content Include="pages\settings\users\users.html" />
+    <Content Include="pages\settings\users\UsersController.js" />
     <Content Include="pages\trainings\trainings.html" />
     <Content Include="pages\trainings\TrainingsController.js" />
     <Content Include="Scripts\angular-base64\angular-base64.min.js" />
