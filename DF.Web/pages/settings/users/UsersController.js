@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('UsersController', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'NgTableParams', 'AuthenticationService', 'UsersService', 'LookupsService', 'toastr'];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'NgTableParams', 'AuthenticationService', 'UsersService', 'toastr'];
 
-    function ctrlFn($rootScope, $scope, $location, $uibModal, NgTableParams, AuthenticationService, UsersService, LookupsService, toastr) {
+    function ctrlFn($rootScope, $scope, $location, $uibModal, NgTableParams, AuthenticationService, UsersService, toastr) {
         // set active menu item
         $("#left-panel nav ul li").removeClass("active");
         $("#menuUsers").addClass("active");
@@ -129,7 +129,45 @@
 
         //#region Action buttons
 
-        
+        $scope.manageUserGroups = function (user) {
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/settings/users/user-groups-dialog/user-groups-dialog.html',
+                controller: 'UserGroupsDialogController',
+                resolve: {
+                    user: () => {
+                        return _.cloneDeep(user);
+                    },
+                    allGroups: (UserGroupsService) => {
+                        return UserGroupsService.getUserGroups().then(
+                            (response) => {
+                                return response.data;
+                            }
+                        );
+                    },
+                    userGroups: () => {
+                        return UsersService.getUserGroups(user).then(
+                            (response) => {
+                                return response.data;
+                            }
+                        );
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            dialog.result.then(
+                function () {
+                    $scope.applyFilter();
+                },
+                function () {
+                    // modal dismissed => do nothing
+                }
+            );
+        };
 
         //#endregion
     }

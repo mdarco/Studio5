@@ -338,7 +338,7 @@ namespace DF.DB
 
         #region User group members
 
-        public static void DeleteUserGroupMember(int userID, int userGroupID)
+        public static void DeleteUserFromGroup(int userID, int userGroupID)
         {
             using (var ctx = new DFAppEntities())
             {
@@ -353,27 +353,26 @@ namespace DF.DB
 
         public static void AddUserToGroups(int userID, List<UserGroupModel> userGroups)
         {
-            for (int i = 0; i < userGroups.Count; i++)
-            {
-                int currentUserGroupID = userGroups[i].UserGroupID;
-                AddUserToGroup(userID, currentUserGroupID);
-            }
-        }
-
-        private static void AddUserToGroup(int userID, int currentUserGroupID)
-        {
             using (var ctx = new DFAppEntities())
             {
-                var user = ctx.Users.Where(u => u.UserID == userID).FirstOrDefault();
-                var userGroup = ctx.UserGroups.Where(ug => ug.UserGroupID == currentUserGroupID).FirstOrDefault();
+                // first delete all membership info
+                var membership = ctx.UserGroupMembers.Where(x => x.UserID == userID).ToList();
+                if (membership.Count() > 0)
+                {
+                    for (int i = membership.Count() - 1; i >= 0; i--)
+                    {
+                        ctx.UserGroupMembers.Remove(membership.ElementAt(i));
+                    }
+                }
 
-                if (user != null && userGroup != null)
+                // add new membership info
+                foreach(var group in userGroups)
                 {
                     UserGroupMembers ugm = new UserGroupMembers();
-                    ugm.UserGroupID = currentUserGroupID;
+                    ugm.UserGroupID = group.UserGroupID;
                     ugm.UserID = userID;
 
-                    user.UserGroupMembers.Add(ugm);
+                    ctx.UserGroupMembers.Add(ugm);
                     ctx.SaveChanges();
                 }
             }

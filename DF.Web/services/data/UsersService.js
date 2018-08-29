@@ -12,15 +12,23 @@
 
         var service = {
             getUsers: getUsers,
+            getUserGroups: getUserGroups,
 
             manage: manageUser,
-            delete: deleteUser
+            delete: deleteUser,
+
+            addUserToGroups: addUserToGroups
         };
 
         return service;
 
         function getUsers() {
             var url = WebApiBaseUrl + urlRoot + '?nd=' + Date.now();
+            return $http.get(url);
+        }
+
+        function getUserGroups(user) {
+            var url = WebApiBaseUrl + urlRoot + '/' + user.UserID + '/user-groups' + '?nd=' + Date.now();
             return $http.get(url);
         }
 
@@ -32,6 +40,11 @@
         function deleteUser(userID) {
             var url = WebApiBaseUrl + urlRoot + '/' + userID;
             return $http.delete(url);
+        }
+
+        function addUserToGroups(user, userGroups) {
+            var url = WebApiBaseUrl + urlRoot + '/' + user.UserID + '/user-groups';
+            return $http.post(url, userGroups);
         }
     }
 })();

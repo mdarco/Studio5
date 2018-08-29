@@ -15,20 +15,16 @@ namespace DF.DB
         {
             using (var ctx = new DFAppEntities())
             {
-                return ctx.UserGroups.Where(x => 
-                        x.UserGroupName != "ADMIN" &&
-                        x.UserGroupName != "TRENER" &&
-                        x.UserGroupName != "PREGLED PODATAKA"
-                    )
-                    .Select(u =>
-                        new UserGroupModel()
-                        {
-                            UserGroupID = u.UserGroupID,
-                            UserGroupName = u.UserGroupName
-                        }
-                    )
-                    .OrderBy(u => u.UserGroupName)
-                    .ToList();
+                return ctx.UserGroups
+                            .Select(u =>
+                                new UserGroupModel()
+                                {
+                                    UserGroupID = u.UserGroupID,
+                                    UserGroupName = u.UserGroupName
+                                }
+                            )
+                            .OrderBy(u => u.UserGroupName)
+                            .ToList();
             }
         }
 

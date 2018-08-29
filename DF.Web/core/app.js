@@ -7,7 +7,7 @@
         'ngRoute',
         'ngAnimate',
         'ui.bootstrap',
-        //'checklist-model',
+        'checklist-model',
         'abnTree',
         'blockUI',
         'ngTable',

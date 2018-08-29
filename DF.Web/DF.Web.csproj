@@ -405,6 +405,8 @@
     <Content Include="pages\settings\user-groups\UserGroupsController.js" />
     <Content Include="pages\settings\users\user-dialog\user-dialog.html" />
     <Content Include="pages\settings\users\user-dialog\UserDialogController.js" />
+    <Content Include="pages\settings\users\user-groups-dialog\user-groups-dialog.html" />
+    <Content Include="pages\settings\users\user-groups-dialog\UserGroupsDialogController.js" />
     <Content Include="pages\settings\users\UserInfoController.js" />
     <Content Include="pages\settings\users\users.html" />
     <Content Include="pages\settings\users\UsersController.js" />
@@ -595,6 +597,7 @@
     <Content Include="services\data\MembersService.js" />
     <Content Include="services\data\PaymentsService.js" />
     <Content Include="services\data\TagsService.js" />
+    <Content Include="services\data\UserGroupsService.js" />
     <Content Include="services\data\UsersService.js" />
     <Content Include="services\UtilityService.js" />
     <Content Include="Web.config" />

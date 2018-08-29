@@ -54,7 +54,7 @@ namespace DF.Api.Controllers
         //    Users.ChangePassword(model);
         //}
 
-        [Route("{id}/usergroups")]
+        [Route("{id}/user-groups")]
         [HttpGet]
         public List<UserGroupModel> GetUserGroups(int id)
         {
@@ -70,12 +70,12 @@ namespace DF.Api.Controllers
         //    Users.DeleteUserFromUserGroup(userID, userGroupID);
         //}
 
-        //[Route("{userID}/user-groups")]
-        //[HttpPost]
-        //public void AddUserToUserGroups(int userID, List<UserGroupModel> userGroups)
-        //{
-        //    Users.AddUserToUserGroups(userID, userGroups);
-        //}
+        [Route("{userID}/user-groups")]
+        [HttpPost]
+        public void AddUserToGroups(int userID, List<UserGroupModel> userGroups)
+        {
+            Users.AddUserToGroups(userID, userGroups);
+        }
 
         #endregion
 
