@@ -373,8 +373,9 @@ namespace DF.DB
                     ugm.UserID = userID;
 
                     ctx.UserGroupMembers.Add(ugm);
-                    ctx.SaveChanges();
                 }
+
+                ctx.SaveChanges();
             }
         }
 
@@ -391,7 +392,8 @@ namespace DF.DB
                             new DanceGroupModel()
                             {
                                 DanceGroupID = udg.DanceGroupID,
-                                DanceGroupName = udg.DanceGroups.DanceGroupName
+                                DanceGroupName = udg.DanceGroups.DanceGroupName,
+                                HasPaymentAbility = udg.HasPaymentAbility
                             }
                         )
                         .OrderBy(udg => udg.DanceGroupName)
@@ -421,8 +423,37 @@ namespace DF.DB
                     udg.UserID = userID;
 
                     ctx.UserDanceGroups.Add(udg);
-                    ctx.SaveChanges();
                 }
+
+                ctx.SaveChanges();
+            }
+        }
+
+        public static void SetUserDanceGroupsPaymentPermissions(int userID, List<DanceGroupModel> userDanceGroups)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                // first delete user dance groups payment ability info
+                var ability = ctx.UserDanceGroups.Where(x => x.UserID == userID && x.HasPaymentAbility).ToList();
+                if (ability.Count() > 0)
+                {
+                    for (int i = ability.Count() - 1; i >= 0; i--)
+                    {
+                        ability.ElementAt(i).HasPaymentAbility = false;
+                    }
+                }
+
+                // add new payment ability info
+                foreach (var group in userDanceGroups)
+                {
+                    var record = ctx.UserDanceGroups.Where(x => x.UserID == userID).FirstOrDefault();
+                    if (record != null)
+                    {
+                        record.HasPaymentAbility = true;
+                    }
+                }
+
+                ctx.SaveChanges();
             }
         }
 

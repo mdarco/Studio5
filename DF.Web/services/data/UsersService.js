@@ -19,7 +19,8 @@
             delete: deleteUser,
 
             addUserToGroups: addUserToGroups,
-            addUserToDanceGroups: addUserToDanceGroups
+            addUserToDanceGroups: addUserToDanceGroups,
+            setUserDanceGroupsPaymentPermissions: setUserDanceGroupsPaymentPermissions
         };
 
         return service;
@@ -56,6 +57,11 @@
 
         function addUserToDanceGroups(user, userDanceGroups) {
             var url = WebApiBaseUrl + urlRoot + '/' + user.UserID + '/dance-groups';
+            return $http.post(url, userDanceGroups);
+        }
+
+        function setUserDanceGroupsPaymentPermissions(user, userDanceGroups) {
+            var url = WebApiBaseUrl + urlRoot + '/' + user.UserID + '/dance-groups-payment-permissions';
             return $http.post(url, userDanceGroups);
         }
     }

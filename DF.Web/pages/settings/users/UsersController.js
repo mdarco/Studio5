@@ -129,6 +129,10 @@
 
         //#region Action buttons
 
+        $scope.editUser = function (user) {
+            alert('Work in progress..');
+        };
+
         $scope.manageUserGroups = function (user) {
             var dialogOpts = {
                 backdrop: 'static',
@@ -186,6 +190,39 @@
                                 return response.data;
                             }
                         );
+                    },
+                    userDanceGroups: () => {
+                        return UsersService.getUserDanceGroups(user).then(
+                            (response) => {
+                                return response.data;
+                            }
+                        );
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            dialog.result.then(
+                function () {
+                    $scope.applyFilter();
+                },
+                function () {
+                    // modal dismissed => do nothing
+                }
+            );
+        };
+
+        $scope.managePaymentPermissions = function (user) {
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/settings/users/payment-permissions-dialog/payment-permissions-dialog.html',
+                controller: 'PaymentPermissionsDialogController',
+                resolve: {
+                    user: () => {
+                        return _.cloneDeep(user);
                     },
                     userDanceGroups: () => {
                         return UsersService.getUserDanceGroups(user).then(

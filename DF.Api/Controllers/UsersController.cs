@@ -127,6 +127,13 @@ namespace DF.Api.Controllers
             Users.AddUserToDanceGroups(userID, userDanceGroups);
         }
 
+        [Route("{userID}/dance-groups-payment-permissions")]
+        [HttpPost]
+        public void SetUserDanceGroupsPaymentPermissions(int userID, List<DanceGroupModel> userDanceGroups)
+        {
+            Users.SetUserDanceGroupsPaymentPermissions(userID, userDanceGroups);
+        }
+
         #endregion
     }
 }

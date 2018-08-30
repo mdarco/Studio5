@@ -405,6 +405,8 @@
     <Content Include="pages\settings\user-groups\UserGroupsController.js" />
     <Content Include="pages\settings\users\dance-groups-dialog\dance-groups-dialog.html" />
     <Content Include="pages\settings\users\dance-groups-dialog\DanceGroupsDialogController.js" />
+    <Content Include="pages\settings\users\payment-permissions-dialog\payment-permissions-dialog.html" />
+    <Content Include="pages\settings\users\payment-permissions-dialog\PaymentPermissionsDialogController.js" />
     <Content Include="pages\settings\users\user-dialog\user-dialog.html" />
     <Content Include="pages\settings\users\user-dialog\UserDialogController.js" />
     <Content Include="pages\settings\users\user-groups-dialog\user-groups-dialog.html" />

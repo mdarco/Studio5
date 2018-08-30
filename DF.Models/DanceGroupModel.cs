@@ -13,6 +13,7 @@ namespace DF.Models
         public string DanceGroupDesc { get; set; }
         public Nullable<int> AgeCategoryID { get; set; }
         public string AgeCategory { get; set; }
+        public bool? HasPaymentAbility { get; set; }
 
         // paging and sorting support
         public int PageNo { get; set; }
