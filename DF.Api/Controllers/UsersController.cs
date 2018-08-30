@@ -54,13 +54,6 @@ namespace DF.Api.Controllers
         //    Users.ChangePassword(model);
         //}
 
-        [Route("{id}/user-groups")]
-        [HttpGet]
-        public List<UserGroupModel> GetUserGroups(int id)
-        {
-            return Users.GetUserGroups(id);
-        }
-
         #region User group members
 
         //[Route("{userID}/user-groups/{userGroupID}")]
@@ -69,6 +62,13 @@ namespace DF.Api.Controllers
         //{
         //    Users.DeleteUserFromUserGroup(userID, userGroupID);
         //}
+
+        [Route("{id}/user-groups")]
+        [HttpGet]
+        public List<UserGroupModel> GetUserGroups(int id)
+        {
+            return Users.GetUserGroups(id);
+        }
 
         [Route("{userID}/user-groups")]
         [HttpPost]
@@ -108,6 +108,24 @@ namespace DF.Api.Controllers
         //{
         //    Users.AddUserPermissions(userID, permissions);
         //}
+
+        #endregion
+
+        #region User dance groups
+
+        [Route("{id}/dance-groups")]
+        [HttpGet]
+        public List<DanceGroupModel> GetUserDanceGroups(int id)
+        {
+            return Users.GetUserDanceGroups(id);
+        }
+
+        [Route("{userID}/dance-groups")]
+        [HttpPost]
+        public void AddUserToDanceGroups(int userID, List<DanceGroupModel> userDanceGroups)
+        {
+            Users.AddUserToDanceGroups(userID, userDanceGroups);
+        }
 
         #endregion
     }

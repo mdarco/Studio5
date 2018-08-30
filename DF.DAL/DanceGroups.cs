@@ -31,6 +31,24 @@ namespace DF.DB
             }
         }
 
+        public static List<DanceGroupModel> GetAllDanceGroups()
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                return ctx.DanceGroups
+                        .Include(t => t.Lookup_AgeCategories)
+                        .Select(x =>
+                            new DanceGroupModel()
+                            {
+                                DanceGroupID = x.DanceGroupID,
+                                DanceGroupName = x.DanceGroupName
+                            }
+                        )
+                        .OrderBy(lkp => lkp.DanceGroupName)
+                        .ToList();
+            }
+        }
+
         public static ApiTableResponseModel<DanceGroupModel> GetDanceGroups(DanceGroupModel filter)
         {
             ApiTableResponseModel<DanceGroupModel> response = new ApiTableResponseModel<DanceGroupModel>();

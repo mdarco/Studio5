@@ -18,6 +18,13 @@ namespace DF.Api.Controllers
             return DB.DanceGroups.GetLookup();
         }
 
+        [Route("all")]
+        [HttpGet]
+        public List<DanceGroupModel> GetAllDanceGroups()
+        {
+            return DB.DanceGroups.GetAllDanceGroups();
+        }
+
         [Route("filtered")]
         [HttpPost]
         public ApiTableResponseModel<DanceGroupModel> GetDanceGroups(DanceGroupModel filter)

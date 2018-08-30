@@ -252,23 +252,6 @@ namespace DF.DB
             }
         }
 
-        public static List<UserGroupModel> GetUserGroups(int id)
-        {
-            using (var ctx = new DFAppEntities())
-            {
-                return ctx.UserGroupMembers.Include("UserGroups").Where(ugm => ugm.UserID == id)
-                        .Select(ugm =>
-                            new UserGroupModel()
-                            {
-                                UserGroupID = ugm.UserGroupID,
-                                UserGroupName = ugm.UserGroups.UserGroupName
-                            }
-                        )
-                        .OrderBy(ug => ug.UserGroupName)
-                        .ToList();
-            }
-        }
-
         #region User permissions
 
         // gets effective user permissions (user groups permissions + user permissions)
@@ -338,6 +321,23 @@ namespace DF.DB
 
         #region User group members
 
+        public static List<UserGroupModel> GetUserGroups(int id)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                return ctx.UserGroupMembers.Include("UserGroups").Where(ugm => ugm.UserID == id)
+                        .Select(ugm =>
+                            new UserGroupModel()
+                            {
+                                UserGroupID = ugm.UserGroupID,
+                                UserGroupName = ugm.UserGroups.UserGroupName
+                            }
+                        )
+                        .OrderBy(ug => ug.UserGroupName)
+                        .ToList();
+            }
+        }
+
         public static void DeleteUserFromGroup(int userID, int userGroupID)
         {
             using (var ctx = new DFAppEntities())
@@ -373,6 +373,54 @@ namespace DF.DB
                     ugm.UserID = userID;
 
                     ctx.UserGroupMembers.Add(ugm);
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
+        #endregion
+
+        #region User dance groups
+
+        public static List<DanceGroupModel> GetUserDanceGroups(int id)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                return ctx.UserDanceGroups.Include("DanceGroups").Where(udg => udg.UserID == id)
+                        .Select(udg =>
+                            new DanceGroupModel()
+                            {
+                                DanceGroupID = udg.DanceGroupID,
+                                DanceGroupName = udg.DanceGroups.DanceGroupName
+                            }
+                        )
+                        .OrderBy(udg => udg.DanceGroupName)
+                        .ToList();
+            }
+        }
+
+        public static void AddUserToDanceGroups(int userID, List<DanceGroupModel> userDanceGroups)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                // first delete all dance groups membership info
+                var membership = ctx.UserDanceGroups.Where(x => x.UserID == userID).ToList();
+                if (membership.Count() > 0)
+                {
+                    for (int i = membership.Count() - 1; i >= 0; i--)
+                    {
+                        ctx.UserDanceGroups.Remove(membership.ElementAt(i));
+                    }
+                }
+
+                // add new membership info
+                foreach (var group in userDanceGroups)
+                {
+                    UserDanceGroups udg = new UserDanceGroups();
+                    udg.DanceGroupID = group.DanceGroupID;
+                    udg.UserID = userID;
+
+                    ctx.UserDanceGroups.Add(udg);
                     ctx.SaveChanges();
                 }
             }

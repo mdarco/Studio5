@@ -13,11 +13,13 @@
         var service = {
             getUsers: getUsers,
             getUserGroups: getUserGroups,
+            getUserDanceGroups: getUserDanceGroups,
 
             manage: manageUser,
             delete: deleteUser,
 
-            addUserToGroups: addUserToGroups
+            addUserToGroups: addUserToGroups,
+            addUserToDanceGroups: addUserToDanceGroups
         };
 
         return service;
@@ -29,6 +31,11 @@
 
         function getUserGroups(user) {
             var url = WebApiBaseUrl + urlRoot + '/' + user.UserID + '/user-groups' + '?nd=' + Date.now();
+            return $http.get(url);
+        }
+
+        function getUserDanceGroups(user) {
+            var url = WebApiBaseUrl + urlRoot + '/' + user.UserID + '/dance-groups' + '?nd=' + Date.now();
             return $http.get(url);
         }
 
@@ -45,6 +52,11 @@
         function addUserToGroups(user, userGroups) {
             var url = WebApiBaseUrl + urlRoot + '/' + user.UserID + '/user-groups';
             return $http.post(url, userGroups);
+        }
+
+        function addUserToDanceGroups(user, userDanceGroups) {
+            var url = WebApiBaseUrl + urlRoot + '/' + user.UserID + '/dance-groups';
+            return $http.post(url, userDanceGroups);
         }
     }
 })();

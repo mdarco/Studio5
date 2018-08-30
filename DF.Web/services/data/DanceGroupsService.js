@@ -12,6 +12,7 @@
 
         var service = {
             getLookup: getLookupDanceGroups,
+            getAllDanceGroups: getAllDanceGroups,
             getDanceGroups: getFilteredDanceGroups,
             getDanceGroup: getDanceGroup,
             createDanceGroup: createDanceGroup,
@@ -23,6 +24,11 @@
 
         function getLookupDanceGroups() {
             var url = WebApiBaseUrl + urlRoot + '/lookup?nd=' + Date.now();
+            return $http.get(url);
+        }
+
+        function getAllDanceGroups() {
+            var url = WebApiBaseUrl + urlRoot + '/all?nd=' + Date.now();
             return $http.get(url);
         }
 

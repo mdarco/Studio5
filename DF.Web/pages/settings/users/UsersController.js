@@ -169,6 +169,46 @@
             );
         };
 
+        $scope.manageDanceGroups = function (user) {
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/settings/users/dance-groups-dialog/dance-groups-dialog.html',
+                controller: 'DanceGroupsDialogController',
+                resolve: {
+                    user: () => {
+                        return _.cloneDeep(user);
+                    },
+                    allDanceGroups: (DanceGroupsService) => {
+                        return DanceGroupsService.getAllDanceGroups().then(
+                            (response) => {
+                                return response.data;
+                            }
+                        );
+                    },
+                    userDanceGroups: () => {
+                        return UsersService.getUserDanceGroups(user).then(
+                            (response) => {
+                                return response.data;
+                            }
+                        );
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            dialog.result.then(
+                function () {
+                    $scope.applyFilter();
+                },
+                function () {
+                    // modal dismissed => do nothing
+                }
+            );
+        };
+
         //#endregion
     }
 })();
