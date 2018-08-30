@@ -403,6 +403,8 @@
     <Content Include="pages\settings\search-member-images\SearchMemberImagesController.js" />
     <Content Include="pages\settings\user-groups\user-groups.html" />
     <Content Include="pages\settings\user-groups\UserGroupsController.js" />
+    <Content Include="pages\settings\users\change-password-dialog\change-password-dialog.html" />
+    <Content Include="pages\settings\users\change-password-dialog\ChangePasswordDialogController.js" />
     <Content Include="pages\settings\users\dance-groups-dialog\dance-groups-dialog.html" />
     <Content Include="pages\settings\users\dance-groups-dialog\DanceGroupsDialogController.js" />
     <Content Include="pages\settings\users\payment-permissions-dialog\payment-permissions-dialog.html" />

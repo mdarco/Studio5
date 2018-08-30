@@ -229,11 +229,11 @@ namespace DF.DB
             }
         }
 
-        public static void ChangePassword(UserModel model)
+        public static void ChangePassword(int userID, UserModel model)
         {
             using (var ctx = new DFAppEntities())
             {
-                var user = ctx.Users.FirstOrDefault(u => u.UserID == model.UserID);
+                var user = ctx.Users.FirstOrDefault(u => u.UserID == userID);
                 if (user != null)
                 {
                     // decode password from base64

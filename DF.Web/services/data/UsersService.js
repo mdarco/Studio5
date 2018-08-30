@@ -11,6 +11,8 @@
         var urlRoot = '/api/settings/users';
 
         var service = {
+            changePassword: changePassword,
+
             getUsers: getUsers,
             getUserGroups: getUserGroups,
             getUserDanceGroups: getUserDanceGroups,
@@ -24,6 +26,11 @@
         };
 
         return service;
+
+        function changePassword(user) {
+            var url = WebApiBaseUrl + urlRoot + '/' + user.UserID + '/change-password';
+            return $http.post(url, user);
+        }
 
         function getUsers() {
             var url = WebApiBaseUrl + urlRoot + '?nd=' + Date.now();

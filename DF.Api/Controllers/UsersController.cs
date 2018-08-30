@@ -47,12 +47,12 @@ namespace DF.Api.Controllers
             Users.DeleteUser(id);
         }
 
-        //[Route("change-password")]
-        //[HttpPost]
-        //public void ChangePassword(UserModel model)
-        //{
-        //    Users.ChangePassword(model);
-        //}
+        [Route("{id}/change-password")]
+        [HttpPost]
+        public void ChangePassword(int id, UserModel model)
+        {
+            Users.ChangePassword(id, model);
+        }
 
         #region User group members
 
