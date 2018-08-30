@@ -15,9 +15,6 @@
             return (g.HasPaymentAbility === true);
         });
 
-        console.table($scope.userDanceGroups);
-        console.table($scope.selectedDanceGroups);
-
         $scope.save = function () {
             UsersService.setUserDanceGroupsPaymentPermissions(user, $scope.selectedDanceGroups).then(
                 function () {

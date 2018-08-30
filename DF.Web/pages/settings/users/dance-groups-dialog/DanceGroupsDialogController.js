@@ -12,6 +12,9 @@
         $scope.allDanceGroups = allDanceGroups;
         $scope.userDanceGroups = userDanceGroups;
 
+        //console.table($scope.allDanceGroups);
+        //console.table($scope.userDanceGroups);
+
         $scope.save = function () {
             UsersService.addUserToDanceGroups(user, $scope.userDanceGroups).then(
                 function () {

@@ -187,6 +187,9 @@
                     allDanceGroups: (DanceGroupsService) => {
                         return DanceGroupsService.getAllDanceGroups().then(
                             (response) => {
+                                response.data.forEach((item) => {
+                                    delete item.HasPaymentAbility;
+                                });
                                 return response.data;
                             }
                         );
@@ -194,6 +197,9 @@
                     userDanceGroups: () => {
                         return UsersService.getUserDanceGroups(user).then(
                             (response) => {
+                                response.data.forEach((item) => {
+                                    delete item.HasPaymentAbility;
+                                });
                                 return response.data;
                             }
                         );

@@ -23,7 +23,7 @@ namespace DF.DB
                             new LookupModel()
                             {
                                 ID = x.DanceGroupID,
-                                Name = x.DanceGroupName + " (" + x.Lookup_AgeCategories.Name + ")"
+                                Name = x.DanceGroupName
                             }
                         )
                         .OrderBy(lkp => lkp.Name)

@@ -38,10 +38,19 @@
                                 }
                             );
                         },
-                        danceGroups: function (DanceGroupsService) {
+                        danceGroups: function (DanceGroupsService, AuthenticationService) {
+                            var currentUser = AuthenticationService.getCurrentUser();
+
+                            var userDanceGroups = currentUser.UserDanceGroups.map((g) => {
+                                return g.DanceGroupName.toLowerCase();
+                            });
+
                             return DanceGroupsService.getLookup().then(
                                 function (result) {
-                                    return result.data;
+                                    var f = result.data.filter((d) => {
+                                        return _.includes(userDanceGroups, d.Name.toLowerCase());
+                                    });
+                                    return f;
                                 }
                             );
                         },
