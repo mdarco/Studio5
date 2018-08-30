@@ -20,5 +20,7 @@ namespace DF.Models
         public List<string> UserGroups { get; set; }
 
         public List<string> EffectivePermissions { get; set; }
+
+        public List<DanceGroupModel> UserDanceGroups { get; set; }
     }
 }

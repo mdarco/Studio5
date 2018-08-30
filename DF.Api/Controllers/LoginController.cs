@@ -62,6 +62,9 @@ namespace DF.Api.Controllers
 
                 // get effective permissions
                 model.EffectivePermissions = Users.GetEffectivePermissions(user.UserID);
+
+                // get dance groups (with payment ability info)
+                model.UserDanceGroups = Users.GetUserDanceGroups(user.UserID);
             }
 
             return model;
