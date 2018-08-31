@@ -87,7 +87,10 @@
                             var id = $route.current.params.id;
                             return MembersService.get(id).then(
                                 function (result) {
-                                    return result.data;
+                                    return MembersService.getDanceGroups(result.data.MemberID).then((memberDanceGroups) => {
+                                        result.data.DanceGroups = memberDanceGroups.data;
+                                        return result.data;
+                                    });
                                 }
                             );
                         }

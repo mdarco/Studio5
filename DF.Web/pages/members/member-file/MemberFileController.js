@@ -40,6 +40,25 @@
             });
         }
 
+        //#region Access rights
+
+        $scope.canAccess = function (type) {
+            switch (type.toLowerCase()) {
+                case 'member-payments-tab':
+                    var userPaymentAbilityDanceGroups = currentUser.UserDanceGroups.filter((userDanceGroup) => {
+                        return userDanceGroup.HasPaymentAbility === true;
+                    }).map((g) => {
+                        return g.DanceGroupName.toLowerCase();
+                    });
+                    var memberDanceGroups = $scope.member.DanceGroups.map((g) => {
+                        return g.DanceGroupName.toLowerCase();
+                    });
+                    return _.intersection(userPaymentAbilityDanceGroups, memberDanceGroups).length > 0;
+            }
+        };
+
+        //#endregion
+
         //#region Basic data
 
         $scope.editMember = function (dataType) {
