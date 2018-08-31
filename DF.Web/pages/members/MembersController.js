@@ -14,7 +14,7 @@
 
         // prevent 'Enter' to submit the form
         $('#searchForm').bind('keydown', function (e) {
-            if (e.keyCode == 13) {
+            if (e.keyCode === 13) {
                 e.preventDefault();
             }
         });
@@ -130,11 +130,16 @@
 
         //#endregion
 
-        $scope.filter = {};
         if (isBack) {
             if (MembersService.getSearchFilter()) {
                 $scope.filter = MembersService.getSearchFilter();
                 $scope.applyFilter();
+            }
+        } else {
+            if ($scope.danceGroups && $scope.danceGroups.length > 0) {
+                $scope.filter = {
+                    DanceGroupID: $scope.danceGroups[0].ID
+                };
             }
         }
 

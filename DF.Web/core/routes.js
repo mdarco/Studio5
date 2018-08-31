@@ -47,10 +47,13 @@
 
                             return DanceGroupsService.getLookup().then(
                                 function (result) {
-                                    var f = result.data.filter((d) => {
-                                        return _.includes(userDanceGroups, d.Name.toLowerCase());
-                                    });
-                                    return f;
+                                    if (!_.includes(currentUser.UserGroups, 'ADMIN') && !_.includes(currentUser.UserGroups, 'PREGLED PODATAKA')) {
+                                        return result.data.filter((d) => {
+                                            return _.includes(userDanceGroups, d.Name.toLowerCase());
+                                        });
+                                    } else {
+                                        return result.data;
+                                    }
                                 }
                             );
                         },

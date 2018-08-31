@@ -133,6 +133,10 @@
             alert('Work in progress..');
         };
 
+        $scope.deleteUser = function (userID) {
+            alert('Work in progress..');
+        };
+
         $scope.manageUserGroups = function (user) {
             var dialogOpts = {
                 backdrop: 'static',

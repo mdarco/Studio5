@@ -18,12 +18,12 @@
                         <tr>
                             <td rowspan="10" style="vertical-align: middle; text-align: center;">
                                 <input type="file" id="uploadProfileImage" name="uploadProfileImage" style="display: none;" />
-                                <button class="btn btn-sm btn-primary margin-bottom-10" title="Izmeni sliku" ng-click="triggerUploadProfileImage()"><i class="fa fa-camera"></i></button>
+                                <button class="btn btn-sm btn-primary margin-bottom-10" title="Izmeni sliku" ng-click="triggerUploadProfileImage()" user-groups="ADMIN,TRENER"><i class="fa fa-camera"></i></button>
                                 <div class="margin-bottom-10">
                                     <img id="imgProfileImage" src="{{ member.ProfileImage }}" style="max-width: 300px; max-height: 500px;" alt="" />
                                 </div>
-                                <div ng-click="editMember('IsActive')" ng-class="(member.IsActive) ? 'label label-success text-bold margin-bottom-10 cursor-pointer' : 'label label-danger text-bold margin-bottom-10 cursor-pointer'">{{ (member.IsActive) ? 'Aktivan' : 'Neaktivan' }}</div>
-                                <div class="margin-top-10" style="cursor: pointer" ng-click="editMember('IsCompetitor')">
+                                <div ng-click="editMember('IsActive')" ng-class="(member.IsActive) ? 'label label-success text-bold margin-bottom-10 cursor-pointer' : 'label label-danger text-bold margin-bottom-10 cursor-pointer'" user-groups="ADMIN,TRENER">{{ (member.IsActive) ? 'Aktivan' : 'Neaktivan' }}</div>
+                                <div class="margin-top-10" style="cursor: pointer" ng-click="editMember('IsCompetitor')" user-groups="ADMIN,TRENER">
                                     <img ng-src="{{ (member.IsCompetitor) ? 'Content/img/trophy-icon.png' : 'Content/img/trophy-icon-disabled.png' }}" alt="Competitor" />
                                 </div>
                             </td>
@@ -33,7 +33,7 @@
                                 <!--<button class="btn btn-sm btn-primary"
                                         ng-click="editMember('FullName')"
                                         title="Ažuriranje imena i prezimena"
-                                        permissions="Dosije - izmena osnovnih podataka">
+                                        user-groups="ADMIN,TRENER">
                                     <i class="fa fa-pencil"></i>
                                 </button>-->
                             </td>
@@ -45,7 +45,7 @@
                                 <button class="btn btn-sm btn-primary"
                                         ng-click="editMember('JMBG')"
                                         title="Ažuriranje JMBG"
-                                        permissions="Dosije - izmena osnovnih podataka">
+                                        user-groups="ADMIN,TRENER">
                                     <i class="fa fa-pencil"></i>
                                 </button>
                             </td>
@@ -57,7 +57,7 @@
                                 <button class="btn btn-sm btn-primary"
                                         ng-click="editMember('BirthDate')"
                                         title="Ažuriranje datuma rođenja"
-                                        permissions="Dosije - izmena osnovnih podataka">
+                                        user-groups="ADMIN,TRENER">
                                     <i class="fa fa-pencil"></i>
                                 </button>
                             </td>
@@ -69,7 +69,7 @@
                                 <button class="btn btn-sm btn-primary"
                                         ng-click="editMember('BirthPlace')"
                                         title="Ažuriranje mesta rođenja"
-                                        permissions="Dosije - izmena osnovnih podataka">
+                                        user-groups="ADMIN,TRENER">
                                     <i class="fa fa-pencil"></i>
                                 </button>
                             </td>
@@ -81,7 +81,7 @@
                                 <button class="btn btn-sm btn-primary"
                                         ng-click="editMember('AgeCategory')"
                                         title="Ažuriranje uzrasta"
-                                        permissions="Dosije - izmena osnovnih podataka">
+                                        user-groups="ADMIN,TRENER">
                                     <i class="fa fa-pencil"></i>
                                 </button>
                             </td>
@@ -93,7 +93,7 @@
                                 <button class="btn btn-sm btn-primary"
                                         ng-click="editMember('Address')"
                                         title="Ažuriranje adrese"
-                                        permissions="Dosije - izmena osnovnih podataka">
+                                        user-groups="ADMIN,TRENER">
                                     <i class="fa fa-pencil"></i>
                                 </button>
                             </td>
@@ -105,7 +105,7 @@
                                 <button class="btn btn-sm btn-primary"
                                         ng-click="editMember('Email')"
                                         title="Ažuriranje e-mail adrese"
-                                        permissions="Dosije - izmena osnovnih podataka">
+                                        user-groups="ADMIN,TRENER">
                                     <i class="fa fa-pencil"></i>
                                 </button>
                             </td>
@@ -117,7 +117,7 @@
                                 <button class="btn btn-sm btn-primary"
                                         ng-click="editMember('Phone1')"
                                         title="Ažuriranje telefona 1"
-                                        permissions="Dosije - izmena osnovnih podataka">
+                                        user-groups="ADMIN,TRENER">
                                     <i class="fa fa-pencil"></i>
                                 </button>
                             </td>
@@ -129,7 +129,7 @@
                                 <button class="btn btn-sm btn-primary"
                                         ng-click="editMember('Phone2')"
                                         title="Ažuriranje telefona 2"
-                                        permissions="Dosije - izmena osnovnih podataka">
+                                        user-groups="ADMIN,TRENER">
                                     <i class="fa fa-pencil"></i>
                                 </button>
                             </td>
@@ -141,7 +141,7 @@
                                 <button class="btn btn-sm btn-primary"
                                         ng-click="editMember('Phone3')"
                                         title="Ažuriranje telefona 3"
-                                        permissions="Dosije - izmena osnovnih podataka">
+                                        user-groups="ADMIN,TRENER">
                                     <i class="fa fa-pencil"></i>
                                 </button>
                             </td>
@@ -167,7 +167,7 @@
 
                             <br />
 
-                            <button class="btn btn-sm btn-success" ng-click="addDocument()"><i class="fa fa-plus"></i>  Dodaj dokument</button>
+                            <button class="btn btn-sm btn-success" ng-click="addDocument()" user-groups="ADMIN,TRENER"><i class="fa fa-plus"></i>  Dodaj dokument</button>
 
                             <br /><br />
 
@@ -190,8 +190,8 @@
                                         <td>{{ doc.CreatedByUserFullName }}</td>
                                         <td>{{ doc.Metadata.ExpiryDate | date: 'dd.MM.yyyy' }}</td>
                                         <td>
-                                            <button class="btn btn-danger btn-xs pull-right margin-right-5" title="Brisanje dokumenta" ng-click="deleteDocument(doc)"><i class="fa fa-times"></i></button>
-                                            <a class="btn btn-success btn-xs pull-right margin-right-5" title="Preuzmi/štampaj dokument" ng-href="{{ webApiBaseUrl }}/api/documents/{{ doc.DocumentID }}/download"><i class="fa fa-download"></i></a>
+                                            <button class="btn btn-danger btn-xs pull-right margin-right-5" title="Brisanje dokumenta" ng-click="deleteDocument(doc)" user-groups="ADMIN,TRENER"><i class="fa fa-times"></i></button>
+                                            <a class="btn btn-success btn-xs pull-right margin-right-5" title="Preuzmi/štampaj dokument" ng-href="{{ webApiBaseUrl }}/api/documents/{{ doc.DocumentID }}/download" user-groups="ADMIN,TRENER"><i class="fa fa-download"></i></a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -210,7 +210,7 @@
 
                             <br />
 
-                            <button class="btn btn-sm btn-success" ng-click="selectDanceGroups()"><i class="fa fa-plus"></i>  Izaberi grupe</button>
+                            <button class="btn btn-sm btn-success" ng-click="selectDanceGroups()" user-groups="ADMIN,TRENER"><i class="fa fa-plus"></i>  Izaberi grupe</button>
 
                             <br /><br />
 
@@ -277,7 +277,7 @@
 
                             <br />
 
-                            <button class="btn btn-sm btn-success" ng-click="addMemberPayment()"><i class="fa fa-plus"></i>  Dodaj plaćanje</button>
+                            <button class="btn btn-sm btn-success" ng-click="addMemberPayment()" user-groups="ADMIN,TRENER"><i class="fa fa-plus"></i>  Dodaj plaćanje</button>
 
                             <br /><br />
 
@@ -304,8 +304,8 @@
                                             {{ memberPayment.Payment.NumberOfInstallments === 1 ? (memberPayment.Payment.Type.toUpperCase() === 'ONE-TIME' ? 'Jednokratno' : 'Mesečno') : memberPayment.Payment.NumberOfInstallments }}
                                         </td>
                                         <td>
-                                            <button class="btn btn-danger btn-xs pull-right margin-right-5" title="Brisanje plaćanja" ng-click="deleteMemberPayment(memberPayment)"><i class="fa fa-times"></i></button>
-                                            <button class="btn btn-primary btn-xs pull-right margin-right-5" title="Pregled plaćanja" ng-click="showInstallments(memberPayment)"><i class="fa fa-dollar"></i></button>
+                                            <button class="btn btn-danger btn-xs pull-right margin-right-5" title="Brisanje plaćanja" ng-click="deleteMemberPayment(memberPayment)" user-groups="ADMIN,TRENER"><i class="fa fa-times"></i></button>
+                                            <button class="btn btn-primary btn-xs pull-right margin-right-5" title="Pregled plaćanja" ng-click="showInstallments(memberPayment)" user-groups="ADMIN,TRENER"><i class="fa fa-dollar"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
