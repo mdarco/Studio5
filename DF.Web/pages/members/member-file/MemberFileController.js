@@ -484,6 +484,21 @@
             });
         };
 
+        $scope.resolveDocumentCssClass = function (doc) {
+            if ($scope.documents.length > 0) {
+                if (doc.Metadata.ExpiryDate) {
+                    var today = moment(Date.now());
+                    var expiryDate = moment(doc.Metadata.ExpiryDate);
+
+                    if (expiryDate < today) {
+                        return 'df-alert-row';
+                    }
+                }
+            }
+
+            return '';
+        };
+
         //#endregion
 
         //#region Dance groups
