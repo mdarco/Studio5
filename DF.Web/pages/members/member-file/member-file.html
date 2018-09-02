@@ -16,7 +16,7 @@
                 <table class="table table-condensed">
                     <tbody>
                         <tr>
-                            <td rowspan="10" style="vertical-align: middle; text-align: center;">
+                            <td rowspan="11" style="vertical-align: middle; text-align: center;">
                                 <input type="file" id="uploadProfileImage" name="uploadProfileImage" style="display: none;" />
                                 <button class="btn btn-sm btn-primary margin-bottom-10" title="Izmeni sliku" ng-click="triggerUploadProfileImage()" user-groups="ADMIN,TRENER"><i class="fa fa-camera"></i></button>
                                 <div class="margin-bottom-10">
@@ -141,6 +141,18 @@
                                 <button class="btn btn-sm btn-primary"
                                         ng-click="editMember('Phone3')"
                                         title="Ažuriranje telefona 3"
+                                        user-groups="ADMIN,TRENER">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;"><strong>Komentar</strong></td>
+                            <td>{{ member.Note }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary"
+                                        ng-click="editMember('Note')"
+                                        title="Ažuriranje komentara"
                                         user-groups="ADMIN,TRENER">
                                     <i class="fa fa-pencil"></i>
                                 </button>

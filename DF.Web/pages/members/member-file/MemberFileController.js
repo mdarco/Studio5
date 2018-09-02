@@ -303,6 +303,24 @@
                     );
                     break;
 
+                case 'Note':
+                    openTextFieldDialog($scope.member.Note).then(
+                        function (result) {
+                            MembersService.edit(member.MemberID, { Note: result }).then(
+                                function () {
+                                    if (AppParams.DEBUG) {
+                                        toastr.success('Plesač uspešno ažuriran.');
+                                    }
+                                    $scope.member.Note = result;
+                                },
+                                function (error) {
+                                    toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                                }
+                            );
+                        }
+                    );
+                    break;
+
                 default:
                     alert('Work in progress..');
                     break;

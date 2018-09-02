@@ -108,6 +108,7 @@ namespace DF.DB
                                     AgeCategoryID = x.AgeCategoryID,
                                     AgeCategory = (x.Lookup_AgeCategories != null) ? x.Lookup_AgeCategories.Name : string.Empty,
                                     ProfileImage = x.ProfileImage,
+                                    Note = x.Note,
 
                                     ContactData =
                                         new ContactDataModel()
@@ -157,6 +158,7 @@ namespace DF.DB
                     model.AgeCategoryID = existing.AgeCategoryID;
                     model.AgeCategory = (existing.Lookup_AgeCategories != null) ? existing.Lookup_AgeCategories.Name : string.Empty;
                     model.ProfileImage = existing.ProfileImage;
+                    model.Note = existing.Note;
 
                     model.ContactData =
                         new ContactDataModel()
@@ -192,6 +194,7 @@ namespace DF.DB
                 m.AgeCategoryID = model.AgeCategoryID;
                 m.ProfileImage = model.ProfileImage;
                 m.IsActive = true;
+                m.Note = model.Note;
 
                 if (model.IsCompetitor.HasValue)
                 {
@@ -280,6 +283,8 @@ namespace DF.DB
                     {
                         existing.IsCompetitor = (bool)model.IsCompetitor;
                     }
+
+                    existing.Note = model.Note;
 
                     ctx.SaveChanges();
                 }
