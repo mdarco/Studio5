@@ -8,6 +8,8 @@
     ctrlFn.$inject = ['$scope', '$uibModalInstance', '$base64', 'AuthenticationService', 'UsersService', 'toastr'];
 
     function ctrlFn($scope, $uibModalInstance, $base64, AuthenticationService, UsersService, toastr) {
+        $scope.model = {};
+
         $scope.save = function () {
             var modelValidation = validate();
             if (modelValidation.error) {
