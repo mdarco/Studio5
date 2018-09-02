@@ -756,7 +756,7 @@
                     context: function () {
                         return {
                             member: angular.copy($scope.member),
-                            paymentID: memberPayment.PaymentID
+                            paymentID: memberPayment.ID
                         };
                     }
                 }

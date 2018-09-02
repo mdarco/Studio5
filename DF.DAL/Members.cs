@@ -523,6 +523,7 @@ namespace DF.DB
                                             InstallmentDate = i.InstallmentDate,
                                             Amount = (decimal)i.Amount,
                                             IsPaid = i.IsPaid,
+                                            IsCanceled = i.IsCanceled,
                                             PaymentDate = i.PaymentDate,
                                             Note = i.Note
                                         }
