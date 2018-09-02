@@ -45,6 +45,10 @@
         $scope.canAccess = function (type) {
             switch (type.toLowerCase()) {
                 case 'member-payments-tab':
+                    if (_.includes(currentUser.UserGroups, 'ADMIN')) {
+                        return true;
+                    }
+
                     var userPaymentAbilityDanceGroups = currentUser.UserDanceGroups.filter((userDanceGroup) => {
                         return userDanceGroup.HasPaymentAbility === true;
                     }).map((g) => {
