@@ -18,7 +18,7 @@
                             </td>
                             <td data-title="'Korisničko ime'" header-class="'text-left'">{{ user.Username }}</td>
                             <td data-title="'Status'" header-class="'text-left'">
-                                <span ng-class="user.IsActive ? 'label label-success' :'label label-danger'">{{ user.IsActive ? 'Aktivan' : 'Neaktivan' }}</span>
+                                <span style="cursor: pointer" ng-class="user.IsActive ? 'label label-success' :'label label-danger'" ng-click="changeActive(user)">{{ user.IsActive ? 'Aktivan' : 'Neaktivan' }}</span>
                             </td>
                             <td>
                                 <button class="btn btn-danger btn-xs" style="float: right; margin-left: 5px;" title="Brisanje korisnika" ng-click="deleteUser(user.UserID)"><i class="fa fa-times"></i></button>

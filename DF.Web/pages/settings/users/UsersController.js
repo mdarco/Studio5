@@ -110,7 +110,11 @@
                 backdropClick: false,
                 templateUrl: 'pages/settings/users/user-dialog/user-dialog.html',
                 controller: 'UserDialogController',
-                resolve: {}
+                resolve: {
+                    user: function () {
+                        return null;
+                    }
+                }
             };
 
             var dialog = $uibModal.open(dialogOpts);
@@ -130,11 +134,66 @@
         //#region Action buttons
 
         $scope.editUser = function (user) {
-            alert('Work in progress..');
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/settings/users/user-dialog/user-dialog.html',
+                controller: 'UserDialogController',
+                resolve: {
+                    user: function () {
+                        return UsersService.getUser(user.UserID).then(response => {
+                            return response.data;
+                        });
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            dialog.result.then(
+                function () {
+                    $scope.applyFilter();
+                },
+                function () {
+                    // modal dismissed => do nothing
+                }
+            );
         };
 
         $scope.deleteUser = function (userID) {
             alert('Work in progress..');
+        };
+
+        $scope.changeActive = function (user) {
+            bootbox.confirm({
+                message: (!user.IsActive ? 'Aktivirati' : 'Deaktivirati') + ' korisnika?',
+                buttons: {
+                    confirm: {
+                        label: 'Da',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'Ne',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        // update 'IsActive'
+                        user.IsActive = !user.IsActive;
+
+                        UsersService.manage(user).then(
+                            () => {
+                                
+                            },
+                            (error) => {
+                                toastr.error('Došlo je do greške na serveru prilikom ažuriranja korisnika.');
+                            }
+                        );
+                    }
+                }
+            });
         };
 
         $scope.manageUserGroups = function (user) {

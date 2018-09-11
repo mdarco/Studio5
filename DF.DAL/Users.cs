@@ -24,7 +24,6 @@ namespace DF.DB
                         {
                             UserID = u.UserID,
                             Username = u.Username,
-                            Password = u.Password,
                             FirstName = u.FirstName,
                             LastName = u.LastName,
                             LastLoginAt = u.LastLoginAt,
@@ -75,10 +74,10 @@ namespace DF.DB
                         {
                             UserID = u.UserID,
                             Username = u.Username,
-                            Password = u.Password,
                             FirstName = u.FirstName,
                             LastName = u.LastName,
                             FullName = u.FirstName + " " + u.LastName,
+                            IsActive = u.IsActive,
 
                             UserGroups =
                                 u.UserGroupMembers.Select(ugm =>
@@ -113,6 +112,7 @@ namespace DF.DB
                     model.FirstName = user.FirstName;
                     model.LastName = user.LastName;
                     model.FullName = user.FirstName + " " + user.LastName;
+                    model.IsActive = user.IsActive;
                 }
 
                 return model;
@@ -183,17 +183,20 @@ namespace DF.DB
                         user.Username = model.Username;
                     }
 
-                    // decode password from base64
-                    byte[] decodedData = Convert.FromBase64String(model.Password);
-                    string decodedPass = Encoding.UTF8.GetString(decodedData);
-
-                    byte[] data = Encoding.UTF8.GetBytes(decodedPass);
-                    data = new SHA256Managed().ComputeHash(data);
-                    string hashPassword = Encoding.UTF8.GetString(data);
-
-                    if (hashPassword != user.Password)
+                    if (!string.IsNullOrEmpty(model.Password))
                     {
-                        user.Password = hashPassword;
+                        // decode password from base64
+                        byte[] decodedData = Convert.FromBase64String(model.Password);
+                        string decodedPass = Encoding.UTF8.GetString(decodedData);
+
+                        byte[] data = Encoding.UTF8.GetBytes(decodedPass);
+                        data = new SHA256Managed().ComputeHash(data);
+                        string hashPassword = Encoding.UTF8.GetString(data);
+
+                        if (hashPassword != user.Password)
+                        {
+                            user.Password = hashPassword;
+                        }
                     }
 
                     if (model.FirstName != user.FirstName)
@@ -220,7 +223,16 @@ namespace DF.DB
         {
             using (var ctx = new DFAppEntities())
             {
-                var user = ctx.Users.FirstOrDefault(u => u.UserID == id);
+                var user = ctx.Users
+                            .Include(t => t.ContactData)
+                            .Include(t => t.UserDanceGroups)
+                            .Include(t => t.UserDocuments)
+                            .Include(t => t.UserGroupMembers)
+                            .Include(t => t.UserImages)
+                            .Include(t => t.UserPermissions)
+                            .Include(t => t.ChoreographyChoreographers)
+                            .FirstOrDefault(u => u.UserID == id);
+
                 if (user != null)
                 {
                     ctx.Users.Remove(user);

@@ -55,6 +55,7 @@ namespace DF.DB
                                     OutfitID = x.OutfitID
                                 }
                            )
+                           .OrderBy(x => x.Name)
                            .ToList();
                 }
 
