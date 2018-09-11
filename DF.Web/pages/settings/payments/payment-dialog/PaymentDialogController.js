@@ -5,10 +5,16 @@
       .module('DFApp')
       .controller('PaymentDialogController', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$uibModalInstance', 'PaymentsService', 'UtilityService', 'toastr'];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$uibModalInstance', 'PaymentsService', 'UtilityService', 'toastr', 'model'];
 
-  function ctrlFn($rootScope, $scope, $uibModalInstance, PaymentsService, UtilityService, toastr) {
-      $scope.model = {};
+  function ctrlFn($rootScope, $scope, $uibModalInstance, PaymentsService, UtilityService, toastr, model) {
+      $scope.model = model || {};
+      $scope.disableFields = Boolean(model);
+
+      // format model
+      if (model) {
+          $scope.model.DueDate = $scope.model.DueDate.split('T')[0];
+      }
 
       $scope.paymentTypes = [
           { Name: 'Jednokratno', ID: 'ONE-TIME' },
@@ -120,16 +126,16 @@
                 }
 
                 if (installmentAmountsForCompanion && installmentAmountsForCompanion.length > 0) {
-                    var sum = 0.0;
+                    var sumCompanion = 0.0;
                     _.each(installmentAmountsForCompanion, (amountForCompanion) => {
                         if ($.isNumeric(amountForCompanion)) {
-                            sum += (+(amountForCompanion));
+                            sumCompanion += (+(amountForCompanion));
                         } else {
                             return false; // break _.each() loop
                         }
                     });
     
-                    if (sum < parseFloat($scope.model.AmountForCompanion)) {
+                    if (sumCompanion < parseFloat($scope.model.AmountForCompanion)) {
                         return { error: true, errorMsg: 'Suma iznosa rata za pratioca nije jednaka ukupnoj sumi za plaćanje za pratioca.' };
                     }
                 }

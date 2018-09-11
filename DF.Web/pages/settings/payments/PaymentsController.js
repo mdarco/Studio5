@@ -57,7 +57,12 @@
                 keyboard: false,
                 backdropClick: false,
                 templateUrl: 'pages/settings/payments/payment-dialog/payment-dialog.html',
-                controller: 'PaymentDialogController'
+                controller: 'PaymentDialogController',
+                resolve: {
+                    model: function () {
+                        return null;
+                    }
+                }
             };
 
             var dialog = $uibModal.open(dialogOpts);
@@ -65,6 +70,36 @@
             dialog.result.then(
                 function () {
                     getPayments();
+                },
+                function () {
+                    // modal dismissed => do nothing
+                }
+            );
+        };
+
+        $scope.viewPayment = function (payment) {
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/settings/payments/payment-dialog/payment-dialog.html',
+                controller: 'PaymentDialogController',
+                resolve: {
+                    model: function () {
+                        return PaymentsService.getPayment(payment.ID).then(
+                            function (result) {
+                                return result.data;
+                            }
+                        );
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            dialog.result.then(
+                function () {
+                    
                 },
                 function () {
                     // modal dismissed => do nothing
