@@ -24,7 +24,6 @@ namespace DF.DB
                         {
                             UserID = u.UserID,
                             Username = u.Username,
-                            Password = u.Password,
                             FirstName = u.FirstName,
                             LastName = u.LastName,
                             LastLoginAt = u.LastLoginAt,
@@ -75,10 +74,10 @@ namespace DF.DB
                         {
                             UserID = u.UserID,
                             Username = u.Username,
-                            Password = u.Password,
                             FirstName = u.FirstName,
                             LastName = u.LastName,
                             FullName = u.FirstName + " " + u.LastName,
+                            IsActive = u.IsActive,
 
                             UserGroups =
                                 u.UserGroupMembers.Select(ugm =>

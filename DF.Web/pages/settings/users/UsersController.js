@@ -165,6 +165,37 @@
             alert('Work in progress..');
         };
 
+        $scope.changeActive = function (user) {
+            bootbox.confirm({
+                message: (!user.IsActive ? 'Aktivirati' : 'Deaktivirati') + ' korisnika?',
+                buttons: {
+                    confirm: {
+                        label: 'Da',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'Ne',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        // update 'IsActive'
+                        user.IsActive = !user.IsActive;
+
+                        UsersService.manage(user).then(
+                            () => {
+                                
+                            },
+                            (error) => {
+                                toastr.error('Došlo je do greške na serveru prilikom ažuriranja korisnika.');
+                            }
+                        );
+                    }
+                }
+            });
+        };
+
         $scope.manageUserGroups = function (user) {
             var dialogOpts = {
                 backdrop: 'static',
