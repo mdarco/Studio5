@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('MemberFileController', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$q', '$location', '$timeout', '$uibModal', 'MembersService', 'DocumentsService', 'UtilityService', 'AuthenticationService', 'WebApiBaseUrl', 'toastr', 'AppParams', 'member'];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$q', '$location', '$timeout', '$uibModal', 'MembersService', 'UtilityService', 'AuthenticationService', 'WebApiBaseUrl', 'toastr', 'AppParams', 'member'];
 
-    function ctrlFn($rootScope, $scope, $q, $location, $timeout, $uibModal, MembersService, DocumentsService, UtilityService, AuthenticationService, WebApiBaseUrl, toastr, AppParams, member) {
+    function ctrlFn($rootScope, $scope, $q, $location, $timeout, $uibModal, MembersService, UtilityService, AuthenticationService, WebApiBaseUrl, toastr, AppParams, member) {
         // set active menu item
         $("#left-panel nav ul li").removeClass("active");
         $("#menuHome").addClass("active");
@@ -567,7 +567,22 @@
                         };
                     },
                     allTags: function (DanceGroupsService) {
-                        return DanceGroupsService.getLookup();
+                        return DanceGroupsService.getLookup().then(response => {
+                            if (response && response.data) {
+                                if (!currentUser.UserGroups.includes('ADMIN')) {
+                                    var currentUserDanceGroups = currentUser.UserDanceGroups.map(userGroup => {
+                                        return userGroup.DanceGroupID;
+                                    });
+
+                                    return response.data.filter(group => {
+                                        return currentUserDanceGroups.includes(group.ID);
+                                    });
+                                } else {
+                                    return response.data;
+                                }
+                            }
+                            return null;
+                        });
                     },
                     tags: function () {
                         var selectedDanceGroups = _.map($scope.danceGroups, function (item) {
