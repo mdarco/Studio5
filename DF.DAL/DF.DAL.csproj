@@ -30,6 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.50.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.50.5\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.Contrib, Version=1.50.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.Contrib.1.50.5\lib\net451\Dapper.Contrib.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.SimpleCRUD, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.SimpleCRUD.2.0.0\lib\net45\Dapper.SimpleCRUD.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -42,15 +51,22 @@
       <HintPath>..\packages\MomentSharp.1.0.6149.39352\lib\net45\MomentSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="QueryBuilder, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SqlKata.1.0.4\lib\net45\QueryBuilder.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
