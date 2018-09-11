@@ -223,7 +223,16 @@ namespace DF.DB
         {
             using (var ctx = new DFAppEntities())
             {
-                var user = ctx.Users.FirstOrDefault(u => u.UserID == id);
+                var user = ctx.Users
+                            .Include(t => t.ContactData)
+                            .Include(t => t.UserDanceGroups)
+                            .Include(t => t.UserDocuments)
+                            .Include(t => t.UserGroupMembers)
+                            .Include(t => t.UserImages)
+                            .Include(t => t.UserPermissions)
+                            .Include(t => t.ChoreographyChoreographers)
+                            .FirstOrDefault(u => u.UserID == id);
+
                 if (user != null)
                 {
                     ctx.Users.Remove(user);
