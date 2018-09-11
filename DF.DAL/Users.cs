@@ -434,7 +434,7 @@ namespace DF.DB
             using (var ctx = new DFAppEntities())
             {
                 // first delete user dance groups payment ability info
-                var ability = ctx.UserDanceGroups.Where(x => x.UserID == userID && x.HasPaymentAbility).ToList();
+                var ability = ctx.UserDanceGroups.Where(x => x.UserID == userID).ToList();
                 if (ability.Count() > 0)
                 {
                     for (int i = ability.Count() - 1; i >= 0; i--)
@@ -446,7 +446,7 @@ namespace DF.DB
                 // add new payment ability info
                 foreach (var group in userDanceGroups)
                 {
-                    var record = ctx.UserDanceGroups.Where(x => x.UserID == userID).FirstOrDefault();
+                    var record = ctx.UserDanceGroups.Where(x => x.UserID == userID && x.DanceGroupID == group.DanceGroupID).FirstOrDefault();
                     if (record != null)
                     {
                         record.HasPaymentAbility = true;
