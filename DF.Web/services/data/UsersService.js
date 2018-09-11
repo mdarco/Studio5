@@ -14,6 +14,7 @@
             changePassword: changePassword,
 
             getUsers: getUsers,
+            getUser: getIndividualUser,
             getUserGroups: getUserGroups,
             getUserDanceGroups: getUserDanceGroups,
 
@@ -34,6 +35,11 @@
 
         function getUsers() {
             var url = WebApiBaseUrl + urlRoot + '?nd=' + Date.now();
+            return $http.get(url);
+        }
+
+        function getIndividualUser(id) {
+            var url = WebApiBaseUrl + urlRoot + '/' + id + '?nd=' + Date.now();
             return $http.get(url);
         }
 

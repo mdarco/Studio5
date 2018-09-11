@@ -5,10 +5,10 @@
         .module('DFApp')
         .controller('UserDialogController', ctrlFn);
 
-    ctrlFn.$inject = ['$scope', '$uibModalInstance', '$base64', 'UsersService', 'UtilityService', 'toastr'];
+    ctrlFn.$inject = ['$scope', '$uibModalInstance', '$base64', 'UsersService', 'UtilityService', 'toastr', 'user'];
 
-    function ctrlFn($scope, $uibModalInstance, $base64, UsersService, UtilityService, toastr) {
-        $scope.user = {};
+    function ctrlFn($scope, $uibModalInstance, $base64, UsersService, UtilityService, toastr, user) {
+        $scope.user = user || {};
 
         $scope.save = function () {
             var modelValidation = validate();
@@ -17,11 +17,13 @@
                 return;
             }
 
-            $scope.user.Password = $base64.encode($scope.user.Password);
+            if ($scope.user.Password) {
+                $scope.user.Password = $base64.encode($scope.user.Password);
+            }
 
             UsersService.manage($scope.user).then(
                 function () {
-                    toastr.success('Novi korisnik je uspešno sačuvan.');
+                    toastr.success('Korisnik je uspešno sačuvan.');
                     $uibModalInstance.close();
                 },
                 function (error) {
@@ -36,12 +38,18 @@
 
         // helpers
         function validate() {
-            if (!$scope.user.Username || !$scope.user.Password || !$scope.user.ConfirmPassword) {
-                return { error: true, errorMsg: 'Niste uneli sve obavezne podatke.' };
+            if (!$scope.user.Username) {
+                return { error: true, errorMsg: 'Niste uneli korisničko ime.' };
             }
 
-            if ($scope.user.Password.toLowerCase() !== $scope.user.ConfirmPassword.toLowerCase()) {
-                return { error: true, errorMsg: 'Lozinke se ne poklapaju.' };
+            if (!user) { // add user
+                if (!$scope.user.Password || !$scope.user.ConfirmPassword) {
+                    return { error: true, errorMsg: 'Niste uneli lozinku.' };
+                }
+
+                if ($scope.user.Password.toLowerCase() !== $scope.user.ConfirmPassword.toLowerCase()) {
+                    return { error: true, errorMsg: 'Lozinke se ne poklapaju.' };
+                }
             }
 
             return { error: false };
@@ -50,7 +58,7 @@
         function resolveErrorMessage(error) {
             switch (error.statusText) {
                 case 'error_users_username_exists':
-                    toastr.error('Korisnik sa datim korisničkim imenom već postoji.');
+                    toastr.warning('Korisnik sa datim korisničkim imenom već postoji.');
                     break;
 
                 default:

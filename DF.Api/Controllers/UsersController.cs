@@ -37,7 +37,19 @@ namespace DF.Api.Controllers
         [HttpPost]
         public void ManageUser(UserModel model)
         {
-            Users.ManageUser(model);
+            try
+            {
+                Users.ManageUser(model);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(
+                    new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.Forbidden,
+                        ReasonPhrase = ex.Message
+                    });
+            }
         }
 
         [Route("{id}")]

@@ -113,6 +113,7 @@ namespace DF.DB
                     model.FirstName = user.FirstName;
                     model.LastName = user.LastName;
                     model.FullName = user.FirstName + " " + user.LastName;
+                    model.IsActive = user.IsActive;
                 }
 
                 return model;
@@ -183,17 +184,20 @@ namespace DF.DB
                         user.Username = model.Username;
                     }
 
-                    // decode password from base64
-                    byte[] decodedData = Convert.FromBase64String(model.Password);
-                    string decodedPass = Encoding.UTF8.GetString(decodedData);
-
-                    byte[] data = Encoding.UTF8.GetBytes(decodedPass);
-                    data = new SHA256Managed().ComputeHash(data);
-                    string hashPassword = Encoding.UTF8.GetString(data);
-
-                    if (hashPassword != user.Password)
+                    if (!string.IsNullOrEmpty(model.Password))
                     {
-                        user.Password = hashPassword;
+                        // decode password from base64
+                        byte[] decodedData = Convert.FromBase64String(model.Password);
+                        string decodedPass = Encoding.UTF8.GetString(decodedData);
+
+                        byte[] data = Encoding.UTF8.GetBytes(decodedPass);
+                        data = new SHA256Managed().ComputeHash(data);
+                        string hashPassword = Encoding.UTF8.GetString(data);
+
+                        if (hashPassword != user.Password)
+                        {
+                            user.Password = hashPassword;
+                        }
                     }
 
                     if (model.FirstName != user.FirstName)

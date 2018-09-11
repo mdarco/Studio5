@@ -110,7 +110,11 @@
                 backdropClick: false,
                 templateUrl: 'pages/settings/users/user-dialog/user-dialog.html',
                 controller: 'UserDialogController',
-                resolve: {}
+                resolve: {
+                    user: function () {
+                        return null;
+                    }
+                }
             };
 
             var dialog = $uibModal.open(dialogOpts);
@@ -130,7 +134,31 @@
         //#region Action buttons
 
         $scope.editUser = function (user) {
-            alert('Work in progress..');
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/settings/users/user-dialog/user-dialog.html',
+                controller: 'UserDialogController',
+                resolve: {
+                    user: function () {
+                        return UsersService.getUser(user.UserID).then(response => {
+                            return response.data;
+                        });
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            dialog.result.then(
+                function () {
+                    $scope.applyFilter();
+                },
+                function () {
+                    // modal dismissed => do nothing
+                }
+            );
         };
 
         $scope.deleteUser = function (userID) {
