@@ -4,7 +4,7 @@
 
 <div class="modal-body">
     <form class="smart-form" novalidate="novalidate">
-        <div>
+        <div style="max-height: 500px; overflow: auto;">
             <label class="col-sm-12" ng-repeat="group in allGroups">
                 <input type="checkbox" checklist-model="userGroups" checklist-value="group"> {{group.UserGroupName}}
             </label>
