@@ -100,7 +100,17 @@
                     <a ng-href="#/costumes"><i class="fa fa-lg fa-fw fa-female"></i> <span class="menu-item-parent">Kostimi</span></a>
                 </li>
 
-                <!-- Settings -->
+                <!-- Reports -->
+                <li id="menuReports">
+                    <a ng-href="#"><i class="fa fa-lg fa-fw fa-file"></i> <span class="menu-item-parent">Izveštaji</span></a>
+                    <ul>
+                        <li id="menuReport_UnpaidInstallmentsByPeriod">
+                            <a ng-href="#/report-unpaid-installments-by-period"><i class="fa fa-lg fa-fw fa-file-o"></i> Neplaćene obaveze</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Admin -->
                 <li user-groups="ADMIN">
                     <a ng-href="#"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">Admin</span></a>
                     <ul>
@@ -254,6 +264,7 @@
     <script src="services/data/PaymentsService.js"></script>
     <script src="services/data/UsersService.js"></script>
     <script src="services/data/UserGroupsService.js"></script>
+    <script src="services/data/ReportsService.js"></script>
     <script src="services/UtilityService.js"></script>
 
     <!-- Angular JS controllers -->
@@ -274,6 +285,8 @@
     <script src="pages/members/member-doc-dialog/MemberDocDialogController.js"></script>
     <script src="pages/members/member-payment-dialog/MemberPaymentDialogController.js"></script>
     <script src="pages/members/installments-list-dialog/InstallmentsListDialogController.js"></script>
+
+    <script src="pages/reports/unpaid-installments-by-period/Report_UnpaidInstallmentsByPeriod_Controller.js"></script>
 
     <script src="pages/settings/dance-groups/DanceGroupsController.js"></script>
     <script src="pages/settings/dance-groups/dance-group-dialog/DanceGroupDialogController.js"></script>

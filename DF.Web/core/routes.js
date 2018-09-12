@@ -292,7 +292,17 @@
                         requiredPermissions: ['ADMIN']
 			        }
 			    }
-		    )
+            )
+
+            .when('/report-unpaid-installments-by-period',
+                {
+                    controller: 'Report_UnpaidInstallmentsByPeriod_Controller',
+                    templateUrl: 'pages/reports/unpaid-installments-by-period/unpaid-installments-by-period.html?nd=' + Date.now(),
+                    access: {
+                        loginRequired: true
+                    }
+                }
+            )
 
             .otherwise({ redirectTo: '/login' });
     }

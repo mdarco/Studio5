@@ -375,6 +375,8 @@
     <Content Include="pages\not-authorised\NotAuthorisedController.js" />
     <Content Include="pages\outfits\outfits.html" />
     <Content Include="pages\outfits\OutfitsController.js" />
+    <Content Include="pages\reports\unpaid-installments-by-period\Report_UnpaidInstallmentsByPeriod_Controller.js" />
+    <Content Include="pages\reports\unpaid-installments-by-period\unpaid-installments-by-period.html" />
     <Content Include="pages\settings\dance-groups\dance-group-dialog\dance-group-dialog.html" />
     <Content Include="pages\settings\dance-groups\dance-group-dialog\DanceGroupDialogController.js" />
     <Content Include="pages\settings\dance-groups\dance-groups.html" />
@@ -602,6 +604,7 @@
     <Content Include="services\data\LookupsService.js" />
     <Content Include="services\data\MembersService.js" />
     <Content Include="services\data\PaymentsService.js" />
+    <Content Include="services\data\ReportsService.js" />
     <Content Include="services\data\TagsService.js" />
     <Content Include="services\data\UserGroupsService.js" />
     <Content Include="services\data\UsersService.js" />
