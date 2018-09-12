@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Choreos.cs" />
+    <Compile Include="DALHelper.cs" />
     <Compile Include="DanceGroups.cs" />
     <Compile Include="DanceSelections.cs" />
     <Compile Include="DBModel\Choreographies.cs">
@@ -263,6 +264,7 @@
     <Compile Include="Payments.cs" />
     <Compile Include="Permissions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports.cs" />
     <Compile Include="UserGroups.cs" />
     <Compile Include="Users.cs" />
   </ItemGroup>

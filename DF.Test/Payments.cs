@@ -7,6 +7,8 @@ namespace DF.Test
     [TestClass]
     public class Payments
     {
+        /*
+
         [TestMethod]
         public void GetLatestMonthlyInstallments()
         {
@@ -38,5 +40,7 @@ namespace DF.Test
                 // TODO: log error...
             }
         }
+
+        */
     }
 }

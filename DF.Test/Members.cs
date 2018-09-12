@@ -7,6 +7,8 @@ namespace DF.Test
     [TestClass]
     public class Members
     {
+        /*
+
         [TestMethod]
         public void AddPayment_FullOneTime()
         {
@@ -123,5 +125,7 @@ namespace DF.Test
 
             BL.Members.AddMemberPayment(MEMBER_ID, model);
         }
+
+        */
     }
 }
