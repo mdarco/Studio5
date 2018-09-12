@@ -11,7 +11,11 @@ namespace DF.Test
         [TestMethod]
         public void GetUnpaidInstallmentsByDate()
         {
-            List<ReportInstallment> installments = DB.Reports.GetUnpaidInstallmentsByPeriod(null, null);
+            DateTime? startDate = new DateTime(2018, 7, 1);
+            DateTime? endDate = new DateTime(2018, 7, 31);
+
+            List<ReportInstallment> installments = DB.Reports.GetUnpaidInstallmentsByPeriod(startDate, endDate);
+            Assert.IsTrue(installments.Count == 1);
         }
     }
 }
