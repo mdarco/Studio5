@@ -429,6 +429,8 @@
     <Content Include="Scripts\angular-file-saver\angular-file-saver.bundle.min.js" />
     <Content Include="Scripts\angular-file-saver\angular-file-saver.js" />
     <Content Include="Scripts\angular-file-saver\angular-file-saver.min.js" />
+    <Content Include="Scripts\angular-filter\angular-filter.js" />
+    <Content Include="Scripts\angular-filter\angular-filter.min.js" />
     <Content Include="Scripts\angular-moment\angular-moment.js" />
     <Content Include="Scripts\angular-moment\angular-moment.min.js" />
     <Content Include="Scripts\angular-toastr\angular-toastr.js" />

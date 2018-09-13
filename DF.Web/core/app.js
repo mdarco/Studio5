@@ -21,6 +21,7 @@
         'ngTagsInput',
         'thatisuday.dropzone',
         'purplefox.numeric',
-        'ngCacheBuster'
+        'ngCacheBuster',
+        'angular.filter'
     ]);
 })();
