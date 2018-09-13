@@ -58,12 +58,16 @@
                                 <tr>
                                     <th>Rok za plaćanje</th>
                                     <th>Suma</th>
+                                    <th>Naziv plaćanja</th>
+                                    <th>Kontakt podaci</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="record in value">
-                                    <td>{{ record.InstallmentDate }}</td>
-                                    <td>{{ record.Amount }}</td>
+                                    <td>{{ record.InstallmentDate | date: 'DD-MM-YYYY' }}</td>
+                                    <td>{{ record.Amount }} {{ record.Currency }}</td>
+                                    <td>{{ record.PaymentName }}</td>
+                                    <td>{{ record.Email }} | {{ record.Phone1 }} | {{ record.Phone2 }} | {{ record.Phone3 }}</td>
                                 </tr>
                             </tbody>
                         </table>
