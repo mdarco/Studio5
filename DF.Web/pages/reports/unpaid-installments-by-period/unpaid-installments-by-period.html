@@ -49,9 +49,9 @@
                 <uib-accordion>
                     <div uib-accordion-group ng-repeat="(key, value) in installments | groupBy: 'MemberFullName'" ng-init="state={isOpen: false}" is-open="state.isOpen">
                         <uib-accordion-heading>
-                            <span class="cursor-pointer">
-                                {{ key }} <i class="pull-right glyphicon" ng-class="{'fa fa-chevron-down': state.isOpen, 'fa fa-chevron-right': !state.isOpen}"></i>
-                            </span>
+                            <div class="cursor-pointer">
+                                <span class="label label-info">{{ value[0].DanceGroups.trim() }}</span> {{ key }}<i class="pull-right glyphicon" ng-class="{'fa fa-chevron-down': state.isOpen, 'fa fa-chevron-right': !state.isOpen}"></i>
+                            </div>
                         </uib-accordion-heading>
                         <table class="table">
                             <thead>

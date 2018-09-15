@@ -25,5 +25,6 @@ namespace DF.Models
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
         public string Phone3 { get; set; }
+        public string DanceGroups { get; set; }
     }
 }
