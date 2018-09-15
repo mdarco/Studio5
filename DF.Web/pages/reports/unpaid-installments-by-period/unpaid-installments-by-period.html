@@ -64,7 +64,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="record in value">
-                                    <td>{{ record.InstallmentDate | date: 'DD-MM-YYYY' }}</td>
+                                    <td>{{ record.InstallmentDate }}</td>
                                     <td>{{ record.Amount }} {{ record.Currency }}</td>
                                     <td>{{ record.PaymentName }}</td>
                                     <td>{{ record.Email }} | {{ record.Phone1 }} | {{ record.Phone2 }} | {{ record.Phone3 }}</td>

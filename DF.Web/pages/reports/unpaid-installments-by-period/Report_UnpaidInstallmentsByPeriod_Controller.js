@@ -20,7 +20,7 @@
         function generateReport() {
             ReportsService.getUnpaidInstallmentsByPeriod($scope.filter).then(response => {
                 if (response && response.data) {
-                    console.log(response.data);
+                    formatDatesForDisplay(response.data);
                     $scope.installments = response.data;
                 } else {
                     $scope.installments = [];
@@ -36,5 +36,11 @@
             $scope.filter = {};
             $scope.installments = [];
         };
+
+        function formatDatesForDisplay(records) {
+            records.forEach(record => {
+                record.InstallmentDate = moment(record.InstallmentDate).format('DD.MM.YYYY');
+            });
+        }
     }
 })();
