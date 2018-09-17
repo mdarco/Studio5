@@ -47,7 +47,7 @@
         $scope.membersTableParams = new NgTableParams(
             {
                 page: 1,
-                count: 10
+                count: 50
             },
             {
                 total: 0,
