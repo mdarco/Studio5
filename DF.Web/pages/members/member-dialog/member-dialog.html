@@ -89,6 +89,13 @@
                 <select class="form-control" ng-model="member.AgeCategoryID" ng-options="value.ID as value.Name for (key, value) in ageCategories"></select>
             </div>
         </section>
+
+        <section>
+            <div>
+                <label class="control-label">Grupa</label>
+                <select class="form-control" ng-model="member.DanceGroupID" ng-options="value.ID as value.Name for (key, value) in danceGroups"></select>
+            </div>
+        </section>
     </form>
 </div>
 

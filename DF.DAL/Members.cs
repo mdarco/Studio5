@@ -212,6 +212,14 @@ namespace DF.DB
                 m.ContactData.Phone2 = model.ContactData.Phone2;
                 m.ContactData.Phone3 = model.ContactData.Phone3;
 
+                if (model.DanceGroupID.HasValue)
+                {
+                    DanceGroupMembers dgMembers = new DanceGroupMembers();
+                    dgMembers.DanceGroupID = (int)model.DanceGroupID;
+                    dgMembers.MemberID = m.MemberID;
+                    ctx.DanceGroupMembers.Add(dgMembers);
+                }
+
                 ctx.Members.Add(m);
                 ctx.SaveChanges();
             }
