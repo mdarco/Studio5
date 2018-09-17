@@ -144,6 +144,42 @@
                     );
                     break;
 
+                case 'FirstName':
+                    openTextFieldDialog($scope.member.FirstName).then(
+                        function (result) {
+                            MembersService.edit(member.MemberID, { FirstName: result }).then(
+                                function () {
+                                    if (AppParams.DEBUG) {
+                                        toastr.success('Plesač uspešno ažuriran.');
+                                    }
+                                    $scope.member.FirstName = result;
+                                },
+                                function (error) {
+                                    toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                                }
+                            );
+                        }
+                    );
+                    break;
+
+                case 'LastName':
+                    openTextFieldDialog($scope.member.LastName).then(
+                        function (result) {
+                            MembersService.edit(member.MemberID, { LastName: result }).then(
+                                function () {
+                                    if (AppParams.DEBUG) {
+                                        toastr.success('Plesač uspešno ažuriran.');
+                                    }
+                                    $scope.member.LastName = result;
+                                },
+                                function (error) {
+                                    toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
+                                }
+                            );
+                        }
+                    );
+                    break;
+
                 case 'JMBG':
                     openTextFieldDialog($scope.member.JMBG).then(
                         function (result) {

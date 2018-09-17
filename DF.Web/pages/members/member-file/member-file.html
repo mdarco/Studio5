@@ -27,15 +27,27 @@
                                     <img ng-src="{{ (member.IsCompetitor) ? 'Content/img/trophy-icon.png' : 'Content/img/trophy-icon-disabled.png' }}" alt="Competitor" />
                                 </div>
                             </td>
-                            <td style="width: 30%;"><strong>Ime i prezime</strong></td>
-                            <td>{{ member.FullName }}</td>
+                            <td style="width: 30%;"><strong>Ime</strong></td>
+                            <td>{{ member.FirstName }}</td>
                             <td>
-                                <!--<button class="btn btn-sm btn-primary"
-                                        ng-click="editMember('FullName')"
-                                        title="Ažuriranje imena i prezimena"
+                                <button class="btn btn-sm btn-primary"
+                                        ng-click="editMember('FirstName')"
+                                        title="Ažuriranje imena"
                                         user-groups="ADMIN,TRENER">
                                     <i class="fa fa-pencil"></i>
-                                </button>-->
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 30%;"><strong>Prezime</strong></td>
+                            <td>{{ member.LastName }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary"
+                                        ng-click="editMember('LastName')"
+                                        title="Ažuriranje prezimena"
+                                        user-groups="ADMIN,TRENER">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
                             </td>
                         </tr>
                         <tr>

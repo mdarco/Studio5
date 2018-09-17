@@ -232,6 +232,16 @@ namespace DF.DB
                 var existing = ctx.Members.Include(t => t.ContactData).FirstOrDefault(x => x.MemberID == id);
                 if (existing != null)
                 {
+                    if (!string.IsNullOrEmpty(model.FirstName))
+                    {
+                        existing.FirstName = model.FirstName;
+                    }
+
+                    if (!string.IsNullOrEmpty(model.LastName))
+                    {
+                        existing.LastName = model.LastName;
+                    }
+
                     if (!string.IsNullOrEmpty(model.JMBG))
                     {
                         existing.JMBG = model.JMBG;
