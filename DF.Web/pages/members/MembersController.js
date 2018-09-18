@@ -43,6 +43,8 @@
         $scope.totalRecords = 0;
         $scope.initialDocListLoad = true;
         $scope.showGrid = false;
+        $scope.applyClicked = false;
+        $scope.filter = {};
 
         $scope.membersTableParams = new NgTableParams(
             {
@@ -59,7 +61,13 @@
 
                     $scope.filter = $scope.filter || {};
 
-                    $scope.filter.PageNo = params.page();
+                    if ($scope.applyClicked) {
+                        $scope.applyClicked = false;
+                        $scope.filter.PageNo = 1;
+                    } else {
+                        $scope.filter.PageNo = params.page();
+                    }
+
                     $scope.filter.RecordsPerPage = params.count();
 
                     resolveStatusFilter();
@@ -95,6 +103,7 @@
 
         $scope.applyFilter = function () {
             //$scope.newSearch = true;
+            $scope.applyClicked = true;
             $scope.membersTableParams.reload();
         };
 
