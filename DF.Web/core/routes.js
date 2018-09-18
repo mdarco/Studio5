@@ -298,6 +298,27 @@
                 {
                     controller: 'Report_UnpaidInstallmentsByPeriod_Controller',
                     templateUrl: 'pages/reports/unpaid-installments-by-period/unpaid-installments-by-period.html?nd=' + Date.now(),
+                    resolve: {
+                        danceGroups: function (DanceGroupsService, AuthenticationService) {
+                            var currentUser = AuthenticationService.getCurrentUser();
+
+                            var userDanceGroups = currentUser.UserDanceGroups.map((g) => {
+                                return g.DanceGroupName.toLowerCase();
+                            });
+
+                            return DanceGroupsService.getLookup().then(
+                                function (result) {
+                                    if (!_.includes(currentUser.UserGroups, 'ADMIN') && !_.includes(currentUser.UserGroups, 'PREGLED PODATAKA')) {
+                                        return result.data.filter((d) => {
+                                            return _.includes(userDanceGroups, d.Name.toLowerCase());
+                                        });
+                                    } else {
+                                        return result.data;
+                                    }
+                                }
+                            );
+                        }
+                    },
                     access: {
                         loginRequired: true
                     }

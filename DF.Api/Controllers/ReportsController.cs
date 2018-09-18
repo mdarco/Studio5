@@ -17,5 +17,12 @@ namespace DF.Api.Controllers
         {
             return DB.Reports.GetUnpaidInstallmentsByPeriod(filter.StartDate, filter.EndDate);
         }
+
+        [Route("unpaid-installments-by-period-and-dance-group")]
+        [HttpPost]
+        public List<ReportInstallment> GetUnpaidInstallmentsByPeriodAndDanceGroup(ReportFilter filter)
+        {
+            return DB.Reports.GetUnpaidInstallmentsByPeriodAndDanceGroup(filter.StartDate, filter.EndDate, filter.DanceGroupID);
+        }
     }
 }

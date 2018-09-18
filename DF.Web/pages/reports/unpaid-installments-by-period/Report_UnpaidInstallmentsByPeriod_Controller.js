@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('Report_UnpaidInstallmentsByPeriod_Controller', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'ReportsService', 'AuthenticationService'];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'ReportsService', 'AuthenticationService', 'danceGroups'];
 
-    function ctrlFn($rootScope, $scope, $location, $uibModal, ReportsService, AuthenticationService) {
+    function ctrlFn($rootScope, $scope, $location, $uibModal, ReportsService, AuthenticationService, danceGroups) {
         // set active menu item
         $("#left-panel nav ul li").removeClass("active");
         $("#menumenuReport_UnpaidInstallmentsByPeriod").addClass("active");
@@ -16,9 +16,16 @@
 
         $scope.filter = {};
         $scope.installments = [];
+        $scope.danceGroups = danceGroups;
+
+        if (currentUser.UserGroups.includes('TRENER')) {
+            if ($scope.danceGroups && $scope.danceGroups.length > 0) {
+                $scope.filter.DanceGroupID = $scope.danceGroups[0].ID;
+            }
+        }
 
         function generateReport() {
-            ReportsService.getUnpaidInstallmentsByPeriod($scope.filter).then(response => {
+            ReportsService.getUnpaidInstallmentsByPeriodAndDanceGroup($scope.filter).then(response => {
                 if (response && response.data) {
                     formatDatesForDisplay(response.data);
                     $scope.installments = response.data;

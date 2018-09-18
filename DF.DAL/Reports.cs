@@ -30,5 +30,24 @@ namespace DF.DB
 
             return installments;
         }
+
+        public static List<ReportInstallment> GetUnpaidInstallmentsByPeriodAndDanceGroup(DateTime? startDate, DateTime? endDate, int? danceGroupID)
+        {
+            string spName = "dbo.getUnpaidInstallmentsByPeriodAndDanceGroup";
+
+            List<ReportInstallment> installments = new List<ReportInstallment>();
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var spParams = new DynamicParameters();
+                spParams.Add("@startDate", startDate, dbType: System.Data.DbType.DateTime);
+                spParams.Add("@endDate", endDate, dbType: System.Data.DbType.DateTime);
+                spParams.Add("@danceGroupID", danceGroupID, dbType: System.Data.DbType.Int32);
+
+                installments = connection.Query<ReportInstallment>(spName, spParams, commandType: System.Data.CommandType.StoredProcedure).ToList();
+            }
+
+            return installments;
+        }
     }
 }

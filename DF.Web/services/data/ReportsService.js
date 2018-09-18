@@ -11,13 +11,19 @@
         var urlRoot = '/api/reports';
 
         var service = {
-            getUnpaidInstallmentsByPeriod: getUnpaidInstallmentsByPeriod
+            getUnpaidInstallmentsByPeriod: getUnpaidInstallmentsByPeriod,
+            getUnpaidInstallmentsByPeriodAndDanceGroup: getUnpaidInstallmentsByPeriodAndDanceGroup
         };
 
         return service;
 
         function getUnpaidInstallmentsByPeriod(filter) {
             var url = WebApiBaseUrl + urlRoot + '/unpaid-installments-by-period?nd=' + Date.now();
+            return $http.post(url, filter);
+        }
+
+        function getUnpaidInstallmentsByPeriodAndDanceGroup(filter) {
+            var url = WebApiBaseUrl + urlRoot + '/unpaid-installments-by-period-and-dance-group?nd=' + Date.now();
             return $http.post(url, filter);
         }
     }
