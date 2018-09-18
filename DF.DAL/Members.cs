@@ -25,7 +25,7 @@ namespace DF.DB
                 new Query("Members")
                     .Join("Lookup_AgeCategories", "Members.AgeCategoryID", "Lookup_AgeCategories.ID")
                     .Join("ContactData", "Members.ContactDataID", "ContactData.ContactDataID")
-                    .Select("MemberID", "FirstName", "LastName", "IsActive", "IsCompetitor", "JMBG", "BirthDate", "BirthPlace", "AgeCategoryID", "Note", "ProfileImage")
+                    .Select("MemberID", "FirstName", "LastName", "IsActive", "IsCompetitor", "JMBG", "BirthDate", "BirthPlace", "AgeCategoryID", "Note")
                     .SelectRaw("FirstName + ' ' + LastName as FullName")
                     .SelectRaw("Lookup_AgeCategories.Name as AgeCategory")
                     .SelectRaw("ContactData.Address, ContactData.Email, ContactData.Phone1, ContactData.Phone2, ContactData.Phone3");
