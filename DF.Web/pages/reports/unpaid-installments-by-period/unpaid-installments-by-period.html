@@ -67,8 +67,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="record in value">
-                                    <td>{{ record.InstallmentDate }}</td>
+                                <tr ng-repeat="record in value" ng-class="getInstallmentRowCss(record)">
+                                    <td>{{ record.InstallmentDateForDisplay }}</td>
                                     <td>{{ record.Amount }} {{ record.Currency }}</td>
                                     <td>{{ record.PaymentName }}</td>
                                     <td>{{ record.Email }} | {{ record.Phone1 }} | {{ record.Phone2 }} | {{ record.Phone3 }}</td>

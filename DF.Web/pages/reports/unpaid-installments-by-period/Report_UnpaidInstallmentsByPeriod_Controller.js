@@ -46,8 +46,14 @@
 
         function formatDatesForDisplay(records) {
             records.forEach(record => {
-                record.InstallmentDate = moment(record.InstallmentDate).format('DD.MM.YYYY');
+                record.InstallmentDateForDisplay = moment(record.InstallmentDate).format('DD.MM.YYYY');
             });
         }
+
+        $scope.getInstallmentRowCss = function (record) {
+            if (moment(record.InstallmentDate) < moment()) {
+                return 'df-alert-row-light';
+            }
+        };
     }
 })();

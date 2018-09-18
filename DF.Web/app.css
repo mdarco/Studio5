@@ -148,6 +148,10 @@ caption {
     font-weight: bold;
 }
 
+.df-alert-row-light {
+    color: red;
+}
+
 .df-ok-row {
     color: green;
     font-weight: bold;
