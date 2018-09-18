@@ -18,7 +18,7 @@ namespace DF.Api.Controllers
         [HttpPost]
         public ApiTableResponseModel<MemberModel> GetFilteredMembers(MemberFilterModel filter)
         {
-            return DB.Members.GetFilteredMembers(filter);
+            return DB.Members.GetFilteredMembers_Dapper(filter);
         }
 
         [Route("{id}")]

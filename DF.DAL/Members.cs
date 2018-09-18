@@ -8,11 +8,108 @@ using System.Linq.Dynamic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using Dapper;
+using SqlKata;
+using SqlKata.Compilers;
+using System.Data.SqlClient;
 
 namespace DF.DB
 {
     public static class Members
     {
+        public static ApiTableResponseModel<MemberModel> GetFilteredMembers_Dapper(MemberFilterModel filter)
+        {
+            ApiTableResponseModel<MemberModel> response = new ApiTableResponseModel<MemberModel>();
+
+            var q =
+                new Query("Members")
+                    .Join("Lookup_AgeCategories", "Members.AgeCategoryID", "Lookup_AgeCategories.ID")
+                    .Join("ContactData", "Members.ContactDataID", "ContactData.ContactDataID")
+                    .Select("MemberID", "FirstName", "LastName", "IsActive", "IsCompetitor", "JMBG", "BirthDate", "BirthPlace", "AgeCategoryID", "Note", "ProfileImage")
+                    .SelectRaw("FirstName + ' ' + LastName as FullName")
+                    .SelectRaw("Lookup_AgeCategories.Name as AgeCategory")
+                    .SelectRaw("ContactData.Address, ContactData.Email, ContactData.Phone1, ContactData.Phone2, ContactData.Phone3");
+
+            if (filter != null)
+            {
+                bool excludeNonActive = true;
+                if (filter.ExcludeNonActive.HasValue)
+                {
+                    excludeNonActive = (bool)filter.ExcludeNonActive;
+                }
+
+                if (excludeNonActive)
+                {
+                    q = q.Where("IsActive", 1);
+                }
+
+                if (!string.IsNullOrEmpty(filter.FullName))
+                {
+                    q = q.WhereRaw("lower(FirstName + ' ' + LastName) like '%" + filter.FullName.ToLower() + "%'");
+                }
+
+                if (!string.IsNullOrEmpty(filter.JMBG))
+                {
+                    q = q.WhereRaw("lower(JMBG) like '" + filter.JMBG.ToLower() + "%'");
+                }
+
+                if (filter.DanceGroupID.HasValue)
+                {
+                    q = q.WhereRaw(filter.DanceGroupID + " in (select DanceGroupID from fnGetMemberDanceGroupsAsTable(MemberID))");
+                }
+
+                // paging & sorting
+                if (string.IsNullOrEmpty(filter.OrderByClause))
+                {
+                    // default order
+                    filter.OrderByClause = "FullName";
+                }
+
+                if (filter.PageNo < 1)
+                {
+                    filter.PageNo = 1;
+                }
+
+                if (filter.RecordsPerPage < 1)
+                {
+                    // unlimited
+                    filter.RecordsPerPage = 1000000;
+                }
+            }
+
+            var compiler = new SqlServerCompiler();
+            SqlResult result = compiler.Compile(q);
+            string sql = result.Sql;
+
+            string connectionString = DALHelper.GetSqlConnectionStringFromEF();
+
+            List<MemberModel> members = new List<MemberModel>();
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                // Total
+                response.Total = connection.Query<MemberModel>(sql).Count();
+
+                // Data
+                members = connection.Query<MemberModel, ContactDataModel, MemberModel>(
+                    sql,
+                    (member, contactData) => {
+                        member.ContactData = contactData;
+                        return member;
+                    },
+                    splitOn: "Address"
+                )
+                .OrderBy(filter.OrderByClause)
+                .Skip((filter.PageNo - 1) * filter.RecordsPerPage)
+                .Take(filter.RecordsPerPage)
+                .AsList();
+            }
+
+            response.Data = members;
+
+            return response;
+        }
+
         public static ApiTableResponseModel<MemberModel> GetFilteredMembers(MemberFilterModel filter)
         {
             ApiTableResponseModel<MemberModel> response = new ApiTableResponseModel<MemberModel>();
