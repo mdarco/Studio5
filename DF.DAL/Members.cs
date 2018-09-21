@@ -23,11 +23,12 @@ namespace DF.DB
 
             var q =
                 new Query("Members")
-                    .Join("Lookup_AgeCategories", "Members.AgeCategoryID", "Lookup_AgeCategories.ID")
-                    .Join("ContactData", "Members.ContactDataID", "ContactData.ContactDataID")
+                    .LeftJoin("Lookup_AgeCategories", "Members.AgeCategoryID", "Lookup_AgeCategories.ID")
+                    .LeftJoin("ContactData", "Members.ContactDataID", "ContactData.ContactDataID")
                     .Select("MemberID", "FirstName", "LastName", "IsActive", "IsCompetitor", "JMBG", "BirthDate", "BirthPlace", "AgeCategoryID", "Note")
                     .SelectRaw("FirstName + ' ' + LastName as FullName")
                     .SelectRaw("Lookup_AgeCategories.Name as AgeCategory")
+                    .SelectRaw("'' as Split")
                     .SelectRaw("ContactData.Address, ContactData.Email, ContactData.Phone1, ContactData.Phone2, ContactData.Phone3");
 
             if (filter != null)
@@ -97,7 +98,7 @@ namespace DF.DB
                         member.ContactData = contactData;
                         return member;
                     },
-                    splitOn: "Address"
+                    splitOn: "Split"
                 )
                 .OrderBy(filter.OrderByClause)
                 .Skip((filter.PageNo - 1) * filter.RecordsPerPage)
