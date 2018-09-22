@@ -5,9 +5,11 @@
         .module('DFApp')
         .controller('InstallmentsListDialogController', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', '$uibModalInstance', 'MembersService', 'UtilityService', 'toastr', 'installments', 'context'];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', '$uibModalInstance', 'MembersService', 'UtilityService', 'AuthenticationService', 'toastr', 'installments', 'context'];
 
-    function ctrlFn($rootScope, $scope, $location, $uibModal, $uibModalInstance, MembersService, UtilityService, toastr, installments, context) {
+    function ctrlFn($rootScope, $scope, $location, $uibModal, $uibModalInstance, MembersService, UtilityService, AuthenticationService, toastr, installments, context) {
+        var currentUser = AuthenticationService.getCurrentUser();
+
         $scope.installments = installments.data || installments;
         $scope.member = context.member;
 
@@ -200,5 +202,9 @@
                     return '';
             }
         }
+
+        $scope.canAccessIsCanceled = function () {
+            return currentUser.UserGroups.includes('ADMIN');
+        };
     }
 })();

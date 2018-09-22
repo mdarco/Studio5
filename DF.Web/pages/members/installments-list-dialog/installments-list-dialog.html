@@ -36,7 +36,7 @@
                 </td>
                 <td style="text-align: center; color: black !important;">
                     <span>{{ installment.IsCanceled ? 'Da' : 'Ne' }}</span>
-                    <span><i class="fa fa-pencil pull-right cursor-pointer" ng-click="editInstallment(installment, 'IsCanceled')"></i></span>
+                    <span><i class="fa fa-pencil pull-right cursor-pointer" ng-click="editInstallment(installment, 'IsCanceled')" ng-show="canAccessIsCanceled()"></i></span>
                 </td>
             </tr>
         </tbody>
