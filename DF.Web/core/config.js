@@ -22,7 +22,9 @@
         httpRequestInterceptorCacheBusterProvider.setMatchlist([
                 /.*common.*/,
                 /.*member-dialog.*/,
-                /.*member-doc-dialog.*/
+                /.*member-doc-dialog.*/,
+                /.*installments-list-dialog.* /,
+                /.*member-payment-dialog.* /
             ], true
         );
     }
