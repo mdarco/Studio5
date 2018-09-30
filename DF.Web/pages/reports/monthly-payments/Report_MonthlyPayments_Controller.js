@@ -96,8 +96,6 @@
                 var today = moment(Date.now());
                 var expiryDate = moment(doc.ExpiryDate.split('.')[2] + '-' + doc.ExpiryDate.split('.')[1] + '-' + doc.ExpiryDate.split('.')[0]);
 
-                console.log(expiryDate);
-
                 if (expiryDate < today) {
                     return 'df-alert-row';
                 }
