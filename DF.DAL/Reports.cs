@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Dapper;
 using DF.Models;
+using Newtonsoft.Json;
 
 namespace DF.DB
 {
@@ -48,6 +49,38 @@ namespace DF.DB
             }
 
             return installments;
+        }
+
+        public static List<MonthlyPaymentsReportModel> GetMonthlyPaymentsReport(DateTime? startDate, DateTime? endDate, int? danceGroupID)
+        {
+            string spName = "dbo.MonthlyPaymentReport";
+
+            List<MonthlyPaymentsReportModel> records = new List<MonthlyPaymentsReportModel>();
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var spParams = new DynamicParameters();
+                spParams.Add("@startDate", startDate, dbType: System.Data.DbType.DateTime);
+                spParams.Add("@endDate", endDate, dbType: System.Data.DbType.DateTime);
+                spParams.Add("@danceGroupID", danceGroupID, dbType: System.Data.DbType.Int32);
+
+                records = connection.Query<MonthlyPaymentsReportModel>(spName, spParams, commandType: System.Data.CommandType.StoredProcedure).ToList();
+            }
+
+            foreach(var r in records)
+            {
+                if (!string.IsNullOrEmpty(r.Documents))
+                {
+                    r.DeserializedDocuments = JsonConvert.DeserializeObject<List<MonthlyPaymentsReportModel_Document>>(r.Documents);
+                }
+
+                if (!string.IsNullOrEmpty(r.Payments))
+                {
+                    r.DeserializedPayments = JsonConvert.DeserializeObject<List<MonthlyPaymentsReportModel_Payment>>(r.Payments);
+                }
+            }
+
+            return records;
         }
     }
 }

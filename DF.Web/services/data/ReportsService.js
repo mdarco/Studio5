@@ -12,7 +12,8 @@
 
         var service = {
             getUnpaidInstallmentsByPeriod: getUnpaidInstallmentsByPeriod,
-            getUnpaidInstallmentsByPeriodAndDanceGroup: getUnpaidInstallmentsByPeriodAndDanceGroup
+            getUnpaidInstallmentsByPeriodAndDanceGroup: getUnpaidInstallmentsByPeriodAndDanceGroup,
+            getMonthlyPaymentsReport: getMonthlyPaymentsReport
         };
 
         return service;
@@ -24,6 +25,11 @@
 
         function getUnpaidInstallmentsByPeriodAndDanceGroup(filter) {
             var url = WebApiBaseUrl + urlRoot + '/unpaid-installments-by-period-and-dance-group?nd=' + Date.now();
+            return $http.post(url, filter);
+        }
+
+        function getMonthlyPaymentsReport(filter) {
+            var url = WebApiBaseUrl + urlRoot + '/monthly-payments?nd=' + Date.now();
             return $http.post(url, filter);
         }
     }

@@ -9,7 +9,10 @@ namespace DF.Models
     public class ReportInstallment
     {
         public DateTime? InstallmentDate { get; set; }
+        public string InstallmentDateFormatted { get; set; }
         public decimal? Amount { get; set; }
+        public bool? IsPaid { get; set; }
+        public bool? IsCanceled { get; set; }
         public string Note { get; set; }
         public int? MemberID { get; set; }
         public int? PaymentID { get; set; }
