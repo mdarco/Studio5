@@ -157,6 +157,11 @@ caption {
     font-weight: bold;
 }
 
+.df-strikethrough-row {
+    color: gray;
+    text-decoration: line-through;
+}
+
 /* Reports */
 .report-result-file-redirection {
     border: 1px solid lightgray;

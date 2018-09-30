@@ -50,17 +50,41 @@
             <div class="panel-body">
                 <p style="font-variant:small-caps; margin-left: 10px" ng-show="records.length === 0">nema podataka.</p>
 
+                <table class="table" ng-show="showTotals">
+                    <caption>Total</caption>
+                    <thead>
+                        <tr>
+                            <th>Plaćanje</th>
+                            <th>Ukupna suma</th>
+                        </tr>
+                    </thead>
+                    <tbody style="background-color: #ffffe1;">
+                        <tr ng-repeat="(key, value) in totals">
+                            <td>{{ key }}</td>
+                            <td>{{ value }}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot style="background-color: #fff3db;">
+                        <tr>
+                            <td class="pull-right" style="font-weight: bold;">TOTAL</td>
+                            <td style="font-weight: bold;">{{ grandTotal }}</td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <br />
+
                 <uib-accordion>
                     <div uib-accordion-group ng-repeat="record in records" ng-init="state={isOpen: false}" is-open="state.isOpen">
-                        <uib-accordion-heading>
-                            <div class="cursor-pointer">
-                                {{ record.FullName }} <i class="pull-right glyphicon" ng-class="{'fa fa-chevron-down': state.isOpen, 'fa fa-chevron-right': !state.isOpen}"></i>
+                        <div uib-accordion-heading>
+                            <div class="cursor-pointer" style="background-color: #eff8ff;">
+                                <span style="font-weight: bold;">{{ record.FullName }}</span> <i class="pull-right glyphicon" ng-class="{'fa fa-chevron-down': state.isOpen, 'fa fa-chevron-right': !state.isOpen}"></i>
                             </div>
-                            <div>
-                                <span style="font-size: small; color: gray !important;">[ {{ record.BirthDate }} ]</span>&nbsp;
-                                <span style="font-size: small; color: gray !important;">[ {{ record.ContactPhone }} ]</span>
+                            <div style="background-color: #eff8ff;">
+                                <span style="font-size: small; font-weight: bold; color: gray !important;">[ {{ record.BirthDate }} ]</span>&nbsp;
+                                <span style="font-size: small; font-weight: bold; color: gray !important;">[ {{ record.ContactPhone }} ]</span>
                             </div>
-                        </uib-accordion-heading>
+                        </div>
                         <table class="table">
                             <caption>Dokumenti</caption>
                             <thead>
@@ -71,7 +95,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="recordDoc in record.DeserializedDocuments">
+                                <tr ng-repeat="recordDoc in record.DeserializedDocuments" ng-class="resolveDocRowCssClass(recordDoc)">
                                     <td>{{ recordDoc.DocumentName }}</td>
                                     <td>{{ recordDoc.DocumentType }}</td>
                                     <td>{{ recordDoc.ExpiryDate }}</td>
@@ -97,8 +121,8 @@
                                             </thead>
                                             <tbody>
                                                 <tr ng-repeat="installment in recordPayment.Installments">
-                                                    <td>{{ installment.InstallmentDateFormatted }}</td>
-                                                    <td>{{ installment.Amount }} {{ installment.Currency }}</td>
+                                                    <td ng-class="{ 'df-strikethrough-row' : installment.IsCanceled === true }">{{ installment.InstallmentDateFormatted }}</td>
+                                                    <td ng-class="{ 'df-strikethrough-row' : installment.IsCanceled === true }">{{ installment.Amount }} {{ installment.Currency }}</td>
                                                     <td>
                                                         <span ng-show="installment.IsPaid === false" ng-class="{ 'label label-danger' : installment.IsPaid === false }">Neplaćeno</span>&nbsp;
                                                         <span ng-show="installment.IsCanceled === true" ng-class="{ 'label label-default' : installment.IsCanceled === true }">Poništeno</span>

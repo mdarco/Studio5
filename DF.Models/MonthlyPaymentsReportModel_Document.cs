@@ -10,5 +10,6 @@ namespace DF.Models
     {
         public string DocumentName { get; set; }
         public string DocumentType { get; set; }
+        public string ExpiryDate { get; set; }
     }
 }
