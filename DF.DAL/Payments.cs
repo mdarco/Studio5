@@ -151,6 +151,26 @@ namespace DF.DB
             }
         }
 
+        public static void ForceDeletePayment(int id)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var p = ctx.Payments
+                                .Include(t => t.MemberPayments)
+                                .Include(t => t.MemberPaymentInstallments)
+                                .Include(t => t.MemberPaymentsForCompanions)
+                                .FirstOrDefault(x => x.ID == id);
+
+                if (p != null)
+                {
+                    
+
+                    ctx.Payments.Remove(p);
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
         #region Installments
 
         public static List<GetLatestMonthlyInstallments_Result> GetLatestMonthlyInstallments()
