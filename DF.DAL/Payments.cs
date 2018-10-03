@@ -136,34 +136,26 @@ namespace DF.DB
             {
                 var p = ctx.Payments
                                 .Include(t => t.MemberPayments)
-                                .FirstOrDefault(x => x.ID == id);
-
-                if (p != null)
-                {
-                    if (p.MemberPayments != null && p.MemberPayments.Count() > 0)
-                    {
-                        throw new Exception("Placanje je vezano za clanove i ne moze se obrisati.");
-                    }
-
-                    ctx.Payments.Remove(p);
-                    ctx.SaveChanges();
-                }
-            }
-        }
-
-        public static void ForceDeletePayment(int id)
-        {
-            using (var ctx = new DFAppEntities())
-            {
-                var p = ctx.Payments
-                                .Include(t => t.MemberPayments)
                                 .Include(t => t.MemberPaymentInstallments)
                                 .Include(t => t.MemberPaymentsForCompanions)
                                 .FirstOrDefault(x => x.ID == id);
 
                 if (p != null)
                 {
-                    
+                    for (int i = p.MemberPaymentsForCompanions.Count() - 1; i >= 0; i--)
+                    {
+                        ctx.MemberPaymentsForCompanions.Remove(p.MemberPaymentsForCompanions.ElementAt(i));
+                    }
+
+                    for (int j = p.MemberPaymentInstallments.Count() - 1; j >= 0; j--)
+                    {
+                        ctx.MemberPaymentInstallments.Remove(p.MemberPaymentInstallments.ElementAt(j));
+                    }
+
+                    for (int k = p.MemberPayments.Count() - 1; k >= 0; k--)
+                    {
+                        ctx.MemberPayments.Remove(p.MemberPayments.ElementAt(k));
+                    }
 
                     ctx.Payments.Remove(p);
                     ctx.SaveChanges();

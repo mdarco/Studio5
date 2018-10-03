@@ -5,14 +5,14 @@
         .module('DFApp')
         .controller('PaymentsController', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'PaymentsService', 'toastr' /* , 'AuthenticationService' */];
+    ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', 'PaymentsService', 'AuthenticationService', 'toastr'];
 
-    function ctrlFn($rootScope, $scope, $location, $uibModal, PaymentsService, toastr /* , AuthenticationService */) {
+    function ctrlFn($rootScope, $scope, $location, $uibModal, PaymentsService, AuthenticationService, toastr) {
         // set active menu item
         $("#left-panel nav ul li").removeClass("active");
         $("#menuPayments").addClass("active");
 
-        //var currentUser = AuthenticationService.getCurrentUser();
+        var currentUser = AuthenticationService.getCurrentUser();
 
         $scope.filter = {};
         $scope.payments = [];
@@ -109,7 +109,7 @@
 
         $scope.deletePayment = function (payment) {
             bootbox.confirm({
-                message: 'Da li ste sigurni?',
+                message: 'Plaćanje će biti u potpunosti obrisano.\nDa li ste sigurni?',
                 buttons: {
                     confirm: {
                         label: 'Da',
@@ -124,6 +124,7 @@
                     if (result) {
                         PaymentsService.deletePayment(payment.ID).then(
                             function () {
+                                toastr.success('Plaćanje obrisano.');
                                 getPayments();
                             },
                             function (error) {
@@ -133,6 +134,11 @@
                     }
                 }
             });
+        };
+
+        // access resolvers
+        $scope.canDeletePayments = function () {
+            return currentUser.UserGroups.includes('ADMIN');
         };
     }
 })();
