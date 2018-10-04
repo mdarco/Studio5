@@ -779,15 +779,17 @@
             );
         };
 
-        $scope.deleteMemberPayment = function (memberID, paymentID) {
-            MembersService.deleteMemberPayment(memberID, paymentID).then(
+        $scope.deleteMemberPayment = function (memberPayment) {
+            MembersService.deleteMemberPayment(memberPayment.MemberID, memberPayment.ID).then(
                 () => {
                     if (AppParams.DEBUG) {
                         toastr.success('Plaćanje uspešno obrisano.');
                     }
+
+                    $scope.getMemberPayments();
                 },
                 error => {
-                    toastr.error('Plaćanje se ne može izbrisati - postoje plaćene rate i/ili dugovanja.');
+                    toastr.error('Plaćanje se ne može izbrisati - nisu sve rate poništene.');
                 }
             );
         };
