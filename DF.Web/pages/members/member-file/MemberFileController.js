@@ -780,18 +780,35 @@
         };
 
         $scope.deleteMemberPayment = function (memberPayment) {
-            MembersService.deleteMemberPayment(memberPayment.MemberID, memberPayment.ID).then(
-                () => {
-                    if (AppParams.DEBUG) {
-                        toastr.success('Plaćanje uspešno obrisano.');
+            bootbox.confirm({
+                message: 'Da li ste sigurni?',
+                buttons: {
+                    confirm: {
+                        label: 'Da',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: 'Ne',
+                        className: 'btn-default'
                     }
-
-                    $scope.getMemberPayments();
                 },
-                error => {
-                    toastr.error('Plaćanje se ne može izbrisati - nisu sve rate poništene.');
+                callback: function (result) {
+                    if (result) {
+                        MembersService.deleteMemberPayment(memberPayment.MemberID, memberPayment.ID).then(
+                            () => {
+                                if (AppParams.DEBUG) {
+                                    toastr.success('Plaćanje uspešno obrisano.');
+                                }
+
+                                $scope.getMemberPayments();
+                            },
+                            error => {
+                                toastr.error('Plaćanje se ne može izbrisati - nisu sve rate poništene.');
+                            }
+                        );
+                    }
                 }
-            );
+            });
         };
 
         $scope.showInstallments = function (memberPayment) {
