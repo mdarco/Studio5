@@ -747,19 +747,16 @@ namespace DF.DB
 
                 if (memberPayment != null)
                 {
-                    // can be deleted only if all installments are not paid or canceled
-                    // and if there are no overdue installments
-                    var installments = ctx.MemberPaymentInstallments.Where(mpi => mpi.MemberID == memberID && mpi.PaymentID == paymentID);
+                    // can be deleted only if all installments are canceled
+                    var installments = ctx.MemberPaymentInstallments.Where(mpi => mpi.MemberID == memberID && mpi.PaymentID == paymentID).ToList();
                     if (installments != null && installments.Count() > 0)
                     {
-                        foreach (var installment in installments)
+                        for (int i = installments.Count() - 1; i >= 0; i--)
                         {
-                            bool isOverdue = (!installment.IsPaid && (installment.InstallmentDate.Date < DateTime.Now.Date));
-                            bool notDeletable = installment.IsPaid || (!installment.IsPaid && isOverdue && !installment.IsCanceled);
-
-                            if (notDeletable)
+                            var installment = installments.ElementAt(i);
+                            if (!installment.IsCanceled)
                             {
-                                throw new Exception("error_member_payments_cannot_be_deleted");
+                                throw new Exception("error_member_payments_delete_installment_not_canceled");
                             }
 
                             ctx.MemberPaymentInstallments.Remove(installment);
@@ -767,11 +764,12 @@ namespace DF.DB
                     }
 
                     // delete member payment companions
-                    var companions = ctx.MemberPaymentsForCompanions.Where(mpc => mpc.MemberID == memberID && mpc.PaymentID == paymentID);
+                    var companions = ctx.MemberPaymentsForCompanions.Where(mpc => mpc.MemberID == memberID && mpc.PaymentID == paymentID).ToList();
                     if (companions != null && companions.Count() > 0)
                     {
-                        foreach (var companion in companions)
+                        for (int j = companions.Count() - 1; j >= 0; j--)
                         {
+                            var companion = companions.ElementAt(j);
                             ctx.MemberPaymentsForCompanions.Remove(companion);
                         }
                     }
