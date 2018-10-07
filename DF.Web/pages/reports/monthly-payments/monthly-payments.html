@@ -109,12 +109,13 @@
                             <caption>Plaćanja</caption>
                             <tbody>
                                 <tr ng-repeat="recordPayment in record.DeserializedPayments">
-                                    <td>
+                                    <td ng-show="showMemberPayment(recordPayment)">
                                         <span style="font-weight: bold;">{{ recordPayment.Name }}</span>
                                         <table class="table">
                                             <thead>
                                                 <tr>
                                                     <th>Rok za plaćanje</th>
+                                                    <th>Datum plaćanja</th>
                                                     <th>Suma</th>
                                                     <th>Status</th>
                                                 </tr>
@@ -122,6 +123,7 @@
                                             <tbody>
                                                 <tr ng-repeat="installment in recordPayment.Installments">
                                                     <td ng-class="{ 'df-strikethrough-row' : installment.IsCanceled === true }">{{ installment.InstallmentDateFormatted }}</td>
+                                                    <td ng-class="{ 'df-strikethrough-row' : installment.IsCanceled === true }">{{ installment.PaymentDateFormatted }}</td>
                                                     <td ng-class="{ 'df-strikethrough-row' : installment.IsCanceled === true }">{{ installment.Amount }} {{ installment.Currency }}</td>
                                                     <td>
                                                         <span ng-show="installment.IsPaid === false" ng-class="{ 'label label-danger' : installment.IsPaid === false }">Neplaćeno</span>&nbsp;

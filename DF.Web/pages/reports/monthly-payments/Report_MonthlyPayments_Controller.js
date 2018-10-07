@@ -103,5 +103,9 @@
 
             return '';
         };
+
+        $scope.showMemberPayment = function (payment) {
+            return !_.isNull(payment.Installments);
+        };
     }
 })();
