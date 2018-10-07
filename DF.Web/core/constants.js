@@ -13,7 +13,7 @@
             startingDay: 1
         },
 
-        IMAGE_BASE64_SIZE_LIMIT: 1000000,
+        IMAGE_BASE64_SIZE_LIMIT: 500000, // bytes (500 KB)
         IMAGE_FILE_TYPES: ['image/png', 'image/jpeg', 'image/gif'],
 
         DEBUG: true
