@@ -41,7 +41,7 @@ namespace DF.DB
 
                 if (excludeNonActive)
                 {
-                    q = q.Where("IsActive", 1);
+                    q = q.WhereRaw("IsActive = 1");
                 }
 
                 if (!string.IsNullOrEmpty(filter.FullName))
