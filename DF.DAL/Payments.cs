@@ -173,7 +173,7 @@ namespace DF.DB
             }
         }
 
-        // this should be executed by an agent every first day of the month
+        // this is executed by an agent every first day of the month
         public static void CreateNewMonthlyInstallments()
         {
             var latestMonthlyInstallments = Payments.GetLatestMonthlyInstallments();
@@ -183,13 +183,16 @@ namespace DF.DB
                 {
                     foreach (var monthlyInstallment in latestMonthlyInstallments)
                     {
+                        int diff = DateTime.Now.Month - monthlyInstallment.InstallmentDate.Month;
+                        if (diff == 0) diff++;
+
                         MemberPaymentInstallments newMonthlyInstallment = new MemberPaymentInstallments()
                         {
                             MemberID = monthlyInstallment.MemberID,
                             PaymentID = monthlyInstallment.PaymentID,
-                            InstallmentDate = monthlyInstallment.InstallmentDate.AddMonths(1),
+                            InstallmentDate = monthlyInstallment.InstallmentDate.AddMonths(diff),
                             Amount = monthlyInstallment.Amount,
-                            IsCanceled = monthlyInstallment.IsCanceled,
+                            IsCanceled = false,
                             IsPaid = false
                         };
 
