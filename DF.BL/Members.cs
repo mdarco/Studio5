@@ -84,9 +84,34 @@ namespace DF.BL
                         }
                     }
 
+                    DateTime? installmentDate = null;
+                    if (paymentInfo.Type.ToUpper() == "ONE-TIME")
+                    {
+                        installmentDate = paymentInfo.DueDate;
+                    }
+
+                    if (paymentInfo.Type.ToUpper() == "MONTHLY")
+                    {
+                        // if member payment is assigned before paymentInfo.DueDate
+                        //      => installment date would be equal to paymentInfo.DueDate
+                        // if member payment is assigned after paymentInfo.DueDate
+                        //      => installment date would be equal to paymentInfoDueDate.AddMonths(<diff (in months) between the current month and the paymentInfo.DueDate month>)
+
+                        if (DateTime.Now <= paymentInfo.DueDate)
+                        {
+                            installmentDate = paymentInfo.DueDate;
+                        }
+                        else
+                        {
+                            int diff = DateTime.Now.Month - ((DateTime)paymentInfo.DueDate).Month;
+                            if (diff == 0) diff++;
+                            installmentDate = ((DateTime)paymentInfo.DueDate).AddMonths(diff);
+                        }
+                    }
+
                     var oneTimePayment = new InstallmentModel()
                     {
-                        InstallmentDate = paymentInfo.DueDate,
+                        InstallmentDate = installmentDate,
                         Amount = installmentAmount,
                         IsPaid = false
                     };

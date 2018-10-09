@@ -688,12 +688,6 @@ namespace DF.DB
                 var member = ctx.Members.FirstOrDefault(m => m.MemberID == memberID);
                 if (member != null)
                 {
-                    //var existing = ctx.MemberPayments.FirstOrDefault(x => x.MemberID == memberID && x.PaymentID == model.PaymentID);
-                    //if (existing != null)
-                    //{
-                    //    return;
-                    //}
-
                     MemberPayments memberPayment = new MemberPayments()
                     {
                         MemberID = memberID,
