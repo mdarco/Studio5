@@ -45,6 +45,18 @@
 </head>
 
 <body class="smart-style-1 fixed-navigation fixed-header fixed-ribbon" style="overflow-y: auto;">
+    <header>
+        <div class="pull-right" style="padding-top: 10px; padding-right: 30px;" authenticated-user>
+            <div id="hide-menu" class="btn btn-primary pull-right" style="margin-bottom: 15px;">
+                <span>
+                    <a title="Otvori meni">
+                        <i class="fa fa-reorder" style="color: white !important;"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </header>
+
     <!-- Left panel : NAVIGATION AREA -->
     <aside id="left-panel" style="top: 0;" authenticated-user>
         <!-- User info -->
@@ -161,6 +173,9 @@
         </nav>
 
         <!--<span class="minifyme"><i class="fa fa-arrow-circle-left hit"></i></span>-->
+        <span class="minifyme" data-action="minifyMenu" minify-menu>
+            <i class="fa fa-arrow-circle-left hit"></i>
+        </span>
     </aside>
 
     <!-- MAIN PANEL -->

@@ -142,7 +142,13 @@ $(document).ready(function() {
 		$('body').toggleClass("minified");
 		$(this).effect("highlight", {}, 500);
 		e.preventDefault();
-	});
+    });
+
+    $('#hide-menu').click(function (e) {
+        $('body').toggleClass("minified");
+        $(this).effect("highlight", {}, 500);
+        e.preventDefault();
+    });
 });
 
 /* SMART ADMIN SETTINGS - End */
