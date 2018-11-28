@@ -2,53 +2,62 @@
     #main {
         margin-left: 0;
     }
+
+    .login-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        justify-items: center;
+    }
+
+    .login-item-1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+    }
+
+    .login-item-2 {
+        width: 50%;
+        text-align: center;
+    }
 </style>
 
-<div class="container">
-    <table style="width: 100%; margin-top: 50px;">
-        <tbody>
-            <tr>
-                <td style="width: 100%; text-align: center;">
-                    <img src="Content/img/df-logo.png" />
-                </td>
-            </tr>
-            <tr>
-                <td style="width: 100%; text-align: center;">
-                    <!--<div style="width: 100%; text-align: center;">-->
-                        <form id="login-form" class="smart-form client-form" style="border: 1px solid lightgray; margin-top: 50px; width: 100%;">
-                            <header style="text-align: left;"><strong>Dance Factory</strong></header>
+<div class="login-container">
+    <div class="login-item-1">
+        <img src="Content/img/df-logo.png" width="240" height="240" />
+    </div>
+    <div class="login-item-2">
+        <form id="login-form" class="smart-form client-form" style="border: 1px solid lightgray; margin-top: 50px; width: 100%;">
+            <header style="text-align: left;"><strong>Dance Factory</strong></header>
 
-                            <fieldset>
-                                <section>
-                                    <label class="label">Korisničko ime</label>
-                                    <label class="input">
-                                        <i class="icon-append fa fa-user"></i>
-                                        <input type="text" name="username" ng-model="userLoginModel.Username">
-                                        <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Unesite koriničko ime</b>
-                                    </label>
-                                </section>
+            <fieldset>
+                <section>
+                    <label class="label">Korisničko ime</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-user"></i>
+                        <input type="text" name="username" ng-model="userLoginModel.Username">
+                        <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Unesite koriničko ime</b>
+                    </label>
+                </section>
 
-                                <section>
-                                    <label class="label">Lozinka</label>
-                                    <label class="input">
-                                        <i class="icon-append fa fa-lock"></i>
-                                        <input type="password" name="password" ng-model="userLoginModel.Password">
-                                        <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Unesite lozinku</b>
-                                    </label>
-                                </section>
+                <section>
+                    <label class="label">Lozinka</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-lock"></i>
+                        <input type="password" name="password" ng-model="userLoginModel.Password">
+                        <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Unesite lozinku</b>
+                    </label>
+                </section>
 
-                                <section>
-                                    <div ng-show="error.errorMsg" class="note note-error" style="color: red;">{{ error.errorMsg }}</div>
-                                </section>
-                            </fieldset>
+                <section>
+                    <div ng-show="error.errorMsg" class="note note-error" style="color: red;">{{ error.errorMsg }}</div>
+                </section>
+            </fieldset>
 
-                            <footer>
-                                <button class="btn btn-primary" ng-click="login()">Prijava</button>
-                            </footer>
-                        </form>
-                    <!--</div>-->
-                </td>
-            </tr>
-        </tbody>
-    </table>
+            <footer>
+                <button class="btn btn-primary" ng-click="login()">Prijava</button>
+            </footer>
+        </form>
+    </div>
 </div>
