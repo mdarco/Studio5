@@ -86,6 +86,14 @@
 
                 openDateFieldDialog(dataField, installment[dataField]).then(
                     function (result) {
+                        if (moment(result) < moment()) {
+                            var firstDayOfMonth = moment().year() + '-' + (moment().month() + 1) + '-01';
+                            if (moment(result) < moment(firstDayOfMonth)) {
+                                toastr.warning('Datum plaćanja mora biti u okviru tekućeg meseca.');
+                                return;
+                            }
+                        }
+
                         var editObj = {};
                         editObj[dataField] = result;
 
