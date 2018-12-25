@@ -475,6 +475,38 @@
             );
         };
 
+        $scope.previewDocument = function (doc) {
+            var dialogOpts = {
+                size: 'lg',
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/common/doc-preview-dialog/doc-preview-dialog.html',
+                controller: 'DocPreviewDialogController',
+                resolve: {
+                    settings: function () {
+                        return {
+                            // TODO: get doc as byte64 string
+                            //string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                            //var pdfUrl = "data:application/pdf;base64," + base64String;
+                            DocUrl: 'https://pdfobject.com/pdf/sample-3pp.pdf'
+                        };
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            dialog.result.then(
+                function () {
+
+                },
+                function () {
+                    // modal dismissed
+                }
+            );
+        };
+
         $scope.addDocument = function () {
             var dialogOpts = {
                 backdrop: 'static',

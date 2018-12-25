@@ -344,6 +344,8 @@
     <Content Include="pages\common\combo-dialog\ComboDialogController.js" />
     <Content Include="pages\common\date-dialog\date-dialog.html" />
     <Content Include="pages\common\date-dialog\DateDialogController.js" />
+    <Content Include="pages\common\doc-preview-dialog\doc-preview-dialog.html" />
+    <Content Include="pages\common\doc-preview-dialog\DocPreviewDialogController.js" />
     <Content Include="pages\common\table-select-dialog\table-select-dialog.html" />
     <Content Include="pages\common\table-select-dialog\TableSelectDialogController.js" />
     <Content Include="pages\common\tags-dialog\tags-dialog.html" />
@@ -572,6 +574,8 @@
     <Content Include="Scripts\ngTable\ng-table.js.map" />
     <Content Include="Scripts\JSTools\dataConvert.min.js.map" />
     <Content Include="Scripts\JSTools\dataValidator.min.js.map" />
+    <Content Include="Scripts\PDFObject\pdfobject.js" />
+    <Content Include="Scripts\PDFObject\pdfobject.min.js" />
     <Content Include="Scripts\SmartAdmin\jarvis-widgets\jarvis.widget.js" />
     <Content Include="Scripts\SmartAdmin\jarvis-widgets\jarvis.widget.min.js" />
     <Content Include="Scripts\SmartAdmin\plugins\msie-fix\jquery.mb.browser.js" />

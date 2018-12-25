@@ -216,6 +216,7 @@
                                         <td>
                                             <button class="btn btn-danger btn-xs pull-right margin-right-5" title="Brisanje dokumenta" ng-click="deleteDocument(doc)" user-groups="ADMIN,TRENER"><i class="fa fa-times"></i></button>
                                             <a class="btn btn-success btn-xs pull-right margin-right-5" title="Preuzmi/štampaj dokument" ng-href="{{ webApiBaseUrl }}/api/documents/{{ doc.DocumentID }}/download" user-groups="ADMIN,TRENER"><i class="fa fa-download"></i></a>
+                                            <button class="btn btn-primary btn-xs pull-right margin-right-5" title="Prikaz dokumenta" ng-click="previewDocument(doc)" user-groups="ADMIN,TRENER"><i class="fa fa-eye"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
