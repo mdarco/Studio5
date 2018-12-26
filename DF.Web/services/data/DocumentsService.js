@@ -19,7 +19,9 @@
             getAllTags: getAllTags,
             getTags: getTags,
             getTagsForAutocomplete: getTagsForAutocomplete,
-            insertTags: insertTags
+            insertTags: insertTags,
+
+            getDataUrl: getDataUrl
         };
 
         return service;
@@ -66,5 +68,10 @@
         }
 
         //#endregion
+
+        function getDataUrl(id) {
+            var url = WebApiBaseUrl + urlRoot + '/' + id + '/data-url?nd=' + Date.now();
+            return $http.get(url);
+        }
     }
 })();

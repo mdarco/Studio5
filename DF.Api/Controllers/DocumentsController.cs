@@ -35,5 +35,29 @@ namespace DF.Api.Controllers
 
             return result;
         }
+
+        [Route("{id}/data-url")]
+        [HttpGet]
+        public string GetDocumentDataUrl(int id)
+        {
+            // full path to coded file name file with '.tim' extension
+            string docPath = Documents.GetPath(id, true);
+
+            // decoded document file name
+            string docFileName = DB.Documents.GetFileName(id);
+
+            byte[] fileBytes = File.ReadAllBytes(docPath);
+
+            // get base64 string
+            string base64String = Convert.ToBase64String(fileBytes, 0, fileBytes.Length);
+
+            // get file mime-type
+            string mimeType = Helpers.GetMimeType(Path.GetExtension(docFileName).Substring(1));
+            
+            //var dataUrl = "data:application/pdf;base64," + base64String;
+            string dataUrl = "data:" + mimeType + ";base64," + base64String;
+
+            return dataUrl;
+        }
     }
 }

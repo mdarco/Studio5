@@ -484,13 +484,24 @@
                 templateUrl: 'pages/common/doc-preview-dialog/doc-preview-dialog.html',
                 controller: 'DocPreviewDialogController',
                 resolve: {
-                    settings: function () {
-                        return {
-                            // TODO: get doc as byte64 string
-                            //string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
-                            //var pdfUrl = "data:application/pdf;base64," + base64String;
-                            DocUrl: 'https://pdfobject.com/pdf/sample-3pp.pdf'
-                        };
+                    settings: function (DocumentsService) {
+                        return DocumentsService.getDataUrl(doc.DocumentID).then(response => {
+                            if (response && response.data) {
+                                return {
+                                    DocUrl: response.data
+                                };
+                            } else {
+                                toastr.warning('Dokument nije pronađen.');
+                                return {
+                                    DocUrl: null
+                                };
+                            }
+                        }).catch(error => {
+                            toastr.error('Došlo je do greške prilikom preuzimanja dokumenta.');
+                            return {
+                                DocUrl: null
+                            };
+                        });
                     }
                 }
             };
