@@ -40,13 +40,24 @@ namespace DF.Api.Controllers
         [HttpGet]
         public string GetDocumentDataUrl(int id)
         {
+            byte[] fileBytes;
+
             // full path to coded file name file with '.tim' extension
             string docPath = Documents.GetPath(id, true);
 
             // decoded document file name
             string docFileName = DB.Documents.GetFileName(id);
 
-            byte[] fileBytes = File.ReadAllBytes(docPath);
+            string fileType = Path.GetExtension(docFileName);
+            if (fileType.ToLower() == ".docx" || fileType.ToLower() == ".doc")
+            {
+                // TODO: convert Word to PDF here
+                throw new Exception("Nije moguc prikaz Word datoteka.");
+            }
+            else
+            {
+                fileBytes = File.ReadAllBytes(docPath);
+            }
 
             // get base64 string
             string base64String = Convert.ToBase64String(fileBytes, 0, fileBytes.Length);

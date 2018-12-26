@@ -8,3 +8,4 @@ packages
 bin
 obj
 /DF.Web/test.pdf
+/DF.Web/DocumentStore

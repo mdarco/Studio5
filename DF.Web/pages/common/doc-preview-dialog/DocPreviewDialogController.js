@@ -10,10 +10,8 @@
     function ctrlFn($scope, $uibModalInstance, toastr, settings) {
         $scope.docUrl = '';
 
-        if (settings.DocUrl) {
+        if (settings && settings.DocUrl) {
             $scope.docUrl = settings.DocUrl;
-        } else {
-            toastr.warning('Dokument nije pronađen.');
         }
 
         $scope.close = function () {

@@ -497,7 +497,13 @@
                                 };
                             }
                         }).catch(error => {
-                            toastr.error('Došlo je do greške prilikom preuzimanja dokumenta.');
+                            console.log(error);
+                            if (error.data.ExceptionMessage) {
+                                toastr.warning(error.data.ExceptionMessage);
+                            } else {
+                                toastr.error('Došlo je do greške prilikom preuzimanja dokumenta.');
+                            }
+
                             return {
                                 DocUrl: null
                             };

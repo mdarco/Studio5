@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using word = Microsoft.Office.Interop.Word;
+using excel = Microsoft.Office.Interop.Excel;
 
 namespace DF.BL
 {
@@ -51,5 +55,34 @@ namespace DF.BL
 
             return Convert.FromBase64String(data);
         }
+
+        //public static byte[] ConvertWordToPdf(string wordFilePath)
+        //{
+        //    byte[] result;
+
+        //    word.Application app = new word.Application();
+
+        //    if (app != null)
+        //    {
+        //        word.Document doc = app.Documents.Open(wordFilePath);
+
+        //        if (doc != null)
+        //        {
+        //            string tmpPdfFile = Path.GetTempFileName();
+        //            doc.SaveAs2(tmpPdfFile, word.WdSaveFormat.wdFormatPDF);
+        //            result = File.ReadAllBytes(tmpPdfFile);
+        //            File.Delete(tmpPdfFile);
+
+        //            doc.Close(word.WdSaveOptions.wdDoNotSaveChanges);
+        //            app.Quit();
+
+        //            return result;
+        //        }
+
+        //        throw new Exception("MS Word dokument se ne moze otvoriti.");
+        //    }
+
+        //    throw new Exception("MS Word nije instaliran ili se ne moze pokrenuti.");
+        //}
     }
 }
