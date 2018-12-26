@@ -49,14 +49,21 @@ namespace DF.Api.Controllers
             string docFileName = DB.Documents.GetFileName(id);
 
             string fileType = Path.GetExtension(docFileName);
-            if (fileType.ToLower() == ".docx" || fileType.ToLower() == ".doc")
+            if (fileType.ToLower() == ".docx" || fileType.ToLower() == ".doc" || fileType.ToLower() == ".xlsx" || fileType.ToLower() == ".xls")
             {
-                // TODO: convert Word to PDF here
-                throw new Exception("Nije moguc prikaz Word datoteka.");
+                // TODO: convert Word/Excel to PDF here
+                throw new Exception("Nije moguc prikaz Word i Excel dokumenata.");
             }
             else
             {
-                fileBytes = File.ReadAllBytes(docPath);
+                if (File.Exists(docPath))
+                {
+                    fileBytes = File.ReadAllBytes(docPath);
+                }
+                else
+                {
+                    throw new Exception("Trazeni dokument nije pronadjen.");
+                }
             }
 
             // get base64 string
