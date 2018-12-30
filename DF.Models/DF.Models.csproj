@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiTableResponseModel.cs" />
+    <Compile Include="ClaimModel.cs" />
     <Compile Include="CompanionModel.cs" />
     <Compile Include="ContactDataModel.cs" />
     <Compile Include="DanceGroupModel.cs" />
