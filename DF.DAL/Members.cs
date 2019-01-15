@@ -644,6 +644,7 @@ namespace DF.DB
                                             Note = i.Note
                                         }
                                     )
+                                    .OrderByDescending(i => i.InstallmentDate)
                                     .ToList()
                             }
                        )
