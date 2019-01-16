@@ -25,6 +25,7 @@ namespace DF.Models
         public ContactDataModel ContactData { get; set; }
 
         public int? DanceGroupID { get; set; }
+        public string DanceGroups { get; set; }
 
         //this.ChoreographyMembers = new HashSet<ChoreographyMembers>();
         //this.DanceGroupMembers = new HashSet<DanceGroupMembers>();

@@ -28,6 +28,7 @@ namespace DF.DB
                     .Select("MemberID", "FirstName", "LastName", "IsActive", "IsCompetitor", "JMBG", "BirthDate", "BirthPlace", "AgeCategoryID", "Note")
                     .SelectRaw("FirstName + ' ' + LastName as FullName")
                     .SelectRaw("Lookup_AgeCategories.Name as AgeCategory")
+                    .SelectRaw("dbo.fnGetMemberDanceGroups(MemberID) as DanceGroups")
                     .SelectRaw("'' as Split")
                     .SelectRaw("ContactData.Address, ContactData.Email, ContactData.Phone1, ContactData.Phone2, ContactData.Phone3");
 
