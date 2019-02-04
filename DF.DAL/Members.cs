@@ -394,6 +394,8 @@ namespace DF.DB
                     if (model.IsActive.HasValue)
                     {
                         existing.IsActive = (bool)model.IsActive;
+
+                        // TODO: when activating member that has previous payments, add new payment installments accordingly!
                     }
 
                     if (model.IsCompetitor.HasValue)
