@@ -85,28 +85,16 @@ namespace DF.BL
                     }
 
                     DateTime? installmentDate = null;
-                    if (paymentInfo.Type.ToUpper() == "ONE-TIME")
+                    if (DateTime.Now <= paymentInfo.DueDate)
                     {
                         installmentDate = paymentInfo.DueDate;
                     }
-
-                    if (paymentInfo.Type.ToUpper() == "MONTHLY")
+                    else
                     {
-                        // if member payment is assigned before paymentInfo.DueDate
-                        //      => installment date would be equal to paymentInfo.DueDate
-                        // if member payment is assigned after paymentInfo.DueDate
-                        //      => installment date would be equal to paymentInfoDueDate.AddMonths(<diff (in months) between the current month and the paymentInfo.DueDate month>)
-
-                        if (DateTime.Now <= paymentInfo.DueDate)
-                        {
-                            installmentDate = paymentInfo.DueDate;
-                        }
-                        else
-                        {
-                            int diff = DateTime.Now.Month - ((DateTime)paymentInfo.DueDate).Month;
-                            if (diff == 0) diff++;
-                            installmentDate = ((DateTime)paymentInfo.DueDate).AddMonths(diff);
-                        }
+                        var payDay = paymentInfo.DueDate.Value.Day;
+                        var payMonth = DateTime.Now.Month;
+                        var payYear = DateTime.Now.Year;
+                        installmentDate = new DateTime(payYear, payMonth, payDay);
                     }
 
                     var oneTimePayment = new InstallmentModel()
