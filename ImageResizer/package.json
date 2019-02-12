@@ -4,13 +4,18 @@
   "description": "",
   "main": "df-image-resizer.js",
   "scripts": {
-    "serve": "clear && node server.js"
+    "serve": "clear && nodemon server.js"
   },
   "keywords": [],
   "author": "Darko Milutinovic",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "buffer-image-size": "^0.6.4",
-    "jimp": "^0.6.0"
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "gm": "^1.23.1",
+    "jimp": "^0.6.0",
+    "sharp": "^0.21.3"
   }
 }
