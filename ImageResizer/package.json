@@ -1,0 +1,16 @@
+{
+  "name": "df-image-resizer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "df-image-resizer.js",
+  "scripts": {
+    "serve": "clear && node server.js"
+  },
+  "keywords": [],
+  "author": "Darko Milutinovic",
+  "license": "ISC",
+  "dependencies": {
+    "buffer-image-size": "^0.6.4",
+    "jimp": "^0.6.0"
+  }
+}
