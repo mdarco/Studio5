@@ -44,5 +44,5 @@ app.listen(7000, err => {
 		process.exit(1);
 	}
 
-	console.log(`DF-Image-Resizer is now running on port 7000...`);	
+    console.log(`DF-Image-Resizer is now running on port 7000...`);
 });

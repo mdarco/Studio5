@@ -4,7 +4,7 @@
   "description": "",
   "main": "df-image-resizer.js",
   "scripts": {
-    "serve": "clear && nodemon server.js"
+    "serve": "clear && nodemon resize-df-images.js"
   },
   "keywords": [],
   "author": "Darko Milutinovic",
