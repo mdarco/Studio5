@@ -10,6 +10,21 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb', extended: true }));
 
+const imageResize = async (base64_image) => {
+    if (base64_image) {
+        // const base64_prefix = base64_image.split(',')[0];
+        const base64_string = base64_image.split(',')[1];
+        
+        try {
+            return await resizeImage(base64_string);
+        } catch(err) {
+            console.error('DF-IMAGE-RESIZE-ERROR: ', err);
+        }
+    } else {
+        console.error('DF-IMAGE-RESIZE-ERROR: image not found.');
+    }
+};
+
 app.get('/', (req, res) => {
 	res.send('DF-Image-Resizer v0.1');
 });
@@ -17,19 +32,9 @@ app.get('/', (req, res) => {
 app.post('/resize-image', async (req, res) => {
     const base64_image = req.body.image;
     // console.log('POST B64_IMAGE', base64_image);
-    if (base64_image) {
-        // const base64_prefix = base64_image.split(',')[0];
-        const base64_string = base64_image.split(',')[1];
-        
-        try {
-            const resizedImage = await resizeImage(base64_string);
-            res.status(200).json({ resizedImage });
-        } catch(err) {
-            console.error('DF-IMAGE-RESIZE-ERROR: ', err);
-        }
-    } else {
-        console.error('Image not found.');
-    }
+    
+    const resizedImage = await imageResize(base64_image);
+    res.status(200).json({ resizedImage });
 });
 
 app.listen(7000, err => {
