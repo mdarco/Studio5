@@ -870,7 +870,14 @@
                 controller: 'InstallmentsListDialogController',
                 resolve: {
                     installments: function () {
-                        return memberPayment.Installments;
+                        // return memberPayment.Installments;
+                        return MembersService.getMemberPaymentInstallments(memberPayment.MemberID, memberPayment.Payment.ID).then(response => {
+                            if (response && response.data) {
+                                return response.data;
+                            } else {
+                                return [];
+                            }
+                        });
                     },
                     context: function () {
                         return {
