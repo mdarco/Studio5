@@ -328,7 +328,11 @@ namespace DF.DB
         {
             using (var ctx = new DFAppEntities())
             {
-                var existing = ctx.Members.Include(t => t.ContactData).FirstOrDefault(x => x.MemberID == id);
+                var existing = ctx.Members
+                    .Include(t => t.ContactData)
+                    .Include("MemberPayments.Payments")
+                    .FirstOrDefault(x => x.MemberID == id);
+
                 if (existing != null)
                 {
                     if (!string.IsNullOrEmpty(model.FirstName))
@@ -395,7 +399,11 @@ namespace DF.DB
                     {
                         existing.IsActive = (bool)model.IsActive;
 
-                        // TODO: when activating member that has previous payments, add new payment installments accordingly!
+                        if (existing.IsActive)
+                        {
+                            // update member payments after reactivation
+                            UpdateMemberPayments(ctx, existing);
+                        }
                     }
 
                     if (model.IsCompetitor.HasValue)
@@ -406,6 +414,36 @@ namespace DF.DB
                     existing.Note = model.Note;
 
                     ctx.SaveChanges();
+                }
+            }
+        }
+
+        public static void UpdateMemberPayments(DFAppEntities ctx, DBModel.Members existingMember)
+        {
+            var memberPayments = existingMember.MemberPayments.Where(x => x.Payments.Type.ToUpper() == "MONTHLY" || (x.Payments.Type.ToUpper() == "ONE-TIME" && x.Payments.NumberOfInstallments > 1)).ToList();
+
+            if (memberPayments != null && memberPayments.Count() > 0)
+            {
+                foreach (var memberPayment in memberPayments)
+                {
+                    var installments = ctx.MemberPaymentInstallments.Where(x => x.MemberID == existingMember.MemberID && x.PaymentID == memberPayment.PaymentID).OrderByDescending(x => x.InstallmentDate).ToList();
+                    if (installments != null && installments.Count() > 0)
+                    {
+                        var currentInstallment = installments.ElementAt(0);
+                        while (currentInstallment.InstallmentDate.Date < DateTime.Now.Date)
+                        {
+                            var newInstallment = new MemberPaymentInstallments();
+                            newInstallment.MemberID = existingMember.MemberID;
+                            newInstallment.PaymentID = memberPayment.PaymentID;
+                            newInstallment.InstallmentDate = currentInstallment.InstallmentDate.Date.AddMonths(1);
+                            newInstallment.Amount = currentInstallment.Amount;
+                            newInstallment.IsPaid = false;
+                            newInstallment.IsCanceled = false;
+
+                            ctx.MemberPaymentInstallments.Add(newInstallment);
+                            currentInstallment = newInstallment;
+                        }
+                    }
                 }
             }
         }
