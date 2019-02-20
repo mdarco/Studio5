@@ -420,29 +420,33 @@ namespace DF.DB
 
         public static void UpdateMemberPayments(DFAppEntities ctx, DBModel.Members existingMember)
         {
-            var memberPayments = existingMember.MemberPayments.Where(x => x.Payments.Type.ToUpper() == "MONTHLY" || (x.Payments.Type.ToUpper() == "ONE-TIME" && x.Payments.NumberOfInstallments > 1)).ToList();
+            var memberPayments = existingMember.MemberPayments.Where(x => x.Payments.Type.ToUpper() == "MONTHLY").ToList();
 
             if (memberPayments != null && memberPayments.Count() > 0)
             {
                 foreach (var memberPayment in memberPayments)
                 {
                     var installments = ctx.MemberPaymentInstallments.Where(x => x.MemberID == existingMember.MemberID && x.PaymentID == memberPayment.PaymentID).OrderByDescending(x => x.InstallmentDate).ToList();
-                    if (installments != null && installments.Count() > 0)
-                    {
-                        var currentInstallment = installments.ElementAt(0);
-                        while (currentInstallment.InstallmentDate.Date < DateTime.Now.Date)
-                        {
-                            var newInstallment = new MemberPaymentInstallments();
-                            newInstallment.MemberID = existingMember.MemberID;
-                            newInstallment.PaymentID = memberPayment.PaymentID;
-                            newInstallment.InstallmentDate = currentInstallment.InstallmentDate.Date.AddMonths(1);
-                            newInstallment.Amount = currentInstallment.Amount;
-                            newInstallment.IsPaid = false;
-                            newInstallment.IsCanceled = false;
+                    var currentInstallment = (installments != null) ? installments.ElementAt(0) : null;
 
-                            ctx.MemberPaymentInstallments.Add(newInstallment);
-                            currentInstallment = newInstallment;
-                        }
+                    while (
+                        currentInstallment == null || 
+                        (
+                            currentInstallment.InstallmentDate.Date < DateTime.Now.Date && 
+                            (currentInstallment.InstallmentDate.Year < DateTime.Now.Year || (currentInstallment.InstallmentDate.Year == DateTime.Now.Year && currentInstallment.InstallmentDate.Month < DateTime.Now.Month))
+                        )
+                    )
+                    {
+                        var newInstallment = new MemberPaymentInstallments();
+                        newInstallment.MemberID = existingMember.MemberID;
+                        newInstallment.PaymentID = memberPayment.PaymentID;
+                        newInstallment.InstallmentDate = currentInstallment.InstallmentDate.Date.AddMonths(1);
+                        newInstallment.Amount = currentInstallment.Amount;
+                        newInstallment.IsPaid = false;
+                        newInstallment.IsCanceled = false;
+
+                        ctx.MemberPaymentInstallments.Add(newInstallment);
+                        currentInstallment = newInstallment;
                     }
                 }
             }
