@@ -89,6 +89,10 @@
                                             toastr.success('Plesač uspešno ažuriran.');
                                         }
                                         $scope.member.IsActive = !$scope.member.IsActive;
+
+                                        if ($scope.member.IsActive) {
+                                            $scope.getMemberPayments();
+                                        }
                                     },
                                     function (error) {
                                         toastr.error('Došlo je do greške na serveru prilikom ažuriranja.');
@@ -870,14 +874,14 @@
                 controller: 'InstallmentsListDialogController',
                 resolve: {
                     installments: function () {
-                        // return memberPayment.Installments;
-                        return MembersService.getMemberPaymentInstallments(memberPayment.MemberID, memberPayment.Payment.ID).then(response => {
-                            if (response && response.data) {
-                                return response.data;
-                            } else {
-                                return [];
-                            }
-                        });
+                        return memberPayment.Installments;
+                        //return MembersService.getMemberPaymentInstallments(memberPayment.MemberID, memberPayment.Payment.ID).then(response => {
+                        //    if (response && response.data) {
+                        //        return response.data;
+                        //    } else {
+                        //        return [];
+                        //    }
+                        //});
                     },
                     context: function () {
                         return {
