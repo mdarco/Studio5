@@ -126,8 +126,9 @@
                                                     <td ng-class="{ 'df-strikethrough-row' : installment.IsCanceled === true }">{{ installment.PaymentDateFormatted }}</td>
                                                     <td ng-class="{ 'df-strikethrough-row' : installment.IsCanceled === true }">{{ installment.Amount }} {{ installment.Currency }}</td>
                                                     <td>
-                                                        <span ng-show="installment.IsPaid === false" ng-class="{ 'label label-danger' : installment.IsPaid === false }">Neplaćeno</span>&nbsp;
+                                                        <span ng-show="installment.IsPaid === false" ng-class="{ 'label label-danger' : installment.IsPaid === false }">Nije plaćeno</span>&nbsp;
                                                         <span ng-show="installment.IsCanceled === true" ng-class="{ 'label label-default' : installment.IsCanceled === true }">Poništeno</span>
+                                                        <span ng-show="installment.IsPaid === true" ng-class="{ 'label label-success' : installment.IsPaid === true }">Plaćeno</span>&nbsp;
                                                     </td>
                                                 </tr>
                                             </tbody>

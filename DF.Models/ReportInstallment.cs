@@ -10,6 +10,7 @@ namespace DF.Models
     {
         public DateTime? InstallmentDate { get; set; }
         public string InstallmentDateFormatted { get; set; }
+        public string PaymentDateFormatted { get; set; }
         public decimal? Amount { get; set; }
         public bool? IsPaid { get; set; }
         public bool? IsCanceled { get; set; }
