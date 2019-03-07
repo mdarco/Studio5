@@ -84,22 +84,23 @@ namespace DF.BL
                         }
                     }
 
-                    DateTime? installmentDate = null;
-                    if (DateTime.Now <= paymentInfo.DueDate)
-                    {
-                        installmentDate = paymentInfo.DueDate;
-                    }
-                    else
-                    {
-                        var payDay = paymentInfo.DueDate.Value.Day;
-                        var payMonth = DateTime.Now.Month;
-                        var payYear = DateTime.Now.Year;
-                        installmentDate = new DateTime(payYear, payMonth, payDay);
-                    }
+                    //DateTime? installmentDate = null;
+                    //if (DateTime.Now <= paymentInfo.DueDate)
+                    //{
+                    //    installmentDate = paymentInfo.DueDate;
+                    //}
+                    //else
+                    //{
+                    //    var payDay = paymentInfo.DueDate.Value.Day;
+                    //    var payMonth = DateTime.Now.Month;
+                    //    var payYear = DateTime.Now.Year;
+                    //    installmentDate = new DateTime(payYear, payMonth, payDay);
+                    //}
 
                     var oneTimePayment = new InstallmentModel()
                     {
-                        InstallmentDate = installmentDate,
+                        // InstallmentDate = installmentDate,
+                        InstallmentDate = paymentInfo.DueDate,
                         Amount = installmentAmount,
                         IsPaid = false
                     };
