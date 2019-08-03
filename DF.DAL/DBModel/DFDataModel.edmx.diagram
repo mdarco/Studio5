@@ -13,14 +13,12 @@
         <EntityTypeShape EntityType="DFDataModel.DanceGroupChoreographies" Width="1.5" PointX="14.25" PointY="25.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.DanceGroupLocations" Width="1.5" PointX="11.25" PointY="15.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.DanceGroupMembers" Width="1.5" PointX="5.25" PointY="23.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DFDataModel.DanceGroupPeriods" Width="1.5" PointX="11.25" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.DanceGroups" Width="1.5" PointX="3" PointY="36.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.DanceGroupStaff" Width="1.5" PointX="5.25" PointY="34.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.DanceSelectionChoreographies" Width="1.5" PointX="14.25" PointY="28.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.DanceSelectionDanceGroups" Width="1.5" PointX="11.25" PointY="44.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.DanceSelectionLocations" Width="1.5" PointX="14.25" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.DanceSelectionMembers" Width="1.5" PointX="8.25" PointY="26.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DFDataModel.DanceSelectionPeriods" Width="1.5" PointX="14.25" PointY="22.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.DanceSelections" Width="1.5" PointX="6" PointY="42.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.DanceSelectionStaff" Width="1.5" PointX="8.25" PointY="36.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.Documents" Width="1.5" PointX="5.25" PointY="37.125" IsExpanded="true" />
@@ -41,7 +39,6 @@
         <EntityTypeShape EntityType="DFDataModel.Members" Width="1.5" PointX="3" PointY="25.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.Outfits" Width="1.5" PointX="0.75" PointY="21.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.Performances" Width="1.5" PointX="11.25" PointY="22.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="DFDataModel.Periods" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.Permissions" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.TrainingMemberPresenceRegistrations" Width="1.5" PointX="8.25" PointY="32.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DFDataModel.Trainings" Width="1.5" PointX="6" PointY="55.375" IsExpanded="true" />
@@ -69,8 +66,6 @@
         <AssociationConnector Association="DFDataModel.FK_DanceGroupLocations_Locations" ManuallyRouted="false" />
         <AssociationConnector Association="DFDataModel.FK_DanceGroupMembers_DanceGroups" ManuallyRouted="false" />
         <AssociationConnector Association="DFDataModel.FK_DanceGroupMembers_Members" ManuallyRouted="false" />
-        <AssociationConnector Association="DFDataModel.FK_DanceGroupPeriods_DanceGroups" ManuallyRouted="false" />
-        <AssociationConnector Association="DFDataModel.FK_DanceGroupPeriods_Periods" ManuallyRouted="false" />
         <AssociationConnector Association="DFDataModel.FK_DanceGroupStaff_DanceGroups" ManuallyRouted="false" />
         <AssociationConnector Association="DFDataModel.FK_DanceSelectionDanceGroups_DanceGroups" ManuallyRouted="false" />
         <AssociationConnector Association="DFDataModel.FK_DanceGroupStaff_Users" ManuallyRouted="false" />
@@ -80,8 +75,6 @@
         <AssociationConnector Association="DFDataModel.FK_DanceSelectionLocations_Locations" ManuallyRouted="false" />
         <AssociationConnector Association="DFDataModel.FK_DanceGroupSelections_Members" ManuallyRouted="false" />
         <AssociationConnector Association="DFDataModel.FK_DanceSelectionMembers_DanceSelections" ManuallyRouted="false" />
-        <AssociationConnector Association="DFDataModel.FK_DanceSelectionPeriods_DanceSelections" ManuallyRouted="false" />
-        <AssociationConnector Association="DFDataModel.FK_DanceSelectionPeriods_Periods" ManuallyRouted="false" />
         <AssociationConnector Association="DFDataModel.FK_DanceSelectionStaff_DanceSelections" ManuallyRouted="false" />
         <AssociationConnector Association="DFDataModel.FK_DanceSelectionStaff_Users" ManuallyRouted="false" />
         <AssociationConnector Association="DFDataModel.FK_Documents_CreatedByUsers" ManuallyRouted="false" />
@@ -128,6 +121,10 @@
         <EntityTypeShape EntityType="DFDataModel.UserDanceGroups" Width="1.5" PointX="13.25" PointY="41.125" />
         <AssociationConnector Association="DFDataModel.FK_UserDanceGroups_DanceGroups" />
         <AssociationConnector Association="DFDataModel.FK_UserDanceGroups_Users" />
+        <AssociationConnector Association="DFDataModel.FK_Trainings_DanceGroups" />
+        <AssociationConnector Association="DFDataModel.FK_Trainings_DanceSelections" />
+        <AssociationConnector Association="DFDataModel.FK_Trainings_Locations" />
+        <AssociationConnector Association="DFDataModel.FK_Trainings_Users" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -20,10 +20,10 @@ namespace DF.DB.DBModel
             this.DanceGroupChoreographies = new HashSet<DanceGroupChoreographies>();
             this.DanceGroupLocations = new HashSet<DanceGroupLocations>();
             this.DanceGroupMembers = new HashSet<DanceGroupMembers>();
-            this.DanceGroupPeriods = new HashSet<DanceGroupPeriods>();
             this.DanceGroupStaff = new HashSet<DanceGroupStaff>();
             this.DanceSelectionDanceGroups = new HashSet<DanceSelectionDanceGroups>();
             this.UserDanceGroups = new HashSet<UserDanceGroups>();
+            this.Trainings = new HashSet<Trainings>();
         }
     
         public int DanceGroupID { get; set; }
@@ -38,13 +38,13 @@ namespace DF.DB.DBModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanceGroupMembers> DanceGroupMembers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DanceGroupPeriods> DanceGroupPeriods { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanceGroupStaff> DanceGroupStaff { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DanceSelectionDanceGroups> DanceSelectionDanceGroups { get; set; }
         public virtual Lookup_AgeCategories Lookup_AgeCategories { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserDanceGroups> UserDanceGroups { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Trainings> Trainings { get; set; }
     }
 }

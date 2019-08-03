@@ -26,6 +26,7 @@ namespace DF.DB.DBModel
             this.UserImages = new HashSet<UserImages>();
             this.UserPermissions = new HashSet<UserPermissions>();
             this.UserDanceGroups = new HashSet<UserDanceGroups>();
+            this.Trainings = new HashSet<Trainings>();
         }
     
         public int UserID { get; set; }
@@ -56,5 +57,7 @@ namespace DF.DB.DBModel
         public virtual ICollection<UserPermissions> UserPermissions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserDanceGroups> UserDanceGroups { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Trainings> Trainings { get; set; }
     }
 }

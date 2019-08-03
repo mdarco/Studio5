@@ -35,14 +35,12 @@ namespace DF.DB.DBModel
         public virtual DbSet<DanceGroupChoreographies> DanceGroupChoreographies { get; set; }
         public virtual DbSet<DanceGroupLocations> DanceGroupLocations { get; set; }
         public virtual DbSet<DanceGroupMembers> DanceGroupMembers { get; set; }
-        public virtual DbSet<DanceGroupPeriods> DanceGroupPeriods { get; set; }
         public virtual DbSet<DanceGroups> DanceGroups { get; set; }
         public virtual DbSet<DanceGroupStaff> DanceGroupStaff { get; set; }
         public virtual DbSet<DanceSelectionChoreographies> DanceSelectionChoreographies { get; set; }
         public virtual DbSet<DanceSelectionDanceGroups> DanceSelectionDanceGroups { get; set; }
         public virtual DbSet<DanceSelectionLocations> DanceSelectionLocations { get; set; }
         public virtual DbSet<DanceSelectionMembers> DanceSelectionMembers { get; set; }
-        public virtual DbSet<DanceSelectionPeriods> DanceSelectionPeriods { get; set; }
         public virtual DbSet<DanceSelections> DanceSelections { get; set; }
         public virtual DbSet<DanceSelectionStaff> DanceSelectionStaff { get; set; }
         public virtual DbSet<Documents> Documents { get; set; }
@@ -63,7 +61,6 @@ namespace DF.DB.DBModel
         public virtual DbSet<Members> Members { get; set; }
         public virtual DbSet<Outfits> Outfits { get; set; }
         public virtual DbSet<Performances> Performances { get; set; }
-        public virtual DbSet<Periods> Periods { get; set; }
         public virtual DbSet<Permissions> Permissions { get; set; }
         public virtual DbSet<TrainingMemberPresenceRegistrations> TrainingMemberPresenceRegistrations { get; set; }
         public virtual DbSet<Trainings> Trainings { get; set; }

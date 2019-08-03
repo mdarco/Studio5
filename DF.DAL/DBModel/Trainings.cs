@@ -23,11 +23,18 @@ namespace DF.DB.DBModel
         public int TrainingID { get; set; }
         public System.DateTime TrainingDate { get; set; }
         public int TrainingLocationID { get; set; }
-        public int TrainingPeriodID { get; set; }
         public Nullable<int> TrainingDanceGroupID { get; set; }
         public Nullable<int> TrainingDanceSelectionID { get; set; }
+        public string WeekDay { get; set; }
+        public Nullable<System.TimeSpan> StartTime { get; set; }
+        public Nullable<System.TimeSpan> EndTime { get; set; }
+        public Nullable<int> TrainerUserID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TrainingMemberPresenceRegistrations> TrainingMemberPresenceRegistrations { get; set; }
+        public virtual DanceGroups DanceGroups { get; set; }
+        public virtual DanceSelections DanceSelections { get; set; }
+        public virtual Locations Locations { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

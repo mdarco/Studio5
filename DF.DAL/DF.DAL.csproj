@@ -107,9 +107,6 @@
     <Compile Include="DBModel\DanceGroupMembers.cs">
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBModel\DanceGroupPeriods.cs">
-      <DependentUpon>DFDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="DBModel\DanceGroups.cs">
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
@@ -126,9 +123,6 @@
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBModel\DanceSelectionMembers.cs">
-      <DependentUpon>DFDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModel\DanceSelectionPeriods.cs">
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBModel\DanceSelections.cs">
@@ -222,9 +216,6 @@
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBModel\Performances.cs">
-      <DependentUpon>DFDataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DBModel\Periods.cs">
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DBModel\Permissions.cs">
