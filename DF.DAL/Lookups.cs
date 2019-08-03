@@ -26,5 +26,24 @@ namespace DF.DB
                             .ToList();
             }
         }
+
+        public static List<LookupModel> GetLocations()
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                return ctx.Locations
+                            .Select(x =>
+                                new LookupModel()
+                                {
+                                    ID = x.LocationID,
+                                    Name = x.LocationName,
+                                    Desc = x.LocationDesc,
+                                    Metadata = x.LocationAddress
+                                }
+                            )
+                            .OrderBy(ac => ac.Name)
+                            .ToList();
+            }
+        }
     }
 }
