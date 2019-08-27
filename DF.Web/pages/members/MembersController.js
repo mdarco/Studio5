@@ -32,8 +32,6 @@
         $scope.danceSelections = danceSelections;
         $scope.events = events;
 
-        console.log($scope.danceGroups);
-
         $scope.statuses = [
             { ID: 'all', Name: 'Svi' },
             { ID: 'active', Name: 'Aktivni' }//,

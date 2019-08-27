@@ -12,7 +12,7 @@ namespace DF.Models
         public string JMBG { get; set; }
         public bool? ExcludeNonActive { get; set; }
         public int? ChoreoID { get; set; }
-        public int? DanceGroupID { get; set; }
+        public List<int> DanceGroupID { get; set; }
         public int? DanceSelectionID { get; set; }
         public int? EventID { get; set; }
 

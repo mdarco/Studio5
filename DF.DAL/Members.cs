@@ -55,9 +55,12 @@ namespace DF.DB
                     q = q.WhereRaw("lower(JMBG) like '" + filter.JMBG.ToLower() + "%'");
                 }
 
-                if (filter.DanceGroupID.HasValue)
+                if (filter.DanceGroupID != null && filter.DanceGroupID.Count() > 0)
                 {
-                    q = q.WhereRaw(filter.DanceGroupID + " in (select DanceGroupID from fnGetMemberDanceGroupsAsTable(MemberID))");
+                    foreach (int gID in filter.DanceGroupID)
+                    {
+                        q = q.WhereRaw(gID + " in (select DanceGroupID from fnGetMemberDanceGroupsAsTable(MemberID))");
+                    }
                 }
 
                 // paging & sorting
@@ -155,9 +158,12 @@ namespace DF.DB
                         q = q.Where(x => x.ChoreographyMembers.Select(cm => cm.ChoreographyID).ToList().Contains((int)filter.ChoreoID));
                     }
 
-                    if (filter.DanceGroupID.HasValue)
+                    if (filter.DanceGroupID != null && filter.DanceGroupID.Count() > 0)
                     {
-                        q = q.Where(x => x.DanceGroupMembers.Select(dgm => dgm.DanceGroupID).ToList().Contains((int)filter.DanceGroupID));
+                        foreach (int gID in filter.DanceGroupID)
+                        {
+                            q = q.Where(x => x.DanceGroupMembers.Select(dgm => dgm.DanceGroupID).ToList().Contains(gID));
+                        }
                     }
 
                     if (filter.DanceSelectionID.HasValue)
