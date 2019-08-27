@@ -27,22 +27,18 @@
                     </div>
 
                     <div class="row">
-                        <!--<div class="col-md-3">
-                            <label class="control-label">Koreografija</label>
-                            <select class="form-control" ng-model="filter.ChoreoID" ng-options="value.ID as value.Name for (key, value) in choreos"></select>
-                        </div>-->
                         <div class="col-md-3">
-                            <label class="control-label">Grupa</label>
-                            <select class="form-control" ng-model="filter.DanceGroupID" ng-options="value.ID as value.Name for (key, value) in danceGroups"></select>
+                            <label class="control-label">Grupe</label>
+                            <!--<select class="form-control" ng-model="filter.DanceGroupID" ng-options="value.ID as value.Name for (key, value) in danceGroups"></select>-->
+                            <tags-input 
+                                ng-model="filter.DanceGroups"
+                                replace-spaces-with-dashes="false"
+                                add-from-autocomplete-only="true"
+                                display-property="Name"
+                                key-property="ID">
+                                <auto-complete source="danceGroups" min-length="0" debounce-delay="0" max-results-to-show="1000" load-on-down-arrow="true"></auto-complete>
+                            </tags-input>
                         </div>
-                        <!--<div class="col-md-3">
-                            <label class="control-label">Selekcija</label>
-                            <select class="form-control" ng-model="filter.DanceSelectionID" ng-options="value.ID as value.Name for (key, value) in danceSelections"></select>
-                        </div>-->
-                        <!--<div class="col-md-3">
-                            <label class="control-label">Događaj</label>
-                            <select class="form-control" ng-model="filter.EventID" ng-options="value.ID as value.Name for (key, value) in events"></select>
-                        </div>-->
                     </div>
 
                     <br />

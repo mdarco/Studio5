@@ -32,6 +32,8 @@
         $scope.danceSelections = danceSelections;
         $scope.events = events;
 
+        console.log($scope.danceGroups);
+
         $scope.statuses = [
             { ID: 'all', Name: 'Svi' },
             { ID: 'active', Name: 'Aktivni' }//,
@@ -103,6 +105,9 @@
 
         $scope.applyFilter = function () {
             //$scope.newSearch = true;
+
+            $scope.filter.DanceGroupID = $scope.filter.DanceGroups.map(g => g.ID);
+
             $scope.applyClicked = true;
             $scope.membersTableParams.reload();
         };
