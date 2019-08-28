@@ -55,12 +55,9 @@ namespace DF.DB
                     q = q.WhereRaw("lower(JMBG) like '" + filter.JMBG.ToLower() + "%'");
                 }
 
-                if (filter.DanceGroupID != null && filter.DanceGroupID.Count() > 0)
+                if (filter.DanceGroupID.HasValue)
                 {
-                    foreach (int gID in filter.DanceGroupID)
-                    {
-                        q = q.WhereRaw(gID + " in (select DanceGroupID from fnGetMemberDanceGroupsAsTable(MemberID))");
-                    }
+                    q = q.WhereRaw(filter.DanceGroupID + " in (select DanceGroupID from fnGetMemberDanceGroupsAsTable(MemberID))");
                 }
 
                 // paging & sorting
@@ -115,124 +112,101 @@ namespace DF.DB
             return response;
         }
 
-        public static ApiTableResponseModel<MemberModel> GetFilteredMembers(MemberFilterModel filter)
+        // v2: support for multi-group search
+        public static ApiTableResponseModel<MemberModel> GetFilteredMembers_Dapper_v2(MemberFilterModel filter)
         {
             ApiTableResponseModel<MemberModel> response = new ApiTableResponseModel<MemberModel>();
 
+            var q =
+                new Query("Members")
+                    .LeftJoin("Lookup_AgeCategories", "Members.AgeCategoryID", "Lookup_AgeCategories.ID")
+                    .LeftJoin("ContactData", "Members.ContactDataID", "ContactData.ContactDataID")
+                    .Select("MemberID", "FirstName", "LastName", "IsActive", "IsCompetitor", "JMBG", "BirthDate", "BirthPlace", "AgeCategoryID", "Note")
+                    .SelectRaw("FirstName + ' ' + LastName as FullName")
+                    .SelectRaw("Lookup_AgeCategories.Name as AgeCategory")
+                    .SelectRaw("dbo.fnGetMemberDanceGroups(MemberID) as DanceGroups")
+                    .SelectRaw("'' as Split")
+                    .SelectRaw("ContactData.Address, ContactData.Email, ContactData.Phone1, ContactData.Phone2, ContactData.Phone3");
+
             if (filter != null)
             {
-                using (var ctx = new DFAppEntities())
+                bool excludeNonActive = true;
+                if (filter.ExcludeNonActive.HasValue)
                 {
-                    var q = ctx.Members
-                                .Include(t => t.ChoreographyMembers)
-                                .Include(t => t.DanceGroupMembers)
-                                .Include(t => t.DanceSelectionMembers)
-                                .Include(t => t.ContactData)
-                                .Include(t => t.Lookup_AgeCategories)
-                                .Include("Performances.Events")
-                                .AsQueryable();
+                    excludeNonActive = (bool)filter.ExcludeNonActive;
+                }
 
-                    bool excludeNonActive = true;
-                    if (filter.ExcludeNonActive.HasValue)
+                if (excludeNonActive)
+                {
+                    q = q.WhereRaw("IsActive = 1");
+                }
+
+                if (!string.IsNullOrEmpty(filter.FullName))
+                {
+                    q = q.WhereRaw("lower(FirstName + ' ' + LastName) like '%" + filter.FullName.ToLower() + "%'");
+                }
+
+                if (!string.IsNullOrEmpty(filter.JMBG))
+                {
+                    q = q.WhereRaw("lower(JMBG) like '" + filter.JMBG.ToLower() + "%'");
+                }
+
+                if (filter.DanceGroupID_List != null && filter.DanceGroupID_List.Count() > 0)
+                {
+                    foreach (int gID in filter.DanceGroupID_List)
                     {
-                        excludeNonActive = (bool)filter.ExcludeNonActive;
+                        q = q.WhereRaw(gID + " in (select DanceGroupID from fnGetMemberDanceGroupsAsTable(MemberID))");
                     }
+                }
 
-                    if (excludeNonActive)
-                    {
-                        q = q.Where(x => x.IsActive);
-                    }
+                // paging & sorting
+                if (string.IsNullOrEmpty(filter.OrderByClause))
+                {
+                    // default order
+                    filter.OrderByClause = "FullName";
+                }
 
-                    if (!string.IsNullOrEmpty(filter.FullName))
-                    {
-                        q = q.Where(x => (x.FirstName.ToLower() + " " + x.LastName.ToLower()).Contains(filter.FullName.ToLower()));
-                    }
+                if (filter.PageNo < 1)
+                {
+                    filter.PageNo = 1;
+                }
 
-                    if (!string.IsNullOrEmpty(filter.JMBG))
-                    {
-                        q = q.Where(x => x.JMBG.StartsWith(filter.JMBG));
-                    }
-
-                    if (filter.ChoreoID.HasValue)
-                    {
-                        q = q.Where(x => x.ChoreographyMembers.Select(cm => cm.ChoreographyID).ToList().Contains((int)filter.ChoreoID));
-                    }
-
-                    if (filter.DanceGroupID != null && filter.DanceGroupID.Count() > 0)
-                    {
-                        foreach (int gID in filter.DanceGroupID)
-                        {
-                            q = q.Where(x => x.DanceGroupMembers.Select(dgm => dgm.DanceGroupID).ToList().Contains(gID));
-                        }
-                    }
-
-                    if (filter.DanceSelectionID.HasValue)
-                    {
-                        q = q.Where(x => x.DanceSelectionMembers.Select(dsm => dsm.DanceSelectionID).ToList().Contains((int)filter.DanceSelectionID));
-                    }
-
-                    if (filter.EventID.HasValue)
-                    {
-                        q = q.Where(x => x.Performances.Select(p => p.EventID).ToList().Contains((int)filter.EventID));
-                    }
-
-                    // paging & sorting
-                    if (string.IsNullOrEmpty(filter.OrderByClause))
-                    {
-                        // default order
-                        filter.OrderByClause = "FullName";
-                    }
-
-                    if (filter.PageNo < 1)
-                    {
-                        filter.PageNo = 1;
-                    }
-
-                    if (filter.RecordsPerPage < 1)
-                    {
-                        // unlimited
-                        filter.RecordsPerPage = 1000000;
-                    }
-
-                    response.Total = q.Count();
-
-                    var Data =
-                        q.ToList()
-                            .Select(x =>
-                                new MemberModel()
-                                {
-                                    MemberID = x.MemberID,
-                                    FirstName = x.FirstName,
-                                    LastName = x.LastName,
-                                    FullName = x.FirstName + " " + x.LastName,
-                                    IsActive = x.IsActive,
-                                    IsCompetitor = x.IsCompetitor,
-                                    JMBG = x.JMBG,
-                                    BirthDate = x.BirthDate,
-                                    BirthPlace = x.BirthPlace,
-                                    AgeCategoryID = x.AgeCategoryID,
-                                    AgeCategory = (x.Lookup_AgeCategories != null) ? x.Lookup_AgeCategories.Name : string.Empty,
-                                    ProfileImage = x.ProfileImage,
-                                    Note = x.Note,
-
-                                    ContactData =
-                                        new ContactDataModel()
-                                        {
-                                            Address = x.ContactData.Address,
-                                            Email = x.ContactData.Email,
-                                            Phone1 = x.ContactData.Phone1,
-                                            Phone2 = x.ContactData.Phone2,
-                                            Phone3 = x.ContactData.Phone3
-                                        }
-                                }
-                            )
-                            .OrderBy(filter.OrderByClause)
-                            .Skip((filter.PageNo - 1) * filter.RecordsPerPage)
-                            .Take(filter.RecordsPerPage);
-
-                    response.Data = Data;
+                if (filter.RecordsPerPage < 1)
+                {
+                    // unlimited
+                    filter.RecordsPerPage = 1000000;
                 }
             }
+
+            var compiler = new SqlServerCompiler();
+            SqlResult result = compiler.Compile(q);
+            string sql = result.Sql;
+
+            string connectionString = DALHelper.GetSqlConnectionStringFromEF();
+
+            List<MemberModel> members = new List<MemberModel>();
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                // Total
+                response.Total = connection.Query<MemberModel>(sql).Count();
+
+                // Data
+                members = connection.Query<MemberModel, ContactDataModel, MemberModel>(
+                    sql,
+                    (member, contactData) => {
+                        member.ContactData = contactData;
+                        return member;
+                    },
+                    splitOn: "Split"
+                )
+                .OrderBy(filter.OrderByClause)
+                .Skip((filter.PageNo - 1) * filter.RecordsPerPage)
+                .Take(filter.RecordsPerPage)
+                .AsList();
+            }
+
+            response.Data = members;
 
             return response;
         }
