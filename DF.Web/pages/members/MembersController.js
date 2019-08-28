@@ -140,6 +140,15 @@
             }
         }
 
+        $scope.filterDanceGroupsForAutocomplete = function (query) {
+            return $scope.danceGroups.filter(g => {
+                console.log(g.Name);
+                if (g.Name.toLowerCase().indexOf(query.toLowerCase()) !== -1) {
+                    return g;
+                }
+            });
+        };
+
         //#endregion
 
         if (isBack) {
