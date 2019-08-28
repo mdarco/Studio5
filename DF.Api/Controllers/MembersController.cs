@@ -21,6 +21,13 @@ namespace DF.Api.Controllers
             return DB.Members.GetFilteredMembers_Dapper(filter);
         }
 
+        [Route("filtered-v2")]
+        [HttpPost]
+        public ApiTableResponseModel<MemberModel> GetFilteredMembers_v2(MemberFilterModel filter)
+        {
+            return DB.Members.GetFilteredMembers_Dapper_v2(filter);
+        }
+
         [Route("{id}")]
         [HttpGet]
         public MemberModel GetMember(int id)

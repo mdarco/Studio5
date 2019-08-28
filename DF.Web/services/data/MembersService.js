@@ -17,6 +17,7 @@
             setSearchFilter: setSearchFilter,
 
             getFiltered: getFilteredMembers,
+            getFiltered_v2: getFilteredMembers_v2,
             get: getMember,
             create: createMember,
             edit: editMember,
@@ -52,6 +53,11 @@
 
         function getFilteredMembers(filter) {
             var url = WebApiBaseUrl + urlRoot + '/filtered?nd=' + Date.now();
+            return $http.post(url, filter);
+        }
+
+        function getFilteredMembers_v2(filter) {
+            var url = WebApiBaseUrl + urlRoot + '/filtered-v2?nd=' + Date.now();
             return $http.post(url, filter);
         }
 

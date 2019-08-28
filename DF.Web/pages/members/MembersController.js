@@ -74,7 +74,7 @@
 
                     MembersService.setSearchFilter(angular.copy($scope.filter));
 
-                    return MembersService.getFiltered($scope.filter).then(
+                    return MembersService.getFiltered_v2($scope.filter).then(
                         function (result) {
                             if (!result || !result.data || !result.data.Data) {
                                 $scope.showGrid = false;
@@ -103,6 +103,9 @@
 
         $scope.applyFilter = function () {
             //$scope.newSearch = true;
+
+            $scope.filter.DanceGroupID_List = $scope.filter.DanceGroups.map(g => g.ID);
+
             $scope.applyClicked = true;
             $scope.membersTableParams.reload();
         };
@@ -136,6 +139,14 @@
                     break;
             }
         }
+
+        $scope.filterDanceGroupsForAutocomplete = function (query) {
+            return $scope.danceGroups.filter(g => {
+                if (g.Name.toLowerCase().indexOf(query.toLowerCase()) !== -1) {
+                    return g;
+                }
+            });
+        };
 
         //#endregion
 
