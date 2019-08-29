@@ -104,7 +104,9 @@
         $scope.applyFilter = function () {
             //$scope.newSearch = true;
 
-            $scope.filter.DanceGroupID_List = $scope.filter.DanceGroups.map(g => g.ID);
+            if ($scope.filter.DanceGroups && $scope.filter.DanceGroups.length > 0) {
+                $scope.filter.DanceGroupID_List = $scope.filter.DanceGroups.map(g => g.ID);
+            }
 
             $scope.applyClicked = true;
             $scope.membersTableParams.reload();
