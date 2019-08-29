@@ -26,16 +26,5 @@ namespace DF.Models
 
         public int? DanceGroupID { get; set; }
         public string DanceGroups { get; set; }
-
-        //this.ChoreographyMembers = new HashSet<ChoreographyMembers>();
-        //this.DanceGroupMembers = new HashSet<DanceGroupMembers>();
-        //this.DanceSelectionMembers = new HashSet<DanceSelectionMembers>();
-        //this.MemberDocuments = new HashSet<MemberDocuments>();
-        //this.MemberImages = new HashSet<MemberImages>();
-        //this.MemberPaymentItems = new HashSet<MemberPaymentItems>();
-        //this.MemberPayments = new HashSet<MemberPayments>();
-        //this.MemberPaymentsForCompanions = new HashSet<MemberPaymentsForCompanions>();
-        //this.Performances = new HashSet<Performances>();
-        //this.TrainingMemberPresenceRegistrations = new HashSet<TrainingMemberPresenceRegistrations>();
     }
 }
