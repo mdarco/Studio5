@@ -1,0 +1,54 @@
+﻿<div class="modal-header bg-color-darken" style="color: white; background-color: #1B1E24;">
+    <h4>Trening</h4>
+</div>
+
+<div class="modal-body">
+    <form class="smart-form" novalidate="novalidate">
+        <section>
+            <div>
+                <label class="control-label">Datum (*)</label>
+                <label class="input"><input type="text" class="form-control" ng-model="training.TrainingDate" placeholder="YYYY-MM-DD" /></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Lokacija (*)</label>
+                <select class="form-control" ng-model="training.TrainingLocationID" ng-options="value.ID as value.Name for (key, value) in locations"></select>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Grupa (*)</label>
+                <select class="form-control" ng-model="training.TrainingDanceGroupID" ng-options="value.ID as value.Name for (key, value) in danceGroups"></select>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Vreme početka (*)</label>
+                <label class="input"><input type="text" class="form-control" ng-model="training.StartTime" placeholder="HH:MM" /></label>
+            </div>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Vreme završetka (*)</label>
+                <label class="input"><input type="text" class="form-control" ng-model="training.EndTime" placeholder="HH:MM" /></label>
+            </div>
+        </section>
+
+        <section ng-hide="resolveTrainerComboVisibility()">
+            <div>
+                <label class="control-label">Trener</label>
+                <select class="form-control" ng-model="training.TrainingUserID" ng-options="value.ID as value.Name for (key, value) in trainers"></select>
+            </div>
+        </section>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button ng-click="save()" class="btn btn-success">Sačuvaj</button>
+    <button ng-click="close()" class="btn btn-primary">Odustani</button>
+</div>

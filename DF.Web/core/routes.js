@@ -105,6 +105,34 @@
                 {
                     controller: 'TrainingsController',
                     templateUrl: 'pages/trainings/trainings.html?nd=' + Date.now(),
+                    resolve: {
+                        locations: function (LookupsService) {
+                            return LookupsService.getLocations().then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            );
+                        },
+                        danceGroups: function (DanceGroupsService, AuthenticationService) {
+                            var currentUser = AuthenticationService.getCurrentUser();
+
+                            var userDanceGroups = currentUser.UserDanceGroups.map((g) => {
+                                return g.DanceGroupName.toLowerCase();
+                            });
+
+                            return DanceGroupsService.getLookup().then(
+                                function (result) {
+                                    if (!_.includes(currentUser.UserGroups, 'ADMIN') && !_.includes(currentUser.UserGroups, 'PREGLED PODATAKA')) {
+                                        return result.data.filter((d) => {
+                                            return _.includes(userDanceGroups, d.Name.toLowerCase());
+                                        });
+                                    } else {
+                                        return result.data;
+                                    }
+                                }
+                            );
+                        }
+                    },
                     access: {
                         loginRequired: true
                     }

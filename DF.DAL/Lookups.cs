@@ -45,5 +45,23 @@ namespace DF.DB
                             .ToList();
             }
         }
+
+        public static List<LookupModel> GetUsers()
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                return ctx.Users
+                            .Where(u => u.IsActive)
+                            .Select(x =>
+                                new LookupModel()
+                                {
+                                    ID = x.UserID,
+                                    Name = x.FirstName + " " + x.LastName
+                                }
+                            )
+                            .OrderBy(ac => ac.Name)
+                            .ToList();
+            }
+        }
     }
 }

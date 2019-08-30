@@ -17,5 +17,19 @@ namespace DF.Api.Controllers
         {
             return DB.Lookups.GetAgeCategories();
         }
+
+        [Route("locations")]
+        [HttpGet]
+        public List<LookupModel> GetLocations()
+        {
+            return DB.Lookups.GetLocations();
+        }
+
+        [Route("users")]
+        [HttpGet]
+        public List<LookupModel> GetUsers()
+        {
+            return DB.Lookups.GetUsers();
+        }
     }
 }
