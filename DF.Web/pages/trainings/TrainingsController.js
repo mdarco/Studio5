@@ -170,7 +170,7 @@
 
         $scope.openMemberPresencePage = function (training) {
             TrainingsService.setSearchFilter(angular.copy($scope.filter));
-            $location.path(training.TrainingID + '/member-presence');
+            $location.path('/training-member-presence/' + training.TrainingID);
         };
 
         //#endregion

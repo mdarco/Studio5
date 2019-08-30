@@ -91,6 +91,7 @@ namespace DF.DB
                             TrainingMemberPresenceRegistrations = x.TrainingMemberPresenceRegistrations.Select(r =>
                                 new TrainingMemberPresenceRegistrationModel()
                                 {
+                                    TrainingID = r.TrainingID,
                                     MemberID = r.MemberID,
                                     MemberName = r.Members.FirstName + " " + r.Members.LastName,
                                     IsPresent = r.IsPresent,
@@ -98,6 +99,7 @@ namespace DF.DB
                                     AbsenceNote = r.AbsenceNote
                                 }
                             )
+                            .OrderBy(mp => mp.MemberName)
                         }
                     )
                     .OrderBy(filter.OrderByClause)
@@ -191,13 +193,15 @@ namespace DF.DB
                     return training.TrainingMemberPresenceRegistrations.Select(r =>
                         new TrainingMemberPresenceRegistrationModel()
                         {
+                            TrainingID = r.TrainingID,
                             MemberID = r.MemberID,
                             MemberName = r.Members.FirstName + " " + r.Members.LastName,
                             IsPresent = r.IsPresent,
                             AbsenceJustified = r.AbsenceJustified,
                             AbsenceNote = r.AbsenceNote
                         }
-                    );
+                    )
+                    .OrderBy(x => x.MemberName);
                 }
 
                 return null;
@@ -214,14 +218,23 @@ namespace DF.DB
                     if (model.IsPresent.HasValue)
                     {
                         reg.IsPresent = model.IsPresent.Value;
+
+                        if (reg.IsPresent)
+                        {
+                            reg.AbsenceJustified = null;
+                            reg.AbsenceNote = null;
+                        }
                     }
 
-                    if (model.AbsenceJustified.HasValue)
+                    if (!reg.IsPresent && model.AbsenceJustified.HasValue)
                     {
-                        reg.IsPresent = model.AbsenceJustified.Value;
+                        reg.AbsenceJustified = model.AbsenceJustified.Value;
                     }
 
-                    reg.AbsenceNote = model.AbsenceNote;
+                    if (!reg.IsPresent)
+                    {
+                        reg.AbsenceNote = model.AbsenceNote;
+                    }
 
                     ctx.SaveChanges();
                 }

@@ -139,6 +139,26 @@
                 }
             )
 
+            .when('/training-member-presence/:id',
+                {
+                    controller: 'MemberPresenceController',
+                    templateUrl: 'pages/trainings/member-presence/member-presence.html?nd=' + Date.now(),
+                    resolve: {
+                        memberPresenceList: function ($route, TrainingsService) {
+                            var id = $route.current.params.id;
+                            return TrainingsService.getMemberPresence(id).then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            );
+                        }
+                    },
+                    access: {
+                        loginRequired: true
+                    }
+                }
+            )
+
             .when('/choreos',
                 {
                     controller: 'ChoreosController',

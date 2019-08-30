@@ -1,0 +1,38 @@
+﻿<!-- Member presence grid -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-primary" style="margin-left: 15px; margin-right: 30px;">
+            <div class="panel-heading" style="background-color: #1B1E24;">
+                <span>Prozivnik</span>
+            </div>
+            <div class="panel-body">
+                <p style="font-variant:small-caps; margin-left: 10px" ng-show="showGrid === false">nema podataka.</p>
+
+                <table ng-show="showGrid === true" class="table table-condensed table-hover table-responsive table-striped" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th>Ime i prezime</th>
+                            <th>Status</th>
+                            <th>Odsustvo opravdano?</th>
+                            <th>Komentar</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in memberPresenceList">
+                            <td>{{ item.MemberName }}</td>
+                            <td>{{ item.IsPresent ? 'Prisutan' : 'Nije prisutan' }}</td>
+                            <td>{{ resolveAbsenceJustifiedDisplayText(item) }}</td>
+                            <td>{{ item.AbsenceNote }}</td>
+                            <td>
+                                <button class="btn btn-primary btn-xs pull-right margin-right-5" title="Izmena statusa" ng-click="toggleStatus(item)"><i class="fa fa-toggle-up"></i></button>
+                                <button class="btn btn-primary btn-xs pull-right margin-right-5" title="Odsustvo opravdano?" ng-click="toggleAbsenceJustified(item)" ng-show="!item.IsPresent"><i class="fa fa-exclamation"></i></button>
+                                <button class="btn btn-primary btn-xs pull-right margin-right-5" title="Izmena komentara" ng-click="editAbsenceNote(item)" ng-show="!item.IsPresent"><i class="fa fa-sticky-note"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
