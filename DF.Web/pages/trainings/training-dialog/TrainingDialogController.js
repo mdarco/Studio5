@@ -23,6 +23,11 @@
                 return;
             }
 
+            if (!$scope.training.TrainingUserID) {
+                // assign current user
+                $scope.training.TrainerUserID = currentUser.UserID;
+            }
+
             TrainingsService.create($scope.training).then(
                 function () {
                     toastr.success('Novi trening je uspešno kreiran.');

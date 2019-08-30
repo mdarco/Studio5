@@ -82,13 +82,11 @@ namespace DF.DB
                             TrainingLocationName = x.Locations.LocationName,
                             TrainingDanceGroupID = x.TrainingDanceGroupID,
                             TrainingDanceGroupName = x.DanceGroups.DanceGroupName,
-                            TrainingDanceSelectionID = x.TrainingDanceSelectionID,
-                            TrainingDanceSelectionName = x.DanceSelections.DanceSelectionName,
                             WeekDay = x.WeekDay,
                             StartTime = (TimeSpan)x.StartTime,
                             EndTime = (TimeSpan)x.EndTime,
                             TrainerUserID = x.TrainerUserID,
-                            TrainerUserName = x.Users.FirstName + " " + x.Users.LastName,
+                            TrainerUserName = (x.Users != null) ? (x.Users.FirstName + " " + x.Users.LastName) : string.Empty,
 
                             TrainingMemberPresenceRegistrations = x.TrainingMemberPresenceRegistrations.Select(r =>
                                 new TrainingMemberPresenceRegistrationModel()
