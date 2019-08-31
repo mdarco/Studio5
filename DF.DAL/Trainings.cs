@@ -148,7 +148,8 @@ namespace DF.DB
                     {
                         TrainingID = t.TrainingID,
                         MemberID = groupMember.MemberID,
-                        IsPresent = true
+                        IsPresent = true,
+                        AbsenceJustified = true
                     };
 
                     ctx.TrainingMemberPresenceRegistrations.Add(r);

@@ -61,7 +61,7 @@
         }
 
         function updateTrainingMemberPresenceRegistration(model) {
-            var url = WebApiBaseUrl + urlRoot + '/' + id + '/member-presence/' + model.MemberID;
+            var url = WebApiBaseUrl + urlRoot + '/' + model.TrainingID + '/member-presence/' + model.MemberID;
             return $http.post(url, model);
         }
 

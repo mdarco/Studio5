@@ -26,8 +26,8 @@
                             <td>{{ item.AbsenceNote }}</td>
                             <td>
                                 <button class="btn btn-primary btn-xs pull-right margin-right-5" title="Izmena statusa" ng-click="toggleStatus(item)"><i class="fa fa-toggle-up"></i></button>
-                                <button class="btn btn-primary btn-xs pull-right margin-right-5" title="Odsustvo opravdano?" ng-click="toggleAbsenceJustified(item)" ng-show="!item.IsPresent"><i class="fa fa-exclamation"></i></button>
-                                <button class="btn btn-primary btn-xs pull-right margin-right-5" title="Izmena komentara" ng-click="editAbsenceNote(item)" ng-show="!item.IsPresent"><i class="fa fa-sticky-note"></i></button>
+                                <button class="btn btn-info btn-xs pull-right margin-right-5" title="Odsustvo opravdano?" ng-click="toggleAbsenceJustified(item)" ng-show="!item.IsPresent"><i class="fa fa-exclamation"></i></button>
+                                <button class="btn btn-info btn-xs pull-right margin-right-5" title="Izmena komentara" ng-click="editAbsenceNote(item)" ng-show="!item.IsPresent"><i class="fa fa-sticky-note"></i></button>
                             </td>
                         </tr>
                     </tbody>
