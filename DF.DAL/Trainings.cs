@@ -222,7 +222,7 @@ namespace DF.DB
 
                         if (reg.IsPresent)
                         {
-                            reg.AbsenceJustified = null;
+                            reg.AbsenceJustified = true;
                             reg.AbsenceNote = null;
                         }
                     }

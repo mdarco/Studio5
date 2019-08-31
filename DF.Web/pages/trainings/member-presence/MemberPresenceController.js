@@ -5,12 +5,11 @@
         .module('DFApp')
         .controller('MemberPresenceController', ctrlFn);
 
-    ctrlFn.$inject = ['$scope', '$q', '$location', '$timeout', '$uibModal', 'TrainingsService', 'AuthenticationService', 'WebApiBaseUrl', 'toastr', 'memberPresenceList'];
+    ctrlFn.$inject = ['$scope', '$uibModal', 'TrainingsService', 'AuthenticationService', 'toastr', 'memberPresenceList'];
 
-    function ctrlFn($scope, $q, $location, $timeout, $uibModal, TrainingsService, AuthenticationService, WebApiBaseUrl, toastr, memberPresenceList) {
-        var currentUser = AuthenticationService.getCurrentUser();
+    function ctrlFn($scope, $uibModal, TrainingsService, AuthenticationService, toastr, memberPresenceList) {
+        // var currentUser = AuthenticationService.getCurrentUser();
 
-        $scope.webApiBaseUrl = WebApiBaseUrl;
         $scope.memberPresenceList = memberPresenceList;
         $scope.showGrid = (memberPresenceList && memberPresenceList.length > 0);
 
@@ -24,6 +23,20 @@
             }
         };
 
+        $scope.resolveStatusCss = function (item) {
+            if (item.IsPresent) {
+                return 'label label-success';
+            }
+
+            if (!item.IsPresent) {
+                if (item.AbsenceJustified) {
+                    return 'label label-primary';
+                } else {
+                    return 'label label-danger';
+                }
+            }
+        };
+
         $scope.toggleStatus = function (item) {
             let updateStatusObj = {
                 TrainingID: item.TrainingID,
@@ -33,7 +46,12 @@
 
             TrainingsService.updateMemberPresence(updateStatusObj).then(() => {
                 toastr.success('Status izmenjen.');
+
                 item.IsPresent = !item.IsPresent;
+                if (item.IsPresent) {
+                    item.AbsenceJustified = true;
+                    item.AbsenceNote = null;
+                }
             });
         };
 
@@ -49,5 +67,44 @@
                 item.AbsenceJustified = !item.AbsenceJustified;
             });
         };
+
+        $scope.editAbsenceNote = function (item) {
+            openTextFieldDialog(item.AbsenceNote).then(
+                function (result) {
+                    let updateObj = {
+                        TrainingID: item.TrainingID,
+                        MemberID: item.MemberID,
+                        AbsenceNote: result
+                    };
+
+                    TrainingsService.updateMemberPresence(updateObj).then(() => {
+                        toastr.success('Komentar je izmenjen.');
+                        item.AbsenceNote = result;
+                    });
+                }
+            );
+        };
+
+        // helpers
+        function openTextFieldDialog(text) {
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/common/text-field-dialog/text-field-dialog.html',
+                controller: 'TextFieldDialogController',
+                resolve: {
+                    settings: function () {
+                        return {
+                            FieldValue: text
+                        };
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            return dialog.result;
+        }
     }
 })();
