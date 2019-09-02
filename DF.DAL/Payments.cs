@@ -112,7 +112,7 @@ namespace DF.DB
                     Description = model.Description,
                     Type = model.Type,
                     Currency = model.Currency,
-                    Amount = model.Amount,
+                    Amount = (decimal)model.Amount,
                     DueDate = (DateTime)model.DueDate,
                     StopDate = model.StopDate,
                     NumberOfInstallments = model.NumberOfInstallments,
@@ -155,20 +155,34 @@ namespace DF.DB
                 if (existing != null)
                 {
                     existing.Name = model.Name;
-                    
+
+                    // check for the same name
+                    var sameName = ctx.Payments.AsNoTracking().FirstOrDefault(x => x.Name.ToLower() == model.Name.ToLower());
+                    if (sameName != null)
+                    {
+                        throw new Exception("error_payments_clone_payment_existing_name");
+                    }
+
+                    existing.Active = true;
+
+                    if (model.Amount.HasValue)
+                    {
+                        existing.Amount = model.Amount.Value;
+                    }
+
                     if (model.DueDate.HasValue)
                     {
                         existing.DueDate = model.DueDate.Value;
                     }
 
-                    if (model.StopDate.HasValue)
+                    if (model.NumberOfInstallments.HasValue)
                     {
-                        existing.StopDate = model.StopDate.Value;
+                        existing.NumberOfInstallments = model.NumberOfInstallments.Value;
                     }
 
-                    if (model.Active.HasValue)
+                    if (!string.IsNullOrEmpty(model.InstallmentAmounts))
                     {
-                        existing.Active = model.Active.Value;
+                        existing.InstallmentAmounts = model.InstallmentAmounts;
                     }
 
                     ctx.Payments.Add(existing);

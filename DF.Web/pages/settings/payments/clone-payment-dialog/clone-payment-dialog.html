@@ -1,0 +1,49 @@
+﻿<div class="modal-header bg-color-darken" style="color: white; background-color: #1B1E24;">
+    <h4>Kreiranje kopije plaćanja</h4>
+</div>
+
+<div class="modal-body">
+    <form class="smart-form" novalidate="novalidate">
+        <section>
+            <div>
+                <label class="control-label">Naziv (*)</label>
+                <label class="input"><input type="text" class="form-control" ng-model="clone.Name" /></label>
+            </div>
+        </section>
+
+        <section>
+            <label class="control-label">Iznos (*)</label>
+            <label class="input"><input type="text" class="form-control" ng-model="clone.Amount"></label>
+        </section>
+
+        <section>
+            <div>
+                <label class="control-label">Rok za plaćanje (*)</label>
+                <div style="font-size: xx-small; color: gray;">
+                    (U slučaju plaćanja na rate - rok za plaćanje prve rate)
+                </div>
+                <label class="input"><input type="text" class="form-control" ng-model="clone.DueDate" placeholder="YYYY-MM-DD" /></label>
+            </div>
+        </section>
+
+        <section>
+            <label class="control-label">Broj rata</label>
+            <label class="input"><input type="text" class="form-control" ng-model="clone.NumberOfInstallments"></label>
+        </section>
+
+        <section>
+            <label class="control-label">Iznosi rata</label>
+            <div style="font-size: xx-small; color: gray;">
+                Format: [ Iznos-prve-rate;Iznos-druge-rate;Iznos-trece-rate; ... ]<br />
+                (Zbir iznosa svih rata mora biti jednak iznosu plaćanja)<br />
+                (Ukoliko se iznosi ne zadaju, iznosi rata će biti jednaki)
+            </div>
+            <label class="input"><input type="text" class="form-control" ng-model="clone.InstallmentAmounts"></label>
+        </section>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button ng-click="save()" class="btn btn-success">Sačuvaj</button>
+    <button ng-click="close()" class="btn btn-primary">Odustani</button>
+</div>

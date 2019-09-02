@@ -88,7 +88,29 @@
         };
 
         $scope.clonePayment = function (payment) {
-            // TODO:
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/settings/payments/clone-payment-dialog/clone-payment-dialog.html',
+                controller: 'ClonePaymentDialogController',
+                resolve: {
+                    payment: () => {
+                        return payment;
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            dialog.result.then(
+                function () {
+                    $scope.applyFilter();
+                },
+                function () {
+                    // modal dismissed => do nothing
+                }
+            );
         };
 
         $scope.viewPayment = function (payment) {

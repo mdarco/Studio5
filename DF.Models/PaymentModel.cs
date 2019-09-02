@@ -13,7 +13,7 @@ namespace DF.Models
         public string Description { get; set; }
         public string Currency { get; set; }
         public string Type { get; set; }
-        public decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
         public DateTime? DueDate { get; set; }
         public DateTime? StopDate { get; set; }
         public int? NumberOfInstallments { get; set; }

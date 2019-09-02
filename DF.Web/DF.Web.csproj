@@ -396,6 +396,8 @@
     <Content Include="pages\settings\lookup-disciplines\LookupDisciplinesController.js" />
     <Content Include="pages\settings\lookup-event-types\lookup-event-types.html" />
     <Content Include="pages\settings\lookup-event-types\LookupEventTypesController.js" />
+    <Content Include="pages\settings\payments\clone-payment-dialog\clone-payment-dialog.html" />
+    <Content Include="pages\settings\payments\clone-payment-dialog\ClonePaymentDialogController.js" />
     <Content Include="pages\settings\payments\payment-dialog\payment-dialog.html" />
     <Content Include="pages\settings\payments\payment-dialog\PaymentDialogController.js" />
     <Content Include="pages\settings\payments\payments.html" />
