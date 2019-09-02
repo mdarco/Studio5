@@ -67,6 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportFilter.cs" />
     <Compile Include="ReportInstallment.cs" />
+    <Compile Include="TrainingFilter.cs" />
     <Compile Include="TrainingMemberPresenceRegistrationModel.cs" />
     <Compile Include="TrainingModel.cs" />
     <Compile Include="UserFilterModel.cs" />

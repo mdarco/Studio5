@@ -421,6 +421,10 @@
     <Content Include="pages\settings\users\UserInfoController.js" />
     <Content Include="pages\settings\users\users.html" />
     <Content Include="pages\settings\users\UsersController.js" />
+    <Content Include="pages\trainings\member-presence\member-presence.html" />
+    <Content Include="pages\trainings\member-presence\MemberPresenceController.js" />
+    <Content Include="pages\trainings\training-dialog\training-dialog.html" />
+    <Content Include="pages\trainings\training-dialog\TrainingDialogController.js" />
     <Content Include="pages\trainings\trainings.html" />
     <Content Include="pages\trainings\TrainingsController.js" />
     <Content Include="Scripts\angular-base64\angular-base64.min.js" />
@@ -613,6 +617,7 @@
     <Content Include="services\data\PaymentsService.js" />
     <Content Include="services\data\ReportsService.js" />
     <Content Include="services\data\TagsService.js" />
+    <Content Include="services\data\TrainingsService.js" />
     <Content Include="services\data\UserGroupsService.js" />
     <Content Include="services\data\UsersService.js" />
     <Content Include="services\UtilityService.js" />

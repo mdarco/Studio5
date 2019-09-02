@@ -185,6 +185,7 @@
     <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\TokenController.cs" />
+    <Compile Include="Controllers\TrainingsController.cs" />
     <Compile Include="Controllers\UserGroupsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />

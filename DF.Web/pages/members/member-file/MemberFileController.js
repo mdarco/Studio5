@@ -398,7 +398,7 @@
                 var chunk_length = 0;
 
                 fileReader.onloadend = function (event) {
-                    if (event.target.readyState == FileReader.DONE) {
+                    if (event.target.readyState === FileReader.DONE) {
                         var chunk = event.target.result;
                         chunk_length += chunk.length;
                         chunks.push(chunk);

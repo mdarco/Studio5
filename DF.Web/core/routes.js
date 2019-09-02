@@ -105,6 +105,54 @@
                 {
                     controller: 'TrainingsController',
                     templateUrl: 'pages/trainings/trainings.html?nd=' + Date.now(),
+                    resolve: {
+                        locations: function (LookupsService) {
+                            return LookupsService.getLocations().then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            );
+                        },
+                        danceGroups: function (DanceGroupsService, AuthenticationService) {
+                            var currentUser = AuthenticationService.getCurrentUser();
+
+                            var userDanceGroups = currentUser.UserDanceGroups.map((g) => {
+                                return g.DanceGroupName.toLowerCase();
+                            });
+
+                            return DanceGroupsService.getLookup().then(
+                                function (result) {
+                                    if (!_.includes(currentUser.UserGroups, 'ADMIN') && !_.includes(currentUser.UserGroups, 'PREGLED PODATAKA')) {
+                                        return result.data.filter((d) => {
+                                            return _.includes(userDanceGroups, d.Name.toLowerCase());
+                                        });
+                                    } else {
+                                        return result.data;
+                                    }
+                                }
+                            );
+                        }
+                    },
+                    access: {
+                        loginRequired: true
+                    }
+                }
+            )
+
+            .when('/training-member-presence/:id',
+                {
+                    controller: 'MemberPresenceController',
+                    templateUrl: 'pages/trainings/member-presence/member-presence.html?nd=' + Date.now(),
+                    resolve: {
+                        memberPresenceList: function ($route, TrainingsService) {
+                            var id = $route.current.params.id;
+                            return TrainingsService.getMemberPresence(id).then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            );
+                        }
+                    },
                     access: {
                         loginRequired: true
                     }

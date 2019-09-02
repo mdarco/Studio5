@@ -183,20 +183,24 @@ namespace DF.DB
                 {
                     foreach (var monthlyInstallment in latestMonthlyInstallments)
                     {
-                        int diff = DateTime.Now.Month - monthlyInstallment.InstallmentDate.Month;
-                        if (diff == 0) diff++;
-
-                        MemberPaymentInstallments newMonthlyInstallment = new MemberPaymentInstallments()
+                        if (DateTime.Now.Year == monthlyInstallment.InstallmentDate.Year)
                         {
-                            MemberID = monthlyInstallment.MemberID,
-                            PaymentID = monthlyInstallment.PaymentID,
-                            InstallmentDate = monthlyInstallment.InstallmentDate.AddMonths(diff),
-                            Amount = monthlyInstallment.Amount,
-                            IsCanceled = false,
-                            IsPaid = false
-                        };
+                            int diff = DateTime.Now.Month - monthlyInstallment.InstallmentDate.Month;
+                            if (diff == 0) diff++;
+                            if (diff < 0) continue;
 
-                        ctx.MemberPaymentInstallments.Add(newMonthlyInstallment);
+                            MemberPaymentInstallments newMonthlyInstallment = new MemberPaymentInstallments()
+                            {
+                                MemberID = monthlyInstallment.MemberID,
+                                PaymentID = monthlyInstallment.PaymentID,
+                                InstallmentDate = monthlyInstallment.InstallmentDate.AddMonths(diff),
+                                Amount = monthlyInstallment.Amount,
+                                IsCanceled = false,
+                                IsPaid = false
+                            };
+
+                            ctx.MemberPaymentInstallments.Add(newMonthlyInstallment);
+                        }
                     }
 
                     ctx.SaveChanges();

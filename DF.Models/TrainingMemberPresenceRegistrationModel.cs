@@ -11,7 +11,7 @@ namespace DF.Models
         public int TrainingID { get; set; }
         public int MemberID { get; set; }
         public string MemberName { get; set; }
-        public bool IsPresent { get; set; }
+        public bool? IsPresent { get; set; }
         public bool? AbsenceJustified { get; set; }
         public string AbsenceNote { get; set; }
     }
