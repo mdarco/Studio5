@@ -14,6 +14,8 @@
             getFiltered: getFiltered,
             getPayment: getPayment,
             addPayment: addPayment,
+            editPayment: editPayment,
+            clonePayment: clonePayment,
             deletePayment: deletePayment
         };
 
@@ -31,6 +33,16 @@
 
         function addPayment(model) {
             var url = WebApiBaseUrl + urlRoot;
+            return $http.post(url, model);
+        }
+
+        function editPayment(model) {
+            var url = WebApiBaseUrl + urlRoot + '/' + model.ID;
+            return $http.put(url, model);
+        }
+
+        function clonePayment(model) {
+            var url = WebApiBaseUrl + urlRoot + '/' + model.ID;
             return $http.post(url, model);
         }
 

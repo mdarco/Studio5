@@ -20,7 +20,7 @@ namespace DF.Models
         public string InstallmentAmounts { get; set; }
         public decimal? AmountForCompanion { get; set; }
         public string InstallmentAmountsForCompanion { get; set; }
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
         public Nullable<int> EventID { get; set; }
         public Nullable<int> CostumeID { get; set; }
         public Nullable<int> OutfitID { get; set; }

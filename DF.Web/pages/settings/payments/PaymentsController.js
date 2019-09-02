@@ -77,6 +77,20 @@
             );
         };
 
+        $scope.togglePaymentActive = function (payment) {
+            PaymentsService.editPayment({ Active: !payment.Active }).then(() => {
+                if (payment.Active) {
+                    toastr.success('Plaćanje deaktivirano.');
+                } else {
+                    toastr.success('Plaćanje aktivirano.');
+                }
+            });
+        };
+
+        $scope.clonePayment = function (payment) {
+            // TODO:
+        };
+
         $scope.viewPayment = function (payment) {
             var dialogOpts = {
                 backdrop: 'static',
@@ -137,7 +151,7 @@
         };
 
         // access resolvers
-        $scope.canDeletePayments = function () {
+        $scope.resolveAdminAccess = function () {
             return currentUser.UserGroups.includes('ADMIN');
         };
     }

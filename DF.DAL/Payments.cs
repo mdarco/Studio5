@@ -130,6 +130,53 @@ namespace DF.DB
             }
         }
 
+        public static void EditPayment(PaymentModel model)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var existing = ctx.Payments.FirstOrDefault(x => x.ID == model.ID);
+                if (existing != null)
+                {
+                    if (model.Active.HasValue)
+                    {
+                        existing.Active = model.Active.Value;
+                    }
+
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
+        public static void ClonePayment(PaymentModel model)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var existing = ctx.Payments.AsNoTracking().FirstOrDefault(x => x.ID == model.ID);
+                if (existing != null)
+                {
+                    existing.Name = model.Name;
+                    
+                    if (model.DueDate.HasValue)
+                    {
+                        existing.DueDate = model.DueDate.Value;
+                    }
+
+                    if (model.StopDate.HasValue)
+                    {
+                        existing.StopDate = model.StopDate.Value;
+                    }
+
+                    if (model.Active.HasValue)
+                    {
+                        existing.Active = model.Active.Value;
+                    }
+
+                    ctx.Payments.Add(existing);
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
         public static void DeletePayment(int id)
         {
             using (var ctx = new DFAppEntities())

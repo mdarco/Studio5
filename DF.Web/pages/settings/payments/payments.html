@@ -64,7 +64,9 @@
                                 {{ payment.NumberOfInstallments === 1 ? (payment.Type.toUpperCase() === 'ONE-TIME' ? 'Jednokratno' : 'Mesečno') : payment.NumberOfInstallments }}
                             </td>
                             <td>
-                                <button class="btn btn-danger btn-xs pull-right margin-right-5" title="Brisanje plaćanja" ng-click="deletePayment(payment)" ng-show="canDeletePayments()"><i class="fa fa-times"></i></button>
+                                <button class="btn btn-danger btn-xs pull-right margin-right-5" title="Brisanje plaćanja" ng-click="deletePayment(payment)" ng-show="resolveAdminAccess()"><i class="fa fa-times"></i></button>
+                                <button class="btn btn-warning btn-xs pull-right margin-right-5" title="Aktiviranje/deaktiviranje plaćanja" ng-click="togglePaymentActive(payment)" ng-show="resolveAdminAccess()"><i class="fa fa-money"></i></button>
+                                <button class="btn btn-info btn-xs pull-right margin-right-5" title="Kopiranje plaćanja" ng-click="clonePayment(payment)" ng-show="resolveAdminAccess()"><i class="fa fa-clone"></i></button>
                                 <button class="btn btn-primary btn-xs pull-right margin-right-5" title="Pregled plaćanja" ng-click="viewPayment(payment)"><i class="fa fa-eye"></i></button>
                             </td>
                         </tr>
