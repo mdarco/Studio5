@@ -141,7 +141,10 @@ namespace DF.DB
                 };
 
                 // training member presence registrations
-                var groupMembers = ctx.DanceGroupMembers.Where(x => x.DanceGroupID == model.TrainingDanceGroupID);
+                var groupMembers = ctx.DanceGroupMembers
+                                        .Include(tbl => tbl.Members)
+                                        .Where(x => x.DanceGroupID == model.TrainingDanceGroupID && x.Members.IsActive);
+
                 foreach (var groupMember in groupMembers)
                 {
                     TrainingMemberPresenceRegistrations r = new TrainingMemberPresenceRegistrations
