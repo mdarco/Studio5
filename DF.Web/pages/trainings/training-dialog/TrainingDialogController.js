@@ -5,16 +5,28 @@
         .module('DFApp')
         .controller('TrainingDialogController', ctrlFn);
 
-    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'TrainingsService', 'AuthenticationService', 'toastr', 'locations', 'danceGroups', 'trainers'];
+    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'TrainingsService', 'AuthenticationService', 'UtilityService', 'toastr', 'locations', 'danceGroups', 'trainers'];
 
-    function ctrlFn($scope, $uibModalInstance, TrainingsService, AuthenticationService, toastr, locations, danceGroups, trainers) {
+    function ctrlFn($scope, $uibModalInstance, TrainingsService, AuthenticationService, UtilityService, toastr, locations, danceGroups, trainers) {
         $scope.locations = locations;
         $scope.danceGroups = danceGroups;
         $scope.trainers = trainers;
 
         var currentUser = AuthenticationService.getCurrentUser();
 
-        $scope.training = {};
+        $scope.training = {
+            TrainingDate: UtilityService.convertDateToISODateString(new Date())
+        };
+
+        if (danceGroups.length === 1) {
+            $scope.training.TrainingDanceGroupID = danceGroups[0].ID;
+        }
+
+        if (danceGroups.length > 1) {
+            if (!_.includes(currentUser.UserGroups, 'ADMIN') && !_.includes(currentUser.UserGroups, 'PREGLED PODATAKA')) {
+                $scope.training.TrainingDanceGroupID = danceGroups[0].ID;
+            }
+        }
 
         $scope.save = function () {
             var modelValidation = validate();
@@ -23,7 +35,7 @@
                 return;
             }
 
-            if (!$scope.training.TrainingUserID) {
+            if (!$scope.training.TrainerUserID) {
                 // assign current user
                 $scope.training.TrainerUserID = currentUser.UserID;
             }
@@ -80,7 +92,7 @@
         function resolveErrorMessage(error) {
             switch (error.statusText) {
                 default:
-                    toastr.error('Došlo je do greške na serveru prilikom unošenja novog plesača.');
+                    toastr.error('Došlo je do greške na serveru prilikom unošenja novog treninga.');
                     break;
             }
         }
