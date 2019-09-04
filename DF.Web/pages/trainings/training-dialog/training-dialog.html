@@ -45,6 +45,13 @@
                 <select class="form-control" ng-model="training.TrainerUserID" ng-options="value.ID as value.Name for (key, value) in trainers"></select>
             </div>
         </section>
+
+        <section>
+            <div>
+                <label class="control-label">Napomena</label>
+                <label class="input"><textarea rows="2" class="form-control" ng-model="training.Note"></textarea></label>
+            </div>
+        </section>
     </form>
 </div>
 

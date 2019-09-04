@@ -87,6 +87,7 @@ namespace DF.DB
                             EndTime = (TimeSpan)x.EndTime,
                             TrainerUserID = x.TrainerUserID,
                             TrainerUserName = (x.Users != null) ? (x.Users.FirstName + " " + x.Users.LastName) : string.Empty,
+                            Note = x.Note,
 
                             TrainingMemberPresenceRegistrations = x.TrainingMemberPresenceRegistrations.Select(r =>
                                 new TrainingMemberPresenceRegistrationModel()
@@ -137,7 +138,8 @@ namespace DF.DB
                     WeekDay = model.TrainingDate.ToString("dddd", new CultureInfo("sr-Latn-RS")),
                     StartTime = model.StartTime,
                     EndTime = model.EndTime,
-                    TrainerUserID = model.TrainerUserID
+                    TrainerUserID = model.TrainerUserID,
+                    Note = model.Note
                 };
 
                 // training member presence registrations

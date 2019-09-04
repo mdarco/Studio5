@@ -427,6 +427,7 @@
           <Property Name="StartTime" Type="time" Precision="7" />
           <Property Name="EndTime" Type="time" Precision="7" />
           <Property Name="TrainerUserID" Type="int" />
+          <Property Name="Note" Type="nvarchar" MaxLength="1000" Nullable="false" />
         </EntityType>
         <EntityType Name="UserDanceGroups">
           <Key>
@@ -2141,6 +2142,7 @@
           <NavigationProperty Name="DanceSelections" Relationship="DFDataModel.FK_Trainings_DanceSelections" FromRole="Trainings" ToRole="DanceSelections" />
           <NavigationProperty Name="Locations" Relationship="DFDataModel.FK_Trainings_Locations" FromRole="Trainings" ToRole="Locations" />
           <NavigationProperty Name="Users" Relationship="DFDataModel.FK_Trainings_Users" FromRole="Trainings" ToRole="Users" />
+          <Property Name="Note" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserDocuments">
           <Key>
@@ -3876,6 +3878,7 @@
           <EntitySetMapping Name="Trainings">
             <EntityTypeMapping TypeName="DFDataModel.Trainings">
               <MappingFragment StoreEntitySet="Trainings">
+                <ScalarProperty Name="Note" ColumnName="Note" />
                 <ScalarProperty Name="TrainerUserID" ColumnName="TrainerUserID" />
                 <ScalarProperty Name="EndTime" ColumnName="EndTime" />
                 <ScalarProperty Name="StartTime" ColumnName="StartTime" />

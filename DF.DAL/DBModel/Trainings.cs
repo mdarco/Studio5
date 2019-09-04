@@ -29,6 +29,7 @@ namespace DF.DB.DBModel
         public Nullable<System.TimeSpan> StartTime { get; set; }
         public Nullable<System.TimeSpan> EndTime { get; set; }
         public Nullable<int> TrainerUserID { get; set; }
+        public string Note { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TrainingMemberPresenceRegistrations> TrainingMemberPresenceRegistrations { get; set; }
