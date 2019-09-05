@@ -21,6 +21,7 @@ namespace DF.Models
         public TimeSpan EndTime { get; set; }
         public int? TrainerUserID { get; set; }
         public string TrainerUserName { get; set; }
+        public string Note { get; set; }
 
         public IEnumerable<TrainingMemberPresenceRegistrationModel> TrainingMemberPresenceRegistrations { get; set; }
     }

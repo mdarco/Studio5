@@ -84,7 +84,9 @@
                             <td data-title="'Vreme početka'" header-class="'text-left'">{{ training.StartTime }}</td>
                             <td data-title="'Vreme završetka'" header-class="'text-left'">{{ training.EndTime }}</td>
                             <td data-title="'Trener'" header-class="'text-left'">{{ training.TrainerUserName }}</td>
+                            <td data-title="'Napomena'" header-class="'text-left'">{{ training.Note }}</td>
                             <td header-class="''">
+                                <button class="btn btn-danger btn-xs" style="float: right; margin-left: 5px;" title="Brisanje treninga" ng-click="deleteTraining(training)"><i class="fa fa-times"></i></button>
                                 <button class="btn btn-primary btn-xs" style="float: right; margin-left: 5px;" title="Prozivnik" ng-click="openMemberPresencePage(training)">Prozivnik</button>
                             </td>
                         </tr>

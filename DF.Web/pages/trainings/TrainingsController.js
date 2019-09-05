@@ -166,6 +166,36 @@
 
         //#endregion
 
+        //#region Delete training
+
+        $scope.deleteTraining = function (training) {
+            bootbox.confirm({
+                message: 'Da li ste sigurni?',
+                buttons: {
+                    confirm: {
+                        label: 'Da',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: 'Ne',
+                        className: 'btn-default'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        TrainingsService.delete(training.TrainingID).then(() => {
+                            toastr.success('Trening uspešno obrisan.');
+                            $scope.applyFilter();
+                        }).catch((error) => {
+                            toastr.success('Došlo je do greške prilikom brisanja treninga.');
+                        });
+                    }
+                }
+            });
+        };
+
+        //#endregion
+
         //#region Member presence
 
         $scope.openMemberPresencePage = function (training) {

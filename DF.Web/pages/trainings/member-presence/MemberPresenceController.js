@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('MemberPresenceController', ctrlFn);
 
-    ctrlFn.$inject = ['$scope', '$uibModal', 'TrainingsService', 'AuthenticationService', 'toastr', 'memberPresenceList'];
+    ctrlFn.$inject = ['$scope', '$location', '$uibModal', 'TrainingsService', 'AuthenticationService', 'toastr', 'memberPresenceList'];
 
-    function ctrlFn($scope, $uibModal, TrainingsService, AuthenticationService, toastr, memberPresenceList) {
+    function ctrlFn($scope, $location, $uibModal, TrainingsService, AuthenticationService, toastr, memberPresenceList) {
         // var currentUser = AuthenticationService.getCurrentUser();
 
         $scope.memberPresenceList = memberPresenceList;
@@ -106,5 +106,9 @@
 
             return dialog.result;
         }
+
+        $scope.backToSearch = function () {
+            $location.path('/trainings').search({ back: true });
+        };
     }
 })();

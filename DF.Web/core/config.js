@@ -23,8 +23,9 @@
                 /.*common.*/,
                 /.*member-dialog.*/,
                 /.*member-doc-dialog.*/,
-                /.*installments-list-dialog.* /,
-                /.*member-payment-dialog.* /
+                /.*installments-list-dialog.*/,
+                /.*member-payment-dialog.*/,
+                /.*training-dialog.*/
             ], true
         );
     }
