@@ -29,9 +29,9 @@ namespace DF.DB
                         q = q.Where(x => !filter.ExcludeID.Contains(x.ID));
                     }
 
-                    if (filter.IsActive.HasValue)
+                    if (filter.Active.HasValue)
                     {
-                        q = q.Where(x => x.Active == filter.IsActive);
+                        q = q.Where(x => x.Active == filter.Active);
                     }
 
                     return q.Select(x =>

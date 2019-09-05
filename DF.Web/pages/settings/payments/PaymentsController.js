@@ -17,6 +17,11 @@
         $scope.filter = {};
         $scope.payments = [];
 
+        $scope.paymentStatuses = [
+            { ID: 'active', Name: 'Aktivno' },
+            { ID: 'inactive', Name: 'Neaktivno' }
+        ];
+
         $scope.showGrid = false;
 
         function getPayments() {
@@ -42,6 +47,14 @@
         }
 
         $scope.applyFilter = function () {
+            if ($scope.filter.PaymentStatus === 'active') {
+                $scope.filter.Active = true;
+            }
+
+            if ($scope.filter.PaymentStatus === 'inactive') {
+                $scope.filter.Active = false;
+            }
+
             getPayments();
         };
 
@@ -78,11 +91,29 @@
         };
 
         $scope.togglePaymentActive = function (payment) {
-            PaymentsService.editPayment({ Active: !payment.Active }).then(() => {
-                if (payment.Active) {
-                    toastr.success('Plaćanje deaktivirano.');
-                } else {
-                    toastr.success('Plaćanje aktivirano.');
+            bootbox.confirm({
+                message: 'Da li ste sigurni?',
+                buttons: {
+                    confirm: {
+                        label: 'Da',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: 'Ne',
+                        className: 'btn-default'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        PaymentsService.editPayment({ ID: payment.ID, Active: !payment.Active }).then(() => {
+                            if (payment.Active) {
+                                toastr.success('Plaćanje deaktivirano.');
+                                payment.Active = !payment.Active;
+                            } else {
+                                toastr.success('Plaćanje aktivirano.');
+                            }
+                        });
+                    }
                 }
             });
         };
