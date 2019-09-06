@@ -169,6 +169,21 @@ namespace DF.DB
             }
         }
 
+        public static void EditTraining(TrainingModel model)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                DBModel.Trainings existing = ctx.Trainings.FirstOrDefault(x =>x.TrainingID == model.TrainingID);
+
+                if (existing != null)
+                {
+                    existing.Note = model.Note;
+
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
         public static void DeleteTraining(int id)
         {
             using (var ctx = new DFAppEntities())

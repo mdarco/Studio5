@@ -18,6 +18,7 @@
 
             getFiltered: getFilteredTrainings,
             create: createTraining,
+            edit: editTraining,
             delete: deleteTraining,
 
             getMemberPresence: getTrainingMemberPresenceRegistrations,
@@ -46,6 +47,11 @@
         function createTraining(model) {
             var url = WebApiBaseUrl + urlRoot;
             return $http.post(url, model);
+        }
+
+        function editTraining(model) {
+            var url = WebApiBaseUrl + urlRoot + '/' + model.TrainingID;
+            return $http.put(url, model);
         }
 
         function deleteTraining(id) {
