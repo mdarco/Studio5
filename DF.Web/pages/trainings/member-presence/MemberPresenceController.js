@@ -108,6 +108,10 @@
             });
         };
 
+        $scope.getPresentMembersCount = function () {
+            return memberPresenceList.filter(item => item.IsPresent).length;
+        };
+
         // helpers
         function openTextFieldDialog(text) {
             var dialogOpts = {
