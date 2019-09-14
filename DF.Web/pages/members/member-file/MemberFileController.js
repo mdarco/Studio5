@@ -789,7 +789,7 @@
                             return mp.Payment.ID;
                         });
 
-                        return PaymentsService.getFiltered({ ExcludeID: excludeID, IsActive: true });
+                        return PaymentsService.getFiltered({ ExcludeID: excludeID, Active: true });
                     },
                     additionalChkboxCol: function () {
                         return null;
