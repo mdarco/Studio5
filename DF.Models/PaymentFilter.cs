@@ -9,7 +9,7 @@ namespace DF.Models
     public class PaymentFilter
     {
         public string Name { get; set; }
-        public bool? IsActive { get; set; }
+        public bool? Active { get; set; }
         public List<int> ExcludeID { get; set; }
     }
 }

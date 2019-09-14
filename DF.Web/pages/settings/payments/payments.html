@@ -14,6 +14,12 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Status</label>
+                                <select class="form-control" ng-model="filter.PaymentStatus" ng-options="value.ID as value.Name for (key, value) in paymentStatuses"></select>
+                            </div>
+                        </div>
                     </div>
 
                     <br />
@@ -50,11 +56,12 @@
                             <th>Tip</th>
                             <th>Iznos</th>
                             <th>Br. rata</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="payment in payments">
+                        <tr ng-repeat="payment in payments" ng-style="payment.Active === false && {'color': 'lightgray'}">
                             <td>{{ payment.Name }}</td>
                             <td>{{ payment.Description }}</td>
                             <td>{{ payment.Currency }}</td>
@@ -63,8 +70,11 @@
                             <td ng-style="{ 'font-variant': payment.NumberOfInstallments === 1 ? 'small-caps' : '' }">
                                 {{ payment.NumberOfInstallments === 1 ? (payment.Type.toUpperCase() === 'ONE-TIME' ? 'Jednokratno' : 'Mesečno') : payment.NumberOfInstallments }}
                             </td>
+                            <td><div ng-class="payment.Active === true ? 'label label-success' : 'label label-danger'">{{ payment.Active === true ? 'Aktivno' : 'Neaktivno' }}</div></td>
                             <td>
-                                <button class="btn btn-danger btn-xs pull-right margin-right-5" title="Brisanje plaćanja" ng-click="deletePayment(payment)" ng-show="canDeletePayments()"><i class="fa fa-times"></i></button>
+                                <button class="btn btn-danger btn-xs pull-right margin-right-5" title="Brisanje plaćanja" ng-click="deletePayment(payment)" ng-show="resolveAdminAccess()"><i class="fa fa-times"></i></button>
+                                <button class="btn btn-warning btn-xs pull-right margin-right-5" title="Aktiviranje/deaktiviranje plaćanja" ng-click="togglePaymentActive(payment)" ng-show="resolveAdminAccess()"><i class="fa fa-money"></i></button>
+                                <button class="btn btn-info btn-xs pull-right margin-right-5" title="Kopiranje plaćanja" ng-click="clonePayment(payment)" ng-show="resolveAdminAccess()"><i class="fa fa-clone"></i></button>
                                 <button class="btn btn-primary btn-xs pull-right margin-right-5" title="Pregled plaćanja" ng-click="viewPayment(payment)"><i class="fa fa-eye"></i></button>
                             </td>
                         </tr>

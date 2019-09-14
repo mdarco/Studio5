@@ -75,7 +75,7 @@ namespace DF.BL
                      * 
                      */
 
-                    decimal installmentAmount = model.DiscountAmount.HasValue ? (decimal)model.DiscountAmount : paymentInfo.Amount;
+                    decimal installmentAmount = model.DiscountAmount.HasValue ? (decimal)model.DiscountAmount : (decimal)paymentInfo.Amount;
                     if (model.Companions != null && model.Companions.Count() > 0)
                     {
                         foreach (var c in model.Companions)
@@ -159,7 +159,7 @@ namespace DF.BL
                         }
                     }
 
-                    decimal totalAmount = paymentInfo.Amount;
+                    decimal totalAmount = (decimal)paymentInfo.Amount;
                     if (model.DiscountPercentage.HasValue)
                     {
                         totalAmount = totalAmount * (1 - ((decimal)model.DiscountPercentage / 100));

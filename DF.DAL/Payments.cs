@@ -29,9 +29,9 @@ namespace DF.DB
                         q = q.Where(x => !filter.ExcludeID.Contains(x.ID));
                     }
 
-                    if (filter.IsActive.HasValue)
+                    if (filter.Active.HasValue)
                     {
-                        q = q.Where(x => x.Active == filter.IsActive);
+                        q = q.Where(x => x.Active == filter.Active);
                     }
 
                     return q.Select(x =>
@@ -112,7 +112,7 @@ namespace DF.DB
                     Description = model.Description,
                     Type = model.Type,
                     Currency = model.Currency,
-                    Amount = model.Amount,
+                    Amount = (decimal)model.Amount,
                     DueDate = (DateTime)model.DueDate,
                     StopDate = model.StopDate,
                     NumberOfInstallments = model.NumberOfInstallments,
@@ -127,6 +127,67 @@ namespace DF.DB
 
                 ctx.Payments.Add(p);
                 ctx.SaveChanges();
+            }
+        }
+
+        public static void EditPayment(PaymentModel model)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var existing = ctx.Payments.FirstOrDefault(x => x.ID == model.ID);
+                if (existing != null)
+                {
+                    if (model.Active.HasValue)
+                    {
+                        existing.Active = model.Active.Value;
+                    }
+
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
+        public static void ClonePayment(PaymentModel model)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var existing = ctx.Payments.AsNoTracking().FirstOrDefault(x => x.ID == model.ID);
+                if (existing != null)
+                {
+                    existing.Name = model.Name;
+
+                    // check for the same name
+                    var sameName = ctx.Payments.AsNoTracking().FirstOrDefault(x => x.Name.ToLower() == model.Name.ToLower());
+                    if (sameName != null)
+                    {
+                        throw new Exception("error_payments_clone_payment_existing_name");
+                    }
+
+                    existing.Active = true;
+
+                    if (model.Amount.HasValue)
+                    {
+                        existing.Amount = model.Amount.Value;
+                    }
+
+                    if (model.DueDate.HasValue)
+                    {
+                        existing.DueDate = model.DueDate.Value;
+                    }
+
+                    if (model.NumberOfInstallments.HasValue)
+                    {
+                        existing.NumberOfInstallments = model.NumberOfInstallments.Value;
+                    }
+
+                    if (!string.IsNullOrEmpty(model.InstallmentAmounts))
+                    {
+                        existing.InstallmentAmounts = model.InstallmentAmounts;
+                    }
+
+                    ctx.Payments.Add(existing);
+                    ctx.SaveChanges();
+                }
             }
         }
 

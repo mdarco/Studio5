@@ -39,6 +39,25 @@ namespace DF.Api.Controllers
         }
 
         [Route("{id}")]
+        [HttpPut]
+        public void EditTraining(TrainingModel model)
+        {
+            try
+            {
+                DB.Trainings.EditTraining(model);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(
+                    new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.Forbidden,
+                        ReasonPhrase = ex.Message
+                    });
+            }
+        }
+
+        [Route("{id}")]
         [HttpDelete]
         public void DeleteTraining(int id)
         {

@@ -10,6 +10,12 @@
     function ctrlFn($scope, $location, $uibModal, TrainingsService, AuthenticationService, toastr, memberPresenceList) {
         // var currentUser = AuthenticationService.getCurrentUser();
 
+        var trainingID = null;
+        var urlParts = $location.url().split('/');
+        if (urlParts && urlParts.length > 0) {
+            trainingID = parseInt(urlParts[urlParts.length - 1]);
+        }
+
         $scope.memberPresenceList = memberPresenceList;
         $scope.showGrid = (memberPresenceList && memberPresenceList.length > 0);
 
@@ -80,6 +86,21 @@
                     TrainingsService.updateMemberPresence(updateObj).then(() => {
                         toastr.success('Komentar je izmenjen.');
                         item.AbsenceNote = result;
+                    });
+                }
+            );
+        };
+
+        $scope.editTrainingComment = function () {
+            openTextFieldDialog().then(
+                function (result) {
+                    let updateObj = {
+                        TrainingID: trainingID,
+                        Note: result
+                    };
+
+                    TrainingsService.edit(updateObj).then(() => {
+                        toastr.success('Komentar je izmenjen.');
                     });
                 }
             );

@@ -17,6 +17,11 @@
         $scope.filter = {};
         $scope.payments = [];
 
+        $scope.paymentStatuses = [
+            { ID: 'active', Name: 'Aktivno' },
+            { ID: 'inactive', Name: 'Neaktivno' }
+        ];
+
         $scope.showGrid = false;
 
         function getPayments() {
@@ -42,6 +47,14 @@
         }
 
         $scope.applyFilter = function () {
+            if ($scope.filter.PaymentStatus === 'active') {
+                $scope.filter.Active = true;
+            }
+
+            if ($scope.filter.PaymentStatus === 'inactive') {
+                $scope.filter.Active = false;
+            }
+
             getPayments();
         };
 
@@ -70,6 +83,60 @@
             dialog.result.then(
                 function () {
                     getPayments();
+                },
+                function () {
+                    // modal dismissed => do nothing
+                }
+            );
+        };
+
+        $scope.togglePaymentActive = function (payment) {
+            bootbox.confirm({
+                message: 'Da li ste sigurni?',
+                buttons: {
+                    confirm: {
+                        label: 'Da',
+                        className: 'btn-primary'
+                    },
+                    cancel: {
+                        label: 'Ne',
+                        className: 'btn-default'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        PaymentsService.editPayment({ ID: payment.ID, Active: !payment.Active }).then(() => {
+                            if (payment.Active) {
+                                toastr.success('Plaćanje deaktivirano.');
+                                payment.Active = !payment.Active;
+                            } else {
+                                toastr.success('Plaćanje aktivirano.');
+                            }
+                        });
+                    }
+                }
+            });
+        };
+
+        $scope.clonePayment = function (payment) {
+            var dialogOpts = {
+                backdrop: 'static',
+                keyboard: false,
+                backdropClick: false,
+                templateUrl: 'pages/settings/payments/clone-payment-dialog/clone-payment-dialog.html',
+                controller: 'ClonePaymentDialogController',
+                resolve: {
+                    payment: () => {
+                        return payment;
+                    }
+                }
+            };
+
+            var dialog = $uibModal.open(dialogOpts);
+
+            dialog.result.then(
+                function () {
+                    $scope.applyFilter();
                 },
                 function () {
                     // modal dismissed => do nothing
@@ -137,7 +204,7 @@
         };
 
         // access resolvers
-        $scope.canDeletePayments = function () {
+        $scope.resolveAdminAccess = function () {
             return currentUser.UserGroups.includes('ADMIN');
         };
     }

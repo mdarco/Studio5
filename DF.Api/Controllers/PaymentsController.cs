@@ -45,6 +45,44 @@ namespace DF.Api.Controllers
         }
 
         [Route("{id}")]
+        [HttpPut]
+        public void EditPayment(PaymentModel model)
+        {
+            try
+            {
+                DB.Payments.EditPayment(model);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(
+                    new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.Forbidden,
+                        ReasonPhrase = ex.Message
+                    });
+            }
+        }
+
+        [Route("{id}")]
+        [HttpPost]
+        public void ClonePayment(PaymentModel model)
+        {
+            try
+            {
+                DB.Payments.ClonePayment(model);
+            }
+            catch (Exception ex)
+            {
+                throw new HttpResponseException(
+                    new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.Forbidden,
+                        ReasonPhrase = ex.Message
+                    });
+            }
+        }
+
+        [Route("{id}")]
         [HttpDelete]
         public void DeletePayment(int id)
         {
