@@ -17,6 +17,7 @@
             setSearchFilter: setSearchFilter,
 
             getFiltered: getFilteredTrainings,
+            get: getTraining,
             create: createTraining,
             edit: editTraining,
             delete: deleteTraining,
@@ -42,6 +43,11 @@
         function getFilteredTrainings(filter) {
             var url = WebApiBaseUrl + urlRoot + '/filtered?nd=' + Date.now();
             return $http.post(url, filter);
+        }
+
+        function getTraining(id) {
+            var url = WebApiBaseUrl + urlRoot + '/' + id + '?nd=' + Date.now();
+            return $http.get(url);
         }
 
         function createTraining(model) {

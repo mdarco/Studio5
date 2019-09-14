@@ -19,6 +19,13 @@ namespace DF.Api.Controllers
             return DB.Trainings.GetTrainingsFiltered(filter);
         }
 
+        [Route("{id}")]
+        [HttpGet]
+        public TrainingModel GetTraining(int id)
+        {
+            return DB.Trainings.GetTraining(id);
+        }
+
         [Route("")]
         [HttpPost]
         public void CreateTraining(TrainingModel model)

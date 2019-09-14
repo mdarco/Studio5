@@ -92,18 +92,20 @@
         };
 
         $scope.editTrainingComment = function () {
-            openTextFieldDialog().then(
-                function (result) {
-                    let updateObj = {
-                        TrainingID: trainingID,
-                        Note: result
-                    };
+            TrainingsService.get(trainingID).then((t) => {
+                openTextFieldDialog(t.data.Note).then(
+                    function (result) {
+                        let updateObj = {
+                            TrainingID: trainingID,
+                            Note: result
+                        };
 
-                    TrainingsService.edit(updateObj).then(() => {
-                        toastr.success('Komentar je izmenjen.');
-                    });
-                }
-            );
+                        TrainingsService.edit(updateObj).then(() => {
+                            toastr.success('Komentar je izmenjen.');
+                        });
+                    }
+                );
+            });
         };
 
         // helpers

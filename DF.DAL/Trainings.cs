@@ -113,6 +113,40 @@ namespace DF.DB
             return response;
         }
 
+        public static TrainingModel GetTraining(int id)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var training = ctx.Trainings
+                                .Include(t => t.Locations)
+                                .Include(t => t.DanceGroups)
+                                .Include(t => t.DanceSelections)
+                                .Include(t => t.Users)
+                                .FirstOrDefault(x => x.TrainingID == id);
+
+                if (training != null)
+                {
+                    return new TrainingModel()
+                    {
+                        TrainingID = training.TrainingID,
+                        TrainingDate = training.TrainingDate,
+                        TrainingLocationID = training.TrainingLocationID,
+                        TrainingLocationName = training.Locations.LocationName,
+                        TrainingDanceGroupID = training.TrainingDanceGroupID,
+                        TrainingDanceGroupName = training.DanceGroups.DanceGroupName,
+                        WeekDay = training.WeekDay,
+                        StartTime = (TimeSpan)training.StartTime,
+                        EndTime = (TimeSpan)training.EndTime,
+                        TrainerUserID = training.TrainerUserID,
+                        TrainerUserName = (training.Users != null) ? (training.Users.FirstName + " " + training.Users.LastName) : string.Empty,
+                        Note = training.Note
+                    };
+                }
+
+                return null;
+            }
+        }
+
         public static TrainingModel CreateTraining(TrainingModel model)
         {
             using (var ctx = new DFAppEntities())
