@@ -3,6 +3,17 @@
 </div>
 
 <div class="modal-body">
+    <div style="font-size: smaller">
+        <label>
+            <input type="radio" name="installmentsFilterRadios" ng-model="installmentsFilter" value="seasonOnly">
+            <span>Samo za tekuću sezonu</span>
+        </label>
+        &nbsp;&nbsp;&nbsp;
+        <label>
+            <input type="radio" name="installmentsFilterRadios" ng-model="installmentsFilter" value="all">
+            <span>Sva plaćanja</span>
+        </label>
+    </div>
     <table class="table table-hover table-striped">
         <thead>
             <tr>
@@ -15,7 +26,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="installment in installments" ng-style="{ 'color': installment.IsCanceled ? 'lightgray' : '' }">
+            <tr ng-repeat="installment in installmentsToDisplay" ng-style="{ 'color': installment.IsCanceled ? 'lightgray' : '' }">
                 <td>{{ installment.InstallmentDate | date: 'dd.MM.yyyy' }}</td>
                 <td>{{ installment.Amount }}</td>
                 <td>

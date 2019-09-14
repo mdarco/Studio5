@@ -8,10 +8,22 @@
     ctrlFn.$inject = ['$rootScope', '$scope', '$location', '$uibModal', '$uibModalInstance', 'MembersService', 'UtilityService', 'AuthenticationService', 'toastr', 'installments', 'context'];
 
     function ctrlFn($rootScope, $scope, $location, $uibModal, $uibModalInstance, MembersService, UtilityService, AuthenticationService, toastr, installments, context) {
+        const SEASON_START_MONTH_DAY = '09-01';
+
         var currentUser = AuthenticationService.getCurrentUser();
 
         $scope.installments = installments.data || installments;
+        $scope.installmentsSeasonOnly = $scope.installments.filter(item => {
+            let seasonStartDate = (new Date()).getFullYear() + '-' + SEASON_START_MONTH_DAY;
+            if (moment(item.InstallmentDate) >= moment(seasonStartDate)) {
+                return item;
+            }
+        });
+
         $scope.member = context.member;
+
+        $scope.installmentsFilter = 'seasonOnly';
+        $scope.installmentsToDisplay = $scope.installmentsSeasonOnly;
 
         $scope.editInstallment = function (installment, dataField) {
             if (dataField !== 'IsCanceled' && dataField !== 'Note' && installment.IsCanceled) {
@@ -130,6 +142,16 @@
                 );
             }
         };
+
+        $scope.$watch('installmentsFilter', (newFilterValue) => {
+            if (newFilterValue === 'seasonOnly') {
+                $scope.installmentsToDisplay = $scope.installmentsSeasonOnly;
+            }
+
+            if (newFilterValue === 'all') {
+                $scope.installmentsToDisplay = $scope.installments;
+            }
+        });
 
         $scope.resolveStatusCssClass = function (installment) {
             if (installment.IsPaid) {
