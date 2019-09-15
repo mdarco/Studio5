@@ -639,7 +639,8 @@ namespace DF.DB
                                         NumberOfInstallments = x.Payments.NumberOfInstallments,
                                         InstallmentAmounts = x.Payments.InstallmentAmounts,
                                         InstallmentAmountsForCompanion = x.Payments.InstallmentAmountsForCompanion,
-                                        DueDate = x.Payments.DueDate
+                                        DueDate = x.Payments.DueDate,
+                                        Active = x.Payments.Active
                                     },
 
                                 DiscountAmount = x.DiscountAmount,

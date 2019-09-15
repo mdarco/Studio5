@@ -306,6 +306,18 @@
 
                             <br /><br />
 
+                            <div style="font-size: smaller">
+                                <label>
+                                    <input type="radio" name="memberPaymentsFilterRadios" ng-model="memberPaymentsFilter" ng-change="onMemberPaymentsFilterClicked(memberPaymentsFilter)" value="activeOnly">
+                                    <span>Samo aktivna plaćanja</span>
+                                </label>
+                                &nbsp;&nbsp;&nbsp;
+                                <label>
+                                    <input type="radio" name="memberPaymentsFilterRadios" ng-model="memberPaymentsFilter" ng-change="onMemberPaymentsFilterClicked(memberPaymentsFilter)" value="all">
+                                    <span>Sva plaćanja</span>
+                                </label>
+                            </div>
+
                             <table ng-show="showPayments === true" class="table table-condensed table-hover table-responsive table-striped" style="width: 100%">
                                 <thead>
                                     <tr>
@@ -319,7 +331,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="memberPayment in memberPayments" ng-class="resolveMemberPaymentCssClass(memberPayment)">
+                                    <tr ng-repeat="memberPayment in memberPaymentsToDisplay" ng-class="resolveMemberPaymentCssClass(memberPayment)">
                                         <td>{{ memberPayment.Payment.Name }}</td>
                                         <td>{{ memberPayment.Payment.Description }}</td>
                                         <td>{{ memberPayment.Payment.Currency }}</td>

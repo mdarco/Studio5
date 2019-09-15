@@ -5,9 +5,9 @@
         .module('DFApp')
         .controller('MemberFileController', ctrlFn);
 
-    ctrlFn.$inject = ['$rootScope', '$scope', '$q', '$location', '$timeout', '$uibModal', 'MembersService', 'UtilityService', 'AuthenticationService', 'WebApiBaseUrl', 'toastr', 'AppParams', 'member'];
+    ctrlFn.$inject = ['$scope', '$location', '$timeout', '$uibModal', 'MembersService', 'UtilityService', 'AuthenticationService', 'WebApiBaseUrl', 'toastr', 'AppParams', 'member'];
 
-    function ctrlFn($rootScope, $scope, $q, $location, $timeout, $uibModal, MembersService, UtilityService, AuthenticationService, WebApiBaseUrl, toastr, AppParams, member) {
+    function ctrlFn($scope, $location, $timeout, $uibModal, MembersService, UtilityService, AuthenticationService, WebApiBaseUrl, toastr, AppParams, member) {
         // set active menu item
         $("#left-panel nav ul li").removeClass("active");
         $("#menuHome").addClass("active");
@@ -717,20 +717,36 @@
 
         //#region Payments
 
+        $scope.memberPaymentsToDisplay = [];
         $scope.memberPayments = [];
+        $scope.memberActivePayments = [];
         $scope.showPayments = false;
+        $scope.memberPaymentsFilter = 'activeOnly';
 
         $scope.getMemberPayments = function () {
             MembersService.getMemberPayments(member.MemberID).then(
                 function (result) {
                     if (result && result.data) {
                         $scope.memberPayments = result.data;
+                        $scope.memberActivePayments = result.data.filter(item => {
+                            if (item.Payment.Active) {
+                                return item;
+                            }
+                        });
+
+                        if ($scope.memberPaymentsFilter === 'activeOnly') {
+                            $scope.memberPaymentsToDisplay = $scope.memberActivePayments;
+                        }
+
+                        if ($scope.memberPaymentsFilter === 'all') {
+                            $scope.memberPaymentsToDisplay = $scope.memberPayments;
+                        }
 
                         if (AppParams.DEBUG) {
                             toastr.success('Plaćanja uspešno učitana.');
                         }
 
-                        $scope.showPayments = ($scope.memberPayments.length > 0);
+                        $scope.showPayments = ($scope.memberPaymentsToDisplay.length > 0);
                     }
                 },
                 function (error) {
@@ -739,6 +755,18 @@
                     $scope.showPayments = false;
                 }
             );
+        };
+
+        $scope.onMemberPaymentsFilterClicked = function (newFilterValue) {
+            if (newFilterValue === 'activeOnly') {
+                $scope.memberPaymentsToDisplay = $scope.memberActivePayments;
+            }
+
+            if (newFilterValue === 'all') {
+                $scope.memberPaymentsToDisplay = $scope.memberPayments;
+            }
+
+            $scope.showPayments = ($scope.memberPaymentsToDisplay.length > 0);
         };
 
         $scope.addMemberPayment = function () {
