@@ -189,8 +189,9 @@ namespace DF.DB
                     ctx.Entry(t).Collection(x => x.DanceGroupStaff).Load();
                     ctx.Entry(t).Collection(x => x.DanceSelectionDanceGroups).Load();
                     ctx.Entry(t).Collection(x => x.DanceGroupLocations).Load();
+                    ctx.Entry(t).Collection(x => x.UserDanceGroups).Load();
 
-                    for(int i = t.DanceGroupChoreographies.Count() - 1; i >= 0; i--)
+                    for (int i = t.DanceGroupChoreographies.Count() - 1; i >= 0; i--)
                     {
                         ctx.DanceGroupChoreographies.Remove(t.DanceGroupChoreographies.ElementAt(i));
                     }
@@ -213,6 +214,11 @@ namespace DF.DB
                     for (int i = t.DanceGroupLocations.Count() - 1; i >= 0; i--)
                     {
                         ctx.DanceGroupLocations.Remove(t.DanceGroupLocations.ElementAt(i));
+                    }
+
+                    for (int i = t.UserDanceGroups.Count() - 1; i >= 0; i--)
+                    {
+                        ctx.UserDanceGroups.Remove(t.UserDanceGroups.ElementAt(i));
                     }
 
                     ctx.DanceGroups.Remove(t);
