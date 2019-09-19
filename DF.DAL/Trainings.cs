@@ -55,7 +55,7 @@ namespace DF.DB
                 if (string.IsNullOrEmpty(filter.OrderByClause))
                 {
                     // default order
-                    filter.OrderByClause = "TrainingDate";
+                    filter.OrderByClause = "TrainingDate desc";
                 }
 
                 if (filter.PageNo < 1)
