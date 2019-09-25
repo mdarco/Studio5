@@ -57,6 +57,7 @@
     <Compile Include="MemberFilterModel.cs" />
     <Compile Include="MemberModel.cs" />
     <Compile Include="MemberPaymentModel.cs" />
+    <Compile Include="MemberPresenceSheetFilter.cs" />
     <Compile Include="MonthlyPaymentReportModel.cs" />
     <Compile Include="MonthlyPaymentsReportModel_Document.cs" />
     <Compile Include="MonthlyPaymentsReportModel_Payment.cs" />

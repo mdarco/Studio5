@@ -67,6 +67,7 @@
     <Compile Include="Reports.cs" />
     <Compile Include="SqlKata.cs" />
     <Compile Include="Token.cs" />
+    <Compile Include="Trainings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

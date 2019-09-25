@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 using DF.Models;
 
@@ -83,6 +81,8 @@ namespace DF.Api.Controllers
             }
         }
 
+        #region Member presence
+
         [Route("{id}/member-presence")]
         [HttpGet]
         public IEnumerable<TrainingMemberPresenceRegistrationModel> GetMemberPresenceRegistrations(int id)
@@ -96,5 +96,7 @@ namespace DF.Api.Controllers
         {
             DB.Trainings.UpdateTrainingMemberPresenceRegistration(model);
         }
+
+        #endregion
     }
 }

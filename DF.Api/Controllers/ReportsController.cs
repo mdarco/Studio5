@@ -1,6 +1,7 @@
 ﻿using DF.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -30,6 +31,14 @@ namespace DF.Api.Controllers
         public List<MonthlyPaymentsReportModel> GetMonthlyReport(ReportFilter filter)
         {
             return DB.Reports.GetMonthlyPaymentsReport(filter.StartDate, filter.EndDate, filter.DanceGroupID);
+        }
+
+        [Route("member-presence")]
+        [HttpPost]
+        public DataTable CreateMemberPresenceSheet(MemberPresenceSheetFilter filter)
+        {
+            var items = DB.Trainings.CreateMemberPresenceSheet(filter.DanceGroupID, filter.StartDate, filter.EndDate);
+            return BL.Helpers.DynamicToDataTable(items);
         }
     }
 }

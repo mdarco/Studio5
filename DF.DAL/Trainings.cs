@@ -4,15 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Globalization;
+using System.Data.SqlClient;
+using Dapper;
 
 namespace DF.DB
 {
     public static class Trainings
     {
+        private static readonly string connectionString = DALHelper.GetSqlConnectionStringFromEF();
+
         public static ApiTableResponseModel<TrainingModel> GetTrainingsFiltered(TrainingFilter filter)
         {
             ApiTableResponseModel<TrainingModel> response = new ApiTableResponseModel<TrainingModel>();
@@ -238,6 +240,8 @@ namespace DF.DB
             }
         }
 
+        #region Member presence
+
         public static IEnumerable<TrainingMemberPresenceRegistrationModel> GetTrainingMemberPresenceRegistrations(int trainingID)
         {
             using (var ctx = new DFAppEntities())
@@ -295,5 +299,22 @@ namespace DF.DB
                 }
             }
         }
+
+        public static IEnumerable<dynamic> CreateMemberPresenceSheet(int? danceGroupID, DateTime? startDate, DateTime? endDate)
+        {
+            string spName = "dbo.MemberPresenceSheet";
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var spParams = new DynamicParameters();
+                spParams.Add("@danceGroupID", danceGroupID, dbType: System.Data.DbType.Int32);
+                spParams.Add("@startDate", startDate, dbType: System.Data.DbType.DateTime);
+                spParams.Add("@endDate", endDate, dbType: System.Data.DbType.DateTime);
+
+                return connection.Query(spName, spParams, commandType: System.Data.CommandType.StoredProcedure).ToList();
+            }
+        }
+
+        #endregion
     }
 }

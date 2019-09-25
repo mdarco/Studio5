@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using word = Microsoft.Office.Interop.Word;
 using excel = Microsoft.Office.Interop.Excel;
+using System.Data;
 
 namespace DF.BL
 {
@@ -54,6 +55,27 @@ namespace DF.BL
             string data = base64Data.Split(',')[1];
 
             return Convert.FromBase64String(data);
+        }
+
+        public static DataTable DynamicToDataTable(IEnumerable<dynamic> items)
+        {
+            if (items == null) return null;
+
+            var data = items.ToArray();
+            if (data.Length == 0) return null;
+
+            var dt = new DataTable();
+            foreach (var pair in ((IDictionary<string, object>)data[0]))
+            {
+                dt.Columns.Add(pair.Key, (pair.Value ?? string.Empty).GetType());
+            }
+
+            foreach (var d in data)
+            {
+                dt.Rows.Add(((IDictionary<string, object>)d).Values.ToArray());
+            }
+
+            return dt;
         }
 
         //public static byte[] ConvertWordToPdf(string wordFilePath)
