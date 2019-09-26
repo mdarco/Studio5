@@ -13,7 +13,8 @@
         var service = {
             getUnpaidInstallmentsByPeriod: getUnpaidInstallmentsByPeriod,
             getUnpaidInstallmentsByPeriodAndDanceGroup: getUnpaidInstallmentsByPeriodAndDanceGroup,
-            getMonthlyPaymentsReport: getMonthlyPaymentsReport
+            getMonthlyPaymentsReport: getMonthlyPaymentsReport,
+            getTrainingMemberPresence: getTrainingMemberPresence
         };
 
         return service;
@@ -30,6 +31,11 @@
 
         function getMonthlyPaymentsReport(filter) {
             var url = WebApiBaseUrl + urlRoot + '/monthly-payments?nd=' + Date.now();
+            return $http.post(url, filter);
+        }
+
+        function getTrainingMemberPresence(filter) {
+            var url = WebApiBaseUrl + urlRoot + '/training-member-presence?nd=' + Date.now();
             return $http.post(url, filter);
         }
     }

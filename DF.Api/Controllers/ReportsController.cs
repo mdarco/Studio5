@@ -33,7 +33,7 @@ namespace DF.Api.Controllers
             return DB.Reports.GetMonthlyPaymentsReport(filter.StartDate, filter.EndDate, filter.DanceGroupID);
         }
 
-        [Route("member-presence")]
+        [Route("training-member-presence")]
         [HttpPost]
         public DataTable CreateMemberPresenceSheet(MemberPresenceSheetFilter filter)
         {
