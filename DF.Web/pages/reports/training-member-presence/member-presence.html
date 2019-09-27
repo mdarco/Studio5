@@ -53,12 +53,17 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th align="center" ng-repeat="headerCol in headerColumns">{{ formatHeader(headerCol) }}</th>
+                            <th style="text-align: center" ng-repeat="headerCol in headerColumns">{{ formatHeader(headerCol) }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in records">
-                            <td align="center" ng-repeat="headerCol in headerColumns">{{ item[headerCol] }}</td>
+                            <td align="center" ng-repeat="headerCol in headerColumns">
+                                <div ng-show="$index === 0">{{ item[headerCol] }}</div>
+                                <div ng-if="item[headerCol] === '1' || item[headerCol] === 1"><i class="fa fa-check" style="color: green"></i></div>
+                                <div ng-if="item[headerCol] === '0' || item[headerCol] === 0"><i class="fa fa-times" style="color: red"></i></div>
+                                <div ng-show="$index > 0 && item[headerCol] !== '1' && item[headerCol] !== 1 && item[headerCol] !== '0' && item[headerCol] !== 0">-</div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
