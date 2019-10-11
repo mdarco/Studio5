@@ -26,7 +26,7 @@ namespace DF.DB
                             .Include(t => t.DanceGroups)
                             .Include(t => t.DanceSelections)
                             .Include(t => t.Users)
-                            .Include("TrainingMemberPresenceRegistrations.Members")
+                            // .Include("TrainingMemberPresenceRegistrations.Members")
                             .AsQueryable();
 
                 if (filter.TrainingDate.HasValue)
@@ -89,20 +89,20 @@ namespace DF.DB
                             EndTime = (TimeSpan)x.EndTime,
                             TrainerUserID = x.TrainerUserID,
                             TrainerUserName = (x.Users != null) ? (x.Users.FirstName + " " + x.Users.LastName) : string.Empty,
-                            Note = x.Note,
+                            Note = x.Note//,
 
-                            TrainingMemberPresenceRegistrations = x.TrainingMemberPresenceRegistrations.Select(r =>
-                                new TrainingMemberPresenceRegistrationModel()
-                                {
-                                    TrainingID = r.TrainingID,
-                                    MemberID = r.MemberID,
-                                    MemberName = r.Members.FirstName + " " + r.Members.LastName,
-                                    IsPresent = r.IsPresent,
-                                    AbsenceJustified = r.AbsenceJustified,
-                                    AbsenceNote = r.AbsenceNote
-                                }
-                            )
-                            .OrderBy(mp => mp.MemberName)
+                            //TrainingMemberPresenceRegistrations = x.TrainingMemberPresenceRegistrations.Select(r =>
+                            //    new TrainingMemberPresenceRegistrationModel()
+                            //    {
+                            //        TrainingID = r.TrainingID,
+                            //        MemberID = r.MemberID,
+                            //        MemberName = r.Members.FirstName + " " + r.Members.LastName,
+                            //        IsPresent = r.IsPresent,
+                            //        AbsenceJustified = r.AbsenceJustified,
+                            //        AbsenceNote = r.AbsenceNote
+                            //    }
+                            //)
+                            //.OrderBy(mp => mp.MemberName)
                         }
                     )
                     .OrderBy(filter.OrderByClause)
