@@ -98,12 +98,42 @@
 
                 openDateFieldDialog(dataField, installment[dataField]).then(
                     function (result) {
-                        if (moment(result) < moment()) {
-                            var firstDayOfMonth = moment().year() + '-' + (moment().month() + 1) + '-01';
-                            if (moment(result) < moment(firstDayOfMonth)) {
+                        if (result) {
+                            result = result.split('T')[0];
+
+                            var resultParts = result.split('-');
+
+                            if (parseInt(resultParts[1]) < 10) {
+                                resultParts[1] = '0' + resultParts[1];
+                            }
+
+                            if (parseInt(resultParts[2]) < 10) {
+                                resultParts[2] = '0' + resultParts[2];
+                            }
+
+                            result = resultParts.join('-');
+                        }
+
+                        if (!moment(result, 'YYYY-MM-DD', true).isValid()) {
+                            toastr.warning('Datum plaćanja nije ispravan (YYYY-MM-DD).');
+                            return;
+                        }
+
+                        if (moment(result, 'YYYY-MM-DD', true).isBefore(moment())) {
+                            var currentYear = moment().year();
+                            var currentMonth = moment().month() + 1;
+                            if (currentMonth < 10) {
+                                currentMonth = '0' + currentMonth;
+                            }
+
+                            var firstDayOfMonth = currentYear + '-' + currentMonth + '-01';
+                            if (moment(result, 'YYYY-MM-DD', true).isBefore(moment(firstDayOfMonth), 'YYYY-MM-DD', true)) {
                                 toastr.warning('Datum plaćanja mora biti u okviru tekućeg meseca.');
                                 return;
                             }
+                        } else {
+                            toastr.warning('Datum plaćanja ne može biti u budućnosti.');
+                            return;
                         }
 
                         var editObj = {};
