@@ -244,11 +244,11 @@ namespace DF.DB
                 {
                     foreach (var monthlyInstallment in latestMonthlyInstallments)
                     {
-                        if (DateTime.Now.Year == monthlyInstallment.InstallmentDate.Year)
+                        if (DateTime.Now.Year == monthlyInstallment.InstallmentDate.Year || (monthlyInstallment.InstallmentDate.Month == 12 && monthlyInstallment.InstallmentDate.Year == DateTime.Now.Year - 1))
                         {
                             int diff = DateTime.Now.Month - monthlyInstallment.InstallmentDate.Month;
                             if (diff == 0) diff++;
-                            if (diff < 0) continue;
+                            if (diff < 0) diff = 1;
 
                             MemberPaymentInstallments newMonthlyInstallment = new MemberPaymentInstallments()
                             {
