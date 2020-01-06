@@ -67,7 +67,23 @@ namespace DF.BL
             var dt = new DataTable();
             foreach (var pair in ((IDictionary<string, object>)data[0]))
             {
-                dt.Columns.Add(pair.Key, (pair.Value ?? string.Empty).GetType());
+                string key = string.Empty;
+
+                if (pair.Key.Contains("|"))
+                {
+                    // transform ISO date string to Serbian date string
+                    var parts = pair.Key.Split('|');
+                    if (parts != null && parts.Length > 0)
+                    {
+                        key = string.Format("{0} | {1} | {2}", ConvertFromIsoDateStringToSerbianDateString(parts[0].Trim()), parts[1].Trim(), parts[2].Trim());
+                    }
+                }
+                else
+                {
+                    key = pair.Key;
+                }
+
+                dt.Columns.Add(key, (pair.Value ?? string.Empty).GetType());
             }
 
             foreach (var d in data)
@@ -76,6 +92,17 @@ namespace DF.BL
             }
 
             return dt;
+        }
+
+        public static string ConvertFromIsoDateStringToSerbianDateString(string isoDate)
+        {
+            var parts = isoDate.Split('-');
+            if (parts != null && parts.Length > 0)
+            {
+                return string.Format("{0}.{1}.{2}", parts[2], parts[1], parts[0]);
+            }
+
+            return null;
         }
 
         //public static byte[] ConvertWordToPdf(string wordFilePath)
