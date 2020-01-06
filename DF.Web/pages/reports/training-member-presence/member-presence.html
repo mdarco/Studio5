@@ -61,8 +61,9 @@
                             <td align="center" ng-repeat="headerCol in headerColumns">
                                 <div ng-show="$index === 0">{{ item[headerCol] }}</div>
                                 <div ng-if="item[headerCol] === '1' || item[headerCol] === 1"><i class="fa fa-check" style="color: green"></i></div>
-                                <div ng-if="item[headerCol] === '0' || item[headerCol] === 0"><i class="fa fa-times" style="color: red"></i></div>
-                                <div ng-show="$index > 0 && item[headerCol] !== '1' && item[headerCol] !== 1 && item[headerCol] !== '0' && item[headerCol] !== 0">-</div>
+                                <div ng-if="item[headerCol] === '0' || item[headerCol] === 0"><i class="fa fa-times" style="color: blue"></i></div>
+                                <div ng-if="item[headerCol] === '2' || item[headerCol] === 2"><i class="fa fa-times" style="color: red"></i></div>
+                                <div ng-show="$index > 0 && item[headerCol] !== '1' && item[headerCol] !== 1 && item[headerCol] !== '0' && item[headerCol] !== 0 && item[headerCol] !== '2' && item[headerCol] !== 2">-</div>
                             </td>
                         </tr>
                     </tbody>
