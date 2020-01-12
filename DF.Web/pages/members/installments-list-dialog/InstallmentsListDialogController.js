@@ -9,7 +9,7 @@
 
     function ctrlFn($rootScope, $scope, $location, $uibModal, $uibModalInstance, MembersService, UtilityService, AuthenticationService, toastr, installments, context) {
         const SEASON_START_MONTH_DAY = '09-01';
-        const SEASON_END_MONTH_DAY = '06-30';
+        const SEASON_END_MONTH_DAY = '08-31';
 
         var currentUser = AuthenticationService.getCurrentUser();
 
