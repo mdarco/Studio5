@@ -9,13 +9,22 @@
 
     function ctrlFn($rootScope, $scope, $location, $uibModal, $uibModalInstance, MembersService, UtilityService, AuthenticationService, toastr, installments, context) {
         const SEASON_START_MONTH_DAY = '09-01';
+        const SEASON_END_MONTH_DAY = '08-31';
 
         var currentUser = AuthenticationService.getCurrentUser();
 
         $scope.installments = installments.data || installments;
         $scope.installmentsSeasonOnly = $scope.installments.filter(item => {
+            let seasonStartDate_CurrentYear = (new Date()).getFullYear() + '-' + SEASON_START_MONTH_DAY;
+
             let seasonStartDate = (new Date()).getFullYear() + '-' + SEASON_START_MONTH_DAY;
-            if (moment(item.InstallmentDate) >= moment(seasonStartDate)) {
+            let seasonEndDate = ((new Date()).getFullYear() + 1) + '-' + SEASON_END_MONTH_DAY;
+            if (moment(new Date()) < moment(seasonStartDate_CurrentYear)) {
+                seasonStartDate = ((new Date()).getFullYear() - 1) + '-' + SEASON_START_MONTH_DAY;
+                seasonEndDate = (new Date()).getFullYear() + '-' + SEASON_START_MONTH_DAY;
+            }
+
+            if (moment(item.InstallmentDate) >= moment(seasonStartDate) && moment(item.InstallmentDate) <= moment(seasonEndDate)) {
                 return item;
             }
         });
