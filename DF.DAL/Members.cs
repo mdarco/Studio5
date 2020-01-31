@@ -407,26 +407,23 @@ namespace DF.DB
                 foreach (var memberPayment in memberPayments)
                 {
                     var installments = ctx.MemberPaymentInstallments.Where(x => x.MemberID == existingMember.MemberID && x.PaymentID == memberPayment.PaymentID).OrderByDescending(x => x.InstallmentDate).ToList();
-                    var currentInstallment = (installments != null) ? installments.ElementAt(0) : null;
+                    var currentInstallment = installments?.ElementAt(0);
 
-                    while (
-                        currentInstallment == null || 
-                        (
-                            currentInstallment.InstallmentDate.Date < DateTime.Now.Date && 
-                            (currentInstallment.InstallmentDate.Year < DateTime.Now.Year || (currentInstallment.InstallmentDate.Year == DateTime.Now.Year && currentInstallment.InstallmentDate.Month < DateTime.Now.Month))
-                        )
-                    )
+                    if (currentInstallment != null)
                     {
-                        var newInstallment = new MemberPaymentInstallments();
-                        newInstallment.MemberID = existingMember.MemberID;
-                        newInstallment.PaymentID = memberPayment.PaymentID;
-                        newInstallment.InstallmentDate = currentInstallment.InstallmentDate.Date.AddMonths(1);
-                        newInstallment.Amount = currentInstallment.Amount;
-                        newInstallment.IsPaid = false;
-                        newInstallment.IsCanceled = false;
+                        int installmentDay = currentInstallment.InstallmentDate.Day;
+
+                        var newInstallment = new MemberPaymentInstallments
+                        {
+                            MemberID = existingMember.MemberID,
+                            PaymentID = memberPayment.PaymentID,
+                            InstallmentDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, installmentDay),
+                            Amount = currentInstallment.Amount,
+                            IsPaid = false,
+                            IsCanceled = false
+                        };
 
                         ctx.MemberPaymentInstallments.Add(newInstallment);
-                        currentInstallment = newInstallment;
                     }
                 }
             }
