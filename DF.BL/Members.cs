@@ -84,25 +84,6 @@ namespace DF.BL
                         }
                     }
 
-                    //var payDay = paymentInfo.DueDate.Value.Day;
-                    //var payMonth = DateTime.Now.Month;
-                    //var payYear = DateTime.Now.Year;
-
-                    //DateTime installmentDate;
-                    //int direction = -1;
-                    //while (!DateTime.TryParse(string.Format("{0}-{1}-{2}", payYear, payMonth, payDay), out installmentDate))
-                    //{
-                    //    if (payDay == 0)
-                    //    {
-                    //        direction = 1;
-                    //    }
-                    //    else if (payDay == 31)
-                    //    {
-                    //        direction = -1;
-                    //    }
-                    //    payDay += direction;
-                    //}
-
                     DateTime installmentDate = (DateTime)paymentInfo.DueDate;
 
                     var oneTimePayment = new InstallmentModel()
