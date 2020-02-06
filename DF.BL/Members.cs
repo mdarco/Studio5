@@ -84,12 +84,12 @@ namespace DF.BL
                         }
                     }
 
-                    DateTime installmentDate = (DateTime)paymentInfo.DueDate;
+                    int paymentDay = ((DateTime)paymentInfo.DueDate).Day;
+                    DateTime installmentDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, paymentDay);
 
                     var oneTimePayment = new InstallmentModel()
                     {
                         InstallmentDate = installmentDate,
-                        // InstallmentDate = paymentInfo.DueDate,
                         Amount = installmentAmount,
                         IsPaid = false
                     };
@@ -151,7 +151,10 @@ namespace DF.BL
 
                     for (int i = 0; i < paymentInfo.NumberOfInstallments; i++)
                     {
-                        DateTime installmentDate = (i == 0) ? (DateTime)paymentInfo.DueDate : ((DateTime)paymentInfo.DueDate).AddMonths(i);
+                        int paymentDay = ((DateTime)paymentInfo.DueDate).Day;
+                        DateTime paymentDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, paymentDay);
+
+                        DateTime installmentDate = (i == 0) ? paymentDate : paymentDate.AddMonths(i);
 
                         decimal installmentAmount = installmentAmounts.ElementAt(i);
 
