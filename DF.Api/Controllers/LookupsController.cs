@@ -31,5 +31,12 @@ namespace DF.Api.Controllers
         {
             return DB.Lookups.GetUsers();
         }
+
+        [Route("trainers")]
+        [HttpGet]
+        public List<LookupModel> GetTrainers()
+        {
+            return DB.Lookups.GetTrainers();
+        }
     }
 }

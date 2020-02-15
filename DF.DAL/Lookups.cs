@@ -63,5 +63,24 @@ namespace DF.DB
                             .ToList();
             }
         }
+
+        public static List<LookupModel> GetTrainers()
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                return ctx.Users
+                            .Include("UserGroupMembers.UserGroups")
+                            .Where(u => u.IsActive && u.UserGroupMembers.Any(member => member.UserGroups.UserGroupName.ToUpper() == "TRENER"))
+                            .Select(x =>
+                                new LookupModel()
+                                {
+                                    ID = x.UserID,
+                                    Name = x.FirstName + " " + x.LastName
+                                }
+                            )
+                            .OrderBy(ac => ac.Name)
+                            .ToList();
+            }
+        }
     }
 }
