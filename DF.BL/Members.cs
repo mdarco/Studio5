@@ -151,8 +151,8 @@ namespace DF.BL
 
                     for (int i = 0; i < paymentInfo.NumberOfInstallments; i++)
                     {
-                        int paymentDay = ((DateTime)paymentInfo.DueDate).Day;
-                        DateTime paymentDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, paymentDay);
+                        // DateTime paymentDate = new DateTime(DateTime.Now.Year, ((DateTime)paymentInfo.DueDate).Month, ((DateTime)paymentInfo.DueDate).Day);
+                        DateTime paymentDate = (DateTime)paymentInfo.DueDate;
 
                         DateTime installmentDate = (i == 0) ? paymentDate : paymentDate.AddMonths(i);
 
