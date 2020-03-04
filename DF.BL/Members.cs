@@ -69,7 +69,7 @@ namespace DF.BL
                     /* 
                      * FULL ONE-TIME PAYMENT - treated as one-time payment with only one installment
                      * 
-                     * MONTHLY PAYMENTS - treated as full one-time payments
+                     * MONTHLY PAYMENTS - treated one-time payments but with installment date changed accordingly
                      * Recurring can go indefinitely if there is no stop date
                      * Service agent is in charge of creating new monthly payments at the beginning of each month
                      * 
@@ -84,8 +84,17 @@ namespace DF.BL
                         }
                     }
 
-                    int paymentDay = ((DateTime)paymentInfo.DueDate).Day;
-                    DateTime installmentDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, paymentDay);
+                    DateTime? installmentDate = null;
+                    if (paymentInfo.Type.ToUpper() == "MONTHLY")
+                    {
+                        int paymentDay = ((DateTime)paymentInfo.DueDate).Day;
+                        installmentDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, paymentDay);
+                    }
+
+                    if (paymentInfo.Type.ToUpper() == "ONE-TIME")
+                    {
+                        installmentDate = (DateTime)paymentInfo.DueDate;
+                    }
 
                     var oneTimePayment = new InstallmentModel()
                     {
