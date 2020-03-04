@@ -92,8 +92,10 @@ namespace DF.Api.Controllers
 
         [Route("{id}/member-presence/{memberID}")]
         [HttpPost]
-        public void UpdateTrainingMemberPresenceRegistration(TrainingMemberPresenceRegistrationModel model)
+        public void UpdateTrainingMemberPresenceRegistration(int id, int memberID, TrainingMemberPresenceRegistrationModel model)
         {
+            model.TrainingID = id;
+            model.MemberID = memberID;
             DB.Trainings.UpdateTrainingMemberPresenceRegistration(model);
         }
 
