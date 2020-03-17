@@ -161,7 +161,7 @@
             if (!_.includes(currentUser.UserGroups, 'ADMIN') && !_.includes(currentUser.UserGroups, 'PREGLED PODATAKA')) {
                 if ($scope.danceGroups && $scope.danceGroups.length > 0) {
                     $scope.filter = {
-                        DanceGroupID: $scope.danceGroups[0].ID
+                        DanceGroups: $scope.danceGroups
                     };
                 }
             }
