@@ -77,6 +77,7 @@ namespace DF.DB.DBModel
         public virtual DbSet<Payments> Payments { get; set; }
         public virtual DbSet<MemberPaymentInstallments> MemberPaymentInstallments { get; set; }
         public virtual DbSet<UserDanceGroups> UserDanceGroups { get; set; }
+        public virtual DbSet<TrainingSchedules> TrainingSchedules { get; set; }
     
         public virtual ObjectResult<GetLatestMonthlyInstallments_Result> GetLatestMonthlyInstallments()
         {

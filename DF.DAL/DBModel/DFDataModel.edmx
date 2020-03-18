@@ -429,6 +429,17 @@
           <Property Name="TrainerUserID" Type="int" />
           <Property Name="Note" Type="nvarchar" MaxLength="1000" />
         </EntityType>
+        <EntityType Name="TrainingSchedules">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrainingLocationID" Type="int" Nullable="false" />
+          <Property Name="WeekDay" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
         <EntityType Name="UserDanceGroups">
           <Key>
             <PropertyRef Name="UserID" />
@@ -1188,6 +1199,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TrainingSchedules_Locations">
+          <End Role="Locations" Type="Self.Locations" Multiplicity="1" />
+          <End Role="TrainingSchedules" Type="Self.TrainingSchedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="TrainingSchedules">
+              <PropertyRef Name="TrainingLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserDanceGroups_DanceGroups">
           <End Role="DanceGroups" Type="Self.DanceGroups" Multiplicity="1" />
           <End Role="UserDanceGroups" Type="Self.UserDanceGroups" Multiplicity="*" />
@@ -1388,6 +1411,7 @@
           <EntitySet Name="Permissions" EntityType="Self.Permissions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TrainingMemberPresenceRegistrations" EntityType="Self.TrainingMemberPresenceRegistrations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trainings" EntityType="Self.Trainings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TrainingSchedules" EntityType="Self.TrainingSchedules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDanceGroups" EntityType="Self.UserDanceGroups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDocuments" EntityType="Self.UserDocuments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserGroupMembers" EntityType="Self.UserGroupMembers" Schema="dbo" store:Type="Tables" />
@@ -1623,6 +1647,10 @@
           <AssociationSet Name="FK_Trainings_Users" Association="Self.FK_Trainings_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Trainings" EntitySet="Trainings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TrainingSchedules_Locations" Association="Self.FK_TrainingSchedules_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="TrainingSchedules" EntitySet="TrainingSchedules" />
           </AssociationSet>
           <AssociationSet Name="FK_UserDanceGroups_DanceGroups" Association="Self.FK_UserDanceGroups_DanceGroups">
             <End Role="DanceGroups" EntitySet="DanceGroups" />
@@ -1965,6 +1993,7 @@
           <NavigationProperty Name="DanceGroupLocations" Relationship="Self.FK_DanceGroupLocations_Locations" FromRole="Locations" ToRole="DanceGroupLocations" />
           <NavigationProperty Name="DanceSelectionLocations" Relationship="Self.FK_DanceSelectionLocations_Locations" FromRole="Locations" ToRole="DanceSelectionLocations" />
           <NavigationProperty Name="Trainings" Relationship="DFDataModel.FK_Trainings_Locations" FromRole="Locations" ToRole="Trainings" />
+          <NavigationProperty Name="TrainingSchedules" Relationship="DFDataModel.FK_TrainingSchedules_Locations" FromRole="Locations" ToRole="TrainingSchedules" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -3164,6 +3193,11 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Trainings" EntitySet="Trainings" />
           </AssociationSet>
+          <EntitySet Name="TrainingSchedules" EntityType="DFDataModel.TrainingSchedules" />
+          <AssociationSet Name="FK_TrainingSchedules_Locations" Association="DFDataModel.FK_TrainingSchedules_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="TrainingSchedules" EntitySet="TrainingSchedules" />
+          </AssociationSet>
           </EntityContainer>
         <Association Name="FK_UserGroupPermissions_Permissions">
           <End Type="DFDataModel.Permissions" Role="Permissions" Multiplicity="1" />
@@ -3499,6 +3533,30 @@
             </Principal>
             <Dependent Role="Trainings">
               <PropertyRef Name="TrainerUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TrainingSchedules">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrainingLocationID" Type="Int32" Nullable="false" />
+          <Property Name="WeekDay" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Locations" Relationship="DFDataModel.FK_TrainingSchedules_Locations" FromRole="TrainingSchedules" ToRole="Locations" />
+        </EntityType>
+        <Association Name="FK_TrainingSchedules_Locations">
+          <End Type="DFDataModel.Locations" Role="Locations" Multiplicity="1" />
+          <End Type="DFDataModel.TrainingSchedules" Role="TrainingSchedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationID" />
+            </Principal>
+            <Dependent Role="TrainingSchedules">
+              <PropertyRef Name="TrainingLocationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -4045,6 +4103,18 @@
                 <ScalarProperty Name="HasPaymentAbility" ColumnName="HasPaymentAbility" />
                 <ScalarProperty Name="DanceGroupID" ColumnName="DanceGroupID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TrainingSchedules">
+            <EntityTypeMapping TypeName="DFDataModel.TrainingSchedules">
+              <MappingFragment StoreEntitySet="TrainingSchedules">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="WeekDay" ColumnName="WeekDay" />
+                <ScalarProperty Name="TrainingLocationID" ColumnName="TrainingLocationID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

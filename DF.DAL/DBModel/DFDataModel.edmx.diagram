@@ -125,6 +125,8 @@
         <AssociationConnector Association="DFDataModel.FK_Trainings_DanceSelections" />
         <AssociationConnector Association="DFDataModel.FK_Trainings_Locations" />
         <AssociationConnector Association="DFDataModel.FK_Trainings_Users" />
+        <EntityTypeShape EntityType="DFDataModel.TrainingSchedules" Width="1.5" PointX="5" PointY="3.625" />
+        <AssociationConnector Association="DFDataModel.FK_TrainingSchedules_Locations" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

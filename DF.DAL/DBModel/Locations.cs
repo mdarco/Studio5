@@ -20,6 +20,7 @@ namespace DF.DB.DBModel
             this.DanceGroupLocations = new HashSet<DanceGroupLocations>();
             this.DanceSelectionLocations = new HashSet<DanceSelectionLocations>();
             this.Trainings = new HashSet<Trainings>();
+            this.TrainingSchedules = new HashSet<TrainingSchedules>();
         }
     
         public int LocationID { get; set; }
@@ -33,5 +34,7 @@ namespace DF.DB.DBModel
         public virtual ICollection<DanceSelectionLocations> DanceSelectionLocations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Trainings> Trainings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TrainingSchedules> TrainingSchedules { get; set; }
     }
 }

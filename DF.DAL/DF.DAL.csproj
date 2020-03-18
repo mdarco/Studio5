@@ -227,6 +227,9 @@
     <Compile Include="DBModel\Trainings.cs">
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBModel\TrainingSchedules.cs">
+      <DependentUpon>DFDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DBModel\UserDanceGroups.cs">
       <DependentUpon>DFDataModel.tt</DependentUpon>
     </Compile>
