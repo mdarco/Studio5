@@ -253,13 +253,14 @@ namespace DF.DB
                         TrainingLocationID = x.TrainingLocationID,
                         TrainingLocationName = x.Locations.LocationName,
                         WeekDay = x.WeekDay,
+                        WeekDayOrderNo = (x.WeekDay == "ponedeljak") ? 1 : (x.WeekDay == "utorak") ? 2 : (x.WeekDay == "sreda") ? 3 : (x.WeekDay == "četvrtak") ? 4 : (x.WeekDay == "petak") ? 5 : (x.WeekDay == "subota") ? 6 : (x.WeekDay == "nedelja") ? 7 : 0,
                         StartTime = x.StartTime,
                         EndTime = x.EndTime,
                         Note = x.Note
                     }
                 )
                 .OrderBy(x => x.TrainingLocationID)
-                .ThenBy(x => x.WeekDay)
+                .ThenBy(x => x.WeekDayOrderNo)
                 .ThenByDescending(x => x.StartTime)
                 .ToList();
             }
