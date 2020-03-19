@@ -71,6 +71,7 @@
     <Compile Include="TrainingFilter.cs" />
     <Compile Include="TrainingMemberPresenceRegistrationModel.cs" />
     <Compile Include="TrainingModel.cs" />
+    <Compile Include="TrainingScheduleModel.cs" />
     <Compile Include="UserFilterModel.cs" />
     <Compile Include="UserGroupModel.cs" />
     <Compile Include="UserModel.cs" />

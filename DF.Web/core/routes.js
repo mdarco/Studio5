@@ -159,6 +159,26 @@
                 }
             )
 
+            .when('/training-schedules',
+                {
+                    controller: 'TrainingSchedulesController',
+                    templateUrl: 'pages/training-schedules/training-schedules.html?nd=' + Date.now(),
+                    resolve: {
+                        locations: function (LookupsService) {
+                            return LookupsService.getLocations().then(
+                                function (result) {
+                                    return result.data;
+                                }
+                            );
+                        }
+                    },
+                    access: {
+                        loginRequired: true,
+                        requiredPermissions: ['ADMIN']
+                    }
+                }
+            )
+
             .when('/choreos',
                 {
                     controller: 'ChoreosController',

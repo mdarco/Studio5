@@ -425,6 +425,8 @@
     <Content Include="pages\settings\users\UserInfoController.js" />
     <Content Include="pages\settings\users\users.html" />
     <Content Include="pages\settings\users\UsersController.js" />
+    <Content Include="pages\training-schedules\training-schedules.html" />
+    <Content Include="pages\training-schedules\TrainingSchedulesController.js" />
     <Content Include="pages\trainings\member-presence\member-presence.html" />
     <Content Include="pages\trainings\member-presence\MemberPresenceController.js" />
     <Content Include="pages\trainings\training-dialog\training-dialog.html" />
@@ -621,6 +623,7 @@
     <Content Include="services\data\PaymentsService.js" />
     <Content Include="services\data\ReportsService.js" />
     <Content Include="services\data\TagsService.js" />
+    <Content Include="services\data\TrainingSchedulesService.js" />
     <Content Include="services\data\TrainingsService.js" />
     <Content Include="services\data\UserGroupsService.js" />
     <Content Include="services\data\UsersService.js" />

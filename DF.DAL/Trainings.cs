@@ -240,6 +240,82 @@ namespace DF.DB
             }
         }
 
+        #region Training schedules
+
+        public static List<TrainingScheduleModel> GetTrainingSchedules()
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                return ctx.TrainingSchedules.Include(t => t.Locations).Select(x =>
+                    new TrainingScheduleModel
+                    {
+                        ID = x.ID,
+                        TrainingLocationID = x.TrainingLocationID,
+                        TrainingLocationName = x.Locations.LocationName,
+                        WeekDay = x.WeekDay,
+                        StartTime = x.StartTime,
+                        EndTime = x.EndTime,
+                        Note = x.Note
+                    }
+                )
+                .OrderBy(x => x.TrainingLocationID)
+                .ThenBy(x => x.WeekDay)
+                .ThenByDescending(x => x.StartTime)
+                .ToList();
+            }
+        }
+
+        public static int CreateTrainingSchedule(TrainingScheduleModel model)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var existing = ctx.TrainingSchedules.FirstOrDefault(x =>
+                    x.TrainingLocationID == model.TrainingLocationID &&
+                    x.WeekDay == model.WeekDay &&
+                    x.StartTime == model.StartTime &&
+                    x.EndTime == model.EndTime
+                );
+
+                if (existing != null)
+                {
+                    throw new Exception("error_training_schedule_exists");
+                }
+
+                TrainingSchedules s = new TrainingSchedules()
+                {
+                    TrainingLocationID = model.TrainingLocationID,
+                    WeekDay = model.WeekDay,
+                    StartTime = model.StartTime,
+                    EndTime = model.EndTime,
+                    Note = model.Note
+                };
+
+                ctx.TrainingSchedules.Add(s);
+                ctx.SaveChanges();
+
+                return s.ID;
+            }
+        }
+
+        public static void DeleteTrainingSchedule(int id)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var existing = ctx.TrainingSchedules.FirstOrDefault(x => x.ID == id);
+                if (existing != null)
+                {
+                    ctx.TrainingSchedules.Remove(existing);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("error_training_schedule_not_exist");
+                }
+            }
+        }
+
+        #endregion
+
         #region Member presence
 
         public static IEnumerable<TrainingMemberPresenceRegistrationModel> GetTrainingMemberPresenceRegistrations(int trainingID)
