@@ -425,6 +425,8 @@
     <Content Include="pages\settings\users\UserInfoController.js" />
     <Content Include="pages\settings\users\users.html" />
     <Content Include="pages\settings\users\UsersController.js" />
+    <Content Include="pages\training-schedules\training-schedule-dialog\training-schedule-dialog.html" />
+    <Content Include="pages\training-schedules\training-schedule-dialog\TrainingScheduleDialogController.js" />
     <Content Include="pages\training-schedules\training-schedules.html" />
     <Content Include="pages\training-schedules\TrainingSchedulesController.js" />
     <Content Include="pages\trainings\member-presence\member-presence.html" />
