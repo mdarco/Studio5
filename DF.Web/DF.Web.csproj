@@ -560,6 +560,7 @@
     <Content Include="Scripts\exif-js\exif.js" />
     <Content Include="Scripts\file-saver\FileSaver.js" />
     <Content Include="Scripts\file-saver\FileSaver.min.js" />
+    <Content Include="Scripts\i18n\angular-locale_sr-latn.js" />
     <Content Include="Scripts\ivh-treeview\ivh-treeview.js" />
     <Content Include="Scripts\ivh-treeview\ivh-treeview.min.js" />
     <Content Include="Scripts\jquery-ui\jquery-ui-1.12.1.js" />

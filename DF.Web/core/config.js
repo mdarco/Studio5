@@ -25,7 +25,8 @@
                 /.*member-doc-dialog.*/,
                 /.*installments-list-dialog.*/,
                 /.*member-payment-dialog.*/,
-                /.*training-dialog.*/
+                /.*training-dialog.*/,
+                /.*training-schedule-dialog.* /
             ], true
         );
     }

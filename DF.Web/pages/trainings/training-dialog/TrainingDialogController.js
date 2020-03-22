@@ -109,6 +109,15 @@
             }
         };
 
+        function filterSchedules() {
+            $scope.schedulesToDisplay = schedules;
+
+            let weekDay = UtilityService.getJsDateWeekDayNameInSerbian($scope.training.TrainingDate);
+            $scope.schedulesToDisplay = $scope.schedulesToDisplay.filter(s => {
+                return (s.WeekDay === weekDay);
+            });
+        }
+
         // date picker support
         $scope.datePickers = {};
         $scope.openDatePicker = function (pickerFor, event) {
@@ -117,5 +126,14 @@
 
             $scope.datePickers['datePickerOpened_' + pickerFor] = true;
         };
+
+        $scope.datepickerOptions = {
+            startingDay: 1
+        };
+
+        // watchers
+        $scope.$watch('training.TrainingDate', () => {
+            filterSchedules();
+        });
     }
 })();
