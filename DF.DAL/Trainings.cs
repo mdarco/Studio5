@@ -205,6 +205,74 @@ namespace DF.DB
             }
         }
 
+        public static TrainingModel CreateTrainingFromTrainingSchedule(TrainingModel model)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var schedule = ctx.TrainingSchedules.FirstOrDefault(x => x.ID == model.TrainingScheduleID);
+                if (schedule == null)
+                {
+                    throw new Exception("Raspored treninga ne postoji.");
+                }
+
+                // copy training props from training schedule
+                model.TrainingLocationID = schedule.TrainingLocationID;
+                model.WeekDay = schedule.WeekDay;
+                model.StartTime = schedule.StartTime;
+                model.EndTime = schedule.EndTime;
+
+                DBModel.Trainings existing = ctx.Trainings
+                                                .FirstOrDefault(x =>
+                                                    x.TrainingDate == model.TrainingDate &&
+                                                    x.TrainingLocationID == model.TrainingLocationID &&
+                                                    x.TrainingDanceGroupID == model.TrainingDanceGroupID &&
+                                                    x.StartTime == model.StartTime
+                                                );
+
+                if (existing != null)
+                {
+                    throw new Exception("Trening sa zadatim datumom, lokacijom, grupom i početnim vremenom već postoji.");
+                }
+
+                DBModel.Trainings t = new DBModel.Trainings
+                {
+                    TrainingDate = model.TrainingDate,
+                    TrainingLocationID = model.TrainingLocationID,
+                    TrainingDanceGroupID = model.TrainingDanceGroupID,
+                    WeekDay = model.TrainingDate.ToString("dddd", new CultureInfo("sr-Latn-RS")),
+                    StartTime = model.StartTime,
+                    EndTime = model.EndTime,
+                    TrainerUserID = model.TrainerUserID,
+                    Note = model.Note
+                };
+
+                // training member presence registrations
+                var groupMembers = ctx.DanceGroupMembers
+                                        .Include(tbl => tbl.Members)
+                                        .Where(x => x.DanceGroupID == model.TrainingDanceGroupID && x.Members.IsActive);
+
+                foreach (var groupMember in groupMembers)
+                {
+                    TrainingMemberPresenceRegistrations r = new TrainingMemberPresenceRegistrations
+                    {
+                        TrainingID = t.TrainingID,
+                        MemberID = groupMember.MemberID,
+                        IsPresent = true,
+                        AbsenceJustified = true
+                    };
+
+                    ctx.TrainingMemberPresenceRegistrations.Add(r);
+                }
+
+                ctx.Trainings.Add(t);
+                ctx.SaveChanges();
+
+                model.WeekDay = t.WeekDay;
+                model.TrainingID = t.TrainingID;
+                return model;
+            }
+        }
+
         public static void EditTraining(TrainingModel model)
         {
             using (var ctx = new DFAppEntities())

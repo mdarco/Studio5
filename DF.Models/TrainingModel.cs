@@ -23,6 +23,8 @@ namespace DF.Models
         public string TrainerUserName { get; set; }
         public string Note { get; set; }
 
+        public int TrainingScheduleID { get; set; }
+
         public IEnumerable<TrainingMemberPresenceRegistrationModel> TrainingMemberPresenceRegistrations { get; set; }
     }
 }

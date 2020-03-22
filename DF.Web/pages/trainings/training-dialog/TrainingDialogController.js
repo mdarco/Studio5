@@ -5,17 +5,21 @@
         .module('DFApp')
         .controller('TrainingDialogController', ctrlFn);
 
-    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'TrainingsService', 'AuthenticationService', 'UtilityService', 'toastr', 'locations', 'danceGroups', 'trainers'];
+    ctrlFn.$inject = ['$scope', '$uibModalInstance', 'TrainingsService', 'AuthenticationService', 'UtilityService', 'toastr', /* 'locations', */ 'danceGroups', 'trainers', 'schedules'];
 
-    function ctrlFn($scope, $uibModalInstance, TrainingsService, AuthenticationService, UtilityService, toastr, locations, danceGroups, trainers) {
-        $scope.locations = locations;
+    function ctrlFn($scope, $uibModalInstance, TrainingsService, AuthenticationService, UtilityService, toastr, /* locations, */ danceGroups, trainers, schedules) {
+        // $scope.locations = locations;
         $scope.danceGroups = danceGroups;
         $scope.trainers = trainers;
+
+        $scope.schedules = schedules;
+        $scope.schedulesToDisplay = schedules;
 
         var currentUser = AuthenticationService.getCurrentUser();
 
         $scope.training = {
-            TrainingDate: UtilityService.convertDateToISODateString(new Date())
+            // TrainingDate: UtilityService.convertDateToISODateString(new Date())
+            TrainingDate: new Date()
         };
 
         if (danceGroups.length === 1) {
@@ -39,7 +43,7 @@
                 // assign current user
                 $scope.training.TrainerUserID = currentUser.UserID;
             }
-
+            
             TrainingsService.create($scope.training).then(
                 function () {
                     toastr.success('Novi trening je uspešno kreiran.');
@@ -57,12 +61,12 @@
 
         // helpers
         function validate() {
-            let timeValidator = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+            // let timeValidator = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
 
             // check required data
-            if (!$scope.training.TrainingDate || !$scope.training.TrainingLocationID || !$scope.training.TrainingDanceGroupID || !$scope.training.StartTime || !$scope.training.EndTime
+            if (!$scope.training.TrainingDate || !$scope.training.TrainingScheduleID || !$scope.training.TrainingDanceGroupID
             ) {
-                return { error: true, errorMsg: 'Datum, lokacija, grupa i vreme treninga su obavezni podaci.' };
+                return { error: true, errorMsg: 'Datum, raspored i grupa su obavezni podaci.' };
             }
 
             // check training date
@@ -71,20 +75,20 @@
             }
 
             // check training start and end time
-            if ($scope.training.StartTime && !timeValidator.test($scope.training.StartTime)) {
-                return { error: true, errorMsg: 'Neispravno vreme početka treninga.' };
-            }
+            //if ($scope.training.StartTime && !timeValidator.test($scope.training.StartTime)) {
+            //    return { error: true, errorMsg: 'Neispravno vreme početka treninga.' };
+            //}
 
-            if ($scope.training.EndTime && !timeValidator.test($scope.training.EndTime)) {
-                return { error: true, errorMsg: 'Neispravno vreme završetka treninga.' };
-            }
+            //if ($scope.training.EndTime && !timeValidator.test($scope.training.EndTime)) {
+            //    return { error: true, errorMsg: 'Neispravno vreme završetka treninga.' };
+            //}
 
             // check if end time is later than the start time
-            let startTime = moment('2000-01-01T' + $scope.training.StartTime);
-            let endTime = moment('2000-01-01T' + $scope.training.EndTime);
-            if (!endTime.isAfter(startTime)) {
-                return { error: true, errorMsg: 'Vreme završetka treninga mora biti posle vremena početka treninga.' };
-            }
+            //let startTime = moment('2000-01-01T' + $scope.training.StartTime);
+            //let endTime = moment('2000-01-01T' + $scope.training.EndTime);
+            //if (!endTime.isAfter(startTime)) {
+            //    return { error: true, errorMsg: 'Vreme završetka treninga mora biti posle vremena početka treninga.' };
+            //}
 
             return { error: false };
         }
