@@ -21,6 +21,37 @@ namespace DF.Api.Controllers
                 foreach(var s in schedules)
                 {
                     s.Name = s.TrainingLocationName + ": " + s.StartTime.ToString(@"hh\:mm") + " - " + s.EndTime.ToString(@"hh\:mm");
+
+                    switch(s.WeekDay.ToLower())
+                    {
+                        case "nedelja":
+                            s.WeekDayNo = 0;
+                            break;
+
+                        case "ponedeljak":
+                            s.WeekDayNo = 1;
+                            break;
+
+                        case "utorak":
+                            s.WeekDayNo = 2;
+                            break;
+
+                        case "sreda":
+                            s.WeekDayNo = 3;
+                            break;
+
+                        case "četvrtak":
+                            s.WeekDayNo = 4;
+                            break;
+
+                        case "petak":
+                            s.WeekDayNo = 5;
+                            break;
+
+                        case "subota":
+                            s.WeekDayNo = 6;
+                            break;
+                    }
                 }
             }
 

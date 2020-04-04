@@ -18,5 +18,6 @@ namespace DF.Models
         public string Note { get; set; }
 
         public string Name { get; set; }
+        public int WeekDayNo { get; set; }
     }
 }
