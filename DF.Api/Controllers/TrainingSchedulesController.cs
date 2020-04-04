@@ -14,7 +14,17 @@ namespace DF.Api.Controllers
         [HttpGet]
         public List<TrainingScheduleModel> GetTrainingSchedules()
         {
-            return DB.Trainings.GetTrainingSchedules();
+            var schedules = DB.Trainings.GetTrainingSchedules();
+
+            if (schedules != null)
+            {
+                foreach(var s in schedules)
+                {
+                    s.Name = s.TrainingLocationName + ": " + s.StartTime.ToString(@"hh\:mm") + " - " + s.EndTime.ToString(@"hh\:mm");
+                }
+            }
+
+            return schedules;
         }
 
         [Route("")]
