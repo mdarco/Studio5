@@ -24,13 +24,32 @@ namespace DF.Api.Controllers
             return DB.Trainings.GetTraining(id);
         }
 
+        //[Route("")]
+        //[HttpPost]
+        //public void CreateTraining(TrainingModel model)
+        //{
+        //    try
+        //    {
+        //        DB.Trainings.CreateTraining(model);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new HttpResponseException(
+        //            new HttpResponseMessage()
+        //            {
+        //                StatusCode = HttpStatusCode.Forbidden,
+        //                ReasonPhrase = ex.Message
+        //            });
+        //    }
+        //}
+
         [Route("")]
         [HttpPost]
-        public void CreateTraining(TrainingModel model)
+        public void CreateTrainingFromTrainingSchedule(TrainingModel model)
         {
             try
             {
-                DB.Trainings.CreateTraining(model);
+                DB.Trainings.CreateTrainingFromTrainingSchedule(model);
             }
             catch (Exception ex)
             {

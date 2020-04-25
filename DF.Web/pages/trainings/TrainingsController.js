@@ -140,8 +140,12 @@
                 templateUrl: 'pages/trainings/training-dialog/training-dialog.html',
                 controller: 'TrainingDialogController',
                 resolve: {
-                    locations: () => {
-                        return $scope.locations;
+                    schedules: (TrainingSchedulesService) => {
+                        return TrainingSchedulesService.get().then(
+                            function (result) {
+                                return result.data;
+                            }
+                        );
                     },
                     danceGroups: () => {
                         return $scope.danceGroups;

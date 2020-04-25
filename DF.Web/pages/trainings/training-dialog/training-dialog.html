@@ -6,15 +6,37 @@
     <form class="smart-form" novalidate="novalidate">
         <section>
             <div>
+                <!--<label class="control-label">Datum (*)</label>
+                <label class="input"><input type="text" class="form-control" ng-model="training.TrainingDate" placeholder="YYYY-MM-DD" /></label>-->
                 <label class="control-label">Datum (*)</label>
-                <label class="input"><input type="text" class="form-control" ng-model="training.TrainingDate" placeholder="YYYY-MM-DD" /></label>
+                <label class="input" style="width: 100%">
+                    <input type="text"
+                           uib-datepicker-popup
+                           ng-model="training.TrainingDate"
+                           placeholder="YYYY-MM-DD"
+                           class="form-control disabled-input-color"
+                           is-open="datePickers.datePickerOpened_TrainingDate"
+                           datepicker-options="datepickerOptions"
+                           readonly="readonly"
+                           current-text="Danas"
+                           clear-text="Obriši"
+                           close-text="Zatvori" />
+                </label>
+                <button type="button" class="btn btn-sm btn-primary form-control" style="margin-bottom: 3px; width: 10%;" ng-click="openDatePicker('TrainingDate', $event)"><i class="fa fa-calendar"></i></button>
             </div>
         </section>
 
-        <section>
+        <!--<section>
             <div>
                 <label class="control-label">Lokacija (*)</label>
                 <select class="form-control" ng-model="training.TrainingLocationID" ng-options="value.ID as value.Name for (key, value) in locations"></select>
+            </div>
+        </section>-->
+
+        <section>
+            <div>
+                <label class="control-label">Raspored (*)</label>
+                <select class="form-control" ng-model="training.TrainingScheduleID" ng-options="value.ID as (value.TrainingLocationName + ' - ' + value.WeekDay + ' - ' + value.StartTime.slice(0, -3) + ' - ' + value.EndTime.slice(0, -3)) for (key, value) in schedulesToDisplay"></select>
             </div>
         </section>
 
@@ -25,19 +47,19 @@
             </div>
         </section>
 
-        <section>
+        <!--<section>
             <div>
                 <label class="control-label">Vreme početka (*)</label>
                 <label class="input"><input type="text" class="form-control" ng-model="training.StartTime" placeholder="HH:MM" /></label>
             </div>
-        </section>
+        </section>-->
 
-        <section>
+        <!--<section>
             <div>
                 <label class="control-label">Vreme završetka (*)</label>
                 <label class="input"><input type="text" class="form-control" ng-model="training.EndTime" placeholder="HH:MM" /></label>
             </div>
-        </section>
+        </section>-->
 
         <section ng-hide="resolveTrainerComboVisibility()">
             <div>

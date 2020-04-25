@@ -11,6 +11,7 @@
         var service = {
             convertISODateStringToDate: convertISODateStringToDate,
             convertDateToISODateString: convertDateToISODateString,
+            getJsDateWeekDayNameInSerbian: getJsDateWeekDayNameInSerbian,
 
             arrayBufferToBase64: arrayBufferToBase64,
             dataURItoBlob: dataURItoBlob
@@ -45,6 +46,31 @@
                 }
 
                 return year + '-' + month + '-' + day;
+            }
+        }
+
+        function getJsDateWeekDayNameInSerbian(date) {
+            switch (date.getDay()) {
+                case 0:
+                    return 'nedelja';
+
+                case 1:
+                    return 'ponedeljak';
+
+                case 2:
+                    return 'utorak';
+
+                case 3:
+                    return 'sreda';
+
+                case 4:
+                    return 'četvrtak';
+
+                case 5:
+                    return 'petak';
+
+                case 6:
+                    return 'subota';
             }
         }
 
