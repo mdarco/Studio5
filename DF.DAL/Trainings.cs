@@ -426,7 +426,6 @@ namespace DF.DB
                         if (reg.IsPresent)
                         {
                             reg.AbsenceJustified = true;
-                            reg.AbsenceNote = null;
                         }
                     }
 
@@ -435,7 +434,7 @@ namespace DF.DB
                         reg.AbsenceJustified = model.AbsenceJustified.Value;
                     }
 
-                    if (!reg.IsPresent)
+                    if (!reg.IsPresent && !string.IsNullOrEmpty(model.AbsenceNote))
                     {
                         reg.AbsenceNote = model.AbsenceNote;
                     }
