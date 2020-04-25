@@ -439,6 +439,11 @@ namespace DF.DB
                         reg.AbsenceNote = model.AbsenceNote;
                     }
 
+                    if (!reg.IsPresent && model.ForceDeleteAbsenceNote.HasValue && model.ForceDeleteAbsenceNote.Value)
+                    {
+                        reg.AbsenceNote = null;
+                    }
+
                     ctx.SaveChanges();
                 }
             }

@@ -14,5 +14,6 @@ namespace DF.Models
         public bool? IsPresent { get; set; }
         public bool? AbsenceJustified { get; set; }
         public string AbsenceNote { get; set; }
+        public bool? ForceDeleteAbsenceNote { get; set; }
     }
 }
