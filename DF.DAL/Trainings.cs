@@ -327,7 +327,7 @@ namespace DF.DB
                         Note = x.Note
                     }
                 )
-                .OrderBy(x => x.TrainingLocationID)
+                .OrderBy(x => x.TrainingLocationName)
                 .ThenBy(x => x.WeekDayOrderNo)
                 .ThenByDescending(x => x.StartTime)
                 .ToList();
