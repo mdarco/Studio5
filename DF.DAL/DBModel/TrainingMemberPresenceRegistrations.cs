@@ -19,6 +19,7 @@ namespace DF.DB.DBModel
         public bool IsPresent { get; set; }
         public Nullable<bool> AbsenceJustified { get; set; }
         public string AbsenceNote { get; set; }
+        public bool IsOnline { get; set; }
     
         public virtual Members Members { get; set; }
         public virtual Trainings Trainings { get; set; }

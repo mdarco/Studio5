@@ -43,12 +43,22 @@
             }
         };
 
+        $scope.resolveOnlineStatusCss = function (item) {
+            if (item.IsOnline) {
+                return 'label label-info';
+            }
+        };
+
         $scope.toggleStatus = function (item) {
             let updateStatusObj = {
                 TrainingID: item.TrainingID,
                 MemberID: item.MemberID,
                 IsPresent: !item.IsPresent
             };
+
+            if (!updateStatusObj.IsPresent) {
+                updateStatusObj.IsOnline = false;
+            }
 
             TrainingsService.updateMemberPresence(updateStatusObj).then(() => {
                 toastr.success('Status izmenjen.');
@@ -57,7 +67,27 @@
                 if (item.IsPresent) {
                     item.AbsenceJustified = true;
                     item.AbsenceNote = null;
+                } else {
+                    item.IsOnline = false;
                 }
+            });
+        };
+
+        $scope.toggleOnlineStatus = function (item) {
+            let updateOnlineStatusObj = {
+                TrainingID: item.TrainingID,
+                MemberID: item.MemberID,
+                IsOnline: !item.IsOnline
+            };
+
+            if (!item.IsPresent && updateOnlineStatusObj.IsOnline) {
+                toastr.warning('Plesač nije prisutan!');
+                return;
+            }
+
+            TrainingsService.updateMemberPresence(updateOnlineStatusObj).then(() => {
+                toastr.success('Onlline status izmenjen.');
+                item.IsOnline = !item.IsOnline;
             });
         };
 

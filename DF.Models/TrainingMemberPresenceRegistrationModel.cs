@@ -12,6 +12,7 @@ namespace DF.Models
         public int MemberID { get; set; }
         public string MemberName { get; set; }
         public bool? IsPresent { get; set; }
+        public bool? IsOnline { get; set; }
         public bool? AbsenceJustified { get; set; }
         public string AbsenceNote { get; set; }
         public bool? ForceDeleteAbsenceNote { get; set; }

@@ -411,6 +411,7 @@
           <Property Name="TrainingID" Type="int" Nullable="false" />
           <Property Name="MemberID" Type="int" Nullable="false" />
           <Property Name="IsPresent" Type="bit" Nullable="false" />
+          <Property Name="IsOnline" Type="bit" Nullable="false" />
           <Property Name="AbsenceJustified" Type="bit" />
           <Property Name="AbsenceNote" Type="nvarchar" MaxLength="4000" />
         </EntityType>
@@ -2152,6 +2153,7 @@
           <Property Name="AbsenceNote" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Members" Relationship="Self.FK_TrainingMemberPresenceRegistrations_Members" FromRole="TrainingMemberPresenceRegistrations" ToRole="Members" />
           <NavigationProperty Name="Trainings" Relationship="Self.FK_TrainingMemberPresenceRegistrations_Trainings" FromRole="TrainingMemberPresenceRegistrations" ToRole="Trainings" />
+          <Property Name="IsOnline" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Trainings">
           <Key>
@@ -3925,6 +3927,7 @@
           <EntitySetMapping Name="TrainingMemberPresenceRegistrations">
             <EntityTypeMapping TypeName="DFDataModel.TrainingMemberPresenceRegistrations">
               <MappingFragment StoreEntitySet="TrainingMemberPresenceRegistrations">
+                <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
                 <ScalarProperty Name="TrainingID" ColumnName="TrainingID" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="IsPresent" ColumnName="IsPresent" />

@@ -25,6 +25,7 @@
                         <tr>
                             <th>Ime i prezime</th>
                             <th>Status</th>
+                            <th>Online</th>
                             <th>Odsustvo opravdano?</th>
                             <th>Komentar</th>
                             <th></th>
@@ -34,10 +35,12 @@
                         <tr ng-repeat="item in memberPresenceList">
                             <td>{{ item.MemberName }}</td>
                             <td><div ng-class="resolveStatusCss(item)">{{ item.IsPresent ? 'Prisutan' : 'Nije prisutan' }}</div></td>
+                            <td><div ng-class="resolveOnlineStatusCss(item)">{{ item.IsOnline ? 'Online' : '' }}</div></td>
                             <td>{{ resolveAbsenceJustifiedDisplayText(item) }}</td>
                             <td>{{ item.AbsenceNote }}</td>
                             <td>
                                 <button class="btn btn-primary btn-xs pull-right margin-right-5" title="Izmena statusa" ng-click="toggleStatus(item)"><i class="fa fa-exchange"></i></button>
+                                <button class="btn btn-default btn-xs pull-right margin-right-5" title="Izmena online statusa" ng-click="toggleOnlineStatus(item)"><i class="fa fa-exchange"></i></button>
                                 <button class="btn btn-info btn-xs pull-right margin-right-5" title="Odsustvo opravdano?" ng-click="toggleAbsenceJustified(item)" ng-show="!item.IsPresent"><i class="fa fa-user"></i></button>
                                 <button class="btn btn-info btn-xs pull-right margin-right-5" title="Izmena komentara" ng-click="editAbsenceNote(item)" ng-show="!item.IsPresent"><i class="fa fa-comment"></i></button>
                             </td>
@@ -45,7 +48,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td style="font-size: smaller"><strong>Ukupno: {{ memberPresenceList.length }} | Prisutno: {{ getPresentMembersCount() }}</strong></td>
+                            <td colspan="6" style="font-size: smaller"><strong>Ukupno: {{ memberPresenceList.length }} | Prisutno: {{ getPresentMembersCount() }}</strong></td>
                         </tr>
                     </tfoot>
                 </table>

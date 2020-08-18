@@ -60,10 +60,15 @@
                         <tr ng-repeat="item in records">
                             <td align="center" ng-repeat="headerCol in headerColumns">
                                 <div ng-show="$index === 0">{{ item[headerCol] }}</div>
-                                <div ng-if="item[headerCol] === '1' || item[headerCol] === 1"><i class="fa fa-check" style="color: green"></i></div>
-                                <div ng-if="item[headerCol] === '0' || item[headerCol] === 0"><i class="fa fa-times" style="color: blue"></i></div>
-                                <div ng-if="item[headerCol] === '2' || item[headerCol] === 2"><i class="fa fa-times" style="color: red"></i></div>
-                                <div ng-show="$index > 0 && item[headerCol] !== '1' && item[headerCol] !== 1 && item[headerCol] !== '0' && item[headerCol] !== 0 && item[headerCol] !== '2' && item[headerCol] !== 2">-</div>
+                                <div ng-if="item[headerCol] === '1' || item[headerCol] === 1" title="Prisutan"><i class="fa fa-check" style="color: green"></i></div>
+                                <div ng-if="item[headerCol] === '3' || item[headerCol] === 3" title="Prisutan online"><i class="fa fa-check" style="color: magenta"></i></div>
+                                <div ng-if="item[headerCol] === '0' || item[headerCol] === 0" title="Opravdano odsutan"><i class="fa fa-times" style="color: blue"></i></div>
+                                <div ng-if="item[headerCol] === '2' || item[headerCol] === 2" title="Nije prisutan"><i class="fa fa-times" style="color: red"></i></div>
+                                <div
+                                     ng-show="$index > 0 && item[headerCol] !== '1' && item[headerCol] !== 1 && item[headerCol] !== '0' && item[headerCol] !== 0 && item[headerCol] !== '2' && item[headerCol] !== 2 && item[headerCol] !== '3' && item[headerCol] !== 3"
+                                >
+                                -
+                                </div>
                             </td>
                         </tr>
                     </tbody>

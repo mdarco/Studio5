@@ -401,6 +401,7 @@ namespace DF.DB
                             MemberID = r.MemberID,
                             MemberName = r.Members.FirstName + " " + r.Members.LastName,
                             IsPresent = r.IsPresent,
+                            IsOnline = r.IsOnline,
                             AbsenceJustified = r.AbsenceJustified,
                             AbsenceNote = r.AbsenceNote
                         }
@@ -427,6 +428,11 @@ namespace DF.DB
                         {
                             reg.AbsenceJustified = true;
                         }
+                    }
+
+                    if (model.IsOnline.HasValue)
+                    {
+                        reg.IsOnline = model.IsOnline.Value;
                     }
 
                     if (!reg.IsPresent && model.AbsenceJustified.HasValue)
