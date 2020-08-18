@@ -329,7 +329,7 @@ namespace DF.DB
                 )
                 .OrderBy(x => x.TrainingLocationName)
                 .ThenBy(x => x.WeekDayOrderNo)
-                .ThenByDescending(x => x.StartTime)
+                .ThenBy(x => x.StartTime)
                 .ToList();
             }
         }
