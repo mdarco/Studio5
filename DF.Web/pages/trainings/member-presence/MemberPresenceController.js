@@ -138,8 +138,14 @@
             });
         };
 
+        $scope.getOnlineMembersCount = function () {
+            return memberPresenceList.filter(item => item.IsOnline).length;
+        };
+
         $scope.getPresentMembersCount = function () {
-            return memberPresenceList.filter(item => item.IsPresent).length;
+            const livePresenceCount = memberPresenceList.filter(item => item.IsPresent).length;
+            const onlinePresenceCount = memberPresenceList.filter(item => item.IsOnline).length;
+            return livePresenceCount - onlinePresenceCount;
         };
 
         // helpers
