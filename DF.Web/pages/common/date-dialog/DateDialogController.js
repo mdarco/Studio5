@@ -16,6 +16,10 @@
             $scope.dateObj.Value = settings.DateValue;
         }
 
+        $scope.datepickerOptions = {
+            startingDay: 1
+        };
+
         $scope.save = function () {
             var modelValidation = validate();
             if (modelValidation.error) {
