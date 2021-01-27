@@ -401,7 +401,7 @@ namespace DF.DB
         public static void UpdateMemberPayments(DFAppEntities ctx, DBModel.Members existingMember)
         {
             var memberPayments = existingMember.MemberPayments
-                .Where(x => x.Payments.Type.ToUpper() == "MONTHLY" && !x.Payments.Active)
+                .Where(x => x.Payments.Type.ToUpper() == "MONTHLY" && x.Payments.Active)
                 .ToList();
 
             if (memberPayments != null && memberPayments.Count() > 0)
