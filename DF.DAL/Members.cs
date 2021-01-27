@@ -412,18 +412,25 @@ namespace DF.DB
                     if (currentInstallment != null)
                     {
                         int installmentDay = currentInstallment.InstallmentDate.Day;
+                        DateTime installmentDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, installmentDay);
 
-                        var newInstallment = new MemberPaymentInstallments
+                        // check if there is already an installment with the given 'installmentDate'
+                        var existingInstallment = installments.FirstOrDefault(x => x.InstallmentDate.Date == installmentDate.Date);
+
+                        if (existingInstallment == null)
                         {
-                            MemberID = existingMember.MemberID,
-                            PaymentID = memberPayment.PaymentID,
-                            InstallmentDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, installmentDay),
-                            Amount = currentInstallment.Amount,
-                            IsPaid = false,
-                            IsCanceled = false
-                        };
+                            var newInstallment = new MemberPaymentInstallments
+                            {
+                                MemberID = existingMember.MemberID,
+                                PaymentID = memberPayment.PaymentID,
+                                InstallmentDate = installmentDate,
+                                Amount = currentInstallment.Amount,
+                                IsPaid = false,
+                                IsCanceled = false
+                            };
 
-                        ctx.MemberPaymentInstallments.Add(newInstallment);
+                            ctx.MemberPaymentInstallments.Add(newInstallment);
+                        }
                     }
                 }
             }
