@@ -29,6 +29,7 @@
                 return;
             }
 
+            $scope.schedule.Active = true;
             TrainingSchedulesService.create($scope.schedule).then(
                 function () {
                     toastr.success('Novi raspored treninga je uspešno kreiran.');

@@ -20,6 +20,7 @@ namespace DF.DB.DBModel
         public System.TimeSpan StartTime { get; set; }
         public System.TimeSpan EndTime { get; set; }
         public string Note { get; set; }
+        public bool Active { get; set; }
     
         public virtual Locations Locations { get; set; }
     }

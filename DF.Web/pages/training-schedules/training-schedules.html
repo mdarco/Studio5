@@ -5,18 +5,26 @@
             <div class="panel-heading" style="background-color: #1B1E24;">
                 <span>Raspored treninga</span>
                 <button type="button" class="btn btn-success btn-xs pull-right margin-right-5" ng-click="addTrainingSchedule()" user-groups="ADMIN,TRENER"><i class="fa fa-user-plus"></i> Nov raspored</button>
+                <div class="btn-group btn-group-xs pull-right" role="group" style="margin-right: 20px">
+                    <button type="button" class="btn btn-default" ng-click="filterSchedules(true)">Aktivni</button>
+                    <button type="button" class="btn btn-default" ng-click="filterSchedules(false)">Neaktivni</button>
+                    <button type="button" class="btn btn-default" ng-click="filterSchedules()">Svi</button>
+                </div>
             </div>
             <div class="panel-body table-responsive">
                 <p style="font-variant:small-caps; margin-left: 10px" ng-show="showGrid === false">nema podataka.</p>
 
                 <table ng-table="trainingSchedulesTableParams" ng-show="showGrid === true" class="table table-condensed table-striped table-hover table-responsive table-bordered">
                     <tbody>
-                        <tr ng-repeat="schedule in trainingSchedules">
+                        <tr ng-repeat="schedule in trainingSchedulesToDisplay">
                             <td data-title="'Lokacija'" header-class="'text-left'">{{ schedule.TrainingLocationName }}</td>
                             <td data-title="'Dan'" header-class="'text-left'">{{ schedule.WeekDay }}</td>
                             <td data-title="'Vreme početka'" header-class="'text-left'">{{ schedule.StartTime }}</td>
                             <td data-title="'Vreme završetka'" header-class="'text-left'">{{ schedule.EndTime }}</td>
                             <td data-title="'Napomena'" header-class="'text-left'">{{ schedule.Note }}</td>
+                            <td data-title="'Status'" header-class="'text-left'">
+                                <span style="cursor: pointer" ng-class="schedule.Active ? 'label label-success' :'label label-danger'" ng-click="changeActive(schedule)">{{ schedule.Active ? 'Aktivan' : 'Neaktivan' }}</span>
+                            </td>
                             <td header-class="''">
                                 <button class="btn btn-danger btn-xs" style="float: right; margin-left: 5px;" title="Brisanje treninga" ng-click="deleteTrainingSchedule(schedule)"><i class="fa fa-times"></i></button>
                             </td>

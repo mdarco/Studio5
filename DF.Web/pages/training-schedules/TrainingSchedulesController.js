@@ -16,6 +16,7 @@
 
         $scope.locations = locations;
         $scope.trainingSchedules = [];
+        $scope.trainingSchedulesToDisplay = [];
 
         $scope.weekDays = [
             { ID: 'ponedeljak', Name: 'Ponedeljak' },
@@ -31,7 +32,7 @@
         $scope.totalRecords = undefined;
 
         function getTrainingSchedules() {
-            TrainingSchedulesService.get().then(
+            TrainingSchedulesService.getAll().then(
                 function (result) {
                     if (!result || !result.data) {
                         $scope.showGrid = false;
@@ -40,11 +41,13 @@
 
                     if (result && result.data && result.data.length > 0) {
                         $scope.trainingSchedules = result.data;
+                        $scope.trainingSchedulesToDisplay = result.data;
                         $scope.showGrid = true;
                         $scope.totalRecords = result.data.length;
                     } else {
                         $scope.showGrid = false;
                         $scope.trainingSchedules = [];
+                        $scope.trainingSchedulesToDisplay = [];
                         $scope.totalRecords = undefined;
                     }
                 },
@@ -54,6 +57,56 @@
             );
         }
         getTrainingSchedules();
+
+        $scope.changeActive = function (schedule) {
+            bootbox.confirm({
+                message: (!schedule.Active ? 'Aktivirati' : 'Deaktivirati') + ' raspored treninga?',
+                buttons: {
+                    confirm: {
+                        label: 'Da',
+                        className: 'btn-success'
+                    },
+                    cancel: {
+                        label: 'Ne',
+                        className: 'btn-danger'
+                    }
+                },
+                callback: function (result) {
+                    if (result) {
+                        let model = _.cloneDeep(schedule);
+                        model.Active = !schedule.Active;
+
+                        TrainingSchedulesService.setActive(model).then(
+                            () => {
+                                // update 'Active'
+                                schedule.Active = !schedule.Active;
+                            },
+                            (error) => {
+                                toastr.error('Došlo je do greške na serveru prilikom ažuriranja rasporeda treninga.');
+                            }
+                        );
+                    }
+                }
+            });
+        };
+
+        $scope.filterSchedules = function (showActive) {
+            switch (showActive) {
+                case undefined:
+                    $scope.trainingSchedulesToDisplay = $scope.trainingSchedules;
+                    break;
+
+                case true:
+                    $scope.trainingSchedulesToDisplay = $scope.trainingSchedules.filter(s => s.Active);
+                    break;
+
+                case false:
+                    $scope.trainingSchedulesToDisplay = $scope.trainingSchedules.filter(s => !s.Active);
+                    break;
+            }
+
+            $scope.totalRecords = $scope.trainingSchedulesToDisplay.length;
+        }
 
         //#region Add training schedule
 

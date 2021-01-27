@@ -310,7 +310,34 @@ namespace DF.DB
 
         #region Training schedules
 
+        // returns only active schedules
         public static List<TrainingScheduleModel> GetTrainingSchedules()
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                return ctx.TrainingSchedules.Include(t => t.Locations).Where(x => x.Active).Select(x =>
+                    new TrainingScheduleModel
+                    {
+                        ID = x.ID,
+                        TrainingLocationID = x.TrainingLocationID,
+                        TrainingLocationName = x.Locations.LocationName,
+                        WeekDay = x.WeekDay,
+                        WeekDayOrderNo = (x.WeekDay == "ponedeljak") ? 1 : (x.WeekDay == "utorak") ? 2 : (x.WeekDay == "sreda") ? 3 : (x.WeekDay == "četvrtak") ? 4 : (x.WeekDay == "petak") ? 5 : (x.WeekDay == "subota") ? 6 : (x.WeekDay == "nedelja") ? 7 : 0,
+                        StartTime = x.StartTime,
+                        EndTime = x.EndTime,
+                        Note = x.Note,
+                        Active = x.Active
+                    }
+                )
+                .OrderBy(x => x.TrainingLocationName)
+                .ThenBy(x => x.WeekDayOrderNo)
+                .ThenBy(x => x.StartTime)
+                .ToList();
+            }
+        }
+
+        // returns all schedules
+        public static List<TrainingScheduleModel> GetAllTrainingSchedules()
         {
             using (var ctx = new DFAppEntities())
             {
@@ -324,7 +351,8 @@ namespace DF.DB
                         WeekDayOrderNo = (x.WeekDay == "ponedeljak") ? 1 : (x.WeekDay == "utorak") ? 2 : (x.WeekDay == "sreda") ? 3 : (x.WeekDay == "četvrtak") ? 4 : (x.WeekDay == "petak") ? 5 : (x.WeekDay == "subota") ? 6 : (x.WeekDay == "nedelja") ? 7 : 0,
                         StartTime = x.StartTime,
                         EndTime = x.EndTime,
-                        Note = x.Note
+                        Note = x.Note,
+                        Active = x.Active
                     }
                 )
                 .OrderBy(x => x.TrainingLocationName)
@@ -356,7 +384,8 @@ namespace DF.DB
                     WeekDay = model.WeekDay,
                     StartTime = model.StartTime,
                     EndTime = model.EndTime,
-                    Note = model.Note
+                    Note = model.Note,
+                    Active = model.Active
                 };
 
                 ctx.TrainingSchedules.Add(s);
@@ -374,6 +403,23 @@ namespace DF.DB
                 if (existing != null)
                 {
                     ctx.TrainingSchedules.Remove(existing);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("error_training_schedule_not_exist");
+                }
+            }
+        }
+
+        public static void SetActive(TrainingScheduleModel model)
+        {
+            using (var ctx = new DFAppEntities())
+            {
+                var existing = ctx.TrainingSchedules.FirstOrDefault(x => x.ID == model.ID);
+                if (existing != null)
+                {
+                    existing.Active = model.Active;
                     ctx.SaveChanges();
                 }
                 else

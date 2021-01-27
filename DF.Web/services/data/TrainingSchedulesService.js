@@ -11,15 +11,22 @@
         var urlRoot = '/api/training-schedules';
 
         var service = {
-            get: getTrainingSchedules,
+            get: getActiveTrainingSchedules,
+            getAll: getAllTrainingSchedules,
             create: createTrainingSchedule,
-            delete: deleteTrainingSchedule
+            delete: deleteTrainingSchedule,
+            setActive: setActive
         };
 
         return service;
 
-        function getTrainingSchedules() {
+        function getActiveTrainingSchedules() {
             var url = WebApiBaseUrl + urlRoot + '?nd=' + Date.now();
+            return $http.get(url);
+        }
+
+        function getAllTrainingSchedules() {
+            var url = WebApiBaseUrl + urlRoot + '/all?nd=' + Date.now();
             return $http.get(url);
         }
 
@@ -31,6 +38,11 @@
         function deleteTrainingSchedule(id) {
             var url = WebApiBaseUrl + urlRoot + '/' + id;
             return $http.delete(url);
+        }
+
+        function setActive(model) {
+            var url = `${WebApiBaseUrl}/${urlRoot}/${model.ID}/set-active`;
+            return $http.put(url, model);
         }
     }
 })();
