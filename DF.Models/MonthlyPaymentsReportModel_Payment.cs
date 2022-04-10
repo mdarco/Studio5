@@ -10,5 +10,6 @@ namespace DF.Models
     {
         public string Name { get; set; }
         public List<ReportInstallment> Installments { get; set; }
+        public string Currency { get; set; }
     }
 }
