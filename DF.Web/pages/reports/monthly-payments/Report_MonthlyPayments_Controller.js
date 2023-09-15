@@ -20,7 +20,8 @@
 
         $scope.totals = {};
         $scope.showTotals = false;
-        $scope.grandTotal = 0.0;
+        // $scope.grandTotal = 0.0;
+        $scope.grandTotal = {};
 
         if (currentUser.UserGroups.includes('TRENER')) {
             if ($scope.danceGroups && $scope.danceGroups.length > 0) {
@@ -38,8 +39,14 @@
                 if (response && response.data) {
                     $scope.records = response.data;
 
+                    console.log($scope.records);
+
                     $scope.totals = calculateTotals();
                     $scope.grandTotal = calculateGrandTotal();
+
+                    console.log($scope.totals);
+                    console.log($scope.grandTotal);
+
                     $scope.showTotals = true;
                 } else {
                     $scope.records = [];
@@ -65,13 +72,13 @@
             $scope.records.forEach(record => {
                 record.DeserializedPayments.forEach(payment => {
                     if (!totals[payment.Name]) {
-                        totals[payment.Name] = 0.0;
+                        totals[payment.Name] = { Amount: 0.0, Currency: payment.Currency };
                     }
 
                     if (payment.Installments) {
                         payment.Installments.forEach(installment => {
                             if (!installment.IsCanceled && installment.IsPaid) {
-                                totals[payment.Name] += installment.Amount;
+                                totals[payment.Name].Amount += installment.Amount;
                             }
                         });
                     }
@@ -82,10 +89,16 @@
         }
 
         function calculateGrandTotal() {
-            let grandTotal = 0.0;
+            // let grandTotal = 0.0;
+            let grandTotal = {};
 
             Object.keys($scope.totals).forEach(key => {
-                grandTotal += $scope.totals[key];
+                if (!grandTotal[$scope.totals[key].Currency]) {
+                    grandTotal[$scope.totals[key].Currency] = 0.0;
+                }
+
+                // grandTotal += $scope.totals[key];
+                grandTotal[$scope.totals[key].Currency] += $scope.totals[key].Amount;
             });
 
             return grandTotal;

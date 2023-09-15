@@ -34,8 +34,8 @@
 
         $scope.statuses = [
             { ID: 'all', Name: 'Svi' },
-            { ID: 'active', Name: 'Aktivni' }//,
-            //{ ID: 'inactive', Name: 'Neaktivni' }
+            { ID: 'active', Name: 'Aktivni' },
+            { ID: 'non-active', Name: 'Neaktivni' }
         ];
 
         //#region Filter members
@@ -123,6 +123,7 @@
         function resolveStatusFilter() {
             if (!$scope.filter.Status) {
                 $scope.filter.ExcludeNonActive = false;
+                $scope.filter.ExcludeActive = false;
                 return;
             }
 
@@ -130,10 +131,17 @@
                 case '':
                 case 'all':
                     $scope.filter.ExcludeNonActive = false;
+                    $scope.filter.ExcludeActive = false;
                     break;
 
                 case 'active':
                     $scope.filter.ExcludeNonActive = true;
+                    $scope.filter.ExcludeActive = false;
+                    break;
+
+                case 'non-active':
+                    $scope.filter.ExcludeNonActive = false;
+                    $scope.filter.ExcludeActive = true;
                     break;
 
                 default:

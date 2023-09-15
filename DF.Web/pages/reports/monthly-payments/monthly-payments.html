@@ -55,19 +55,22 @@
                     <thead>
                         <tr>
                             <th>Plaćanje</th>
+                            <th>Valuta</th>
                             <th>Ukupna suma</th>
                         </tr>
                     </thead>
                     <tbody style="background-color: #ffffe1;">
                         <tr ng-repeat="(key, value) in totals">
                             <td>{{ key }}</td>
-                            <td>{{ value }}</td>
+                            <td>{{ value.Currency }}</td>
+                            <td>{{ value.Amount }}</td>
                         </tr>
                     </tbody>
                     <tfoot style="background-color: #fff3db;">
-                        <tr>
+                        <tr ng-repeat="(key, value) in grandTotal">
                             <td class="pull-right" style="font-weight: bold;">TOTAL</td>
-                            <td style="font-weight: bold;">{{ grandTotal }}</td>
+                            <td style="font-weight: bold;">{{ key }}</td>
+                            <td style="font-weight: bold;">{{ value }}</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -124,7 +127,7 @@
                                                 <tr ng-repeat="installment in recordPayment.Installments">
                                                     <td ng-class="{ 'df-strikethrough-row' : installment.IsCanceled === true }">{{ installment.InstallmentDateFormatted }}</td>
                                                     <td ng-class="{ 'df-strikethrough-row' : installment.IsCanceled === true }">{{ installment.PaymentDateFormatted }}</td>
-                                                    <td ng-class="{ 'df-strikethrough-row' : installment.IsCanceled === true }">{{ installment.Amount }} {{ installment.Currency }}</td>
+                                                    <td ng-class="{ 'df-strikethrough-row' : installment.IsCanceled === true }">{{ installment.Amount }} {{ recordPayment.Currency }}</td>
                                                     <td>
                                                         <span ng-show="installment.IsPaid === false" ng-class="{ 'label label-danger' : installment.IsPaid === false }">Nije plaćeno</span>&nbsp;
                                                         <span ng-show="installment.IsCanceled === true" ng-class="{ 'label label-default' : installment.IsCanceled === true }">Poništeno</span>

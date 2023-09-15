@@ -11,6 +11,7 @@ namespace DF.Models
         public string FullName { get; set; }
         public string JMBG { get; set; }
         public bool? ExcludeNonActive { get; set; }
+        public bool? ExcludeActive { get; set; }
         public int? ChoreoID { get; set; }
         public int? DanceGroupID { get; set; }
         public List<int> DanceGroupID_List { get; set; }

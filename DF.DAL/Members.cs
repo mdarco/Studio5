@@ -130,15 +130,27 @@ namespace DF.DB
 
             if (filter != null)
             {
-                bool excludeNonActive = true;
+                bool excludeNonActive = false;
+                bool excludeActive = false;
+
                 if (filter.ExcludeNonActive.HasValue)
                 {
                     excludeNonActive = (bool)filter.ExcludeNonActive;
                 }
 
+                if (filter.ExcludeActive.HasValue)
+                {
+                    excludeActive = (bool)filter.ExcludeActive;
+                }
+
                 if (excludeNonActive)
                 {
                     q = q.WhereRaw("IsActive = 1");
+                }
+
+                if (excludeActive)
+                {
+                    q = q.WhereRaw("IsActive = 0");
                 }
 
                 if (!string.IsNullOrEmpty(filter.FullName))
