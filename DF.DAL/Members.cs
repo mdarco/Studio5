@@ -391,7 +391,10 @@ namespace DF.DB
                         existing.IsCompetitor = (bool)model.IsCompetitor;
                     }
 
-                    existing.Note = model.Note;
+                    if (!string.IsNullOrEmpty(model.Note))
+                    {
+                        existing.Note = model.Note;
+                    }
 
                     ctx.SaveChanges();
                 }
