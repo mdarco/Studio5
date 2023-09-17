@@ -7,4 +7,5 @@ packages
 
 **/bin
 **/obj
+**/obj/Debug
 *.tim
